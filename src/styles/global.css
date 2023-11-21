@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../../public/fonts/Pretendard-Bold.otf') format('otf');
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../../public/fonts/Pretendard-Light.otf') format('otf');
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../../public/fonts/Pretendard-Medium.otf') format('otf');
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../../public/fonts/Pretendard-Regular.otf') format('otf');
+}
+
+@layer base {
+  html {
+    font-family: '';
+    font-size: 36px;
+    font-weight: normal;
+  }
+}
+
+/* custom css */
+.subtitle1 {
+  font-weight: bold;
+  font-size: 2.5rem;
+  line-height: 1.5;
+}
+.subtitle2 {
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 1.5;
+}
+.subtitle3 {
+  font-weight: bold;
+  font-size: 1.75rem;
+  line-height: 1.5;
+}
+.subtitle4 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+.subtitle5 {
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.body1 {
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.body2 {
+  font-weight: medium;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.button {
+  font-weight: medium;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.caption {
+  font-weight: light;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
