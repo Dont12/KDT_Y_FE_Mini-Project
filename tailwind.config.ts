@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        primary: ['Inter', ...defaultTheme.fontFamily.sans],
+        primary: ['Pretendard', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         mainButton: '#D8483D',
