@@ -7,7 +7,7 @@ interface AppLayout {
 
 const RootLayout = ({ children }: AppLayout) => (
   <html lang='ko' className='bg-lightGray'>
-    <body className='container'>
+    <body className='flex items-center justify-center'>
       <main className='mx-auto max-w-3xl'>{children}</main>
     </body>
   </html>
