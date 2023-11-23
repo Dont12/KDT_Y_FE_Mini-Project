@@ -59,7 +59,7 @@ const items = [
 ];
 function Detail() {
   return (
-    <div className=''>
+    <div className='bg-white'>
       <div>
         <Image
           src='https://yaimg.yanolja.com/v5/2023/11/18/16/1280/6558e97be8ded1.18240177.jpg'
