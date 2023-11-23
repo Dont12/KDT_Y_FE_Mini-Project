@@ -8,7 +8,9 @@ interface AppLayout {
 
 const RootLayout = ({ children }: AppLayout) => (
   <html lang='ko' className='bg-lightGray'>
-    <body className='container mx-auto box-border max-w-3xl'>{children}</body>
+    <body className='container mx-auto box-border max-w-3xl bg-white'>
+      {children}
+    </body>
   </html>
 );
 
