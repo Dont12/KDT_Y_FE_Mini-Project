@@ -2,10 +2,10 @@
 'use client';
 import React, { useState } from 'react';
 
-import Carousel from '@/components/main/Carousel';
-import IconList from '@/components/main/IconList';
-import Navigation from '@/components/main/Navigation';
-import PensionCard from '@/components/main/PensionCard';
+import Carousel from '../components/main/Carousel';
+import IconList from '../components/main/IconList';
+import Navigation from '../components/main/Navigation';
+import PensionCard from '../components/main/PensionCard';
 
 interface DataType {
   location: string;
