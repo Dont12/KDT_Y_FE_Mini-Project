@@ -16,7 +16,7 @@ const YourItemComponent: React.FC<YourItemComponentProps> = ({
 }) => {
   return (
     <div className='m-4 max-w-xs'>
-      <div className='grid grid-cols-3 gap-4'>
+      <div className='grid grid-cols-3'>
         <div>
           <img
             src={image}
