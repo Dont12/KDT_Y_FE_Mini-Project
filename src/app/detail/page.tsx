@@ -110,7 +110,7 @@ function Detail() {
                   <div className='flex flex-row items-end justify-end gap-3'>
                     <button>
                       <Image
-                        src='/images/cart.svg'
+                        src='/svg/cartIcon.svg'
                         alt='cartIcon'
                         className='h-8 w-8'
                         width={32}
