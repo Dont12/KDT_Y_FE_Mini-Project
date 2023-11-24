@@ -31,7 +31,7 @@ const HeaderNav = ({
     <nav className='relative flex h-12 items-center justify-center px-3'>
       {showLogo && (
         <Link href='/' className='absolute left-3 m-2'>
-          <Image src='/svg/Logo.svg' width={130} height={39} alt='logo' />
+          <Image src='/svg/logo.svg' width={130} height={39} alt='logo' />
         </Link>
       )}
       {showBack && (
