@@ -27,7 +27,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
           <img
             src={image}
             alt={`Slide ${index + 1}`}
-            className='max-h-348 w-full'
+            className='max-h-348 mb-16 w-full'
           />
         </SwiperSlide>
       ))}

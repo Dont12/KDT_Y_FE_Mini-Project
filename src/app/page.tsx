@@ -1,7 +1,11 @@
+/* eslint-disable react/no-children-prop */
 // pages/index.tsx
 'use client';
 import React, { useState } from 'react';
 
+import HeaderNav from '@/components/common/HeaderNav';
+
+import Header from '../components/common/Header';
 import Carousel from '../components/main/Carousel';
 import IconList from '../components/main/IconList';
 import Navigation from '../components/main/Navigation';
@@ -66,7 +70,7 @@ const HomePage = () => {
 
   const carouselImages = [
     'images/carousel01.jpg',
-    'images/og.jpg',
+    'images/carousel01.jpg',
     'images/carousel01.jpg',
   ];
   const mainIcons = [
@@ -326,7 +330,12 @@ const HomePage = () => {
   ];
 
   return (
-    <div className='bg-white'>
+    <div className='bg-white' style={{ paddingTop: '3.5rem' }}>
+      <Header>
+        <HeaderNav showLogo showCart showMyPage>
+          {' '}
+        </HeaderNav>
+      </Header>
       <Carousel images={carouselImages} />
       <IconList icons={mainIcons} />
       <div className='p-10'>

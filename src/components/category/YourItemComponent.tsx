@@ -15,7 +15,7 @@ const YourItemComponent: React.FC<YourItemComponentProps> = ({
   image,
 }) => {
   return (
-    <div className='m-4 max-w-xs'>
+    <div className='m-6 max-w-xs'>
       <div className='grid grid-cols-3'>
         <div>
           <img

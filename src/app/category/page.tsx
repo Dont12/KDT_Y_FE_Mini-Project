@@ -2,6 +2,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
+import Header from '@/components/common/Header';
+import HeaderNav from '@/components/common/HeaderNav';
+
 // import InfiniteScroll from 'react-infinite-scroll-component';
 import Dropdown from '../../components/category/Dropdown';
 import YourItemComponent from '../../components/category/YourItemComponent';
@@ -257,7 +260,15 @@ const CategoryPage: React.FC = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className='flex flex-col items-center justify-center bg-white'>
+    <div
+      className='flex flex-col items-center justify-center bg-white'
+      style={{ paddingTop: '3.5rem' }}
+    >
+      <Header>
+        <HeaderNav showBack showCart showMyPage>
+          {' '}
+        </HeaderNav>
+      </Header>
       <h1 className='m-5 text-lg'>어디로 갈까요?</h1>
       <Dropdown
         options={[
@@ -336,7 +347,7 @@ const CategoryPage: React.FC = () => {
         selectedOption={selectedLocation}
         onSelectOption={handleLocationChange}
       />
-      <hr className='my-5 w-full border-t' />
+      <hr className='my-8 w-full border-t' />
       {/* <InfiniteScroll
         dataLength={accommodations.length}
         next={loadMoreAccommodations}

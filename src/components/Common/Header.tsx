@@ -33,7 +33,7 @@ const Header = ({ children }: Props) => {
 
   return (
     <header
-      className={`fixed left-0 top-0 min-h-[3.5rem] w-full bg-white pt-2 ${
+      className={`fixed left-0 top-0 z-50 min-h-[3.5rem] w-full bg-white pt-2 ${
         showShadow && 'shadow'
       }`}
     >
