@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../styles/global.css';
 
-interface AppLayout {
+export interface AppLayout {
   children: React.ReactNode;
 }
 
