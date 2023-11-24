@@ -12,6 +12,8 @@
     "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.202",
+    "lodash": "^4.17.21",
     "next": "^13.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
