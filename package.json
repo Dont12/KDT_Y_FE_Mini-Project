@@ -12,10 +12,14 @@
     "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
   "dependencies": {
+    "@types/react-slick": "^0.23.12",
     "next": "^13.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "react-slick": "^0.29.0",
+    "rsuite": "^5.45.0",
+    "slick-carousel": "^1.8.1",
     "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {

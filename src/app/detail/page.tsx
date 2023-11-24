@@ -1,6 +1,18 @@
+'use client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
+import Slider from 'react-slick';
+import { DateRangePicker } from 'rsuite';
 
+import 'rsuite/dist/rsuite.min.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+const Toast = ({ message }: any) => (
+  <div className='bg-mainButton fixed bottom-4 left-1/2 translate-x-[-50%] rounded-lg p-4 text-white shadow-[0px_0px_10px_rgba(0,0,0,0.5)]'>
+    <div>{message}</div>
+  </div>
+);
 const rooms = [
   {
     picture:
@@ -46,29 +58,62 @@ const rules = [
   '※ 청소년 보호법에 따라 미성년자의 혼숙은 불가합니다.',
 ];
 
-const items = [
-  {
-    url: 'https://yaimg.yanolja.com/v5/2023/11/18/16/1280/6558e97aca99a3.91061580.jpg',
-  },
-  {
-    url: 'https://yaimg.yanolja.com/v5/2023/11/18/16/1280/6558e97b6376e8.28259309.jpg',
-  },
-  {
-    url: 'https://yaimg.yanolja.com/v5/2023/11/18/16/1280/6558e97be8ded1.18240177.jpg',
-  },
+const roomImages = [
+  'https://yaimg.yanolja.com/v5/2023/11/18/16/1280/6558e97be8ded1.18240177.jpg',
+  'https://yaimg.yanolja.com/v5/2023/11/06/15/640/65490340a88212.79491230.jpg',
+  'https://yaimg.yanolja.com/v5/2023/11/18/16/1280/6558e97be8ded1.18240177.jpg',
+  'https://yaimg.yanolja.com/v5/2023/11/18/16/1280/6558e97be8ded1.18240177.jpg',
+  'https://yaimg.yanolja.com/v5/2023/11/18/16/640/6558e972d767d3.58178866.jpg',
+  'https://yaimg.yanolja.com/v5/2023/11/18/16/1280/6558e97be8ded1.18240177.jpg',
 ];
+
 function Detail() {
+  const [person, setPerson] = useState('1');
+  const [toastVisible, setToastVisible] = useState(false);
+
+  const showToast = () => {
+    setToastVisible(true);
+    // Automatically hide the toast after 3 seconds
+    setTimeout(() => {
+      setToastVisible(false);
+    }, 3000);
+  };
+
+  const handleInputChange = (e: any) => {
+    // Extracting the entered value and ensuring it is a positive integer
+    let inputValue = e.target.value.replace(/[^0-9]/g, '');
+
+    // Ensuring the value is between 1 and 9
+    inputValue = Math.min(Math.max(parseInt(inputValue), 1), 9);
+
+    // Update the state with the sanitized value
+    setPerson(inputValue);
+    showToast();
+  };
+
   return (
     <div className='bg-white'>
       <div>
-        <Image
-          src='https://yaimg.yanolja.com/v5/2023/11/18/16/1280/6558e97be8ded1.18240177.jpg'
-          alt=''
-          width={768}
-          height={100}
-          className='h-auto w-full'
-          unoptimized={true}
-        />
+        <Slider
+          dots={true}
+          infinite={true}
+          speed={500}
+          slidesToShow={1}
+          slidesToScroll={1}
+        >
+          {roomImages.map((image, index) => (
+            <div key={index}>
+              <Image
+                src={image}
+                alt={`Room Image ${index + 1}`}
+                width={768}
+                height={100}
+                className='h-auto w-full'
+                unoptimized={true}
+              />
+            </div>
+          ))}
+        </Slider>
       </div>
       <div className='flex flex-col gap-4 p-5'>
         <div className='border-mediumGray border-b border-solid pb-3'>
@@ -79,8 +124,25 @@ function Detail() {
           <div>체크인 15:00 - 체크아웃 11:00</div>
         </div>
         <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
-          <div>1월 19일 - 1월 20일 V</div>
-          <div>1명 V</div>
+          <div className='flex flex-col'>
+            <label htmlFor='check'>체크인-체크아웃</label>
+            <DateRangePicker id='chek' />
+          </div>
+          <div className='flex flex-col'>
+            <label htmlFor='person'>인원</label>
+            <input
+              id='person'
+              type='number'
+              className='border-lightGray h-8 w-52 rounded-md border border-solid'
+              min='1'
+              max='9'
+              value={person}
+              onInput={handleInputChange}
+            />
+            {toastVisible && (
+              <Toast message='한번에 예약 할 수 있는 것은 최대 9명 입니다.' />
+            )}
+          </div>
         </div>
         <div className='flex flex-col gap-10'>
           {rooms.map((room, index) => (
