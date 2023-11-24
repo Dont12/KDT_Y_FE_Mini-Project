@@ -56,7 +56,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         <span className='rounded-md shadow-sm'>
           <button
             type='button'
-            className='inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-blue-300 focus:outline-none focus:ring'
+            className='inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none'
             id='options-menu'
             onClick={handleToggle}
           >
