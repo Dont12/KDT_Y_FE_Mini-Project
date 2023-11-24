@@ -1,5 +1,5 @@
-import Header from '@/components/common1/Header';
-import HeaderNav from '@/components/common1/HeaderNav';
+import Header from '@/components/common/Header';
+import HeaderNav from '@/components/common/HeaderNav';
 
 const Cart = () => {
   return (
