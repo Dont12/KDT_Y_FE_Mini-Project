@@ -1,5 +1,5 @@
-import Header from '@/components/Common/Header';
-import HeaderNav from '@/components/Common/HeaderNav';
+import Header from '@/components/common1/Header';
+import HeaderNav from '@/components/common1/HeaderNav';
 
 const Mypage = () => {
   return (
