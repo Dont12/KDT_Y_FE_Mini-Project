@@ -5,6 +5,9 @@ import { DateRangePicker } from 'rsuite';
 
 import 'rsuite/dist/rsuite.min.css';
 
+import Header from '@/components/Common/Header';
+import HeaderNav from '@/components/Common/HeaderNav';
+
 import Carousel from '../../../components/common/Carousel';
 import { Toast } from '../../../components/common/Toast';
 
@@ -90,122 +93,129 @@ function Detail() {
 
   return (
     <>
-      <div>
-        <Carousel images={roomImages} />
-      </div>
-      <div className='flex flex-col gap-4 p-5'>
-        <div className='border-mediumGray border-b border-solid pb-3'>
-          <h3 className='subtitle3'>강릉 애즈풀앤스파펜션</h3>
+      <Header>
+        <HeaderNav showBack showCart showHome>
+          강릉 애즈풀앤스파펜션
+        </HeaderNav>
+      </Header>
+      <main className='mt-12 bg-white'>
+        <div>
+          <Carousel images={roomImages} />
         </div>
-        <div className='border-mediumGray border-b border-solid pb-3'>
-          <p>강원 강릉시 사천면 해안로 1052-1</p>
-          <p>체크인 15:00 - 체크아웃 11:00</p>
-        </div>
-        <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
-          <div className='flex flex-col'>
-            <label htmlFor='check'>체크인-체크아웃</label>
-            <DateRangePicker
-              format='yyyy-MM-dd'
-              id='chek'
-              placeholder={`${today.toLocaleDateString()} - ${tomorrow.toLocaleDateString()}`}
-              defaultValue={[today, tomorrow]}
-              disabledDate={beforeToday}
-              className='h-8 w-52'
-              value={checkInOut as [Date, Date] | null}
-              onChange={(value: [Date, Date] | null) => {
-                if (value !== null) {
-                  setCheckInOut(value);
-                }
-              }}
-            />
+        <div className='flex flex-col gap-4 p-5'>
+          <div className='border-mediumGray border-b border-solid pb-3'>
+            <h3 className='subtitle3'>강릉 애즈풀앤스파펜션</h3>
           </div>
-          <div className='flex flex-col'>
-            <label htmlFor='person'>인원</label>
-            <input
-              id='person'
-              type='number'
-              className='border-lightGray h-8 w-52 rounded-md border border-solid indent-2'
-              min='1'
-              max='9'
-              value={person}
-              onChange={handleInputChange}
-            />
-            {toastVisible && (
-              <Toast message='한번에 예약 할 수 있는 것은 최대 9명 입니다.' />
-            )}
+          <div className='border-mediumGray border-b border-solid pb-3'>
+            <p>강원 강릉시 사천면 해안로 1052-1</p>
+            <p>체크인 15:00 - 체크아웃 11:00</p>
           </div>
-        </div>
-        <div className='flex flex-col gap-10'>
-          {rooms.map((room, index) => (
-            <div
-              key={index}
-              className='border-mediumGray flex flex-col gap-5 rounded border border-solid p-5'
-            >
-              <div className='flex justify-between'>
-                <div className='mr-5'>
-                  <Image
-                    src={room.picture}
-                    width={150}
-                    height={150}
-                    alt={`Room ${index + 1}`}
-                    className='h-full w-48 object-cover'
-                  />
-                </div>
-                <div className='flex grow flex-col gap-5 pt-3'>
-                  <div>
-                    <p>{room.name}</p>
-                    <p>최대 인원: {room.max}</p>
-                    <p>최소 인원: {room.min}</p>
-                    <p>침대: {room.bed}</p>
-                    <p>옵션: {room.option}</p>
-                  </div>
-                  <div className='flex flex-row items-end justify-end gap-3'>
-                    <button>
-                      <Image
-                        src='/images/cart.svg'
-                        alt='cartIcon'
-                        className='h-8 w-8'
-                        width={32}
-                        height={32}
-                      />
-                    </button>
-                    <p className='subtitle4 text-baseline leading-4'>
-                      {room.price}원
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <button className='bg-mainButton h-12 w-full rounded text-white '>
-                  예약하기
-                </button>
-              </div>
+          <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
+            <div className='flex flex-col'>
+              <label htmlFor='check'>체크인-체크아웃</label>
+              <DateRangePicker
+                format='yyyy-MM-dd'
+                id='chek'
+                placeholder={`${today.toLocaleDateString()} - ${tomorrow.toLocaleDateString()}`}
+                defaultValue={[today, tomorrow]}
+                disabledDate={beforeToday}
+                className='h-8 w-52'
+                value={checkInOut as [Date, Date] | null}
+                onChange={(value: [Date, Date] | null) => {
+                  if (value !== null) {
+                    setCheckInOut(value);
+                  }
+                }}
+              />
             </div>
-          ))}
-        </div>
-        <div className='border-mediumGray border-b border-solid py-8'>
-          <h3 className='subtitle5'>이용규칙</h3>
-          {rules.map((rule, index) => (
-            <p className='body1' key={index}>
-              {rule}
+            <div className='flex flex-col'>
+              <label htmlFor='person'>인원</label>
+              <input
+                id='person'
+                type='number'
+                className='border-lightGray h-8 w-52 rounded-md border border-solid indent-2'
+                min='1'
+                max='9'
+                value={person}
+                onChange={handleInputChange}
+              />
+              {toastVisible && (
+                <Toast message='한번에 예약 할 수 있는 것은 최대 9명 입니다.' />
+              )}
+            </div>
+          </div>
+          <div className='flex flex-col gap-10'>
+            {rooms.map((room, index) => (
+              <div
+                key={index}
+                className='border-mediumGray flex flex-col gap-5 rounded border border-solid p-5'
+              >
+                <div className='flex justify-between'>
+                  <div className='mr-5'>
+                    <Image
+                      src={room.picture}
+                      width={150}
+                      height={150}
+                      alt={`Room ${index + 1}`}
+                      className='h-full w-48 object-cover'
+                    />
+                  </div>
+                  <div className='flex grow flex-col gap-5 pt-3'>
+                    <div>
+                      <p>{room.name}</p>
+                      <p>최대 인원: {room.max}</p>
+                      <p>최소 인원: {room.min}</p>
+                      <p>침대: {room.bed}</p>
+                      <p>옵션: {room.option}</p>
+                    </div>
+                    <div className='flex flex-row items-end justify-end gap-3'>
+                      <button>
+                        <Image
+                          src='/svg/cartIcon.svg'
+                          alt='cartIcon'
+                          className='h-8 w-8'
+                          width={32}
+                          height={32}
+                        />
+                      </button>
+                      <p className='subtitle4 text-baseline leading-4'>
+                        {room.price}원
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button className='bg-mainButton h-12 w-full rounded text-white '>
+                    예약하기
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className='border-mediumGray border-b border-solid py-8'>
+            <h3 className='subtitle5'>이용규칙</h3>
+            {rules.map((rule, index) => (
+              <p className='body1' key={index}>
+                {rule}
+              </p>
+            ))}
+          </div>
+          <div className='py-8'>
+            <p className='subtitle5'>숙소소개</p>
+            <p className='body1'>
+              한경면 저지리에는 수동, 중동, 남동, 북동, 동동, 명리동의 6개
+              부락으로 구성되어 있습니다. 그 중 조용하고 살기 좋은 동네로 선정된
+              저지리 수동은 옛 제주의 역사를 지니는 돗통의 정취와 색이 남아 있는
+              공간으로, 소중한 사람들을 몸과 마음이 편안해지는 느슨한 공간으로
+              기억되길 바랍니다.
             </p>
-          ))}
+            <p>
+              [🏠숙소 전체 구성]
+              <br />- 귤밭으로 둘러 쌓인 260평 대지에 3개의 돌집이 있습니다.
+            </p>
+          </div>
         </div>
-        <div className='py-8'>
-          <p className='subtitle5'>숙소소개</p>
-          <p className='body1'>
-            한경면 저지리에는 수동, 중동, 남동, 북동, 동동, 명리동의 6개
-            부락으로 구성되어 있습니다. 그 중 조용하고 살기 좋은 동네로 선정된
-            저지리 수동은 옛 제주의 역사를 지니는 돗통의 정취와 색이 남아 있는
-            공간으로, 소중한 사람들을 몸과 마음이 편안해지는 느슨한 공간으로
-            기억되길 바랍니다.
-          </p>
-          <p>
-            [🏠숙소 전체 구성]
-            <br />- 귤밭으로 둘러 쌓인 260평 대지에 3개의 돌집이 있습니다.
-          </p>
-        </div>
-      </div>
+      </main>
     </>
   );
 }
