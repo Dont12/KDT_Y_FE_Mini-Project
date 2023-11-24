@@ -19,22 +19,22 @@
 //           {
 //             name: '서울/강북 호텔 1',
 //             rating: 4.5,
-//             image: 'svg/main-icon/motel.svg',
+//             image: 'svg/mainIcon/motel.svg',
 //           },
 //           {
 //             name: '서울/강북 호텔 2',
 //             rating: 4.0,
-//             image: 'svg/main-icon/motel.svg',
+//             image: 'svg/mainIcon/motel.svg',
 //           },
 //           {
 //             name: '서울/강북 호텔 3',
 //             rating: 4.5,
-//             image: 'svg/main-icon/motel.svg',
+//             image: 'svg/mainIcon/motel.svg',
 //           },
 //           {
 //             name: '서울/강북 호텔 4',
 //             rating: 4.0,
-//             image: 'svg/main-icon/motel.svg',
+//             image: 'svg/mainIcon/motel.svg',
 //           },
 //         ],
 //       },
@@ -44,22 +44,22 @@
 //           {
 //             name: '서울/강남 호텔 1',
 //             rating: 4.2,
-//             image: 'svg/main-icon/servicedResidences.svg',
+//             image: 'svg/mainIcon/servicedResidences.svg',
 //           },
 //           {
 //             name: '서울/강남 호텔 2',
 //             rating: 3.8,
-//             image: 'svg/main-icon/servicedResidences.svg',
+//             image: 'svg/mainIcon/servicedResidences.svg',
 //           },
 //           {
 //             name: '서울/강남 호텔 3',
 //             rating: 4.2,
-//             image: 'svg/main-icon/servicedResidences.svg',
+//             image: 'svg/mainIcon/servicedResidences.svg',
 //           },
 //           {
 //             name: '서울/강남 호텔 4',
 //             rating: 3.8,
-//             image: 'svg/main-icon/servicedResidences.svg',
+//             image: 'svg/mainIcon/servicedResidences.svg',
 //           },
 //         ],
 //       },
@@ -69,22 +69,22 @@
 //           {
 //             name: '경기·인천 호텔 1',
 //             rating: 4.2,
-//             image: 'svg/main-icon/condo.svg',
+//             image: 'svg/mainIcon/condo.svg',
 //           },
 //           {
 //             name: '경기·인천 호텔 2',
 //             rating: 3.8,
-//             image: 'svg/main-icon/condo.svg',
+//             image: 'svg/mainIcon/condo.svg',
 //           },
 //           {
 //             name: '경기·인천 호텔 3',
 //             rating: 4.2,
-//             image: 'svg/main-icon/condo.svg',
+//             image: 'svg/mainIcon/condo.svg',
 //           },
 //           {
 //             name: '경기·인천 호텔 4',
 //             rating: 3.8,
-//             image: 'svg/main-icon/condo.svg',
+//             image: 'svg/mainIcon/condo.svg',
 //           },
 //         ],
 //       },
@@ -94,22 +94,22 @@
 //           {
 //             name: '부산 호텔 1',
 //             rating: 4.2,
-//             image: 'svg/main-icon/pension.svg',
+//             image: 'svg/mainIcon/pension.svg',
 //           },
 //           {
 //             name: '부산 호텔 2',
 //             rating: 3.8,
-//             image: 'svg/main-icon/pension.svg',
+//             image: 'svg/mainIcon/pension.svg',
 //           },
 //           {
 //             name: '부산 호텔 3',
 //             rating: 4.2,
-//             image: 'svg/main-icon/pension.svg',
+//             image: 'svg/mainIcon/pension.svg',
 //           },
 //           {
 //             name: '부산 호텔 4',
 //             rating: 3.8,
-//             image: 'svg/main-icon/pension.svg',
+//             image: 'svg/mainIcon/pension.svg',
 //           },
 //         ],
 //       },
@@ -131,12 +131,12 @@
 //           {
 //             name: '서울/강북 호텔 1',
 //             rating: 4.5,
-//             image: 'svg/main-icon/motel.svg',
+//             image: 'svg/mainIcon/motel.svg',
 //           },
 //           {
 //             name: '서울/강북 호텔 2',
 //             rating: 4.0,
-//             image: 'svg/main-icon/motel.svg',
+//             image: 'svg/mainIcon/motel.svg',
 //           },
 //           // 초기 데이터...
 //         ],
