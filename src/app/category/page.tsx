@@ -343,16 +343,24 @@ const CategoryPage: React.FC = () => {
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
       > */}
-      <div className='ml-20'>
+      <div
+        className={`ml-20 ${
+          accommodations.length % 2 === 0 ? 'justify-center' : 'justify-around'
+        }`}
+      >
         {accommodations.map((category, index) => (
           <div key={index}>
-            <div className='mb-4 ml-16 text-lg font-bold'>
+            <div className='mb-4 ml-8 mt-4 text-lg font-bold'>
               {category.subOptions}
             </div>
-            <div className='flex flex-wrap justify-center'>
+            <div className='grid grid-cols-2 gap-4'>
               {category.pensions.map((item: any, i: number) => (
                 <YourItemComponent key={i} {...item} />
               ))}
+              {/* {accommodations.length % 2 !== 0 &&
+              index === accommodations.length - 1 && (
+                <div className='w-full'></div>
+              )} */}
             </div>
           </div>
         ))}
