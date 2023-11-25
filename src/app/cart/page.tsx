@@ -7,7 +7,7 @@ import {
   CartHeader,
   CartItem,
   CartNotice,
-} from '@/components/cart1';
+} from '@/components/cart';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 
