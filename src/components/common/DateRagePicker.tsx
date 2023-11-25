@@ -3,7 +3,7 @@ import { DateRangePicker } from 'rsuite';
 
 import 'rsuite/dist/rsuite.min.css';
 
-const DateRagePicker = () => {
+const DateRagePicker = (): JSX.Element => {
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);

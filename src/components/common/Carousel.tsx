@@ -30,7 +30,7 @@ const PrevArrow = ({ onClick }: any) => {
   );
 };
 
-const Carousel = ({ images }: any) => {
+const Carousel = ({ images }: any): JSX.Element => {
   const settings = {
     dots: true,
     infinite: true,

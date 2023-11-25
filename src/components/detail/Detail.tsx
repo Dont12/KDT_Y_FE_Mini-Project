@@ -71,7 +71,7 @@ const rules = [
   '※ 청소년 보호법에 따라 미성년자의 혼숙은 불가합니다.',
 ];
 
-function Detail() {
+const Detail = (): JSX.Element => {
   //   const [checkInOut, setCheckInOut] = useState([today, tomorrow]);
 
   return (
@@ -189,6 +189,6 @@ function Detail() {
       </main>
     </>
   );
-}
+};
 
 export default Detail;

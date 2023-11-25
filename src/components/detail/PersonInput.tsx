@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import Toast from '@/components/common/Toast';
 
-const PersonInput = () => {
+const PersonInput = (): JSX.Element => {
   const [person, setPerson] = useState('1');
   const [toastVisible, setToastVisible] = useState(false);
 
