@@ -51,19 +51,21 @@ const SignIn = (): JSX.Element => {
         <HeaderNav showBack>로그인</HeaderNav>
       </Header>
       <form className='w-full px-20' onSubmit={handleSubmit}>
-        <InputEmail
-          email={email as InputType}
-          handleEmail={handleEmail as InputHandler}
-        />
+        <div className='mb-6'>
+          <InputEmail
+            email={email as InputType}
+            handleEmail={handleEmail as InputHandler}
+          />
 
-        <InputPassword
-          password={password as InputType}
-          handlePassword={handlePassword as InputHandler}
-        />
+          <InputPassword
+            password={password as InputType}
+            handlePassword={handlePassword as InputHandler}
+          />
+        </div>
 
         <SubmitButton content='이메일로 로그인' activate={buttonActivate} />
       </form>
-      <Link href='/auth/signup'>
+      <Link href='/auth/signup' className='mt-10'>
         <div className='cursor-default'>
           아직 회원이 아니신가요?
           <span className='ml-2 cursor-pointer underline'>
