@@ -1,15 +1,14 @@
 'use client';
+import Header from '@components/common/Header';
+import HeaderNav from '@components/common/HeaderNav';
 import Image from 'next/image';
 import React from 'react';
 import { DateRangePicker } from 'rsuite';
 
 import 'rsuite/dist/rsuite.min.css';
 
-import Header from '@/components/Common/Header';
-import HeaderNav from '@/components/Common/HeaderNav';
-
 import PersonInput from './PersonInput';
-import Carousel from '../../../components/common/Carousel';
+import Carousel from '../common/Carousel';
 
 const today = new Date();
 const tomorrow = new Date();

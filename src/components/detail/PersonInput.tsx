@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
-import { Toast } from '@/components/common/Toast';
+import Toast from '@/components/common/Toast';
 
 const PersonInput = () => {
   const [person, setPerson] = useState('1');
