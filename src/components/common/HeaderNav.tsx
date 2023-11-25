@@ -21,7 +21,7 @@ const HeaderNav = ({
   showCart = false,
   showHome = false,
   showMyPage = false,
-}: Props) => {
+}: Props): JSX.Element => {
   const router = useRouter();
   const onBackClick = () => {
     router.back();
