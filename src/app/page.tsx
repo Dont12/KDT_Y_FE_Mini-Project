@@ -27,13 +27,12 @@ const LocationContent: React.FC<{
   index: number;
 }> = ({ selectedLocation, data, index }) => (
   <div
-    style={{
-      display:
-        selectedLocation === data.location ||
-        (selectedLocation === null && index === 0)
-          ? 'block'
-          : 'none',
-    }}
+    className={`${
+      selectedLocation === data.location ||
+      (selectedLocation === null && index === 0)
+        ? 'block'
+        : 'hidden'
+    }`}
   >
     <div className='grid grid-cols-4 gap-4'>
       {data.pensions.map((pension, i) => (
@@ -44,19 +43,12 @@ const LocationContent: React.FC<{
 );
 
 const CircleLabel = ({ label, image }: { label: string; image: string }) => (
-  <div
-    className='relative mb-4 rounded-full bg-black p-4 text-white'
+  <div className="relative mb-4 rounded-full bg-black p-4 text-white w-[7.5rem] h-[7.5rem]"
     style={{
-      width: '120px',
-      height: '120px',
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${image})`, // 배경색을 덧씌워 어둡게 만듦
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${image})`,
       backgroundSize: 'cover',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-  >
-    <p className='text-center text-xl font-semibold'>{label}</p>
+    }}>
+    <p className="text-center text-xl font-semibold flex items-center justify-center h-full">{label}</p>
   </div>
 );
 
