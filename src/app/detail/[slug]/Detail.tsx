@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 import { DateRangePicker } from 'rsuite';
 
 import 'rsuite/dist/rsuite.min.css';
@@ -8,8 +8,8 @@ import 'rsuite/dist/rsuite.min.css';
 import Header from '@/components/Common/Header';
 import HeaderNav from '@/components/Common/HeaderNav';
 
+import PersonInput from './PersonInput';
 import Carousel from '../../../components/common/Carousel';
-import Toast from '../../../components/common/Toast';
 
 const today = new Date();
 const tomorrow = new Date();
@@ -73,23 +73,7 @@ const rules = [
 ];
 
 function Detail() {
-  const [person, setPerson] = useState('1');
-  const [toastVisible, setToastVisible] = useState(false);
-  const [checkInOut, setCheckInOut] = useState([today, tomorrow]);
-
-  const showToast = () => {
-    setToastVisible(true);
-    setTimeout(() => {
-      setToastVisible(false);
-    }, 3000);
-  };
-
-  const handleInputChange = (e: any) => {
-    let inputValue = e.target.value.replace(/[^0-9]/g, '');
-    inputValue = Math.min(Math.max(parseInt(inputValue), 1), 9);
-    setPerson(inputValue);
-    showToast();
-  };
+  //   const [checkInOut, setCheckInOut] = useState([today, tomorrow]);
 
   return (
     <>
@@ -120,28 +104,16 @@ function Detail() {
                 defaultValue={[today, tomorrow]}
                 disabledDate={beforeToday}
                 className='h-8 w-52'
-                value={checkInOut as [Date, Date] | null}
-                onChange={(value: [Date, Date] | null) => {
-                  if (value !== null) {
-                    setCheckInOut(value);
-                  }
-                }}
+                // value={checkInOut as [Date, Date] | null}
+                // onChange={(value: [Date, Date] | null) => {
+                //   if (value !== null) {
+                //     setCheckInOut(value);
+                //   }
+                // }}
               />
             </div>
-            <div className='flex flex-col'>
-              <label htmlFor='person'>인원</label>
-              <input
-                id='person'
-                type='number'
-                className='border-lightGray h-8 w-52 rounded-md border border-solid indent-2'
-                min='1'
-                max='9'
-                value={person}
-                onChange={handleInputChange}
-              />
-              {toastVisible && (
-                <Toast message='한번에 예약 할 수 있는 것은 최대 9명 입니다.' />
-              )}
+            <div>
+              <PersonInput />
             </div>
           </div>
           <div className='flex flex-col gap-10'>
