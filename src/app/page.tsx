@@ -330,7 +330,7 @@ const HomePage = () => {
   ];
 
   return (
-    <div className='bg-white' style={{ paddingTop: '3.5rem' }}>
+    <div className='bg-white pt-[3rem]'>
       <Header>
         <HeaderNav showLogo showCart showMyPage>
           {' '}

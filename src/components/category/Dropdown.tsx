@@ -84,14 +84,14 @@ const Dropdown: React.FC<DropdownProps> = ({
               </div>
             </div>
             {/* 오른쪽 컬럼 - 서브 옵션 */}
-            <div className='w-1/2 pl-4'>
+            <div className='w-3/4 pl-4'>
               {selectedOption?.subOptions && (
-                <div className='py-1'>
+                <div className='flex flex-wrap py-1'>
                   {selectedOption.subOptions.map((subOption) => (
                     <button
                       key={subOption}
                       onClick={() => handleOptionClick({ label: subOption })}
-                      className='block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                      className='block w-1/2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
                     >
                       {subOption}
                     </button>
