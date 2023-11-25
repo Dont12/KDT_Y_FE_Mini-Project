@@ -9,7 +9,7 @@ const nextConfig = {
 
   // Uncoment to add domain whitelist
   images: {
-    domains: ['localhost', '*', 'yaimg.yanolja.com'],
+    domains: ['localhost', '*'],
   },
 
   webpack(config) {
