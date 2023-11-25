@@ -34,7 +34,6 @@ const CartItemRoomInfo = ({
   price,
 }: Props): JSX.Element => {
   const deleteCartItem = () => {
-    // TODO|서지수 장바구니 삭제 기능 구현
     console.log('장바구니 삭제 기능 구현');
   };
   return (

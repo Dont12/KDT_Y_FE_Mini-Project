@@ -20,9 +20,6 @@ const CartItem = ({ data }: Props): JSX.Element => {
     stock,
   } = data.product;
   const { checkInDate, checkOutDate, numberOfNights } = data;
-  // TODO|서지수 재고없으면 예약 마감으로 처리
-  // TODO|서지수 체크인 날짜 지나면 예약 마감으로 처리
-  // TODO|서지수 데이터 이렇게 나눠서 주는게 좋은지 확인
   return (
     <li className='mt-3 w-full bg-white p-5 pt-3'>
       <CartItemHeader
