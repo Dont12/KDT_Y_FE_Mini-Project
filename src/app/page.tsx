@@ -333,58 +333,60 @@ const HomePage = () => {
   ];
 
   return (
-    <div className='bg-white pt-[3rem]'>
+    <>
       <Header>
         <HeaderNav showLogo showCart showMyPage>
           {' '}
         </HeaderNav>
       </Header>
-      <Carousel images={carouselImages} />
-      <IconList icons={mainIcons} />
-      <div className='p-10'>
-        <h1 className='mb-6 text-lg	 font-bold'>크리스마스 펜션 예약하기</h1>
-        <Navigation
-          locations={ChristmasPensionData.map((data) => data.location)}
-          onSelectLocation={(location) =>
-            setSelectedChristmasLocation(location)
-          }
-          selectedLocation={selectedChristmasLocation}
-        />
-        {ChristmasPensionData.map((data, index) => (
-          <LocationContent
-            key={index}
+      <main className='bg-white pt-[3rem]'>
+        <Carousel images={carouselImages} />
+        <IconList icons={mainIcons} />
+        <section className='p-10'>
+          <h1 className='mb-6 text-lg	 font-bold'>크리스마스 펜션 예약하기</h1>
+          <Navigation
+            locations={ChristmasPensionData.map((data) => data.location)}
+            onSelectLocation={(location) =>
+              setSelectedChristmasLocation(location)
+            }
             selectedLocation={selectedChristmasLocation}
-            data={data}
-            index={index}
           />
-        ))}
-      </div>
-      <div className='p-10'>
-        <h1 className='mb-6 text-lg	 font-bold'>겨울 도심 호캉스</h1>
-        <Navigation
-          locations={WinterStaycationData.map((data) => data.location)}
-          onSelectLocation={(location) => setSelectedWinterLocation(location)}
-          selectedLocation={selectedWinterLocation}
-        />
-        {WinterStaycationData.map((data, index) => (
-          <LocationContent
-            key={index}
+          {ChristmasPensionData.map((data, index) => (
+            <LocationContent
+              key={index}
+              selectedLocation={selectedChristmasLocation}
+              data={data}
+              index={index}
+            />
+          ))}
+        </section>
+        <section className='p-10'>
+          <h1 className='mb-6 text-lg	 font-bold'>겨울 도심 호캉스</h1>
+          <Navigation
+            locations={WinterStaycationData.map((data) => data.location)}
+            onSelectLocation={(location) => setSelectedWinterLocation(location)}
             selectedLocation={selectedWinterLocation}
-            data={data}
-            index={index}
           />
-        ))}
-      </div>
-      <div className='p-10'>
-        <h1 className='mb-6	 text-lg font-bold'>사랑받는 겨울 여행지</h1>
-        <div className='mb-6 flex justify-around'>
-          <CircleLabel label='강릉' image='svg/mainIcon/homestay.svg' />
-          <CircleLabel label='제주도' image='svg/mainIcon/homestay.svg' />
-          <CircleLabel label='속초' image='svg/mainIcon/homestay.svg' />
-          <CircleLabel label='평창' image='svg/mainIcon/homestay.svg' />
-        </div>
-      </div>
-    </div>
+          {WinterStaycationData.map((data, index) => (
+            <LocationContent
+              key={index}
+              selectedLocation={selectedWinterLocation}
+              data={data}
+              index={index}
+            />
+          ))}
+        </section>
+        <section className='p-10'>
+          <h1 className='mb-6	 text-lg font-bold'>사랑받는 겨울 여행지</h1>
+          <div className='mb-6 flex justify-around'>
+            <CircleLabel label='강릉' image='svg/mainIcon/homestay.svg' />
+            <CircleLabel label='제주도' image='svg/mainIcon/homestay.svg' />
+            <CircleLabel label='속초' image='svg/mainIcon/homestay.svg' />
+            <CircleLabel label='평창' image='svg/mainIcon/homestay.svg' />
+          </div>
+        </section>
+      </main>
+    </>
   );
 };
 
