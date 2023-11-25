@@ -17,14 +17,14 @@ module.exports = {
     'no-console': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/no-unescaped-entities': 'off',
-
+    'import/no-cycle': 'off',
     'react/display-name': 'off',
     'react/jsx-curly-brace-presence': [
       'warn',
       { props: 'never', children: 'never' },
     ],
 
-    //#region  //*=========== Unused Import ===========
+    // #region  //*=========== Unused Import ===========
     '@typescript-eslint/no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'warn',
     'unused-imports/no-unused-vars': [
@@ -36,9 +36,9 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
-    //#endregion  //*======== Unused Import ===========
+    // #endregion  //*======== Unused Import ===========
 
-    //#region  //*=========== Import Sort ===========
+    // #region  //*=========== Import Sort ===========
     'simple-import-sort/exports': 'warn',
     'simple-import-sort/imports': [
       'warn',
@@ -75,7 +75,7 @@ module.exports = {
         ],
       },
     ],
-    //#endregion  //*======== Import Sort ===========
+    // #endregion  //*======== Import Sort ===========
   },
   globals: {
     React: true,
