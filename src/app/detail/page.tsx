@@ -132,7 +132,7 @@ function Detail() {
           ))}
         </div>
         <div className='border-mediumGray border-b border-solid py-8'>
-          <h3 className='text-base font-bold'>이용규칙</h3>
+          <h3 className='subtitle5'>이용규칙</h3>
           {rules.map((rule, index) => (
             <p className='body1' key={index}>
               {rule}
