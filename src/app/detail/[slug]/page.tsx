@@ -2,12 +2,12 @@ import React from 'react';
 
 import Detail from '@/components/detail/Detail';
 
-function DetailPage() {
+const DetailPage = (): JSX.Element => {
   return (
     <>
       <Detail />
     </>
   );
-}
+};
 
 export default DetailPage;
