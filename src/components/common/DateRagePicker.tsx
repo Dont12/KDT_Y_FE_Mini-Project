@@ -3,7 +3,7 @@ import { DateRangePicker } from 'rsuite';
 
 import 'rsuite/dist/rsuite.min.css';
 
-function DateRagePicker() {
+const DateRagePicker = () => {
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -23,6 +23,6 @@ function DateRagePicker() {
       />
     </>
   );
-}
+};
 
 export default DateRagePicker;

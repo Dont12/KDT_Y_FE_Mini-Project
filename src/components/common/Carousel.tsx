@@ -30,7 +30,7 @@ const PrevArrow = ({ onClick }: any) => {
   );
 };
 
-function Carousel({ images }: any) {
+const Carousel = ({ images }: any) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -55,6 +55,6 @@ function Carousel({ images }: any) {
       ))}
     </Slider>
   );
-}
+};
 
 export default Carousel;
