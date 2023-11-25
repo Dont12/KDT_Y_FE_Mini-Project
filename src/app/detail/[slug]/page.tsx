@@ -5,10 +5,9 @@ import { DateRangePicker } from 'rsuite';
 
 import 'rsuite/dist/rsuite.min.css';
 
-import Header from '@/components/Common/Header';
-import HeaderNav from '@/components/Common/HeaderNav';
-
 import Carousel from '../../../components/common/Carousel';
+import Header from '../../../components/common/Header';
+import HeaderNav from '../../../components/common/HeaderNav';
 import Toast from '../../../components/common/Toast';
 
 const today = new Date();
