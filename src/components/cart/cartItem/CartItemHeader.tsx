@@ -16,7 +16,7 @@ const CartItemHeader = ({
       <Link href={`/detail/${productId}`}>
         <h2 className='mb-0.5 text-lg font-bold'>{productName}</h2>
       </Link>
-      <div className='text-gray1 text-xs font-light'>{address}</div>
+      <div className='text-gray1 text-xs'>{address}</div>
     </div>
   );
 };

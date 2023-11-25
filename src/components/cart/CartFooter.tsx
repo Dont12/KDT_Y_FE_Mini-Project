@@ -10,7 +10,7 @@ const CartFooter = ({ selectCount, totalPrice }: Props): JSX.Element => {
         <div className='flex items-center justify-between'>
           <div className='text-sm font-bold'>총 {selectCount}건</div>
           <div className='flex items-center gap-2'>
-            <div className='text-gray4 text-xs font-light'>결제 예상 금액</div>
+            <div className='text-gray4 text-xs'>결제 예상 금액</div>
             <div className='text-xl font-bold'>
               {totalPrice.toLocaleString('ko-KR')}원
             </div>
@@ -23,7 +23,7 @@ const CartFooter = ({ selectCount, totalPrice }: Props): JSX.Element => {
           <div>예약하기</div>
         </button>
         <div className='mt-3'>
-          <span className='text-gray1 text-xs font-light'>
+          <span className='text-gray1 text-xs'>
             STAYINN은 통신판매중개업자로서, 통신판매의 당사자가 아니라는 사실을
             고지하며 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각
             판매자에게 있습니다.

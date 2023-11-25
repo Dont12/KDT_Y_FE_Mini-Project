@@ -63,20 +63,20 @@ const CartItemRoomInfo = ({
             className='rounded object-cover'
           />
         </div>
-        <div className='flex-col text-xs font-light'>
-          <div>
+        <div className='text-gray1 flex-col text-xs'>
+          <div className='text-black'>
             <span>{convertFullDate(checkInDate)}</span>
             <span> ~ </span>
             <span>{convertFullDate(checkOutDate)}</span>
             <span className='bar'>|</span>
             <span>{numberOfNights}박</span>
           </div>
-          <div className='text-gray1'>
+          <div>
             <span>체크인 {checkInTime}명</span>
             <span className='bar'>|</span>
             <span>체크아웃 {checkOutTime}명</span>
           </div>
-          <div className='text-gray1'>
+          <div>
             기준 {baseGuestCount} / 최대 {maxGuestCount}
           </div>
         </div>
