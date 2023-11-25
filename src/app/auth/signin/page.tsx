@@ -4,9 +4,10 @@ import { useAuthInput, useButtonActivate } from '@hooks/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { InputEmail, InputPassword, SubmitButton } from '@/components/auth';
-import Header from '@/components/Common/Header';
-import HeaderNav from '@/components/Common/HeaderNav';
+import { InputEmail, InputPassword } from '@/components/auth';
+import Header from '@/components/common/Header';
+import HeaderNav from '@/components/common/HeaderNav';
+import SubmitButton from '@/components/common/SubmitButton';
 
 interface FormElements extends HTMLFormElement {
   email: HTMLInputElement;
