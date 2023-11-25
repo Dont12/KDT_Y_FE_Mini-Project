@@ -1,5 +1,5 @@
-import Header from '@/components/Common/Header';
-import HeaderNav from '@/components/Common/HeaderNav';
+import Header from '@/components/common/Header';
+import HeaderNav from '@/components/common/HeaderNav';
 
 const Cart = () => {
   return (
@@ -29,12 +29,9 @@ const Cart = () => {
           </div>
         </div>
       </Header>
-      <main className='mt-[7.25rem]'>
-        임시 장바구니
-      </main>
+      <main className='mt-[7.25rem]'>임시 장바구니</main>
     </>
   );
 };
 
 export default Cart;
-
