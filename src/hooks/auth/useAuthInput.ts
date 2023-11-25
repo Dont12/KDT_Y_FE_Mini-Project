@@ -61,7 +61,7 @@ const useAuthInput = (target: string, password?: InputType) => {
     [input, target, password]
   );
 
-  return [input, handleChange];
+  return [input, handleChange, setInput];
 };
 
 export default useAuthInput;

@@ -10,6 +10,7 @@ import {
 } from '@components/auth';
 import { useAuthInput, useButtonActivate } from '@hooks/auth';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 
 import Header from '@/components/Common/Header';
 import HeaderNav from '@/components/Common/HeaderNav';
@@ -30,14 +31,14 @@ interface InputType {
 
 type InputHandler = (e: React.ChangeEvent<HTMLInputElement>) => void;
 
+type SetInput = React.Dispatch<React.SetStateAction<InputType>>;
+
 const SignUp = (): JSX.Element => {
   const [name, handleName] = useAuthInput('name');
   const [email, handleEmail] = useAuthInput('email');
   const [password, handlePassword] = useAuthInput('password');
-  const [passwordConfirm, handlePasswordConfirm] = useAuthInput(
-    'passwordConfirm',
-    password as InputType
-  );
+  const [passwordConfirm, handlePasswordConfirm, setPasswordConfirm] =
+    useAuthInput('passwordConfirm', password as InputType);
   const [contact, handleContact] = useAuthInput('contact');
   const buttonActivate = useButtonActivate(
     name as InputType,
@@ -77,6 +78,8 @@ const SignUp = (): JSX.Element => {
         <InputPassword
           password={password as InputType}
           handlePassword={handlePassword as InputHandler}
+          passwordConfirm={passwordConfirm as InputType}
+          setPasswordConfirm={setPasswordConfirm as SetInput}
         />
 
         <InputPasswordConfirm
