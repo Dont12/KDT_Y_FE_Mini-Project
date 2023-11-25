@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Option {
   label: string;
@@ -32,15 +32,18 @@ const Dropdown: React.FC<DropdownProps> = ({
     }
   };
 
-  const handleOutsideClick = (event: Event) => {
-    if (
-      isOpen &&
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
-    ) {
-      setIsOpen(false);
-    }
-  };
+  const handleOutsideClick = useCallback(
+    (event: Event) => {
+      if (
+        isOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    },
+    [isOpen]
+  );
 
   useEffect(() => {
     document.addEventListener('click', handleOutsideClick);
@@ -48,7 +51,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     return () => {
       document.removeEventListener('click', handleOutsideClick);
     };
-  }, [isOpen]);
+  }, [isOpen, handleOutsideClick]);
 
   return (
     <div className='relative inline-block text-left' ref={dropdownRef}>
