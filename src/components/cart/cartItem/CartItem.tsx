@@ -1,7 +1,7 @@
 import { CartItem } from '@/@types/cart.types';
 
 import CartItemHeader from './CartItemHeader';
-import CartRoomInfo from './CartRoomInfo';
+import CartRoomInfo from './CartItemRoomInfo';
 
 interface Props {
   data: CartItem;

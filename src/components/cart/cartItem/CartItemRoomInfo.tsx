@@ -20,7 +20,7 @@ interface Props {
   price: number;
 }
 
-const CartRoomInfo = ({
+const CartItemRoomInfo = ({
   productId,
   roomName,
   imageUrl,
@@ -85,4 +85,4 @@ const CartRoomInfo = ({
   );
 };
 
-export default CartRoomInfo;
+export default CartItemRoomInfo;

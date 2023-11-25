@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import CartFooter from '@/components/cart/CartFooter';
-import CartHeader from '@/components/cart/CartHeader';
-import CartItem from '@/components/cart/CartItem';
-import CartNotice from '@/components/cart/CartNotice';
+import {
+  CartFooter,
+  CartHeader,
+  CartItem,
+  CartNotice,
+} from '@/components/cart';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 
@@ -18,7 +20,6 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(650000);
 
   const [cartList, setCartList] = useState([]);
-  useEffect(() => {});
   return (
     <>
       <Header>
