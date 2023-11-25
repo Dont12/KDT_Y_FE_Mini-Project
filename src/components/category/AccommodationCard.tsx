@@ -2,12 +2,8 @@
 
 import React from 'react';
 
-import YourItemComponent, { YourItemComponentProps } from './YourItemComponent';
-
-type AccommodationCardProps = YourItemComponentProps;
-
-const AccommodationCard: React.FC<AccommodationCardProps> = (props) => {
-  return <YourItemComponent {...props} />;
+const AccommodationCard = (YourItemComponentProps: JSX.Element) => {
+  return <AccommodationCard {...YourItemComponentProps} />;
 };
 
 export default AccommodationCard;

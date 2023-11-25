@@ -7,7 +7,7 @@ interface IconWithLabelProps {
   label: string;
 }
 
-const IconWithLabel: React.FC<IconWithLabelProps> = ({ icon, label }) => {
+const IconWithLabel = ({ icon, label }: IconWithLabelProps) => {
   return (
     <div className='flex flex-col items-center'>
       <Image src={icon} alt={label} width={46} height={46} />

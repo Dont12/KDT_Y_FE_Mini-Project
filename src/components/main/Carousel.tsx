@@ -9,7 +9,7 @@ interface CarouselProps {
   images: string[];
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images }) => {
+const Carousel = ({ images }: CarouselProps) => {
   const carouselSettings = {
     spaceBetween: 10,
     slidesPerView: 1,

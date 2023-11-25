@@ -9,12 +9,7 @@ interface PensionCardProps {
   image: string;
 }
 
-const PensionCard: React.FC<PensionCardProps> = ({
-  name,
-  rating,
-  price,
-  image,
-}) => {
+const PensionCard = ({ name, rating, price, image }: PensionCardProps) => {
   return (
     <div className='rounded-md bg-white p-4 shadow-md'>
       <div className='relative mb-4 h-32 w-full'>

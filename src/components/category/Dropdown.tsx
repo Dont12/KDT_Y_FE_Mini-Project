@@ -11,11 +11,11 @@ interface DropdownProps {
   onSelectOption: (option: Option | null) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({
+const Dropdown = ({
   options,
   selectedOption,
   onSelectOption,
-}) => {
+}: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 

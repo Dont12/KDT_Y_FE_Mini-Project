@@ -7,7 +7,7 @@ interface IconListProps {
   icons: { icon: string; label: string }[];
 }
 
-const IconList: React.FC<IconListProps> = ({ icons }) => {
+const IconList = ({ icons }: IconListProps) => {
   return (
     <div className='icon-container grid grid-cols-5 justify-items-center gap-10 pb-10 pl-12 pr-12'>
       {icons.map((iconData, index) => (

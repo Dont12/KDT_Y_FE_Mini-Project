@@ -9,7 +9,7 @@ import HeaderNav from '@/components/common/HeaderNav';
 import Dropdown from '../../components/category/Dropdown';
 import YourItemComponent from '../../components/category/YourItemComponent';
 
-const CategoryPage: React.FC = () => {
+const CategoryPage = () => {
   const [selectedLocation, setSelectedLocation] = useState<{
     label: string;
     subLabel?: string;

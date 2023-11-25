@@ -8,11 +8,11 @@ interface NavigationProps {
   selectedLocation: string | null;
 }
 
-const Navigation: React.FC<NavigationProps> = ({
+const Navigation = ({
   locations,
   onSelectLocation,
   selectedLocation,
-}) => {
+}: NavigationProps) => {
   return (
     <div className='mb-6 flex justify-evenly border-b border-t text-xs'>
       {locations.map((location, index) => (

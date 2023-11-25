@@ -9,11 +9,7 @@ export interface YourItemComponentProps {
   image: string;
 }
 
-const YourItemComponent: React.FC<YourItemComponentProps> = ({
-  name,
-  rating,
-  image,
-}) => {
+const YourItemComponent = ({ name, rating, image }: YourItemComponentProps) => {
   return (
     <div className='m-6 max-w-xs'>
       <div className='grid grid-cols-3'>

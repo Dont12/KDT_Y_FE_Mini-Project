@@ -21,11 +21,13 @@ interface DataType {
   }[];
 }
 
-const LocationContent: React.FC<{
+interface LocationProps {
   selectedLocation: string | null;
   data: DataType;
   index: number;
-}> = ({ selectedLocation, data, index }) => (
+}
+
+const LocationContent = ({ selectedLocation, data, index }: LocationProps) => (
   <div
     className={`${
       selectedLocation === data.location ||
@@ -43,12 +45,16 @@ const LocationContent: React.FC<{
 );
 
 const CircleLabel = ({ label, image }: { label: string; image: string }) => (
-  <div className="relative mb-4 rounded-full bg-black p-4 text-white w-[7.5rem] h-[7.5rem]"
+  <div
+    className='relative mb-4 h-[7.5rem] w-[7.5rem] rounded-full bg-black p-4 text-white'
     style={{
       backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${image})`,
       backgroundSize: 'cover',
-    }}>
-    <p className="text-center text-xl font-semibold flex items-center justify-center h-full">{label}</p>
+    }}
+  >
+    <p className='flex h-full items-center justify-center text-center text-xl font-semibold'>
+      {label}
+    </p>
   </div>
 );
 
