@@ -31,9 +31,10 @@ const Cart = () => {
           totalCount={cartData.data.items.length}
         />
       </Header>
-      <main className='mb-52 mt-[7.25rem]'>
+      <main className='mb-52 mt-[6rem] inline-block'>
         <section>
-          <ul>
+          {/* <EmptyCartItem /> */}
+          <ul className='pt-0'>
             {cartData.data.items.map((cartItem) => (
               <CartItem key={cartItem.id} data={cartItem} />
             ))}
