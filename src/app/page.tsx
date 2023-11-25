@@ -27,6 +27,11 @@ interface LocationProps {
   index: number;
 }
 
+interface CircleLabelProps {
+  label: string;
+  image: string;
+}
+
 const LocationContent = ({ selectedLocation, data, index }: LocationProps) => (
   <div
     className={`${
@@ -44,7 +49,7 @@ const LocationContent = ({ selectedLocation, data, index }: LocationProps) => (
   </div>
 );
 
-const CircleLabel = ({ label, image }: { label: string; image: string }) => (
+const CircleLabel = ({ label, image }: CircleLabelProps) => (
   <div
     className='relative mb-4 h-[7.5rem] w-[7.5rem] rounded-full bg-black p-4 text-white'
     style={{
