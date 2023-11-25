@@ -79,3 +79,14 @@
   font-weight: light;
   font-size: 0.75rem;
 }
+.bar {
+  margin: 0 0.375rem;
+}
+.footer-button {
+  border: 0.1rem solid #e6e6e6;
+  cursor: pointer;
+}
+.footer-button:hover {
+  border: 0.1rem solid #616161;
+  cursor: pointer;
+}
