@@ -18,43 +18,48 @@ const page = () => {
         maxGuestCount={reservationData.maxGuestCount}
         hideDetailLink={true}
       />
-      <div className='border-mediumGray m-8  items-center justify-center rounded-md border border-solid px-5 py-8 '>
-        <div className='flex justify-between'>
-          <p className='m-2 text-xl font-bold'>결제 날짜</p>
-          <p className='text-xl'>{reservationData.paymentDate}</p>
-        </div>
-        <div className='flex justify-between text-xl'>
-          <p className='m-2 text-xl font-bold'>결제 수단</p>
-          <p className='text-xl'>{reservationData.payment}</p>
-        </div>
-        <div className='border-lightGray mt-6 w-full border-b-2'></div>
-
-        <p className='m-2 mt-8 text-xl'>결제 금액</p>
-        <div className='flex justify-between'>
-          <p className='m-2 text-xl font-bold'> 상품 금액</p>
-          <p className='text-xl'>{reservationData.price}</p>
+      <div className='border-mediumGray m-8 items-center justify-center rounded-md border border-solid px-5 py-8 '>
+        <div className='h-20'>
+          <div className='flex justify-between'>
+            <p className='m-2 text-xl font-bold'>결제 날짜</p>
+            <p className='text-xl'>{reservationData.paymentDate}</p>
+          </div>
+          <div className='flex justify-between text-xl'>
+            <p className='m-2 text-xl font-bold'>결제 수단</p>
+            <p className='text-xl'>{reservationData.payment}</p>
+          </div>
         </div>
         <div className='border-lightGray mt-6 w-full border-b-2'></div>
-
-        <p className='m-2 mt-14 text-xl font-bold'>이용자 정보</p>
-        <div className='flex justify-between'>
-          <p className='m-2 text-xl'>이름</p>
-          <p className='text-xl'>{reservationData.name}</p>
-        </div>
-        <div className='flex justify-between'>
-          <p className='m-2 text-xl'>휴대폰 번호</p>
-          <p className='text-xl'>{reservationData.phone}</p>
+        <div className='h-20'>
+          <p className='m-2 mt-8 text-xl'>결제 금액</p>
+          <div className='flex justify-between'>
+            <p className='m-2 text-xl font-bold'> 상품 금액</p>
+            <p className='text-xl'>{reservationData.price}</p>
+          </div>
         </div>
         <div className='border-lightGray mt-6 w-full border-b-2'></div>
-
-        <p className='m-2 mt-14 text-xl font-bold'>예약자 정보</p>
-        <div className='flex justify-between'>
-          <p className='m-2 text-xl'>이름</p>
-          <p className='text-xl'>{reservationData.userName}</p>
+        <div className='h-28'>
+          <p className='m-2 mt-8 text-xl font-bold'>이용자 정보</p>
+          <div className='flex justify-between'>
+            <p className='m-2 text-xl'>이름</p>
+            <p className='text-xl'>{reservationData.name}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className='m-2 text-xl'>휴대폰 번호</p>
+            <p className='text-xl'>{reservationData.phone}</p>
+          </div>
         </div>
-        <div className='flex justify-between'>
-          <p className='m-2 text-xl'>휴대폰 번호</p>
-          <p className='text-xl'>{reservationData.userPhone}</p>
+        <div className='border-lightGray mt-6 w-full border-b-2'></div>
+        <div className='h-28'>
+          <p className='m-2 mt-8 text-xl font-bold'>예약자 정보</p>
+          <div className='flex justify-between'>
+            <p className='m-2 text-xl'>이름</p>
+            <p className='text-xl'>{reservationData.userName}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className='m-2 text-xl'>휴대폰 번호</p>
+            <p className='text-xl'>{reservationData.userPhone}</p>
+          </div>
         </div>
       </div>
     </div>
