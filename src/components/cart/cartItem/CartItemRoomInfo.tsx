@@ -55,13 +55,14 @@ const CartItemRoomInfo = ({
         </button>
       </div>
       <div className='flex items-start gap-2'>
-        <Image
-          src={imageUrl}
-          width={80}
-          height={80}
-          alt={`${roomName} 이미지`}
-          className='rounded'
-        />
+        <div className='relative h-20 w-20'>
+          <Image
+            src={imageUrl}
+            fill
+            alt={`${roomName} 사진`}
+            className='rounded object-cover'
+          />
+        </div>
         <div className='flex-col text-xs font-light'>
           <div>
             <span>{convertFullDate(checkInDate)}</span>
