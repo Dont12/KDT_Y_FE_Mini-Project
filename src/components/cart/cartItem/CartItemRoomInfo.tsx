@@ -40,9 +40,12 @@ const CartItemRoomInfo = ({
   return (
     <div className='border-gray3 mt-4 border-t border-solid pt-5'>
       <div className='flex items-start justify-between'>
-        <Link href={`/detail/${productId}`}>
-          <h3 className='mb-3 text-base font-bold'>{roomName}</h3>
-        </Link>
+        <div className='mb-3 flex items-center gap-2'>
+          <input type='checkbox' />
+          <Link href={`/detail/${productId}`}>
+            <h3 className='text-base font-bold'>{roomName}</h3>
+          </Link>
+        </div>
         <button
           type='button'
           aria-label='장바구니 삭제'
@@ -52,7 +55,6 @@ const CartItemRoomInfo = ({
         </button>
       </div>
       <div className='flex items-start gap-2'>
-        <input type='checkbox' />
         <Image
           src={imageUrl}
           width={80}
