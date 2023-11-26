@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 
 const Divider = () => <div className='border-lightGray border-b  px-8 '></div>;
 
-const page = () => {
+const reservation = () => {
   const [selectorPayment, setSelectorPayment] = useState<null | string>(null);
 
   const handleButtonClick = (paymentMethod: string) => {
@@ -80,7 +80,7 @@ const page = () => {
   );
 };
 
-export default page;
+export default reservation;
 
 const paymentData = [
   {

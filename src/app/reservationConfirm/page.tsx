@@ -1,8 +1,36 @@
+'use client';
+
 import ReservationConfirm from '@/components/ReservationConfirm';
-import React from 'react';
+import ReservationConfirmContainer from '@/components/ReservationConfirmContainer';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
-const page = () => {
+const reservationConfirm = () => {
+  const [reservationData, setReservationData] = useState<Order[]>([]);
+
+  useEffect(() => {
+    const fetchReservationData = async () => {
+      try {
+        const response = await fetch(
+          'https://mock.stayinn.site/v1/orders/history?page=1&pageSize=10'
+        );
+        const reservationConfirmResponse = await response.json();
+
+        if (reservationConfirmResponse.status === 'SUCCESS') {
+          setReservationData(reservationConfirmResponse.data);
+        } else {
+          console.error('API 호출이 실패했습니다:', reservationConfirmResponse);
+        }
+      } catch (error) {
+        console.error('Fetch 에러:', error);
+      }
+    };
+
+    fetchReservationData();
+  }, []);
+  console.log(reservationData);
+
   return (
     <div className='mx-auto min-h-screen max-w-3xl bg-white'>
       <p className='py-14 text-center text-3xl'>국내 여행 예약 내역</p>
@@ -12,19 +40,12 @@ const page = () => {
           <MdOutlineKeyboardArrowDown />
         </button>
       </div>
-      {reservationData.map((data, index) => (
-        <ReservationConfirm
-          key={index}
-          productName={data.productName}
-          roomName={data.roomName}
-          imageUrl={data.imageUrl}
-          visitType={data.visitType}
-          checkInDate={data.checkInDate}
-          checkOutDate={data.checkOutDate}
-          checkInTime={data.checkInTime}
-          checkOutTime={data.checkOutTime}
-          baseGuestCount={data.baseGuestCount}
-          maxGuestCount={data.maxGuestCount}
+      {reservationData.map((order, orderIndex) => (
+        <ReservationConfirmContainer
+          key={orderIndex}
+          orderId={order.orderId}
+          createdDate={order.createdDate}
+          orderItems={order.orderItems}
         />
       ))}
 
@@ -41,56 +62,25 @@ const page = () => {
   );
 };
 
-export default page;
+export default reservationConfirm;
 
-// 예약 내역 데이터
-const reservationData = [
-  {
-    productName: '몬드리안 서울 이태원',
-    roomName: '이태원 몬드리안 썸머바캉스 조식2인',
-    imageUrl: '/images/roomImg.png',
-    visitType: '도보',
-    checkInTime: '15:00',
-    checkOutTime: '12:00',
-    baseGuestCount: 2,
-    maxGuestCount: 4,
-    checkInDate: '2023.11.20',
-    checkOutDate: '2023.11.21',
-  },
-  {
-    productName: '몬드리안 서울 이태원',
-    roomName: '이태원 몬드리안 썸머바캉스 조식2인',
-    imageUrl: '/images/roomImg.png',
-    visitType: '도보',
-    checkInTime: '15:00',
-    checkOutTime: '12:00',
-    baseGuestCount: 2,
-    maxGuestCount: 4,
-    checkInDate: '2023.11.20',
-    checkOutDate: '2023.11.21',
-  },
-  {
-    productName: '몬드리안 서울 이태원',
-    roomName: '이태원 몬드리안 썸머바캉스 조식2인',
-    imageUrl: '/images/roomImg.png',
-    visitType: '도보',
-    checkInTime: '15:00',
-    checkOutTime: '12:00',
-    baseGuestCount: 2,
-    maxGuestCount: 4,
-    checkInDate: '2023.11.20',
-    checkOutDate: '2023.11.21',
-  },
-  {
-    productName: '몬드리안 서울 이태원',
-    roomName: '이태원 몬드리안 썸머바캉스 조식2인',
-    imageUrl: '/images/roomImg.png',
-    visitType: '도보',
-    checkInTime: '15:00',
-    checkOutTime: '12:00',
-    baseGuestCount: 2,
-    maxGuestCount: 4,
-    checkInDate: '2023.11.20',
-    checkOutDate: '2023.11.21',
-  },
-];
+interface Order {
+  orderId: number;
+  createdDate: number;
+  orderItems: OrderItem[];
+}
+
+interface OrderItem {
+  orderItemId: number;
+  productId: number;
+  roomId: number;
+  productName: string;
+  imageUrl: string;
+  roomName: string;
+  baseGuestCount: number;
+  maxGuestCount: number;
+  checkInDate: string;
+  checkInTime: string;
+  checkOutDate: string;
+  checkOutTime: string;
+}

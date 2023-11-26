@@ -1,15 +1,15 @@
 import ReservationConfirm from '@/components/ReservationConfirm';
 import React from 'react';
 
-const page = () => {
+const reservationConfirmDetail = () => {
   return (
     <div className='min-h-screen max-w-3xl bg-white'>
       <p className='py-14 text-center text-3xl'>예약 결과 확인</p>
       <ReservationConfirm
+        orderId={reservationData.orderId}
         productName={reservationData.productName}
         roomName={reservationData.roomName}
         imageUrl={reservationData.imageUrl}
-        visitType={reservationData.visitType}
         checkInDate={reservationData.checkInDate}
         checkOutDate={reservationData.checkOutDate}
         checkInTime={reservationData.checkInTime}
@@ -66,14 +66,14 @@ const page = () => {
   );
 };
 
-export default page;
+export default reservationConfirmDetail;
 
 // 예약(결제된) 내역 데이터
 const reservationData = {
+  orderId: 2,
   productName: '몬드리안 서울 이태원',
   roomName: '이태원 몬드리안 썸머바캉스 조식2인',
   imageUrl: '/images/roomImg.png',
-  visitType: '도보',
   checkInTime: '15:00',
   checkOutTime: '12:00',
   baseGuestCount: 2,

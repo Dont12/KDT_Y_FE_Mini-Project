@@ -10,7 +10,7 @@ const ReservationItem = ({
   baseGuestCount,
   maxGuestCount,
   price,
-}: any) => {
+}) => {
   return (
     <div className='max-w-3xl bg-white p-8'>
       <p className='font-bold'>숙소</p>
