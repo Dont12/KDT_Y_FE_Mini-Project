@@ -6,14 +6,14 @@ import {
   InputName,
   InputPassword,
   InputPasswordConfirm,
-  SubmitButton,
 } from '@components/auth';
 import { useAuthInput, useButtonActivate } from '@hooks/auth';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import Header from '@/components/Common/Header';
-import HeaderNav from '@/components/Common/HeaderNav';
+import Header from '@/components/common/Header';
+import HeaderNav from '@/components/common/HeaderNav';
+import SubmitButton from '@/components/common/SubmitButton';
 
 interface FormElements extends HTMLFormElement {
   email: HTMLInputElement;

@@ -12,6 +12,7 @@
     "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
   "dependencies": {
+    "@types/react-slick": "^0.23.12",
     "@types/lodash": "^4.14.202",
     "lodash": "^4.17.21",
     "next": "^13.5.4",
@@ -20,6 +21,9 @@
     "react-icons": "^4.11.0",
     "react-infinite-scroll-component": "^6.1.0",
     "swiper": "^11.0.5",
+    "react-slick": "^0.29.0",
+    "rsuite": "^5.45.0",
+    "slick-carousel": "^1.8.1",
     "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
