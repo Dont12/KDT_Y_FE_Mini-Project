@@ -44,7 +44,8 @@ const SignUp = (): JSX.Element => {
     name as InputType,
     email as InputType,
     password as InputType,
-    passwordConfirm as InputType
+    passwordConfirm as InputType,
+    contact as InputType
   );
 
   const router = useRouter();
