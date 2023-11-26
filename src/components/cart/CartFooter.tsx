@@ -1,3 +1,5 @@
+import SubmitButton from '../common/SubmitButton';
+
 interface Props {
   selectCount: number;
   totalPrice: number;
@@ -16,12 +18,7 @@ const CartFooter = ({ selectCount, totalPrice }: Props): JSX.Element => {
             </div>
           </div>
         </div>
-        <button
-          type='button'
-          className='bg-mainButton hover:bg-mainButtonHov mt-4 w-full rounded-lg px-4 py-3 text-base font-bold text-white'
-        >
-          <div>예약하기</div>
-        </button>
+        <SubmitButton content='예약하기' activate={false} className='mt-4' />
         <div className='mt-3'>
           <span className='text-gray1 text-xs'>
             STAYINN은 통신판매중개업자로서, 통신판매의 당사자가 아니라는 사실을
