@@ -32,7 +32,7 @@ const ErrorMsg = ({ target, input }: ErrorProps): JSX.Element => {
   };
 
   return (
-    <div className='caption text-red absolute left-1 top-[105%]'>
+    <div className='text-red absolute left-1 top-[105%] text-xs font-light'>
       {input.value ? (input.validationPass ? '' : showError()) : null}
     </div>
   );
