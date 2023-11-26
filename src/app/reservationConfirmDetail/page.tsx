@@ -16,7 +16,7 @@ const reservationConfirmDetail = () => {
         checkOutTime={reservationData.checkOutTime}
         baseGuestCount={reservationData.baseGuestCount}
         maxGuestCount={reservationData.maxGuestCount}
-        hideDetailLink={true}
+        isLastItem={true}
       />
       <div className='border-mediumGray m-8 items-center justify-center rounded-md border border-solid px-5 py-8 '>
         <div className='h-20'>

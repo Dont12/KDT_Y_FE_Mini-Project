@@ -17,7 +17,6 @@ const ReservationConfirm = ({
   maxGuestCount,
   isLastItem,
 }: ReservationConfirmProps & {
-  hideDetailLink?: boolean;
   isLastItem?: boolean;
 }) => {
   return (
