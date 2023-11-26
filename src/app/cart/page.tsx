@@ -1,22 +1,83 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   CartFooter,
   CartHeader,
   CartItem,
   CartNotice,
+  EmptyCartItem,
 } from '@/components/cart';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
+
+import type { CartProduct } from '@/@types/cart.types';
 
 const Cart = () => {
   const [selectCount, setSelectCount] = useState<number>(0);
   const [cartData, setCartData] = useState(mock);
   const [totalPrice, setTotalPrice] = useState(650000);
 
-  const [cartList, setCartList] = useState([]);
+  const [cartProductList, setCartProductList] = useState<CartProduct[]>([]);
+
+  useEffect(() => {
+    mock.data.items.map((item) => {
+      setCartProductList((prevCartProductList) => {
+        const existingIndex = prevCartProductList.findIndex(
+          (prevCartItem) => prevCartItem.productId === item.product.productId
+        );
+        const updatedCartList = [...prevCartProductList];
+        if (existingIndex !== -1) {
+          // 존재하면 숙소 안에 방만 추가
+          updatedCartList[existingIndex].cartRoomList.push({
+            id: item.id,
+            roomId: item.product.roomId,
+            imageUrl: item.product.imageUrl,
+            roomName: item.product.roomName,
+            baseGuestCount: item.product.baseGuestCount,
+            maxGuestCount: item.product.maxGuestCount,
+            price: item.product.price,
+            checkInTime: item.product.checkInTime,
+            checkOutTime: item.product.checkOutTime,
+            stock: item.product.stock,
+            checkInDate: item.checkInDate,
+            checkOutDate: item.checkOutDate,
+            numberOfNights: item.numberOfNights,
+          });
+          return updatedCartList;
+        } else {
+          // 존재하지 않으면 숙소 및 방 추가
+          return [
+            ...prevCartProductList,
+            {
+              productId: item.product.productId,
+              productName: item.product.productName,
+              address: item.product.address,
+              cartRoomList: [
+                {
+                  id: item.id,
+                  roomId: item.product.roomId,
+                  imageUrl: item.product.imageUrl,
+                  roomName: item.product.roomName,
+                  baseGuestCount: item.product.baseGuestCount,
+                  maxGuestCount: item.product.maxGuestCount,
+                  price: item.product.price,
+                  checkInTime: item.product.checkInTime,
+                  checkOutTime: item.product.checkOutTime,
+                  stock: item.product.stock,
+                  checkInDate: item.checkInDate,
+                  checkOutDate: item.checkOutDate,
+                  numberOfNights: item.numberOfNights,
+                },
+              ],
+            },
+          ];
+        }
+      });
+    });
+  }, []);
+
   return (
     <>
       <Header>
@@ -30,12 +91,18 @@ const Cart = () => {
       </Header>
       <main className='mb-52 mt-[6rem]'>
         <section>
-          {/* <EmptyCartItem /> */}
-          <ul className='pt-[0.0063rem]'>
-            {cartData.data.items.map((cartItem) => (
-              <CartItem key={cartItem.id} data={cartItem} />
-            ))}
-          </ul>
+          {cartProductList.length > 0 ? (
+            <ul className='pt-[0.0063rem]'>
+              {cartProductList.map((cartProductItem) => (
+                <CartItem
+                  key={cartProductItem.productId}
+                  cartProductData={cartProductItem}
+                />
+              ))}
+            </ul>
+          ) : (
+            <EmptyCartItem />
+          )}
         </section>
         <CartNotice />
         <CartFooter selectCount={selectCount} totalPrice={totalPrice} />
