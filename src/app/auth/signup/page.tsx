@@ -88,33 +88,35 @@ const SignUp = (): JSX.Element => {
       <Header>
         <HeaderNav showBack>회원가입</HeaderNav>
       </Header>
-      <form className='w-full px-20' onSubmit={handleSubmit}>
-        <InputName
-          name={name as InputType}
-          handleName={handleName as InputHandler}
-        />
+      <form className='w-full px-20 pb-6' onSubmit={handleSubmit}>
+        <div className='mb-6'>
+          <InputName
+            name={name as InputType}
+            handleName={handleName as InputHandler}
+          />
 
-        <InputEmail
-          email={email as InputType}
-          handleEmail={handleEmail as InputHandler}
-        />
+          <InputEmail
+            email={email as InputType}
+            handleEmail={handleEmail as InputHandler}
+          />
 
-        <InputPassword
-          password={password as InputType}
-          handlePassword={handlePassword as InputHandler}
-          passwordConfirm={passwordConfirm as InputType}
-          setPasswordConfirm={setPasswordConfirm as SetInput}
-        />
+          <InputPassword
+            password={password as InputType}
+            handlePassword={handlePassword as InputHandler}
+            passwordConfirm={passwordConfirm as InputType}
+            setPasswordConfirm={setPasswordConfirm as SetInput}
+          />
 
-        <InputPasswordConfirm
-          passwordConfirm={passwordConfirm as InputType}
-          handlePasswordConfirm={handlePasswordConfirm as InputHandler}
-        />
+          <InputPasswordConfirm
+            passwordConfirm={passwordConfirm as InputType}
+            handlePasswordConfirm={handlePasswordConfirm as InputHandler}
+          />
 
-        <InputContact
-          contact={contact as InputType}
-          handleContact={handleContact as InputHandler}
-        />
+          <InputContact
+            contact={contact as InputType}
+            handleContact={handleContact as InputHandler}
+          />
+        </div>
 
         <SubmitButton content='회원가입' activate={buttonActivate} />
       </form>
