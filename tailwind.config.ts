@@ -8,6 +8,9 @@ export default {
       fontFamily: {
         primary: ['Pretendard', ...defaultTheme.fontFamily.sans],
       },
+      boxShadow: {
+        top: '0 0 5px 0 rgb(0 0 0 / 16%);',
+      },
       colors: {
         mainButton: '#D8483D',
         mainButtonHov: '#C55647',
@@ -20,7 +23,13 @@ export default {
         darkGray: '#595757',
         black: '#000000',
         red: '#FF0000',
-        blue: '#0075FF',
+        blue: '#0152CC',
+        lightBlue: '#0075FF',
+        skyBlue: '#ECF4FE',
+        gray1: '#919191',
+        gray2: '#CCCCCC',
+        gray3: '#e6e6e6',
+        gray4: '#616161',
       },
     },
   },
