@@ -15,6 +15,8 @@ import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import SubmitButton from '@/components/common/SubmitButton';
 
+import authRequest from '@/app/api/authRequest';
+
 interface FormElements extends HTMLFormElement {
   email: HTMLInputElement;
   password: HTMLInputElement;
@@ -44,19 +46,41 @@ const SignUp = (): JSX.Element => {
     name as InputType,
     email as InputType,
     password as InputType,
-    passwordConfirm as InputType
+    passwordConfirm as InputType,
+    contact as InputType
   );
 
   const router = useRouter();
 
-  const handleSubmit = (e: FormTarget) => {
+  const signup = async (
+    email: InputType,
+    password: InputType,
+    nickname: InputType,
+    phone: InputType
+  ) => {
+    try {
+      const res = await authRequest.createUser({
+        email: email.value,
+        password: password.value,
+        nickname: nickname.value,
+        phone: phone.value,
+      });
+
+      router.replace('/auth/signin');
+      console.log(res);
+    } catch {
+      console.error(Error);
+    }
+  };
+
+  const handleSubmit = async (e: FormTarget) => {
     e.preventDefault();
-
-    /* ------------------------------------ - ----------------------------------- */
-    // request to server
-    /* ------------------------------------ - ----------------------------------- */
-
-    router.replace('/auth/signin');
+    await signup(
+      email as InputType,
+      password as InputType,
+      name as InputType,
+      contact as InputType
+    );
   };
 
   return (
@@ -64,33 +88,35 @@ const SignUp = (): JSX.Element => {
       <Header>
         <HeaderNav showBack>회원가입</HeaderNav>
       </Header>
-      <form className='w-full px-20' onSubmit={handleSubmit}>
-        <InputName
-          name={name as InputType}
-          handleName={handleName as InputHandler}
-        />
+      <form className='w-full px-20 pb-6' onSubmit={handleSubmit}>
+        <div className='mb-6'>
+          <InputName
+            name={name as InputType}
+            handleName={handleName as InputHandler}
+          />
 
-        <InputEmail
-          email={email as InputType}
-          handleEmail={handleEmail as InputHandler}
-        />
+          <InputEmail
+            email={email as InputType}
+            handleEmail={handleEmail as InputHandler}
+          />
 
-        <InputPassword
-          password={password as InputType}
-          handlePassword={handlePassword as InputHandler}
-          passwordConfirm={passwordConfirm as InputType}
-          setPasswordConfirm={setPasswordConfirm as SetInput}
-        />
+          <InputPassword
+            password={password as InputType}
+            handlePassword={handlePassword as InputHandler}
+            passwordConfirm={passwordConfirm as InputType}
+            setPasswordConfirm={setPasswordConfirm as SetInput}
+          />
 
-        <InputPasswordConfirm
-          passwordConfirm={passwordConfirm as InputType}
-          handlePasswordConfirm={handlePasswordConfirm as InputHandler}
-        />
+          <InputPasswordConfirm
+            passwordConfirm={passwordConfirm as InputType}
+            handlePasswordConfirm={handlePasswordConfirm as InputHandler}
+          />
 
-        <InputContact
-          contact={contact as InputType}
-          handleContact={handleContact as InputHandler}
-        />
+          <InputContact
+            contact={contact as InputType}
+            handleContact={handleContact as InputHandler}
+          />
+        </div>
 
         <SubmitButton content='회원가입' activate={buttonActivate} />
       </form>
