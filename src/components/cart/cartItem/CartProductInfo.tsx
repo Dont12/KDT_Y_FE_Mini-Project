@@ -6,11 +6,7 @@ interface Props {
   address: string;
 }
 
-const CartItemHeader = ({
-  productId,
-  productName,
-  address,
-}: Props): JSX.Element => {
+const CartProductInfo = ({ productId, productName, address }: Props) => {
   return (
     <div className='pt-5'>
       <Link href={`/detail/${productId}`}>
@@ -21,4 +17,4 @@ const CartItemHeader = ({
   );
 };
 
-export default CartItemHeader;
+export default CartProductInfo;

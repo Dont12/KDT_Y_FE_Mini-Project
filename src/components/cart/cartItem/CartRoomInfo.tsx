@@ -12,7 +12,7 @@ interface Props {
   cartRoomData: CartRoom;
 }
 
-const CartItemRoomInfo = ({
+const CartRoomInfo = ({
   productId,
   cartRoomData: {
     roomName,
@@ -30,6 +30,7 @@ const CartItemRoomInfo = ({
   const deleteCartItem = () => {
     console.log('장바구니 삭제 기능 구현');
   };
+
   return (
     <li className='border-gray3 mt-4 border-t border-solid pt-5'>
       <div className='flex items-start justify-between'>
@@ -81,4 +82,4 @@ const CartItemRoomInfo = ({
   );
 };
 
-export default CartItemRoomInfo;
+export default CartRoomInfo;

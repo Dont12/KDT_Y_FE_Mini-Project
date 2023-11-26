@@ -1,7 +1,7 @@
 import type { CartProduct } from '@/@types/cart.types';
 
-import CartItemHeader from './CartItemHeader';
-import CartRoomInfo from './CartItemRoomInfo';
+import CartProductInfo from './CartProductInfo';
+import CartRoomInfo from './CartRoomInfo';
 
 interface Props {
   cartProductData: CartProduct;
@@ -12,7 +12,7 @@ const CartItem = ({
 }: Props) => {
   return (
     <li className='mt-3 w-full bg-white p-5 pt-3'>
-      <CartItemHeader
+      <CartProductInfo
         productId={productId}
         productName={productName}
         address={address}
