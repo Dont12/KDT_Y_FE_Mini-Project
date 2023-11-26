@@ -15,6 +15,8 @@ import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import SubmitButton from '@/components/common/SubmitButton';
 
+import authRequest from '@/app/api/authRequest';
+
 interface FormElements extends HTMLFormElement {
   email: HTMLInputElement;
   password: HTMLInputElement;
@@ -50,14 +52,35 @@ const SignUp = (): JSX.Element => {
 
   const router = useRouter();
 
-  const handleSubmit = (e: FormTarget) => {
+  const signup = async (
+    email: InputType,
+    password: InputType,
+    nickname: InputType,
+    phone: InputType
+  ) => {
+    try {
+      const res = await authRequest.createUser({
+        email: email.value,
+        password: password.value,
+        nickname: nickname.value,
+        phone: phone.value,
+      });
+
+      router.replace('/auth/signin');
+      console.log(res);
+    } catch {
+      console.error(Error);
+    }
+  };
+
+  const handleSubmit = async (e: FormTarget) => {
     e.preventDefault();
-
-    /* ------------------------------------ - ----------------------------------- */
-    // request to server
-    /* ------------------------------------ - ----------------------------------- */
-
-    router.replace('/auth/signin');
+    await signup(
+      email as InputType,
+      password as InputType,
+      name as InputType,
+      contact as InputType
+    );
   };
 
   return (
