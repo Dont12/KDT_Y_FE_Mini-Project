@@ -12,9 +12,6 @@ import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 
 const Cart = () => {
-  // TODO|서지수 예약불가삭제 기능 구현
-  // TODO|서지수 선택 삭제 기능 구현
-  // TODO|서지수 선택에 따라 가격 정보바뀌고 선택한 것만 결제 기능 구현
   const [selectCount, setSelectCount] = useState<number>(0);
   const [cartData, setCartData] = useState(mock);
   const [totalPrice, setTotalPrice] = useState(650000);
