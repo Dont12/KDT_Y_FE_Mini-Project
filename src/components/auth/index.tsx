@@ -4,7 +4,6 @@ import InputEmail from './input/InputEmail';
 import InputName from './input/InputName';
 import InputPassword from './input/InputPassword';
 import InputPasswordConfirm from './input/InputPasswordConfirm';
-import SubmitButton from './SubmitButton';
 import ValidationIcon from './ValidationIcon';
 
 export {
@@ -14,6 +13,5 @@ export {
   InputName,
   InputPassword,
   InputPasswordConfirm,
-  SubmitButton,
   ValidationIcon,
 };
