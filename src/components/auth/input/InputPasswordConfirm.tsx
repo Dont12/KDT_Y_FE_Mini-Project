@@ -13,7 +13,7 @@ interface passwordConfirmProps {
 
 const InputPasswordConfirm = memo(
   ({ passwordConfirm, handlePasswordConfirm }: passwordConfirmProps) => (
-    <div className='relative mt-3'>
+    <div className='relative my-5'>
       <label htmlFor='password-confirm' className='text-base leading-10'>
         비밀번호 확인*
       </label>

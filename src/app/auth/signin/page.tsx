@@ -83,7 +83,7 @@ const SignIn = () => {
         <HeaderNav showBack>로그인</HeaderNav>
       </Header>
       <form className='w-full px-20' onSubmit={handleSubmit}>
-        <div className='mb-6'>
+        <div className='mb-10'>
           <InputEmail
             email={email as InputType}
             handleEmail={handleEmail as InputHandler}
@@ -98,9 +98,9 @@ const SignIn = () => {
         <SubmitButton content='이메일로 로그인' activate={buttonActivate} />
       </form>
       <Link href='/auth/signup' className='mt-10'>
-        <div className='cursor-default'>
+        <div className='text-darkGray cursor-default'>
           아직 회원이 아니신가요?
-          <span className='ml-2 cursor-pointer underline'>
+          <span className='hover:text-blue ml-2 cursor-pointer underline'>
             이메일로 회원가입
           </span>
         </div>

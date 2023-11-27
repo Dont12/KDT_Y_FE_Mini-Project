@@ -12,7 +12,7 @@ interface NameProps {
 }
 
 const InputName = memo(({ name, handleName }: NameProps) => (
-  <div className='relative mt-3'>
+  <div className='relative my-5'>
     <label htmlFor='user' className='text-base leading-10'>
       이름*
     </label>

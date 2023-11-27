@@ -30,7 +30,7 @@ const InputPassword = memo(
     }, [password]);
 
     return (
-      <div className='relative mt-3'>
+      <div className='relative my-5'>
         <label htmlFor='password' className='text-base leading-10'>
           비밀번호*
         </label>

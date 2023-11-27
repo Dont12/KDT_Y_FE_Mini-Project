@@ -12,7 +12,7 @@ interface EmailProps {
 }
 
 const InputEmail = memo(({ email, handleEmail }: EmailProps) => (
-  <div className='relative mt-3'>
+  <div className='relative my-5'>
     <label htmlFor='email' className='text-base leading-10'>
       이메일*
     </label>

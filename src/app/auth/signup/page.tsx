@@ -112,7 +112,7 @@ const SignUp = () => {
         <HeaderNav showBack>회원가입</HeaderNav>
       </Header>
       <form className='w-full px-20 pb-6' onSubmit={handleSubmit}>
-        <div className='mb-6'>
+        <div className='mb-10'>
           <InputName
             name={name as InputType}
             handleName={handleName as InputHandler}

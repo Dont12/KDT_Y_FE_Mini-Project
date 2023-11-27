@@ -12,7 +12,7 @@ interface ContactProps {
 }
 
 const InputContact = memo(({ contact, handleContact }: ContactProps) => (
-  <div className='relative mt-3'>
+  <div className='relative my-5'>
     <label htmlFor='user' className='text-base leading-10'>
       휴대번호*
     </label>
