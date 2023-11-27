@@ -1,11 +1,4 @@
-interface UserData {
-  email: string;
-  password: string;
-  nickname: string;
-  phone: string;
-}
-
-type SigninData = Pick<UserData, 'email' | 'password'>;
+import { SigninData, UserData } from '@/@types/auth.types';
 
 const url = 'https://api.stayinn.site/v1';
 

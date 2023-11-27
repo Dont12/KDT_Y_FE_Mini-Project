@@ -1,18 +1,10 @@
 import { ErrorMsg, ValidationIcon } from '@components/auth';
 import { memo } from 'react';
 
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
-
-interface EmailProps {
-  email: InputType;
-  handleEmail: React.ChangeEventHandler<HTMLInputElement>;
-}
+import { EmailProps } from '@/@types/auth.types';
 
 const InputEmail = memo(({ email, handleEmail }: EmailProps) => (
-  <div className='relative mt-3'>
+  <div className='relative my-5'>
     <label htmlFor='email' className='text-base leading-10'>
       이메일*
     </label>

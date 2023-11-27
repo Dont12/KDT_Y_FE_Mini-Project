@@ -1,12 +1,4 @@
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
-
-interface ErrorProps {
-  target: string;
-  input: InputType;
-}
+import { ErrorProps } from '@/@types/auth.types';
 
 const ErrorMsg = ({ target, input }: ErrorProps) => {
   const showError = () => {

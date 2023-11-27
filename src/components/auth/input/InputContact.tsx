@@ -1,18 +1,10 @@
 import { ErrorMsg, ValidationIcon } from '@components/auth';
 import { memo } from 'react';
 
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
-
-interface ContactProps {
-  contact: InputType;
-  handleContact: React.ChangeEventHandler<HTMLInputElement>;
-}
+import { ContactProps } from '@/@types/auth.types';
 
 const InputContact = memo(({ contact, handleContact }: ContactProps) => (
-  <div className='relative mt-3'>
+  <div className='relative my-5'>
     <label htmlFor='user' className='text-base leading-10'>
       휴대번호*
     </label>

@@ -2,10 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
+import { InputType } from '@/@types/auth.types';
 
 const useButtonActivate = (...input: InputType[]): boolean => {
   const [buttonActivate, setButtonActivate] = useState(false);
