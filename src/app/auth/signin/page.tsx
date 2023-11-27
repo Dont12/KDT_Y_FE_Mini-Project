@@ -9,6 +9,8 @@ import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import SubmitButton from '@/components/common/SubmitButton';
 
+import authRequest from '@/app/api/authRequest';
+
 interface FormElements extends HTMLFormElement {
   email: HTMLInputElement;
   password: HTMLInputElement;
@@ -35,14 +37,32 @@ const SignIn = (): JSX.Element => {
 
   const router = useRouter();
 
+  const signin = async (email: InputType, password: InputType) => {
+    try {
+      const res = await authRequest.signin({
+        email: email.value,
+        password: password.value,
+      });
+
+      console.log(res);
+
+      if (res.status === 'SUCCESS') {
+        router.replace('/');
+      }
+      if (res.status === 'FAIL') {
+        alert('이메일 또는 비밀번호가 틀렸습니다.');
+      }
+      if (res.status === 'ERROR') {
+        alert('SERVER ERROR');
+      }
+    } catch {
+      console.error(Error);
+    }
+  };
+
   const handleSubmit = (e: FormTarget) => {
     e.preventDefault();
-
-    /* ------------------------------------ - ----------------------------------- */
-    // request to server
-    /* ------------------------------------ - ----------------------------------- */
-
-    router.replace('/');
+    signin(email as InputType, password as InputType);
   };
 
   return (
@@ -61,7 +81,11 @@ const SignIn = (): JSX.Element => {
           handlePassword={handlePassword as InputHandler}
         />
 
-        <SubmitButton content='이메일로 로그인' activate={buttonActivate} />
+        <SubmitButton
+          content='이메일로 로그인'
+          activate={buttonActivate}
+          className='mb-6 mt-10'
+        />
       </form>
       <Link href='/auth/signup'>
         <div className='cursor-default'>
