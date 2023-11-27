@@ -1,51 +1,26 @@
-'use client';
-
-import ReservationConfirm from '@/components/ReservationConfirm';
 import ReservationConfirmContainer from '@/components/ReservationConfirmContainer';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import orderRequest from '../api/orderRequest';
 
-const reservationConfirm = () => {
-  const [reservationData, setReservationData] = useState<Order[]>([]);
-
-  useEffect(() => {
-    const fetchReservationData = async () => {
-      try {
-        const response = await fetch(
-          'https://mock.stayinn.site/v1/orders/history?page=1&pageSize=10'
-        );
-        const reservationConfirmResponse = await response.json();
-
-        if (reservationConfirmResponse.status === 'SUCCESS') {
-          setReservationData(reservationConfirmResponse.data);
-        } else {
-          console.error('API 호출이 실패했습니다:', reservationConfirmResponse);
-        }
-      } catch (error) {
-        console.error('Fetch 에러:', error);
-      }
-    };
-
-    fetchReservationData();
-  }, []);
-  console.log(reservationData);
+const reservationConfirm = async () => {
+  const response = await orderRequest.getOrderList();
 
   return (
     <div className='mx-auto min-h-screen max-w-3xl bg-white'>
       <p className='py-14 text-center text-3xl'>국내 여행 예약 내역</p>
       <div className='flex'>
-        <button className='border-mediumGray mx-8 flex items-center justify-center rounded-md border border-solid px-5 py-1 '>
+        <button className='border-mediumGray mx-10  flex items-center justify-center rounded-md border border-solid px-5 py-1 '>
           <p className='tex-2xl'>최근 6개월</p>
           <MdOutlineKeyboardArrowDown />
         </button>
       </div>
-      {reservationData.map((order, orderIndex) => (
+      {response.data.map((order, orderIndex) => (
         <ReservationConfirmContainer
           key={orderIndex}
           orderId={order.orderId}
           createdDate={order.createdDate}
           orderItems={order.orderItems}
+          isDate={true}
         />
       ))}
 

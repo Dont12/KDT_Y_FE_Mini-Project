@@ -6,6 +6,7 @@ const Divider = () => <div className='border-lightGray border-b  pb-4 '></div>;
 
 const ReservationConfirm = ({
   orderId,
+  orderItemId,
   productName,
   roomName,
   imageUrl,
@@ -23,7 +24,7 @@ const ReservationConfirm = ({
     <div className='px-8 py-4'>
       <div className='flex justify-between'>
         <div className='text-mediumGray mx-1 pb-4 text-base'>
-          숙소 예약번호: {orderId}
+          숙소 예약번호: {orderItemId}
         </div>
       </div>
       <div className='bg-mediumGray  mb-2 w-16 rounded p-1 text-center text-xs  text-white'>
@@ -60,6 +61,7 @@ export default ReservationConfirm;
 
 interface ReservationConfirmProps {
   orderId: number;
+  orderItemId: number;
   productName: string;
   roomName: string;
   imageUrl: string;
