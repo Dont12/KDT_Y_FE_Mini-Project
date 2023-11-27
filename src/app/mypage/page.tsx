@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
@@ -10,19 +9,6 @@ import authRequest from '../api/authRequest';
 
 const Mypage = () => {
   const router = useRouter();
-
-  const checkSignin = async () => {
-    try {
-      const res = await authRequest.getUser();
-      console.log('유저정보', res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    checkSignin();
-  }, []);
 
   const logout = async () => {
     try {

@@ -62,8 +62,13 @@ const SignIn = () => {
   };
 
   const checkSignin = async () => {
-    await authRequest.getUser();
-    router.replace('/');
+    try {
+      await authRequest.getUser();
+
+      router.replace('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
