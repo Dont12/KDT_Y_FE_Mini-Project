@@ -9,7 +9,7 @@ import {
 } from '@components/auth';
 import { useAuthInput, useButtonActivate } from '@hooks/auth';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
@@ -35,7 +35,7 @@ type InputHandler = (e: React.ChangeEvent<HTMLInputElement>) => void;
 
 type SetInput = React.Dispatch<React.SetStateAction<InputType>>;
 
-const SignUp = (): JSX.Element => {
+const SignUp = () => {
   const [name, handleName] = useAuthInput('name');
   const [email, handleEmail] = useAuthInput('email');
   const [password, handlePassword] = useAuthInput('password');
@@ -72,6 +72,15 @@ const SignUp = (): JSX.Element => {
       console.error(Error);
     }
   };
+
+  const checkSignin = async () => {
+    await authRequest.getUser();
+    router.replace('/');
+  };
+
+  useEffect(() => {
+    checkSignin();
+  }, []);
 
   const handleSubmit = async (e: FormTarget) => {
     e.preventDefault();

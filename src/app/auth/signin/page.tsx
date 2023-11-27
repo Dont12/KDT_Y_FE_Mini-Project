@@ -3,6 +3,7 @@
 import { useAuthInput, useButtonActivate } from '@hooks/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 import { InputEmail, InputPassword } from '@/components/auth';
 import Header from '@/components/common/Header';
@@ -27,7 +28,7 @@ interface InputType {
 
 type InputHandler = (e: React.ChangeEvent<HTMLInputElement>) => void;
 
-const SignIn = (): JSX.Element => {
+const SignIn = () => {
   const [email, handleEmail] = useAuthInput('email');
   const [password, handlePassword] = useAuthInput('password');
   const buttonActivate = useButtonActivate(
@@ -59,6 +60,15 @@ const SignIn = (): JSX.Element => {
       console.error(Error);
     }
   };
+
+  const checkSignin = async () => {
+    await authRequest.getUser();
+    router.replace('/');
+  };
+
+  useEffect(() => {
+    checkSignin();
+  }, []);
 
   const handleSubmit = (e: FormTarget) => {
     e.preventDefault();

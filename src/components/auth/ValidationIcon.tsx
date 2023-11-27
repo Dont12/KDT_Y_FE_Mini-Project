@@ -9,7 +9,7 @@ interface IconProps {
   input: InputType;
 }
 
-const ValidationIcon = ({ input }: IconProps): JSX.Element => {
+const ValidationIcon = ({ input }: IconProps) => {
   if (!input.value) return <></>;
 
   if (input.validationPass) {

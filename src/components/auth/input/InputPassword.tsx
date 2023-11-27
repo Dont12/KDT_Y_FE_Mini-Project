@@ -19,7 +19,7 @@ const InputPassword = memo(
     handlePassword,
     passwordConfirm,
     setPasswordConfirm,
-  }: PasswordProps): JSX.Element => {
+  }: PasswordProps) => {
     useEffect(() => {
       if (setPasswordConfirm && passwordConfirm)
         setPasswordConfirm({
