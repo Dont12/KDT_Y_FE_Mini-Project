@@ -1,3 +1,5 @@
+'use client';
+
 import { ErrorMsg, ValidationIcon } from '@components/auth';
 import { memo, useEffect } from 'react';
 
