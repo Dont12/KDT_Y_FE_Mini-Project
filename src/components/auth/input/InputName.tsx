@@ -1,15 +1,7 @@
 import { ErrorMsg, ValidationIcon } from '@components/auth';
 import { memo } from 'react';
 
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
-
-interface NameProps {
-  name: InputType;
-  handleName: React.ChangeEventHandler<HTMLInputElement>;
-}
+import { NameProps } from '@/@types/auth.types';
 
 const InputName = memo(({ name, handleName }: NameProps) => (
   <div className='relative my-5'>

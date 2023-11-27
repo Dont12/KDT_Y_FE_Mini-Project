@@ -14,25 +14,13 @@ import React from 'react';
 
 import SubmitButton from '@/components/common/SubmitButton';
 
+import {
+  FormTarget,
+  InputHandler,
+  InputType,
+  SetInput,
+} from '@/@types/auth.types';
 import authRequest from '@/app/api/authRequest';
-
-interface FormElements extends HTMLFormElement {
-  email: HTMLInputElement;
-  password: HTMLInputElement;
-}
-
-interface FormTarget extends React.FormEvent<HTMLFormElement> {
-  target: FormElements;
-}
-
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
-
-type InputHandler = (e: React.ChangeEvent<HTMLInputElement>) => void;
-
-type SetInput = React.Dispatch<React.SetStateAction<InputType>>;
 
 const SignupForm = () => {
   const [name, handleName] = useAuthInput('name');

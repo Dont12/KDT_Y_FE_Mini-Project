@@ -1,15 +1,7 @@
 import { ErrorMsg, ValidationIcon } from '@components/auth';
 import { memo } from 'react';
 
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
-
-interface passwordConfirmProps {
-  passwordConfirm: InputType;
-  handlePasswordConfirm: React.ChangeEventHandler<HTMLInputElement>;
-}
+import { passwordConfirmProps } from '@/@types/auth.types';
 
 const InputPasswordConfirm = memo(
   ({ passwordConfirm, handlePasswordConfirm }: passwordConfirmProps) => (

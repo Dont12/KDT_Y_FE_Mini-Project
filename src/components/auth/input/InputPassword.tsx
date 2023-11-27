@@ -3,17 +3,7 @@
 import { ErrorMsg, ValidationIcon } from '@components/auth';
 import { memo, useEffect } from 'react';
 
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
-
-interface PasswordProps {
-  password: InputType;
-  handlePassword: React.ChangeEventHandler<HTMLInputElement>;
-  passwordConfirm?: InputType;
-  setPasswordConfirm?: React.Dispatch<React.SetStateAction<InputType>>;
-}
+import { PasswordProps } from '@/@types/auth.types';
 
 const InputPassword = memo(
   ({
