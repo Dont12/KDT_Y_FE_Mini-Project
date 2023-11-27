@@ -15,11 +15,9 @@ const rules = [
 const Rules = () => {
   return (
     <>
-      <h3 className='subtitle5'>이용규칙</h3>
+      <h3 className='text-[18px] font-bold'>이용규칙</h3>
       {rules.map((rule, index) => (
-        <p className='body1' key={index}>
-          {rule}
-        </p>
+        <p key={index}>{rule}</p>
       ))}
     </>
   );
