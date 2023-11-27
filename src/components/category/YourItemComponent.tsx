@@ -5,27 +5,34 @@ import React from 'react';
 
 export interface YourItemComponentProps {
   name: string;
-  rating: number;
-  image: string;
+  rating?: number;
+  imageUrl: string;
 }
 
-const YourItemComponent = ({ name, rating, image }: YourItemComponentProps) => {
+const YourItemComponent = ({
+  name,
+  rating,
+  imageUrl,
+}: YourItemComponentProps) => {
   return (
-    <div className='m-6 max-w-xs'>
-      <div className='grid grid-cols-3'>
-        <div>
+    <div className='my-6 max-w-xs'>
+      <div className='grid grid-cols-2 items-center'>
+        <div className='ml-10'>
           <img
-            src={image}
+            src={imageUrl}
             alt={name}
-            className='w-full rounded-md object-cover'
+            className='h-20 w-20 rounded-md object-cover'
           />
         </div>
-        <div className='flex flex-col justify-between'>
+        <div>
           <div>
             <h3 className='text-base'>{name}</h3>
           </div>
-          <div>
+          {/* <div>
             <p className='text-sm'>⭐{rating}</p>
+          </div> */}
+          <div>
+            <p className='text-sm'>⭐4.5</p>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ const PensionCard = ({ name, rating, price, image }: PensionCardProps) => {
   return (
     <div className='rounded-md bg-white p-4 shadow-md'>
       <div className='relative mb-4 h-32 w-full'>
-        <Image src={image} alt={name} layout='fill' objectFit='cover' />
+        <Image src={image} alt={name} width={100} height={100} />
       </div>{' '}
       <h3 className='mb-2 text-base	font-bold'>{name}</h3>
       <p className='mb-2 text-sm text-gray-600'>⭐{rating}</p>
