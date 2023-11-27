@@ -3,7 +3,7 @@
 
 import React from 'react';
 
-export interface YourItemComponentProps {
+interface YourItemComponentProps {
   name: string;
   rating?: number;
   imageUrl: string;
@@ -11,7 +11,7 @@ export interface YourItemComponentProps {
 
 const YourItemComponent = ({
   name,
-  rating,
+  // rating,
   imageUrl,
 }: YourItemComponentProps) => {
   return (

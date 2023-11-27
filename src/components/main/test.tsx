@@ -41,6 +41,38 @@ export const mainIcons: IconProps[] = [
     category: '서비스드레지던스',
   },
   { icon: 'svg/mainIcon/hanok.svg', label: '한옥', category: '한옥' },
+  { icon: 'svg/mainIcon/hotel.svg', label: '서울', location: '서울특별시' },
+  {
+    icon: 'svg/mainIcon/guestHouse.svg',
+    label: '인천',
+    location: '인천광역시',
+  },
+  { icon: 'svg/mainIcon/condo.svg', label: '대전', location: '대전광역시' },
+  {
+    icon: 'svg/mainIcon/youthHostel.svg',
+    label: '대구',
+    category: '유스호스텔',
+  },
+  {
+    icon: 'svg/mainIcon/minbak.svg',
+    label: '제주',
+    location: '제주특별자치도',
+  },
+  {
+    icon: 'svg/mainIcon/minbak.svg',
+    label: '제주도 유스호스텔',
+    category: '유스호스텔',
+    location: '제주특별자치도',
+  },
+  {
+    icon: 'svg/mainIcon/guestHouse.svg',
+    label: '숙소 & 장소 전체',
+  },
+  {
+    label: '인천 홈스테이',
+    category: '홈스테이',
+    location: '인천광역시',
+  },
 ];
 
 // 아이콘을 출력합니다.
