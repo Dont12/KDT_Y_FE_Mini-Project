@@ -8,6 +8,7 @@ import {
   InputPasswordConfirm,
 } from '@components/auth';
 import { useAuthInput, useButtonActivate } from '@hooks/auth';
+import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 
@@ -52,31 +53,40 @@ const SignUp = () => {
 
   const router = useRouter();
 
-  const signup = async (
-    email: InputType,
-    password: InputType,
-    nickname: InputType,
-    phone: InputType
-  ) => {
-    try {
-      const res = await authRequest.createUser({
-        email: email.value,
-        password: password.value,
-        nickname: nickname.value,
-        phone: phone.value,
-      });
+  const signup = debounce(
+    async (
+      email: InputType,
+      password: InputType,
+      nickname: InputType,
+      phone: InputType
+    ) => {
+      try {
+        const res = await authRequest.createUser({
+          email: email.value,
+          password: password.value,
+          nickname: nickname.value,
+          phone: phone.value,
+        });
+        const data = await res.json();
+        console.log(data);
 
-      router.replace('/auth/signin');
-      console.log(res);
-    } catch {
-      console.error(Error);
-    }
-  };
+        if (data.status === 'SUCCESS') {
+          router.replace('/auth/signin');
+        }
+        if (data.status === 'FAIL') {
+          alert(data.errorMessage);
+        }
+      } catch {
+        console.error(Error);
+      }
+    },
+    200
+  );
 
   const checkSignin = async () => {
     try {
       await authRequest.getUser();
-      router.replace('/');
+      // router.replace('/');
     } catch (error) {
       console.log(error);
     }

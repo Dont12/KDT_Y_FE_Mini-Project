@@ -1,6 +1,7 @@
 'use client';
 
 import { useAuthInput, useButtonActivate } from '@hooks/auth';
+import { debounce } from 'lodash';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -38,34 +39,30 @@ const SignIn = () => {
 
   const router = useRouter();
 
-  const signin = async (email: InputType, password: InputType) => {
+  const signin = debounce(async (email: InputType, password: InputType) => {
     try {
       const res = await authRequest.signin({
         email: email.value,
         password: password.value,
       });
+      const data = await res.json();
+      console.log(data);
 
-      console.log(res);
-
-      if (res.status === 'SUCCESS') {
+      if (data.status === 'SUCCESS') {
         router.replace('/');
-      }
-      if (res.status === 'FAIL') {
-        alert('이메일 또는 비밀번호가 틀렸습니다.');
-      }
-      if (res.status === 'ERROR') {
-        alert('SERVER ERROR');
+      } else {
+        alert(data.errorMessage);
       }
     } catch {
       console.error(Error);
     }
-  };
+  }, 200);
 
   const checkSignin = async () => {
     try {
       await authRequest.getUser();
 
-      router.replace('/');
+      // router.replace('/');
     } catch (error) {
       console.log(error);
     }

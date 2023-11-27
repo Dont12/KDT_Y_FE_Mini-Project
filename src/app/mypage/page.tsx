@@ -1,5 +1,6 @@
 'use client';
 
+import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
 
 import Header from '@/components/common/Header';
@@ -10,14 +11,14 @@ import authRequest from '../api/authRequest';
 const Mypage = () => {
   const router = useRouter();
 
-  const logout = async () => {
+  const logout = debounce(async () => {
     try {
       await authRequest.logout();
       router.push('/auth/signin');
     } catch (error) {
       console.log(error);
     }
-  };
+  }, 200);
 
   return (
     <>
