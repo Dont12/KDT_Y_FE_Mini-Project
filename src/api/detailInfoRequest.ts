@@ -1,10 +1,6 @@
-const url = 'https://mock.stayinn.site/v1';
+import { DetailProps } from '@/@types/detail.types';
 
-interface DetailProps {
-  id: string;
-  checkIn: string;
-  checkOut: string;
-}
+const url = 'https://mock.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
 

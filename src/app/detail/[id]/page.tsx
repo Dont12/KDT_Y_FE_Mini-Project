@@ -10,7 +10,8 @@ import PersonInput from '@/components/detail/PersonInput';
 import ReservationButton from '@/components/detail/ReservationButton';
 import Rules from '@/components/detail/Rules';
 
-import detailInfoRequest from '@/app/api/detailInfoRequest';
+import { DetailResponse, Room } from '@/@types/detail.types';
+import detailInfoRequest from '@/api/detailInfoRequest';
 
 const today = new Date();
 const tomorrow = new Date();
@@ -34,7 +35,7 @@ const Detail = async ({
   const defaultCheckOutDate = searchParams.checkOutDate || formatDate(tomorrow);
   const defaultPerson = searchParams.guest || '1';
 
-  const details = await detailInfoRequest.getDetail({
+  const details: DetailResponse = await detailInfoRequest.getDetail({
     id: params.id,
     checkIn: defaultCheckInDate,
     checkOut: defaultCheckOutDate,
@@ -83,7 +84,7 @@ const Detail = async ({
               </div>
             </div>
             <div className='flex flex-col gap-10'>
-              {details.data.rooms.map((room: any, index: any) => (
+              {details.data.rooms.map((room: Room, index: number) => (
                 <div
                   key={index}
                   className='border-mediumGray flex flex-col gap-5 rounded border border-solid p-5'
@@ -136,9 +137,9 @@ const Detail = async ({
                   <div className='flex flex-row'>
                     <CartButton
                       roomId={room.id}
-                      checkIn={defaultCheckInDate}
-                      checkOut={defaultCheckOutDate}
-                      guest={defaultPerson}
+                      checkInDate={defaultCheckInDate}
+                      checkOutDate={defaultCheckOutDate}
+                      guestCount={defaultPerson}
                     />
                     <ReservationButton
                       productId={params.id}
@@ -149,7 +150,7 @@ const Detail = async ({
                       checkOutTime={room.checkOutTime}
                       guestCount={defaultPerson}
                       price={room.price}
-                      stopck={room.stock}
+                      stock={room.stock}
                     />
                   </div>
                 </div>

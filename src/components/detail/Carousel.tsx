@@ -30,7 +30,7 @@ import Image from 'next/image';
 //   );
 // };
 
-const Carousel = ({ images }: any) => {
+const Carousel = ({ images }: { images: string }) => {
   // const settings = {
   //   dots: true,
   //   infinite: true,

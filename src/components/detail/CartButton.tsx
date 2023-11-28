@@ -3,9 +3,15 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-import CartRequest from '@/app/api/cartRequest';
+import { PushCartProps, PushCartResponse } from '@/@types/cart.types';
+import cartRequest from '@/api/cartRequest';
 
-const CartButton = ({ roomId, checkIn, checkOut, guest }: any) => {
+const CartButton = ({
+  roomId,
+  checkInDate,
+  checkOutDate,
+  guestCount,
+}: PushCartProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
 
@@ -19,11 +25,11 @@ const CartButton = ({ roomId, checkIn, checkOut, guest }: any) => {
   };
 
   const pushCartElement = async () => {
-    const response = await CartRequest.pushCart({
+    const response: PushCartResponse = await cartRequest.pushCart({
       roomId: roomId,
-      checkInDate: checkIn,
-      checkOutDate: checkOut,
-      guestCount: guest,
+      checkInDate: checkInDate,
+      checkOutDate: checkOutDate,
+      guestCount: guestCount,
     });
     if (response.status === 'SUCCESS') {
       setModalOpen(true);

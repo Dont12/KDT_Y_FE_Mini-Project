@@ -2,6 +2,10 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
+import {
+  OrderButtonProps,
+  PushOrderElementResponse,
+} from '@/@types/order.types';
 import orderRequest from '@/app/api/orderRequest';
 
 const ReservationButton = ({
@@ -14,20 +18,21 @@ const ReservationButton = ({
   price,
   guestCount,
   stock,
-}: any) => {
+}: OrderButtonProps) => {
   const router = useRouter();
 
   const pushReservationElement = async () => {
-    const response = await orderRequest.pushOrderElement({
-      productId: productId,
-      roomId: roomId,
-      checkInDate: checkInDate,
-      checkInTime: checkInTime,
-      checkOutDate: checkOutDate,
-      checkOutTime: checkOutTime,
-      guestCount: guestCount,
-      price: price,
-    });
+    const response: PushOrderElementResponse =
+      await orderRequest.pushOrderElement({
+        productId: productId,
+        roomId: roomId,
+        checkInDate: checkInDate,
+        checkInTime: checkInTime,
+        checkOutDate: checkOutDate,
+        checkOutTime: checkOutTime,
+        guestCount: guestCount,
+        price: price,
+      });
     if (response.status === 'SUCCESS') {
       router.push(`/reservation/${response.data.orderToken}`);
     } else {
@@ -39,9 +44,9 @@ const ReservationButton = ({
     <input
       type='button'
       className='grow-1 bg-mainButton hover:bg-mainButtonHov w-full rounded text-[18px] font-bold text-white'
-      value={stock == '0' ? '재고 없음' : '예약 하기'}
+      value={stock === 0 ? '재고 없음' : '예약 하기'}
       onClick={pushReservationElement}
-      disabled={stock == '0'}
+      disabled={stock === 0}
     />
   );
 };

@@ -4,7 +4,17 @@ import React, { useState } from 'react';
 
 import Toast from '@/components/common/Toast';
 
-const PersonInput = ({ roomId, checkIn, checkOut, guest }: any) => {
+const PersonInput = ({
+  roomId,
+  checkIn,
+  checkOut,
+  guest,
+}: {
+  roomId: string;
+  checkIn: string;
+  checkOut: string;
+  guest: string;
+}) => {
   const [person, setPerson] = useState(guest);
   const [toastVisible, setToastVisible] = useState(false);
 

@@ -1,17 +1,8 @@
+import { pushOrderListProps } from '@/@types/order.types';
+
 const url = 'https://mock.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
-
-interface pushOrderListProps {
-  productId: string;
-  roomId: string;
-  checkInDate: string;
-  checkInTime: string;
-  checkOutDate: string;
-  checkOutTime: string;
-  guestCount: string;
-  price: string;
-}
 
 const orderRequest = {
   getOrderList: () =>
