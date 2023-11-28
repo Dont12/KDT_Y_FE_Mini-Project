@@ -28,7 +28,7 @@ const Cart = () => {
         const res = await cartRequest.getCartList(1, 10);
         setApiCartList(res.data.items);
       } catch (error) {
-        console.error('deleteCarts api error', error);
+        console.error('getCartList api error', error);
       }
     };
 
