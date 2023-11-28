@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import {
   CartFooter,
@@ -13,13 +14,25 @@ import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 
 import type { CartProduct } from '@/@types/cart.types';
+import { cartSelectedState } from '@/recoil/atoms/cartState';
+
 
 const Cart = () => {
-  const [selectCount, setSelectCount] = useState<number>(0);
-  const [cartData, setCartData] = useState(mock);
-  const [totalPrice, setTotalPrice] = useState(650000);
-
   const [cartProductList, setCartProductList] = useState<CartProduct[]>([]);
+  const selectedCartList = useRecoilValue(cartSelectedState);
+
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  useEffect(() => {
+    const filteredList = mock.data.items.filter((a) =>
+      selectedCartList.includes(String(a.id))
+    );
+
+    let selectPrice = 0;
+    filteredList.map((data) => {
+      selectPrice += data.product.price;
+    });
+    setTotalPrice(selectPrice);
+  }, [selectedCartList]);
 
   useEffect(() => {
     mock.data.items.map((item) => {
@@ -84,10 +97,7 @@ const Cart = () => {
         <HeaderNav showBack showHome showMyPage>
           장바구니
         </HeaderNav>
-        <CartHeader
-          selectCount={selectCount}
-          totalCount={cartData.data.items.length}
-        />
+        <CartHeader />
       </Header>
       <main className='mb-52 mt-[6rem]'>
         <section>
@@ -105,7 +115,7 @@ const Cart = () => {
           )}
         </section>
         <CartNotice />
-        <CartFooter selectCount={selectCount} totalPrice={totalPrice} />
+        <CartFooter totalPrice={totalPrice} />
       </main>
     </>
   );
