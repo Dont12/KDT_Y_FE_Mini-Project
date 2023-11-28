@@ -2,6 +2,14 @@ const url = 'https://mock.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
 
+type PaymentData = {
+  orderToken: string;
+  userName: string;
+  userPhone: string;
+  totalPrice: number;
+  payment: string;
+};
+
 const orderRequest = {
   getOrderList: () =>
     fetch(`${url}/orders/history?page=1&pageSize=10`, {
@@ -17,6 +25,23 @@ const orderRequest = {
       headers: {
         'Content-Type': 'application/json',
       },
+    }).then(responseBody),
+
+  getOrderToken: (orderToken) =>
+    fetch(`${url}/orders?orderToken=${orderToken}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(responseBody),
+
+  postPayment: (paymentData: PaymentData) =>
+    fetch(`${url}/orders/payment`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(paymentData),
     }).then(responseBody),
 };
 

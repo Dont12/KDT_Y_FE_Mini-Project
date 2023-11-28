@@ -1,9 +1,13 @@
 import React from 'react';
 
-const CheckBoxItem = ({ content }) => {
+interface CheckBox {
+  content: string;
+  required: boolean;
+}
+const CheckBoxItem = ({ content, required }: CheckBox) => {
   return (
     <label className='m-2 block'>
-      <input type='checkbox' className='mr-2 mt-2' />
+      <input type='checkbox' className='mr-2 mt-2' required={required} />
       {content}
     </label>
   );

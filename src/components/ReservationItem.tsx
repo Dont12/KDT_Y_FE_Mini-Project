@@ -38,7 +38,9 @@ const ReservationItem = ({
       </p>
       <div className='flex justify-end'>
         <p className='text-mediumGray'>숙박 / 1박</p>
-        <p className='ml-4 font-bold'>{price}원</p>
+        <p className='ml-4 font-bold'>
+          {new Intl.NumberFormat().format(price)}원
+        </p>
       </div>
     </div>
   );

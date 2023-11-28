@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const UserInformation = () => {
   const [userName, setUserName] = useState('');
@@ -31,6 +30,7 @@ const UserInformation = () => {
           value={userName}
           onChange={handleNameChange}
           placeholder='성명을 입력해주세요'
+          className='my-2 w-11/12'
         />
         <p className='mt-4 font-bold'>휴대폰 번호</p>
         <input
@@ -38,6 +38,7 @@ const UserInformation = () => {
           value={userPhone}
           onChange={handlePhoneChange}
           placeholder='휴대폰 번호를 입력해주세요'
+          className='my-2 w-11/12'
         />
       </div>
     </div>
