@@ -29,7 +29,7 @@ const ReservationButton = ({
       price: price,
     });
     if (response.status === 'SUCCESS') {
-      router.push(`/order/${response.data.orderToken}`);
+      router.push(`/reservation/${response.data.orderToken}`);
     } else {
       router.push(`/auth/signin`);
     }
