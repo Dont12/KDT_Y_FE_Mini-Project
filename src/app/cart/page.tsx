@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import {
   CartFooter,
@@ -15,12 +15,12 @@ import HeaderNav from '@/components/common/HeaderNav';
 
 import type { ApiCartItem, CartProduct } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
-import { cartSelectedState } from '@/recoil/atoms/cartState';
+import { apiCartListState, cartSelectedState } from '@/recoil/atoms/cartState';
 
 
 const Cart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [apiCartList, setApiCartList] = useState<ApiCartItem[]>([]);
+  const [apiCartList, setApiCartList] = useRecoilState(apiCartListState);
   const [cartProductList, setCartProductList] = useState<CartProduct[]>([]);
 
   useEffect(() => {

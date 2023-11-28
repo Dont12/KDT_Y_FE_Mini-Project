@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import {
+  apiCartListState,
   cartCheckboxElementState,
   cartSelectedState,
 } from '@/recoil/atoms/cartState';
@@ -13,6 +14,7 @@ const CartHeader = () => {
   const [selectedCartList, setSelectedCartList] =
     useRecoilState(cartSelectedState);
   const cartAllCheckboxList = useRecoilValue(cartCheckboxElementState);
+  const apiCartList = useRecoilValue(apiCartListState);
 
   useEffect(() => {
     setSelectedCartList(
@@ -51,7 +53,7 @@ const CartHeader = () => {
           }
         />
         <label htmlFor='selectAll' className='ml-2 text-xs'>
-          전체 선택 ({selectedCartList.length}/{cartAllCheckboxList.length})
+          전체 선택 ({selectedCartList.length}/{apiCartList.length})
         </label>
       </div>
       <div className='text-blue flex text-xs'>
