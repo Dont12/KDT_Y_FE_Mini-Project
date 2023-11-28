@@ -10,7 +10,11 @@ import PersonInput from '@/components/detail/PersonInput';
 import ReservationButton from '@/components/detail/ReservationButton';
 import Rules from '@/components/detail/Rules';
 
-import detailInfoRequest from '@/app/api/detailInfoRequest';
+import { DetailResponse, Room } from '@/@types/detail.types';
+import detailInfoRequest from '@/api/detailInfoRequest';
+import { calculateTotalCost } from '@/utils/calculatePerNightCost';
+
+import KakaoMap from '../../../components/detail/KakaoMap';
 
 const today = new Date();
 const tomorrow = new Date();
@@ -34,7 +38,7 @@ const Detail = async ({
   const defaultCheckOutDate = searchParams.checkOutDate || formatDate(tomorrow);
   const defaultPerson = searchParams.guest || '1';
 
-  const details = await detailInfoRequest.getDetail({
+  const details: DetailResponse = await detailInfoRequest.getDetail({
     id: params.id,
     checkIn: defaultCheckInDate,
     checkOut: defaultCheckOutDate,
@@ -50,7 +54,8 @@ const Detail = async ({
       <main>
         <div className='mt-12 bg-white'>
           <div>
-            <Carousel images={details.data.imageUrl} />
+            {/* 이미지가 배열로 들어오면 [] 벗기기 */}
+            <Carousel images={[details.data.imageUrl]} />
           </div>
           <div className='flex flex-col gap-4 p-5'>
             <div className='border-mediumGray border-b border-solid pb-3'>
@@ -58,6 +63,12 @@ const Detail = async ({
             </div>
             <div className='border-mediumGray border-b border-solid pb-3'>
               <p>{details.data.address}</p>
+              <div id='map' className='h-60 w-full'>
+                <KakaoMap
+                  longitude={details.data.longitude}
+                  latitude={details.data.latitude}
+                />
+              </div>
               <p>
                 체크인 {details.data.rooms[0].checkInTime} - 체크아웃
                 {details.data.rooms[0].checkOutTime}
@@ -83,7 +94,7 @@ const Detail = async ({
               </div>
             </div>
             <div className='flex flex-col gap-10'>
-              {details.data.rooms.map((room: any, index: any) => (
+              {details.data.rooms.map((room: Room, index: number) => (
                 <div
                   key={index}
                   className='border-mediumGray flex flex-col gap-5 rounded border border-solid p-5'
@@ -98,11 +109,11 @@ const Detail = async ({
                         className='h-full w-48 object-cover'
                       />
                     </div>
-                    <div className='flex grow flex-col gap-5 pt-3'>
+                    <div className='flex grow flex-col gap-3 pt-3'>
                       <div>
                         <p className='font-bold'>{room.name}</p>
                         <p>최대 인원: {room.maxGuestCount}</p>
-                        <p>최소 인원: {room.basicGuestCount}</p>
+                        <p>정원: {room.basicGuestCount}</p>
                         <p>
                           옵션:
                           {room.roomBathFacility === 'Y' && '욕조, '}
@@ -126,9 +137,27 @@ const Detail = async ({
                           남은 객실: {room.stock}
                         </p>
                       </div>
-                      <div className='flex flex-row justify-end gap-3'>
-                        <p className='text-baseline text-[26px] font-bold leading-4'>
+                      <div className='flex flex-row items-end justify-end gap-1'>
+                        <p className='text-gray1 text-[16px] font-bold'>
+                          1박당/
+                        </p>
+                        <p className='m-0 text-[26px] font-bold'>
                           {new Intl.NumberFormat().format(room.price)}원
+                        </p>
+                      </div>
+                      <div className='flex flex-row items-end justify-end'>
+                        <p>
+                          {'총 '}
+                          {new Intl.NumberFormat().format(
+                            calculateTotalCost({
+                              checkInDate: defaultCheckInDate,
+                              checkOutDate: defaultCheckOutDate,
+                              numberOfGuests: defaultPerson,
+                              maxRoomCapacity: room.maxGuestCount,
+                              pricePerNight: room.price,
+                            })
+                          )}
+                          원
                         </p>
                       </div>
                     </div>
@@ -136,9 +165,9 @@ const Detail = async ({
                   <div className='flex flex-row'>
                     <CartButton
                       roomId={room.id}
-                      checkIn={defaultCheckInDate}
-                      checkOut={defaultCheckOutDate}
-                      guest={defaultPerson}
+                      checkInDate={defaultCheckInDate}
+                      checkOutDate={defaultCheckOutDate}
+                      guestCount={defaultPerson}
                     />
                     <ReservationButton
                       productId={params.id}
@@ -149,7 +178,7 @@ const Detail = async ({
                       checkOutTime={room.checkOutTime}
                       guestCount={defaultPerson}
                       price={room.price}
-                      stopck={room.stock}
+                      stock={room.stock}
                     />
                   </div>
                 </div>
