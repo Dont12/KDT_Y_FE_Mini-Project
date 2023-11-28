@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { DateRangePicker } from 'rsuite';
 
@@ -7,12 +8,27 @@ import 'rsuite/dist/rsuite.min.css';
 const today = new Date();
 const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
+
 const beforeToday = (date: Date) => {
   return date < today;
 };
 
-const DatePicker = () => {
-  const [checkInOut, setCheckInOut] = useState([today, tomorrow]);
+const formatDate = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const DatePicker = ({ roomId, checkIn, checkOut, guest }: any) => {
+  const defaultDates =
+    checkIn === '' || checkOut === ''
+      ? [today, tomorrow]
+      : [new Date(checkIn), new Date(checkOut)];
+
+  const [checkInOut, setCheckInOut] = useState(defaultDates);
+
+  const router = useRouter();
 
   return (
     <>
@@ -27,6 +43,11 @@ const DatePicker = () => {
         onChange={(value: [Date, Date] | null) => {
           if (value !== null) {
             setCheckInOut(value);
+            router.push(
+              `/detail/${roomId}?checkInDate=${formatDate(
+                value[0]
+              )}&checkOutDate=${formatDate(value[1])}&guest=${guest}`
+            );
           }
         }}
       />

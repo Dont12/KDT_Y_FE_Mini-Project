@@ -1,11 +1,14 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import Toast from '@/components/common/Toast';
 
-const PersonInput = () => {
-  const [person, setPerson] = useState('1');
+const PersonInput = ({ roomId, checkIn, checkOut, guest }: any) => {
+  const [person, setPerson] = useState(guest);
   const [toastVisible, setToastVisible] = useState(false);
+
+  const router = useRouter();
 
   const showToast = () => {
     setToastVisible(true);
@@ -18,11 +21,16 @@ const PersonInput = () => {
     let inputValue = e.target.value.replace(/[^0-9]/g, '');
     inputValue = Math.min(Math.max(parseInt(inputValue), 1), 9).toString();
     setPerson(inputValue);
+    router.push(
+      `/detail/${roomId}?checkInDate=${checkIn}&checkOutDate=${checkOut}&guest=${inputValue}
+      `
+    );
+    router.refresh;
     showToast();
   };
 
   return (
-    <div className='flex flex-col'>
+    <form className='flex flex-col'>
       <label htmlFor='person'>인원</label>
       <input
         id='person'
@@ -36,7 +44,7 @@ const PersonInput = () => {
       {toastVisible && (
         <Toast message='한번에 예약 할 수 있는 것은 최대 9명 입니다.' />
       )}
-    </div>
+    </form>
   );
 };
 

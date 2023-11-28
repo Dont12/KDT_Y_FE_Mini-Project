@@ -1,23 +1,43 @@
 import Image from 'next/image';
 import React from 'react';
 
-import 'rsuite/dist/rsuite.min.css';
-
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import SubmitButton from '@/components/common/SubmitButton';
 import Carousel from '@/components/detail/Carousel';
+import CartButton from '@/components/detail/CartButton';
 import DatePicker from '@/components/detail/DateRagePicker';
 import PersonInput from '@/components/detail/PersonInput';
 import Rules from '@/components/detail/Rules';
 
 import detailInfoRequest from '@/app/api/detailInfoRequest';
 
-const Detail = async () => {
+const today = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+const formatDate = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const Detail = async ({
+  params,
+  searchParams = { checkInDate: '', checkOutDate: '', guest: '' },
+}: {
+  params: { id: string };
+  searchParams: { checkInDate: string; checkOutDate: string; guest: string };
+}) => {
+  const defaultCheckInDate = searchParams.checkInDate || formatDate(today);
+  const defaultCheckOutDate = searchParams.checkOutDate || formatDate(tomorrow);
+  const defaultPerson = searchParams.guest || '1';
+
   const details = await detailInfoRequest.getDetail({
-    id: '1',
-    checkIn: '2023-11-25',
-    checkOut: '2023-11-26',
+    id: params.id,
+    checkIn: defaultCheckInDate,
+    checkOut: defaultCheckOutDate,
   });
 
   return (
@@ -46,10 +66,20 @@ const Detail = async () => {
             <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
               <div className='flex flex-col'>
                 <label htmlFor='check'>체크인-체크아웃</label>
-                <DatePicker />
+                <DatePicker
+                  roomId={params.id}
+                  checkIn={defaultCheckInDate}
+                  checkOut={defaultCheckOutDate}
+                  guest={defaultPerson}
+                />
               </div>
               <div>
-                <PersonInput />
+                <PersonInput
+                  roomId={params.id}
+                  checkIn={defaultCheckInDate}
+                  checkOut={defaultCheckOutDate}
+                  guest={defaultPerson}
+                />
               </div>
             </div>
             <div className='flex flex-col gap-10'>
@@ -70,7 +100,7 @@ const Detail = async () => {
                     </div>
                     <div className='flex grow flex-col gap-5 pt-3'>
                       <div>
-                        <p>{room.name}</p>
+                        <p className='font-bold'>{room.name}</p>
                         <p>최대 인원: {room.maxGuestCount}</p>
                         <p>최소 인원: {room.basicGuestCount}</p>
                         <p>
@@ -98,21 +128,18 @@ const Detail = async () => {
                       </div>
                       <div className='flex flex-row justify-end gap-3'>
                         <p className='text-baseline text-[26px] font-bold leading-4'>
-                          {room.price}원
+                          {new Intl.NumberFormat().format(room.price)}원
                         </p>
                       </div>
                     </div>
                   </div>
                   <div className='flex flex-row'>
-                    <button className='border-mediumGray mr-3 flex h-12 w-12 items-center justify-center rounded border border-solid p-1'>
-                      <Image
-                        src='/svg/cartIcon.svg'
-                        alt='cartIcon'
-                        className='h-6 w-6'
-                        width={30}
-                        height={30}
-                      />
-                    </button>
+                    <CartButton
+                      roomId={room.id}
+                      checkIn={defaultCheckInDate}
+                      checkOut={defaultCheckOutDate}
+                      guest={defaultPerson}
+                    />
                     <SubmitButton
                       content='예약하기'
                       activate
