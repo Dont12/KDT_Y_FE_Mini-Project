@@ -118,11 +118,13 @@ const Cart = () => {
         </HeaderNav>
         {apiCartList.length !== 0 && <CartHeader />}
       </Header>
-      <main className='mb-52 mt-[6rem]'>
+      <main
+        className={`mb-52 mt-${apiCartList.length !== 0 ? '[6.75rem]' : '12'}`}
+      >
         <section>
           {isLoading ? (
             apiCartList.length > 0 ? (
-              <ul className='pt-[0.0063rem]'>
+              <ul>
                 {cartProductList.map((cartProductItem) => (
                   <CartItem
                     key={cartProductItem.productId}
