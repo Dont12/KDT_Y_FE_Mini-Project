@@ -4,40 +4,35 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { HiMiniXMark } from 'react-icons/hi2';
 
+import type { CartRoom } from '@/@types/cart.types';
 import { convertFullDate } from '@/utils/dateFormat';
 
 interface Props {
   productId: number;
-  roomName: string;
-  imageUrl: string;
-  checkInDate: string;
-  checkOutDate: string;
-  numberOfNights: number;
-  checkInTime: string;
-  checkOutTime: string;
-  baseGuestCount: number;
-  maxGuestCount: number;
-  price: number;
+  cartRoomData: CartRoom;
 }
 
-const CartItemRoomInfo = ({
+const CartRoomInfo = ({
   productId,
-  roomName,
-  imageUrl,
-  checkInDate,
-  checkOutDate,
-  numberOfNights,
-  checkInTime,
-  checkOutTime,
-  baseGuestCount,
-  maxGuestCount,
-  price,
-}: Props): JSX.Element => {
+  cartRoomData: {
+    roomName,
+    imageUrl,
+    checkInDate,
+    checkOutDate,
+    numberOfNights,
+    checkInTime,
+    checkOutTime,
+    baseGuestCount,
+    maxGuestCount,
+    price,
+  },
+}: Props) => {
   const deleteCartItem = () => {
     console.log('장바구니 삭제 기능 구현');
   };
+
   return (
-    <div className='border-gray3 mt-4 border-t border-solid pt-5'>
+    <li className='border-gray3 mt-4 border-t border-solid pt-5'>
       <div className='flex items-start justify-between'>
         <div className='mb-3 flex items-center gap-2'>
           <input type='checkbox' />
@@ -83,8 +78,8 @@ const CartItemRoomInfo = ({
       <div className='mt-4 text-right text-sm font-bold'>
         {price.toLocaleString('ko-KR')}원
       </div>
-    </div>
+    </li>
   );
 };
 
-export default CartItemRoomInfo;
+export default CartRoomInfo;
