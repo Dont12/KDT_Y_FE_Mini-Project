@@ -3,11 +3,11 @@ import React from 'react';
 
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
-import SubmitButton from '@/components/common/SubmitButton';
 import Carousel from '@/components/detail/Carousel';
 import CartButton from '@/components/detail/CartButton';
 import DatePicker from '@/components/detail/DateRagePicker';
 import PersonInput from '@/components/detail/PersonInput';
+import ReservationButton from '@/components/detail/ReservationButton';
 import Rules from '@/components/detail/Rules';
 
 import detailInfoRequest from '@/app/api/detailInfoRequest';
@@ -140,11 +140,17 @@ const Detail = async ({
                       checkOut={defaultCheckOutDate}
                       guest={defaultPerson}
                     />
-                    <SubmitButton
-                      content='예약하기'
-                      activate
-                      className='grow-1'
-                    ></SubmitButton>
+                    <ReservationButton
+                      productId={params.id}
+                      roomId={room.id}
+                      checkInDate={defaultCheckInDate}
+                      checkInTime={room.checkInTime}
+                      checkOutDate={defaultCheckOutDate}
+                      checkOutTime={room.checkOutTime}
+                      guestCount={defaultPerson}
+                      price={room.price}
+                      stopck={room.stock}
+                    />
                   </div>
                 </div>
               ))}
