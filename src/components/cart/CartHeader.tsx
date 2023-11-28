@@ -6,6 +6,8 @@ import {
   cartSelectedState,
 } from '@/recoil/atoms/cartState';
 
+import CartHeaderButton from './CartHeaderButton';
+
 const CartHeader = () => {
   const [selectedCartList, setSelectedCartList] =
     useRecoilState(cartSelectedState);
@@ -52,8 +54,22 @@ const CartHeader = () => {
         </label>
       </div>
       <div className='text-blue flex text-xs'>
-        <button className='hover:bg-skyBlue ml-2 p-2'>예약불가 삭제</button>
-        <button className='hover:bg-skyBlue ml-2 p-2'>선택 삭제</button>
+        <CartHeaderButton
+          onClick={() => {
+            console.log('예약불가 삭제');
+          }}
+          disabled={false}
+        >
+          예약불가 삭제
+        </CartHeaderButton>
+        <CartHeaderButton
+          onClick={() => {
+            console.log('선택 삭제');
+          }}
+          disabled={false}
+        >
+          선택 삭제
+        </CartHeaderButton>
       </div>
     </div>
   );
