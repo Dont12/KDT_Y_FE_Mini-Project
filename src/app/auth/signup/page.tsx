@@ -1,4 +1,7 @@
-import React from 'react';
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 import { SignupForm } from '@/components/auth';
 import Header from '@/components/common/Header';
@@ -7,18 +10,21 @@ import HeaderNav from '@/components/common/HeaderNav';
 import authRequest from '@/app/api/authRequest';
 
 const SignUp = () => {
+  const router = useRouter();
+
   const checkSignin = async () => {
     try {
-      await authRequest.getUser();
-      // router.replace('/');
+      const res = await authRequest.getUser();
+      console.log('현재 로그인이 되어있습니다.', res);
+      router.replace('/');
     } catch (error) {
-      console.log(error);
+      console.log('로그인이 되어있지 않습니다.', error);
     }
   };
 
-  // useEffect(() => {
-  //   checkSignin();
-  // }, []);
+  useEffect(() => {
+    checkSignin();
+  }, []);
 
   return (
     <>

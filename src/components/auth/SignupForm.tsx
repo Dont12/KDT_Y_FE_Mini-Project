@@ -53,14 +53,13 @@ const SignupForm = () => {
           nickname: nickname.value,
           phone: phone.value,
         });
-        const data = await res.json();
-        console.log(data);
+        console.log(res);
 
-        if (data.status === 'SUCCESS') {
+        if (res.status === 'SUCCESS') {
           router.replace('/auth/signin');
         }
-        if (data.status === 'FAIL') {
-          alert(data.errorMessage);
+        if (res.status === 'FAIL') {
+          alert(res.errorMessage);
         }
       } catch {
         console.error(Error);

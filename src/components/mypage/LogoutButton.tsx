@@ -11,7 +11,8 @@ const LogoutButton = () => {
 
   const logout = debounce(async () => {
     try {
-      await authRequest.logout();
+      const res = await authRequest.logout();
+      console.log(res);
       router.push('/auth/signin');
     } catch (error) {
       console.log(error);

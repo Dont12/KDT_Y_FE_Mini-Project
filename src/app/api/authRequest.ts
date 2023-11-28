@@ -2,6 +2,8 @@ import { SigninData, UserData } from '@/@types/auth.types';
 
 const url = 'https://api.stayinn.site/v1';
 
+const responseBody = (res: Response) => res.json();
+
 const authRequest = {
   getUser: () =>
     fetch(`${url}/users`, {
@@ -10,7 +12,7 @@ const authRequest = {
       headers: {
         'Content-Type': 'application/json',
       },
-    }),
+    }).then(responseBody),
 
   createUser: (userData: UserData) =>
     fetch(`${url}/users`, {
@@ -20,7 +22,7 @@ const authRequest = {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),
-    }),
+    }).then(responseBody),
 
   signin: (signinData: SigninData) =>
     fetch(`${url}/auth/login`, {
@@ -30,7 +32,7 @@ const authRequest = {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(signinData),
-    }),
+    }).then(responseBody),
 
   logout: () =>
     fetch(`${url}/auth/logout`, {
@@ -39,7 +41,7 @@ const authRequest = {
       headers: {
         'Content-Type': 'application/json',
       },
-    }),
+    }).then(responseBody),
 };
 
 export default authRequest;

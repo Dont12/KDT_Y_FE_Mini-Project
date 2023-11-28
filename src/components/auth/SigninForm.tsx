@@ -27,13 +27,12 @@ const SigninForm = () => {
         email: email.value,
         password: password.value,
       });
-      const data = await res.json();
-      console.log(data);
+      console.log(res);
 
-      if (data.status === 'SUCCESS') {
+      if (res.status === 'SUCCESS') {
         router.replace('/');
       } else {
-        alert(data.errorMessage);
+        alert(res.errorMessage);
       }
     } catch {
       console.error(Error);
