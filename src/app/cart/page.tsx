@@ -19,13 +19,16 @@ import { cartSelectedState } from '@/recoil/atoms/cartState';
 
 
 const Cart = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiCartList, setApiCartList] = useState<ApiCartItem[]>([]);
   const [cartProductList, setCartProductList] = useState<CartProduct[]>([]);
 
   useEffect(() => {
     const getCartList = async () => {
       try {
-        const res = await cartRequest.getCartList(1, 10);
+        const res = await cartRequest.getCartList(1, 10000);
+        console.log(res);
+        setIsLoading(true);
         setApiCartList(res.data.items);
       } catch (error) {
         console.error('getCartList api error', error);
@@ -117,17 +120,21 @@ const Cart = () => {
       </Header>
       <main className='mb-52 mt-[6rem]'>
         <section>
-          {cartProductList.length > 0 ? (
-            <ul className='pt-[0.0063rem]'>
-              {cartProductList.map((cartProductItem) => (
-                <CartItem
-                  key={cartProductItem.productId}
-                  cartProductData={cartProductItem}
-                />
-              ))}
-            </ul>
+          {isLoading ? (
+            apiCartList.length > 0 ? (
+              <ul className='pt-[0.0063rem]'>
+                {cartProductList.map((cartProductItem) => (
+                  <CartItem
+                    key={cartProductItem.productId}
+                    cartProductData={cartProductItem}
+                  />
+                ))}
+              </ul>
+            ) : (
+              <EmptyCartItem />
+            )
           ) : (
-            <EmptyCartItem />
+            <div>로딩 중</div>
           )}
         </section>
         <CartNotice />
