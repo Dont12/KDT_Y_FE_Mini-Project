@@ -1,18 +1,10 @@
 import { ErrorMsg, ValidationIcon } from '@components/auth';
 import { memo } from 'react';
 
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
-
-interface NameProps {
-  name: InputType;
-  handleName: React.ChangeEventHandler<HTMLInputElement>;
-}
+import { NameProps } from '@/@types/auth.types';
 
 const InputName = memo(({ name, handleName }: NameProps) => (
-  <div className='relative mt-3'>
+  <div className='relative my-5'>
     <label htmlFor='user' className='text-base leading-10'>
       이름*
     </label>
@@ -26,7 +18,7 @@ const InputName = memo(({ name, handleName }: NameProps) => (
       onChange={handleName}
       required
       autoComplete='off'
-      className='border-lightGray top-10 h-14 w-full rounded-[20px] border-2 p-4 text-base text-black'
+      className='border-lightGray top-10 h-14 w-full rounded-[10px] border-2 p-4 text-base text-black'
     />
 
     <ValidationIcon input={name} />
