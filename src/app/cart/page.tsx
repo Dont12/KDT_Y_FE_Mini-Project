@@ -116,7 +116,7 @@ const Cart = () => {
         <HeaderNav showBack showHome showMyPage>
           장바구니
         </HeaderNav>
-        <CartHeader />
+        {apiCartList.length !== 0 && <CartHeader />}
       </Header>
       <main className='mb-52 mt-[6rem]'>
         <section>
