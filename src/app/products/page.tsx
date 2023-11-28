@@ -45,7 +45,7 @@ const dropdownOptions = [
 const ProductPage = () => {
   //   const router = useRouter();
   const pathname = usePathname(); // /products
-  const [location, setLocation] = useState<string | null>(null); // 선택된 지역을 저장할 state
+  const [pickLocation, setpickLocation] = useState<string | null>(null); // 선택된 지역을 저장할 state
   const searchParams = useSearchParams();
 
   // 이 부분에서 오늘과 내일의 날짜를 생성하는 로직이 들어갑니다.
@@ -59,13 +59,25 @@ const ProductPage = () => {
   // API 요청을 보낼 주소
   const apiUrl = `https://mock.stayinn.site/v1/products?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`;
 
+  const location = searchParams.get('location'); // 없다면 null
+  const category = searchParams.get('category'); // 없다면 null
+
+  // URL 매개변수를 기반으로 초기 선택 옵션 초기화
+  const initialSelectedOption = dropdownOptions.find((option) => {
+    if (location === null) {
+      return { label: '전국' };
+    } else {
+      return option.areaCode === location;
+    }
+  }) || { label: '전국' }; // find가 undefined를 반환할 경우 기본값 설정
+
   // API에서 받아온 데이터를 저장할 state
   const [data, setData] = useState<{ data: product[] } | null>(null);
+  const [selectedOption, setSelectedOption] = useState<Option>(
+    initialSelectedOption
+  );
 
   useEffect(() => {
-    const location = searchParams.get('location'); // 없다면 null
-    const category = searchParams.get('category'); // 없다면 null
-
     // category나 location이 변경되면 API 요청을 보냅니다.
     if (category || location) {
       const query = [];
@@ -80,13 +92,14 @@ const ProductPage = () => {
 
       // API 요청 주소에 category나 location이 포함된 경우 추가합니다.
       const fullUrl = `${apiUrl}&${query.join('&')}`;
+
       console.log(fullUrl);
 
       // fetch를 사용하여 API에 요청을 보내고 데이터를 받아옵니다.
       fetch(fullUrl)
         .then((response) => response.json())
         .then((result) => {
-          console.log(result); // API 응답을 기록
+          // console.log(result); // API 응답을 기록
           setData(result); // 데이터를 받아와서 상태를 업데이트한다.
         })
         .catch((error) => {
@@ -108,8 +121,12 @@ const ProductPage = () => {
         </Header>
         <main className='flex flex-col items-center justify-center bg-white py-[3rem]'>
           <h1 className='m-10 text-lg'>
-            <span className='font-bold'>{location}</span>에 있는{' '}
-            <span className='font-bold'>{category}</span> 불러오는 중....🏠
+            <span className='font-bold'>{location ? location : '전국'}</span>에
+            있는{' '}
+            <span className='font-bold'>
+              {category ? category : '전체 숙소'}
+            </span>{' '}
+            불러오는 중....🏠
           </h1>
         </main>
       </>
@@ -118,7 +135,7 @@ const ProductPage = () => {
 
   const handleLocationChange = (option: Option | null) => {
     // 선택된 지역이 변경될 때마다 state를 업데이트하고 URL을 업데이트합니다.
-    setLocation(option?.areaCode || null);
+    setpickLocation(option?.areaCode || null);
 
     const newParams = new URLSearchParams(searchParams.toString()); // 기존 쿼리 파라미터를 복사합니다.
     newParams.set('location', option?.areaCode || ''); // location 파라미터를 설정합니다.
@@ -141,15 +158,13 @@ const ProductPage = () => {
         <h1 className='m-5 text-lg'>어디로 갈까요?</h1>
         <Dropdown
           options={dropdownOptions}
-          selectedOption={
-            dropdownOptions.find((option) => option.areaCode === location) || {
-              label: '전국',
-            }
-          } // 'location'이 'undefined'일 때 기본값으로 { label: '전국' }를 제공합니다.
-          onSelectOption={(option: Option | null) =>
-            handleLocationChange(option)
-          }
-        />{' '}
+          selectedOption={selectedOption}
+          onSelectOption={(option: Option | null) => {
+            handleLocationChange(option);
+            // 선택된 옵션 상태를 업데이트합니다.
+            setSelectedOption(option || initialSelectedOption);
+          }}
+        />
         <hr className='my-8 w-full border-t' />
         <div>
           <div className='grid grid-cols-2 gap-4 '>
