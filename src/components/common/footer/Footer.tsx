@@ -4,7 +4,7 @@ import { IoLogoGithub } from 'react-icons/io';
 import FooterButton from './FooterButton';
 import FooterGithub from './FooterGithub';
 
-const Footer = (): JSX.Element => {
+const Footer = () => {
   return (
     <footer className='text-gray1 m-5 text-sm'>
       <Image src='/svg/footerLogo.svg' width={74} height={21} alt='스테이인' />

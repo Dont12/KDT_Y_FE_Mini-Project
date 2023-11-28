@@ -1,13 +1,6 @@
-interface UserData {
-  email: string;
-  password: string;
-  nickname: string;
-  phone: string;
-}
+import { SigninData, UserData } from '@/@types/auth.types';
 
-type SigninData = Pick<UserData, 'email' | 'password'>;
-
-const url = 'https://mock.stayinn.site/v1';
+const url = 'https://api.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
 
@@ -39,6 +32,15 @@ const authRequest = {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(signinData),
+    }).then(responseBody),
+
+  logout: () =>
+    fetch(`${url}/auth/logout`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }).then(responseBody),
 };
 

@@ -5,7 +5,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const FooterGithub = ({ href, children }: Props): JSX.Element => {
+const FooterGithub = ({ href, children }: Props) => {
   return (
     <li>
       <a href={href} target='_blank'>

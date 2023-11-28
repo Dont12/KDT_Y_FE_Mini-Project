@@ -1,9 +1,13 @@
 import ErrorMsg from './ErrorMsg';
-import InputContact from './input/InputContact';
-import InputEmail from './input/InputEmail';
-import InputName from './input/InputName';
-import InputPassword from './input/InputPassword';
-import InputPasswordConfirm from './input/InputPasswordConfirm';
+import {
+  InputContact,
+  InputEmail,
+  InputName,
+  InputPassword,
+  InputPasswordConfirm,
+} from './input';
+import SigninForm from './SigninForm';
+import SignupForm from './SignupForm';
 import ValidationIcon from './ValidationIcon';
 
 export {
@@ -13,5 +17,7 @@ export {
   InputName,
   InputPassword,
   InputPasswordConfirm,
+  SigninForm,
+  SignupForm,
   ValidationIcon,
 };

@@ -36,6 +36,8 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error'],
     // #endregion  //*======== Unused Import ===========
 
     // #region  //*=========== Import Sort ===========
