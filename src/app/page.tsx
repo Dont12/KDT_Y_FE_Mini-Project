@@ -1,9 +1,12 @@
 /* eslint-disable react/no-children-prop */
 // pages/index.tsx
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 
-// import Carousel, { carouselImages } from '../components/main/Carousel';
+import Header from '@/components/common/Header';
+import HeaderNav from '@/components/common/HeaderNav';
+import Carousel, { carouselImages } from '@/components/main/Carousel';
+
 import IconList, { mainIcons } from '../components/main/IconList';
 
 // interface DataType {
@@ -59,41 +62,41 @@ import IconList, { mainIcons } from '../components/main/IconList';
 // );
 
 const HomePage = () => {
-  // const [selectedChristmasLocation, setSelectedChristmasLocation] = useState<
-  //   string | null
-  // >(null);
+  const [selectedChristmasLocation, setSelectedChristmasLocation] = useState<
+    string | null
+  >(null);
   // const [selectedWinterLocation, setSelectedWinterLocation] = useState<
   //   string | null
   // >(null);
 
   return (
     <>
-      {/* <Header>
+      <Header>
         <HeaderNav showLogo showCart showMyPage>
           {' '}
         </HeaderNav>
-      </Header> */}
+      </Header>
       <main className='bg-white pt-[3rem]'>
-        {/* <Carousel images={carouselImages} /> */}
+        <Carousel images={carouselImages} />
         <IconList icons={mainIcons} />
-        {/* <section className='p-10'>
+        <section className='p-10'>
           <h1 className='mb-6 text-lg	 font-bold'>크리스마스 펜션 예약하기</h1>
-          <Navigation
+          {/* <Navigation
             locations={ChristmasPensionData.map((data) => data.location)}
             onSelectLocation={(location) =>
               setSelectedChristmasLocation(location)
             }
             selectedLocation={selectedChristmasLocation}
-          />
-          {ChristmasPensionData.map((data, index) => (
+          /> */}
+          {/* {ChristmasPensionData.map((data, index) => (
             <LocationContent
               key={index}
               selectedLocation={selectedChristmasLocation}
               data={data}
               index={index}
             />
-          ))}
-        </section> */}
+          ))} */}
+        </section>
         {/* <section className='p-10'>
           <h1 className='mb-6 text-lg	 font-bold'>겨울 도심 호캉스</h1>
           <Navigation
