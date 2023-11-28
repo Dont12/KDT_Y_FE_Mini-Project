@@ -12,4 +12,14 @@ const cartRequest = {
       },
     }).then(responseBody),
 
+  deleteCarts: () =>
+    fetch(`${url}/carts`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(responseBody),
+};
+
 export default cartRequest;
