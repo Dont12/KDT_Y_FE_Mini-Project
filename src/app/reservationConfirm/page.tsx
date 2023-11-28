@@ -1,30 +1,26 @@
-import ReservationConfirm from '@/components/ReservationConfirm';
-import React from 'react';
+import ReservationConfirmContainer from '@/components/ReservationConfirmContainer';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import orderRequest from '../api/orderRequest';
 
-const page = () => {
+const reservationConfirm = async () => {
+  const response = await orderRequest.getOrderList();
+
   return (
     <div className='mx-auto min-h-screen max-w-3xl bg-white'>
       <p className='py-14 text-center text-3xl'>국내 여행 예약 내역</p>
       <div className='flex'>
-        <button className='border-mediumGray mx-8 flex items-center justify-center rounded-md border border-solid px-5 py-1 '>
+        <button className='border-mediumGray mx-10  flex items-center justify-center rounded-md border border-solid px-5 py-1 '>
           <p className='tex-2xl'>최근 6개월</p>
           <MdOutlineKeyboardArrowDown />
         </button>
       </div>
-      {reservationData.map((data, index) => (
-        <ReservationConfirm
-          key={index}
-          productName={data.productName}
-          roomName={data.roomName}
-          imageUrl={data.imageUrl}
-          visitType={data.visitType}
-          checkInDate={data.checkInDate}
-          checkOutDate={data.checkOutDate}
-          checkInTime={data.checkInTime}
-          checkOutTime={data.checkOutTime}
-          baseGuestCount={data.baseGuestCount}
-          maxGuestCount={data.maxGuestCount}
+      {response.data.map((order, orderIndex) => (
+        <ReservationConfirmContainer
+          key={orderIndex}
+          orderId={order.orderId}
+          createdDate={order.createdDate}
+          orderItems={order.orderItems}
+          isDate={true}
         />
       ))}
 
@@ -41,56 +37,25 @@ const page = () => {
   );
 };
 
-export default page;
+export default reservationConfirm;
 
-// 예약 내역 데이터
-const reservationData = [
-  {
-    productName: '몬드리안 서울 이태원',
-    roomName: '이태원 몬드리안 썸머바캉스 조식2인',
-    imageUrl: '/images/roomImg.png',
-    visitType: '도보',
-    checkInTime: '15:00',
-    checkOutTime: '12:00',
-    baseGuestCount: 2,
-    maxGuestCount: 4,
-    checkInDate: '2023.11.20',
-    checkOutDate: '2023.11.21',
-  },
-  {
-    productName: '몬드리안 서울 이태원',
-    roomName: '이태원 몬드리안 썸머바캉스 조식2인',
-    imageUrl: '/images/roomImg.png',
-    visitType: '도보',
-    checkInTime: '15:00',
-    checkOutTime: '12:00',
-    baseGuestCount: 2,
-    maxGuestCount: 4,
-    checkInDate: '2023.11.20',
-    checkOutDate: '2023.11.21',
-  },
-  {
-    productName: '몬드리안 서울 이태원',
-    roomName: '이태원 몬드리안 썸머바캉스 조식2인',
-    imageUrl: '/images/roomImg.png',
-    visitType: '도보',
-    checkInTime: '15:00',
-    checkOutTime: '12:00',
-    baseGuestCount: 2,
-    maxGuestCount: 4,
-    checkInDate: '2023.11.20',
-    checkOutDate: '2023.11.21',
-  },
-  {
-    productName: '몬드리안 서울 이태원',
-    roomName: '이태원 몬드리안 썸머바캉스 조식2인',
-    imageUrl: '/images/roomImg.png',
-    visitType: '도보',
-    checkInTime: '15:00',
-    checkOutTime: '12:00',
-    baseGuestCount: 2,
-    maxGuestCount: 4,
-    checkInDate: '2023.11.20',
-    checkOutDate: '2023.11.21',
-  },
-];
+interface Order {
+  orderId: number;
+  createdDate: number;
+  orderItems: OrderItem[];
+}
+
+interface OrderItem {
+  orderItemId: number;
+  productId: number;
+  roomId: number;
+  productName: string;
+  imageUrl: string;
+  roomName: string;
+  baseGuestCount: number;
+  maxGuestCount: number;
+  checkInDate: string;
+  checkInTime: string;
+  checkOutDate: string;
+  checkOutTime: string;
+}

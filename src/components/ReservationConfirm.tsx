@@ -2,36 +2,35 @@ import React from 'react';
 import Image from 'next/image';
 import { IoIosArrowForward } from 'react-icons/io';
 
+const Divider = () => <div className='border-lightGray border-b  pb-4 '></div>;
+
 const ReservationConfirm = ({
+  orderId,
+  orderItemId,
   productName,
   roomName,
   imageUrl,
-  visitType,
   checkInDate,
   checkOutDate,
   checkInTime,
   checkOutTime,
   baseGuestCount,
   maxGuestCount,
-  hideDetailLink,
-}: ProductProps & { hideDetailLink?: boolean }) => {
+  isLastItem,
+}: ReservationConfirmProps & {
+  isLastItem?: boolean;
+}) => {
   return (
-    <div className='border-mediumGray m-8  items-center justify-center rounded-md border border-solid px-5 py-8 '>
+    <div className='px-8 py-4'>
       <div className='flex justify-between'>
-        <div className='text-mediumGray m-2 text-base'>
-          숙소 예약번호: 123891734892748
+        <div className='text-mediumGray mx-1 pb-4 text-base'>
+          숙소 예약번호: {orderItemId}
         </div>
-        {!hideDetailLink && ( //hideDetailLink가 false인 경우에만 렌더링
-          <button className='m-1 flex items-center justify-center'>
-            <p className='mr-2 text-xl'>상세보기</p>
-            <IoIosArrowForward />
-          </button>
-        )}
       </div>
-      <div className='bg-mediumGray mx-1 mb-2 w-16 rounded p-1 text-center text-xs  text-white'>
+      <div className='bg-mediumGray  mb-2 w-16 rounded p-1 text-center text-xs  text-white'>
         예약완료
       </div>
-      <div className='m-1 text-xl'>{productName}</div>
+      <div className='m-1 text-xl font-bold'>{productName}</div>
       <div className='m-1 text-xl'>{roomName}</div>
       <div className='flex items-center'>
         <Image
@@ -42,7 +41,6 @@ const ReservationConfirm = ({
           alt='room img'
         />
         <div className='m-4'>
-          <div className='text-base'>{visitType}방문</div>
           <div className='text-base'>
             {checkInDate} ~ {checkOutDate}
           </div>
@@ -54,21 +52,23 @@ const ReservationConfirm = ({
           </div>
         </div>
       </div>
+      {isLastItem ? null : <Divider />}
     </div>
   );
 };
 
 export default ReservationConfirm;
 
-interface ProductProps {
+interface ReservationConfirmProps {
+  orderId: number;
+  orderItemId: number;
   productName: string;
   roomName: string;
   imageUrl: string;
-  visitType: string;
+  checkInDate: string;
+  checkOutDate: string;
   checkInTime: string;
   checkOutTime: string;
   baseGuestCount: number;
   maxGuestCount: number;
-  checkInDate: string;
-  checkOutDate: string;
 }
