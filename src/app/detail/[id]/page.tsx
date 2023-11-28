@@ -14,6 +14,8 @@ import { DetailResponse, Room } from '@/@types/detail.types';
 import detailInfoRequest from '@/api/detailInfoRequest';
 import { calculateTotalCost } from '@/utils/calculatePerNightCost';
 
+import KakaoMap from '../../../components/detail/KakaoMap';
+
 const today = new Date();
 const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
@@ -52,7 +54,8 @@ const Detail = async ({
       <main>
         <div className='mt-12 bg-white'>
           <div>
-            <Carousel images={details.data.imageUrl} />
+            {/* 이미지가 배열로 들어오면 [] 벗기기 */}
+            <Carousel images={[details.data.imageUrl]} />
           </div>
           <div className='flex flex-col gap-4 p-5'>
             <div className='border-mediumGray border-b border-solid pb-3'>
@@ -60,6 +63,12 @@ const Detail = async ({
             </div>
             <div className='border-mediumGray border-b border-solid pb-3'>
               <p>{details.data.address}</p>
+              <div id='map' className='h-60 w-full'>
+                <KakaoMap
+                  longitude={details.data.longitude}
+                  latitude={details.data.latitude}
+                />
+              </div>
               <p>
                 체크인 {details.data.rooms[0].checkInTime} - 체크아웃
                 {details.data.rooms[0].checkOutTime}
