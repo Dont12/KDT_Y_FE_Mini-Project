@@ -35,7 +35,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
 
   const deleteCartItem = async () => {
     try {
-      const res = await cartRequest.deleteCarts();
+      const res = await cartRequest.deleteCarts([cartId]);
       console.log(res);
     } catch (error) {
       console.error(error);
