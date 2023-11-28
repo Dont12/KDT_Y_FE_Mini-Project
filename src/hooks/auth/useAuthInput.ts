@@ -2,10 +2,7 @@
 
 import { useCallback, useState } from 'react';
 
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
+import { InputType } from '@/@types/auth.types';
 
 const useAuthInput = (target: string, password?: InputType) => {
   const [input, setInput] = useState({
