@@ -10,6 +10,11 @@ type PaymentData = {
   payment: string;
 };
 
+type orderId = {
+  orderId: number;
+  orderToken: string;
+};
+
 const orderRequest = {
   getOrderList: () =>
     fetch(`${url}/orders/history?page=1&pageSize=10`, {
@@ -19,7 +24,7 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  getOrderListDetail: ({ orderId }) =>
+  getOrderListDetail: ({ orderId }: orderId) =>
     fetch(`${url}/orders/history/${orderId}`, {
       method: 'GET',
       headers: {
@@ -27,7 +32,7 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  getOrderToken: (orderToken) =>
+  getOrderToken: ({ orderToken }) =>
     fetch(`${url}/orders?orderToken=${orderToken}`, {
       method: 'GET',
       headers: {
@@ -35,7 +40,7 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  postPayment: (paymentData: PaymentData) =>
+  postPayment: ({ paymentData }) =>
     fetch(`${url}/orders/payment`, {
       method: 'POST',
       headers: {

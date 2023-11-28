@@ -21,3 +21,10 @@ export interface RegisterOrderItems {
   checkOutTime: string;
   checkOutDate: string;
 }
+export interface PaymentData {
+  orderToken: string;
+  userName: string;
+  userPhone: string;
+  totalPrice: number;
+  payment: string;
+}

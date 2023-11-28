@@ -4,6 +4,7 @@ interface CheckBox {
   content: string;
   required: boolean;
 }
+
 const CheckBoxItem = ({ content, required }: CheckBox) => {
   return (
     <label className='m-2 block'>

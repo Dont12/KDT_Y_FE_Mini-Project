@@ -8,20 +8,38 @@ import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import React, { useEffect, useState } from 'react';
 import orderRequest from '../../api/orderRequest';
+import { useRouter } from 'next/navigation';
+import Modal from 'react-modal';
 
 const Divider = () => <div className='border-lightGray border-b  px-8 '></div>;
 
 const Reservation = ({ params }) => {
+  const router = useRouter();
   const { orderToken } = params;
   const [res, setRes] = useState();
+  const [isPaymentButtonDisabled, setIsPaymentButtonDisabled] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState({ userName: '', userPhone: '' });
   const [selectorPayment, setSelectorPayment] = useState<null | string>(null);
   const handleButtonClick = (paymentMethod: string) => {
     setSelectorPayment(paymentMethod);
+    setIsPaymentButtonDisabled(false);
   };
+
+  const handleUserInfoChange = (newUserInfo) => {
+    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, ...newUserInfo }));
+  };
+
+  const showLoadingMessage = () => (
+    <div className=' flex items-center justify-center'>
+      <p className='mt-24 text-center text-2xl'>결제가 진행중입니다...</p>
+      <img src='/public/images/roading.png' alt='로딩 이미지' />
+    </div>
+  );
 
   const fetchData = async () => {
     try {
-      const response = await orderRequest.getOrderToken(orderToken);
+      const response = await orderRequest.getOrderToken({ orderToken });
       const data = await response.data;
       setRes(data);
       console.log(data);
@@ -33,6 +51,32 @@ const Reservation = ({ params }) => {
     fetchData();
     console.log(orderToken);
   }, []);
+
+  const handlePaymentSubmit = async (e) => {
+    e.preventDefault();
+    setModalIsOpen(true);
+
+    const paymentData = {
+      orderToken,
+      userName: userInfo.userName,
+      userPhone: userInfo.userPhone,
+      totalPrice: res?.totalPrice,
+      payment: selectorPayment,
+    };
+
+    try {
+      const response = await orderRequest.postPayment(paymentData);
+      const resOrderId = response.data.orderId;
+      setTimeout(() => {
+        setModalIsOpen(false);
+        router.push(`/reservationConfirm/${resOrderId}`);
+      }, 3000);
+
+      console.log(response);
+    } catch (error) {
+      console.error('결제 실패', error);
+    }
+  };
 
   return (
     <div>
@@ -59,8 +103,8 @@ const Reservation = ({ params }) => {
             {index < res?.registerOrderItems.length - 1 && <Divider />}
           </>
         ))}
-        <form>
-          <UserInformation />
+        <form onSubmit={handlePaymentSubmit}>
+          <UserInformation onUserInfoChange={handleUserInfoChange} />
           <div className='mt-8  bg-white p-8 '>
             <p className='font-bold'>결제 금액</p>
             <div className='flex justify-between'>
@@ -96,7 +140,8 @@ const Reservation = ({ params }) => {
             <CheckBoxGroup />
             <button
               type='submit'
-              className='bg-mainButton mt-20  w-full rounded p-4 text-center text-white'
+              className='bg-mainButton mt-20 w-full rounded p-4 text-center text-white'
+              disabled={isPaymentButtonDisabled}
             >
               {new Intl.NumberFormat().format(res?.totalPrice)}원 결제하기
             </button>
@@ -107,6 +152,13 @@ const Reservation = ({ params }) => {
             </p>
           </div>
         </form>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          contentLabel='결제 진행 중'
+        >
+          {showLoadingMessage()}
+        </Modal>
       </main>
     </div>
   );
