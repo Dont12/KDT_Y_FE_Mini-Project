@@ -61,8 +61,8 @@ const SignupForm = () => {
         if (res.status === 'FAIL') {
           alert(res.errorMessage);
         }
-      } catch {
-        console.error(Error);
+      } catch (error) {
+        console.log(error);
       }
     },
     200

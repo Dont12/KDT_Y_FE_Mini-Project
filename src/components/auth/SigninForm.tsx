@@ -34,8 +34,8 @@ const SigninForm = () => {
       } else {
         alert(res.errorMessage);
       }
-    } catch {
-      console.error(Error);
+    } catch (error) {
+      console.log(error);
     }
   }, 200);
 
