@@ -21,7 +21,7 @@ const HeaderNav = ({
   showCart = false,
   showHome = false,
   showMyPage = false,
-}: Props) => {
+}: Props): JSX.Element => {
   const router = useRouter();
   const onBackClick = () => {
     router.back();
@@ -43,7 +43,7 @@ const HeaderNav = ({
           <CgChevronLeft className='text-2xl' />
         </button>
       )}
-      <div className='subtitle18'>{children}</div>
+      <div className='text-lg font-bold'>{children}</div>
       <div className='absolute right-3 flex'>
         {showHome && (
           <Link href='/' className='flex h-10 w-10 items-center justify-center'>
