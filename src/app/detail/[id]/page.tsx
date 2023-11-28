@@ -12,6 +12,7 @@ import Rules from '@/components/detail/Rules';
 
 import { DetailResponse, Room } from '@/@types/detail.types';
 import detailInfoRequest from '@/api/detailInfoRequest';
+import { calculateTotalCost } from '@/utils/calculatePerNightCost';
 
 const today = new Date();
 const tomorrow = new Date();
@@ -99,11 +100,11 @@ const Detail = async ({
                         className='h-full w-48 object-cover'
                       />
                     </div>
-                    <div className='flex grow flex-col gap-5 pt-3'>
+                    <div className='flex grow flex-col gap-3 pt-3'>
                       <div>
                         <p className='font-bold'>{room.name}</p>
                         <p>최대 인원: {room.maxGuestCount}</p>
-                        <p>최소 인원: {room.basicGuestCount}</p>
+                        <p>정원: {room.basicGuestCount}</p>
                         <p>
                           옵션:
                           {room.roomBathFacility === 'Y' && '욕조, '}
@@ -127,9 +128,27 @@ const Detail = async ({
                           남은 객실: {room.stock}
                         </p>
                       </div>
-                      <div className='flex flex-row justify-end gap-3'>
-                        <p className='text-baseline text-[26px] font-bold leading-4'>
+                      <div className='flex flex-row items-end justify-end gap-1'>
+                        <p className='text-gray1 text-[16px] font-bold'>
+                          1박당/
+                        </p>
+                        <p className='m-0 text-[26px] font-bold'>
                           {new Intl.NumberFormat().format(room.price)}원
+                        </p>
+                      </div>
+                      <div className='flex flex-row items-end justify-end'>
+                        <p>
+                          {'총 '}
+                          {new Intl.NumberFormat().format(
+                            calculateTotalCost({
+                              checkInDate: defaultCheckInDate,
+                              checkOutDate: defaultCheckOutDate,
+                              numberOfGuests: defaultPerson,
+                              maxRoomCapacity: room.maxGuestCount,
+                              pricePerNight: room.price,
+                            })
+                          )}
+                          원
                         </p>
                       </div>
                     </div>
