@@ -7,7 +7,7 @@ import { CgChevronLeft } from 'react-icons/cg';
 interface Props {
   showLogo?: boolean;
   showBack?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   showCart?: boolean;
   showHome?: boolean;
   showMyPage?: boolean;
