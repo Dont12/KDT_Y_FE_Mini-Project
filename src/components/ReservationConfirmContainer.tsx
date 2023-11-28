@@ -39,25 +39,3 @@ const ReservationConfirmContainer = ({
 };
 
 export default ReservationConfirmContainer;
-
-// interface Order {
-//   orderId: number;
-//   createdDate: number;
-//   orderItems: OrderItem[];
-// }
-
-// interface OrderItem {
-//   orderId: number;
-//   orderItemId: number;
-//   productId: number;
-//   roomId: number;
-//   productName: string;
-//   imageUrl: string;
-//   roomName: string;
-//   baseGuestCount: number;
-//   maxGuestCount: number;
-//   checkInDate: string;
-//   checkInTime: string;
-//   checkOutDate: string;
-//   checkOutTime: string;
-// }
