@@ -7,6 +7,7 @@ import {
 } from '@/recoil/atoms/cartState';
 
 import CartHeaderButton from './CartHeaderButton';
+import DeleteSelectedButton from './DeleteSelectedButton';
 
 const CartHeader = () => {
   const [selectedCartList, setSelectedCartList] =
@@ -62,14 +63,7 @@ const CartHeader = () => {
         >
           예약불가 삭제
         </CartHeaderButton>
-        <CartHeaderButton
-          onClick={() => {
-            console.log('선택 삭제');
-          }}
-          disabled={false}
-        >
-          선택 삭제
-        </CartHeaderButton>
+        <DeleteSelectedButton />
       </div>
     </div>
   );
