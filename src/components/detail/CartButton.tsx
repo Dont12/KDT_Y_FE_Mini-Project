@@ -25,7 +25,7 @@ const CartButton = ({ roomId, checkIn, checkOut, guest }: any) => {
       checkOutDate: checkOut,
       guestCount: guest,
     });
-    if (response === 'SUCCESS') {
+    if (response.status === 'SUCCESS') {
       setModalOpen(true);
     } else {
       router.push(`/auth/signin`);
