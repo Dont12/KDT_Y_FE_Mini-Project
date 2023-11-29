@@ -1,10 +1,8 @@
-/* eslint-disable react/no-children-prop */
 // pages/index.tsx
 'use client';
 import React from 'react';
 
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
+import { Header, HeaderNav } from '@/components/common/header';
 import ChristmasPensionList from '@/components/main/ChristmasPensionList';
 import IconList, { mainIcons } from '@/components/main/IconList';
 import MainCarousel, { carouselImages } from '@/components/main/MainCarousel';
@@ -17,9 +15,7 @@ const HomePage = () => {
   return (
     <>
       <Header>
-        <HeaderNav showLogo showCart showMyPage>
-          {' '}
-        </HeaderNav>
+        <HeaderNav showLogo showCart showMyPage />
       </Header>
       <main className='bg-white pt-[3rem]'>
         <MainCarousel images={carouselImages} />

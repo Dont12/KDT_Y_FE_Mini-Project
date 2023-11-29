@@ -43,3 +43,14 @@ export interface CartRoom {
   checkOutDate: string;
   numberOfNights: number;
 }
+
+export interface PushCartProps {
+  roomId: number;
+  checkInDate: string;
+  checkOutDate: string;
+  guestCount: string;
+}
+
+export interface PushCartResponse {
+  status: string;
+}
