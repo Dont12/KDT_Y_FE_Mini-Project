@@ -11,6 +11,7 @@ export interface PushOrderListProps {
 
 export interface OrderButtonProps extends PushOrderListProps {
   stock: number;
+  maxguest: number;
 }
 
 export interface PushOrderElementResponse {

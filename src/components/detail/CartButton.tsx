@@ -3,15 +3,17 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-import { PushCartProps, PushCartResponse } from '@/@types/cart.types';
+import { isCartPropsValid, PushCartResponse } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
 
 const CartButton = ({
   roomId,
   checkInDate,
   checkOutDate,
+  roomStock,
+  maxguest,
   guestCount,
-}: PushCartProps) => {
+}: isCartPropsValid) => {
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
 
@@ -40,18 +42,20 @@ const CartButton = ({
 
   return (
     <>
-      <button
-        className='border-mediumGray mr-3 flex h-12 w-12 items-center justify-center rounded border border-solid p-1'
-        onClick={pushCartElement}
-      >
-        <Image
-          src='/svg/cartIcon.svg'
-          alt='cartIcon'
-          className='h-6 w-6'
-          width={30}
-          height={30}
-        />
-      </button>
+      {roomStock == 0 || Number(guestCount) > maxguest ? null : (
+        <button
+          className='border-mediumGray mr-3 flex h-12 w-12 items-center justify-center rounded border border-solid p-1'
+          onClick={pushCartElement}
+        >
+          <Image
+            src='/svg/cartIcon.svg'
+            alt='cartIcon'
+            className='h-6 w-6'
+            width={30}
+            height={30}
+          />
+        </button>
+      )}
       {modalOpen ? (
         <div className='relative'>
           <div

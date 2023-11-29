@@ -70,10 +70,6 @@ const Detail = async ({
                 />
               </div>
               <p>{details.data.address}</p>
-              <p>
-                체크인 {details.data.rooms[0].checkInTime} - 체크아웃
-                {details.data.rooms[0].checkOutTime}
-              </p>
             </div>
             <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
               <div className='flex flex-col'>
@@ -113,7 +109,12 @@ const Detail = async ({
                     <div className='flex grow flex-col gap-3 pt-3'>
                       <div>
                         <p className='font-bold'>{room.name}</p>
+                        <p>
+                          체크인 {room.checkInTime} - 체크아웃{' '}
+                          {room.checkOutTime}
+                        </p>
                         <p>최대 인원: {room.maxGuestCount}</p>
+
                         <p>정원: {room.basicGuestCount}</p>
                         <p>
                           옵션:
@@ -168,6 +169,8 @@ const Detail = async ({
                       roomId={room.id}
                       checkInDate={defaultCheckInDate}
                       checkOutDate={defaultCheckOutDate}
+                      roomStock={room.stock}
+                      maxguest={room.maxGuestCount}
                       guestCount={defaultPerson}
                     />
                     <ReservationButton
@@ -178,6 +181,7 @@ const Detail = async ({
                       checkOutDate={defaultCheckOutDate}
                       checkOutTime={room.checkOutTime}
                       guestCount={defaultPerson}
+                      maxguest={room.maxGuestCount}
                       price={room.price}
                       stock={room.stock}
                     />

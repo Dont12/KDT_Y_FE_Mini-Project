@@ -17,6 +17,7 @@ const ReservationButton = ({
   checkOutTime,
   price,
   guestCount,
+  maxguest,
   stock,
 }: OrderButtonProps) => {
   const router = useRouter();
@@ -43,10 +44,20 @@ const ReservationButton = ({
   return (
     <input
       type='button'
-      className='grow-1 bg-mainButton hover:bg-mainButtonHov w-full rounded text-[18px] font-bold text-white'
-      value={stock === 0 ? '재고 없음' : '예약 하기'}
+      className={
+        stock === 0 || maxguest < Number(guestCount)
+          ? 'grow-1 bg-gray1  h-12 w-full rounded text-[18px] font-bold text-white'
+          : 'grow-1 bg-mainButton hover:bg-mainButtonHov h-12 w-full rounded text-[18px] font-bold text-white'
+      }
+      value={
+        stock === 0
+          ? '재고 없음'
+          : maxguest < Number(guestCount)
+          ? '최대인원 초과'
+          : '예약 하기'
+      }
       onClick={pushReservationElement}
-      disabled={stock === 0}
+      disabled={stock === 0 || maxguest < Number(guestCount)}
     />
   );
 };

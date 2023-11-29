@@ -51,6 +51,11 @@ export interface PushCartProps {
   guestCount: string;
 }
 
+export interface isCartPropsValid extends PushCartProps {
+  roomStock: number;
+  maxguest: number;
+}
+
 export interface PushCartResponse {
   status: string;
 }

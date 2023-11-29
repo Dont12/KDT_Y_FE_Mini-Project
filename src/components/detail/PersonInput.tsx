@@ -35,7 +35,6 @@ const PersonInput = ({
       `/detail/${roomId}?checkInDate=${checkIn}&checkOutDate=${checkOut}&guest=${inputValue}
       `
     );
-    router.refresh;
     showToast();
   };
 
