@@ -1,12 +1,11 @@
 import Image from 'next/image';
 import React from 'react';
 
+import { Header, HeaderNav } from '@/components/common/header';
 import {
   Carousel,
   CartButton,
   DatePicker,
-  Header,
-  HeaderNav,
   KakaoMap,
   PersonInput,
   ReservationButton,
