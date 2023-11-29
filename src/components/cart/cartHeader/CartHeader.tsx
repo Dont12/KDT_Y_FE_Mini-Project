@@ -6,8 +6,10 @@ import {
   cartSelectedState,
 } from '@/recoil/atoms/cartState';
 
-import DeleteSelectedButton from './DeleteSelectedButton';
-import DeleteUnavailableButton from './DeleteUnavailableButton';
+import {
+  DeleteSelectedButton,
+  DeleteUnavailableButton,
+} from './CartHeaderButton';
 
 const CartHeader = () => {
   const [selectedCartList, setSelectedCartList] =
