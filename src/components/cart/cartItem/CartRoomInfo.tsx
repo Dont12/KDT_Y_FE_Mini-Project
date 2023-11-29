@@ -110,6 +110,21 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
       setIsReservable(true);
     }
 
+    if (new Date(checkInDate).getTime() > new Date().getTime()) {
+      setIsReservable(true);
+    } else {
+      setIsReservable(false);
+      cartAllCheckboxList.map((cartAllCheckboxItem) => {
+        if (cartAllCheckboxItem.name === String(id)) {
+          cartAllCheckboxItem.disabled = true;
+        }
+      });
+      setSelectedCartList((prevSelectedCartList) =>
+        prevSelectedCartList.filter(
+          (prevSelectedCartItem) => prevSelectedCartItem !== String(id)
+        )
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartAllCheckboxList]);
 
