@@ -17,7 +17,7 @@ const ReservationConfirmContainer = ({
           <ReservationRouter orderId={orderId} />
         </div>
       )}
-      {orderItems.map((orderItem, orderItemIndex) => (
+      {orderItems?.map((orderItem, orderItemIndex) => (
         <ReservationConfirm
           key={orderItemIndex}
           orderId={orderId}

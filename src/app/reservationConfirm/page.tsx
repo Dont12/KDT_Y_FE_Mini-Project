@@ -1,11 +1,29 @@
-import ReservationConfirmContainer from '@/components/ReservationConfirmContainer';
+'use client';
+
+import ReservationConfirmContainer from '@/components/reservation/ReservationConfirmContainer';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import orderRequest from '../api/orderRequest';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
+import { useEffect, useState } from 'react';
 
-const reservationConfirm = async () => {
-  const response = await orderRequest.getOrderList();
+const reservationConfirm = () => {
+  const [reservationConfirm, setReservationConfirm] = useState();
+
+  const fetchData = async () => {
+    try {
+      const response = await orderRequest.getOrderList();
+      const data = await response.data;
+      setReservationConfirm(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className='mx-auto min-h-screen max-w-3xl bg-white'>
@@ -21,7 +39,7 @@ const reservationConfirm = async () => {
             <MdOutlineKeyboardArrowDown />
           </button>
         </div>
-        {response.data.map((order, orderIndex) => (
+        {reservationConfirm?.map((order, orderIndex) => (
           <ReservationConfirmContainer
             key={orderIndex}
             orderId={order.orderId}

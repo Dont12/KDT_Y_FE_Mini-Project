@@ -1,9 +1,9 @@
 'use client';
 
-import CheckBoxGroup from '@/components/CheckBoxGroup';
-import CheckBox from '@/components/CheckBoxGroup';
-import ReservationItem from '@/components/ReservationItem';
-import UserInformation from '@/components/UserInformation';
+import CheckBoxGroup from '@/components/reservation/CheckBoxGroup';
+import CheckBox from '@/components/reservation/CheckBoxGroup';
+import ReservationItem from '@/components/reservation/ReservationItem';
+import UserInformation from '@/components/reservation/UserInformation';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import React, { useEffect, useState } from 'react';
@@ -33,7 +33,7 @@ const Reservation = ({ params }) => {
   const showLoadingMessage = () => (
     <div className=' flex items-center justify-center'>
       <p className='mt-24 text-center text-2xl'>결제가 진행중입니다...</p>
-      <img src='/public/images/roading.png' alt='로딩 이미지' />
+      <img src='../../public/images/roading.png' alt='로딩 이미지' />
     </div>
   );
 
