@@ -1,6 +1,4 @@
-import { PushCartProps } from '@/@types/cart.types';
-
-const url = process.env.SERVER_URL;
+const url = 'https://mock.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
 
@@ -21,26 +19,6 @@ const cartRequest = {
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then(responseBody),
-
-  pushCart: ({
-    roomId,
-    checkInDate,
-    checkOutDate,
-    guestCount,
-  }: PushCartProps) =>
-    fetch(url as string, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        roomId: { roomId },
-        checkInDate: { checkInDate },
-        checkOutDate: { checkOutDate },
-        guestCount: { guestCount },
-      }),
     }).then(responseBody),
 };
 
