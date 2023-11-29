@@ -60,8 +60,8 @@ const dropdownLocationOptions = [
 const ProductPage = () => {
   //   const router = useRouter();
   const pathname = usePathname(); // /products
-  const [pickLocation, setpickLocation] = useState<string | null>(null); // 선택된 지역을 저장할 state
-  const [pickCategory, setpickCategory] = useState<string | null>(null); // 선택된 지역을 저장할 state
+  const [, setpickLocation] = useState<string | null>(null); // 선택된 지역을 저장할 state
+  const [, setpickCategory] = useState<string | null>(null); // 선택된 지역을 저장할 state
 
   const searchParams = useSearchParams();
 
@@ -126,7 +126,7 @@ const ProductPage = () => {
       // API 요청 주소에 category나 location이 포함된 경우 추가합니다.
       const fullUrl = `${apiUrl}&${query.join('&')}`;
 
-      console.log(fullUrl);
+      // console.log(fullUrl);
 
       // fetch를 사용하여 API에 요청을 보내고 데이터를 받아옵니다.
       fetch(fullUrl)
@@ -134,12 +134,9 @@ const ProductPage = () => {
         .then((result) => {
           // console.log(result); // API 응답을 기록
           setData(result); // 데이터를 받아와서 상태를 업데이트한다.
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
         });
     }
-  }, [apiUrl, searchParams, location]);
+  }, [apiUrl, searchParams, location, category]);
 
   // 데이터가 로딩 중일 때의 화면을 표시합니다.
   if (!data) {
