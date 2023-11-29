@@ -17,7 +17,6 @@ import type { ApiCartItem, CartProduct } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
 import { apiCartListState, cartSelectedState } from '@/recoil/atoms/cartState';
 
-
 const Cart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiCartList, setApiCartList] = useRecoilState(apiCartListState);
@@ -51,25 +50,34 @@ const Cart = () => {
         const existingIndex = prevCartProductList.findIndex(
           (prevCartItem) => prevCartItem.productId === item.product.productId
         );
-        const updatedCartList = [...prevCartProductList];
         if (existingIndex !== -1) {
-          // 존재하면 숙소 안에 방만 추가
-          updatedCartList[existingIndex].cartRoomList.push({
-            id: item.id,
-            roomId: item.product.roomId,
-            imageUrl: item.product.imageUrl,
-            roomName: item.product.roomName,
-            baseGuestCount: item.product.baseGuestCount,
-            maxGuestCount: item.product.maxGuestCount,
-            price: item.product.price,
-            checkInTime: item.product.checkInTime,
-            checkOutTime: item.product.checkOutTime,
-            stock: item.product.stock,
-            checkInDate: item.checkInDate,
-            checkOutDate: item.checkOutDate,
-            numberOfNights: item.numberOfNights,
+          return prevCartProductList.map((prevCartProductItem, index) => {
+            // 존재하면 숙소 안에 방만 추가
+            if (index === existingIndex) {
+              return {
+                ...prevCartProductItem,
+                cartRoomList: [
+                  ...prevCartProductItem.cartRoomList,
+                  {
+                    id: item.id,
+                    roomId: item.product.roomId,
+                    imageUrl: item.product.imageUrl,
+                    roomName: item.product.roomName,
+                    baseGuestCount: item.product.baseGuestCount,
+                    maxGuestCount: item.product.maxGuestCount,
+                    price: item.product.price,
+                    checkInTime: item.product.checkInTime,
+                    checkOutTime: item.product.checkOutTime,
+                    stock: item.product.stock,
+                    checkInDate: item.checkInDate,
+                    checkOutDate: item.checkOutDate,
+                    numberOfNights: item.numberOfNights,
+                  },
+                ],
+              };
+            }
+            return prevCartProductItem;
           });
-          return updatedCartList;
         } else {
           // 존재하지 않으면 숙소 및 방 추가
           return [
