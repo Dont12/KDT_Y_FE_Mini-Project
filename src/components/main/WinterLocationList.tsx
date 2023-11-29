@@ -17,19 +17,19 @@ interface WinterLocationProps {
 export const WinterLocations: WinterLocationProps[] = [
   {
     label: '강원도',
-    image: 'svg/mainIcon/homestay.svg',
+    image: 'images/main/winter01.jpg',
     location: '강원특별자치도',
   },
   {
     label: '제주도',
-    image: 'svg/mainIcon/homestay.svg',
+    image: 'images/main/winter02.jpg',
 
     location: '제주특별자치도',
   },
-  { label: '경남', image: 'svg/mainIcon/homestay.svg', location: '경상남도' },
+  { label: '경남', image: 'images/main/winter03.jpg', location: '경상남도' },
   {
     label: '전북',
-    image: 'svg/mainIcon/homestay.svg',
+    image: 'images/main/winter04.jpg',
     location: '전라북도',
   },
 ];
@@ -71,7 +71,7 @@ const Location = ({
 };
 
 const WinterLocationList = ({ locations }: WinterLocationListProps) => (
-  <div className='icon-container grid grid-cols-4 justify-items-center pb-10 pl-12 pr-12'>
+  <div className='icon-container grid grid-cols-4 justify-items-center pb-10 pl-10 pr-10'>
     {locations.map((iconData, index) => (
       <Location key={index} {...iconData} />
     ))}
