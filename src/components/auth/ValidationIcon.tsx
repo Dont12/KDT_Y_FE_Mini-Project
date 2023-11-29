@@ -1,15 +1,8 @@
 import { BsCheckCircleFill, BsFillXCircleFill } from 'react-icons/bs';
 
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
+import { IconProps } from '@/@types/auth.types';
 
-interface IconProps {
-  input: InputType;
-}
-
-const ValidationIcon = ({ input }: IconProps): JSX.Element => {
+const ValidationIcon = ({ input }: IconProps) => {
   if (!input.value) return <></>;
 
   if (input.validationPass) {

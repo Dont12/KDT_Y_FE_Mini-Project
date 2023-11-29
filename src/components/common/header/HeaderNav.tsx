@@ -1,5 +1,4 @@
 'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -8,7 +7,7 @@ import { CgChevronLeft } from 'react-icons/cg';
 interface Props {
   showLogo?: boolean;
   showBack?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   showCart?: boolean;
   showHome?: boolean;
   showMyPage?: boolean;
@@ -43,7 +42,7 @@ const HeaderNav = ({
           <CgChevronLeft className='text-2xl' />
         </button>
       )}
-      <div className='subtitle18'>{children}</div>
+      <div className='text-lg font-bold'>{children}</div>
       <div className='absolute right-3 flex'>
         {showHome && (
           <Link href='/' className='flex h-10 w-10 items-center justify-center'>

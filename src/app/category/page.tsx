@@ -2,8 +2,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
+import { Header, HeaderNav } from '@/components/common/header';
 
 // import InfiniteScroll from 'react-infinite-scroll-component';
 import Dropdown from '../../components/category/Dropdown';
@@ -262,9 +261,7 @@ const CategoryPage = () => {
   return (
     <>
       <Header>
-        <HeaderNav showBack showCart showMyPage>
-          {' '}
-        </HeaderNav>
+        <HeaderNav showBack showCart showMyPage />
       </Header>
       <main className='flex flex-col items-center justify-center bg-white pt-[3rem]'>
         <h1 className='m-5 text-lg'>어디로 갈까요?</h1>
