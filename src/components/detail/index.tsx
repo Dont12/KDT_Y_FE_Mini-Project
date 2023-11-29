@@ -1,5 +1,3 @@
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
 import Carousel from '@/components/detail/Carousel';
 import CartButton from '@/components/detail/CartButton';
 import DatePicker from '@/components/detail/DateRagePicker';
@@ -12,8 +10,6 @@ export {
   Carousel,
   CartButton,
   DatePicker,
-  Header,
-  HeaderNav,
   KakaoMap,
   PersonInput,
   ReservationButton,
