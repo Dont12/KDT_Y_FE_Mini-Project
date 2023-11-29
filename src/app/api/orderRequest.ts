@@ -1,4 +1,4 @@
-import { pushOrderListProps } from '@/@types/order.types';
+import { PushOrderListProps } from '@/@types/order.types';
 
 const url = 'https://mock.stayinn.site/v1';
 
@@ -30,7 +30,7 @@ const orderRequest = {
     checkOutTime,
     guestCount,
     price,
-  }: pushOrderListProps) =>
+  }: PushOrderListProps) =>
     fetch(`${url}/orders`, {
       method: 'POST',
       headers: {
