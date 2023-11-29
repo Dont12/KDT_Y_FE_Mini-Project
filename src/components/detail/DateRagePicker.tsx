@@ -46,7 +46,8 @@ const DatePicker = ({ roomId, checkIn, checkOut, guest }: any) => {
             router.push(
               `/detail/${roomId}?checkInDate=${formatDate(
                 value[0]
-              )}&checkOutDate=${formatDate(value[1])}&guest=${guest}`
+              )}&checkOutDate=${formatDate(value[1])}&guest=${guest}`,
+              { scroll: false }
             );
           }
         }}

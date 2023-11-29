@@ -1,6 +1,6 @@
 import { DetailProps } from '@/@types/detail.types';
 
-const url = 'https://api.stayinn.site/v1';
+const url = 'https://mock.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
 
