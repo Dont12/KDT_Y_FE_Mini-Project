@@ -2,8 +2,7 @@
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
+import { Header, HeaderNav } from '@/components/common/header';
 import DropdownCategory from '@/components/products/DropdownCategory';
 import DropdownLocation from '@/components/products/DropdownLocation';
 import YourItemComponent from '@/components/products/YourItemComponent';
