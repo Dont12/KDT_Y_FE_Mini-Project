@@ -29,7 +29,7 @@ const ChristmasPensionList = () => {
         tomorrow.toISOString().split('T')[0]
       }&category=펜션&location=${location}`;
 
-      console.log('API Request URL:', apiUrl);
+      // console.log('API Request URL:', apiUrl);
 
       const response = await fetch(apiUrl);
       if (!response.ok) {
@@ -47,7 +47,7 @@ const ChristmasPensionList = () => {
       // 선택된 지역 업데이트
       setSelectedLocation(location);
     } catch (error) {
-      console.error('알 수 없는 오류가 발생했습니다');
+      // console.error('알 수 없는 오류가 발생했습니다');
     }
   };
 

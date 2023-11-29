@@ -3,55 +3,17 @@
 'use client';
 import React from 'react';
 
-import Carousel from '@/components/common/Carousel';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
-import { carouselImages } from '@/components/main/Carousel';
 import ChristmasPensionList from '@/components/main/ChristmasPensionList';
 import IconList, { mainIcons } from '@/components/main/IconList';
+import MainCarousel, { carouselImages } from '@/components/main/MainCarousel';
 import WinterHotelList from '@/components/main/WinterHotelList';
-
-// interface DataType {
-//   location: string;
-//   pensions: {
-//     name: string;
-//     rating: number;
-//     price: number;
-//     image: string;
-//   }[];
-// }
-
-// interface LocationProps {
-//   selectedLocation: string | null;
-//   data: DataType;
-//   index: number;
-// }
-
-// const LocationContent = ({ selectedLocation, data, index }: LocationProps) => (
-//   <div
-//     className={`${
-//       selectedLocation === data.location ||
-//       (selectedLocation === null && index === 0)
-//         ? 'block'
-//         : 'hidden'
-//     }`}
-//   >
-//     <div className='grid grid-cols-4 gap-4'>
-//       {data.pensions.map((pension, i) => (
-//         <PensionCard key={i} {...pension} />
-//       ))}
-//     </div>
-//   </div>
-// );
+import WinterLocationList, {
+  WinterLocations,
+} from '@/components/main/WinterLocationList';
 
 const HomePage = () => {
-  // const [selectedChristmasLocation, setSelectedChristmasLocation] = useState<
-  //   string | null
-  // >(null);
-  // const [selectedWinterLocation, setSelectedWinterLocation] = useState<
-  //   string | null
-  // >(null);
-
   return (
     <>
       <Header>
@@ -60,7 +22,7 @@ const HomePage = () => {
         </HeaderNav>
       </Header>
       <main className='bg-white pt-[3rem]'>
-        <Carousel images={carouselImages} />
+        <MainCarousel images={carouselImages} />
         <IconList icons={mainIcons} />
         <section className='p-8'>
           <h1 className='mb-6 text-lg	 font-bold'>크리스마스 펜션 예약하기</h1>
@@ -70,26 +32,10 @@ const HomePage = () => {
           <h1 className='mb-6 text-lg	 font-bold'>겨울 도심 호캉스</h1>
           <WinterHotelList />
         </section>
-        {/* <section className='p-10'>
-          <h1 className='mb-6 text-lg	 font-bold'>겨울 도심 호캉스</h1>
-          <Navigation
-            locations={WinterStaycationData.map((data) => data.location)}
-            onSelectLocation={(location) => setSelectedWinterLocation(location)}
-            selectedLocation={selectedWinterLocation}
-          />
-          {WinterStaycationData.map((data, index) => (
-            <LocationContent
-              key={index}
-              selectedLocation={selectedWinterLocation}
-              data={data}
-              index={index}
-            />
-          ))}
-        </section> */}
-        {/* <section className='p-10'>
+        <section className='p-10'>
           <h1 className='mb-6	 text-lg font-bold'>사랑받는 겨울 여행지</h1>
           <WinterLocationList locations={WinterLocations} />
-        </section> */}
+        </section>
       </main>
     </>
   );
