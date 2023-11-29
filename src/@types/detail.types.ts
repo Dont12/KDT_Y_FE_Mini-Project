@@ -48,7 +48,7 @@ export interface DetailProps {
 }
 
 export interface DatePickerProps {
-  roomId: number;
+  roomId: string;
   checkIn: string;
   checkOut: string;
   guest: string;

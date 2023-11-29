@@ -51,7 +51,7 @@ export interface PushCartProps {
   guestCount: string;
 }
 
-export interface isCartPropsValid extends PushCartProps {
+export interface IsCartPropsValid extends PushCartProps {
   roomStock: number;
   maxguest: number;
 }

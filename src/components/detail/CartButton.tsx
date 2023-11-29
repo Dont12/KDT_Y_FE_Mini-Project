@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-import { isCartPropsValid, PushCartResponse } from '@/@types/cart.types';
+import { IsCartPropsValid, PushCartResponse } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
 
 const CartButton = ({
@@ -13,7 +13,7 @@ const CartButton = ({
   roomStock,
   maxguest,
   guestCount,
-}: isCartPropsValid) => {
+}: IsCartPropsValid) => {
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
 
@@ -27,16 +27,20 @@ const CartButton = ({
   };
 
   const pushCartElement = async () => {
-    const response: PushCartResponse = await cartRequest.pushCart({
-      roomId: roomId,
-      checkInDate: checkInDate,
-      checkOutDate: checkOutDate,
-      guestCount: guestCount,
-    });
-    if (response.status === 'SUCCESS') {
-      setModalOpen(true);
-    } else {
-      router.push(`/auth/signin`);
+    try {
+      const response: PushCartResponse = await cartRequest.pushCart({
+        roomId: roomId,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+        guestCount: guestCount,
+      });
+      if (response.status === 'SUCCESS') {
+        setModalOpen(true);
+      } else {
+        router.push(`/auth/signin`);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

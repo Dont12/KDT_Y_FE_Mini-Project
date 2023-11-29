@@ -23,21 +23,25 @@ const ReservationButton = ({
   const router = useRouter();
 
   const pushReservationElement = async () => {
-    const response: PushOrderElementResponse =
-      await orderRequest.pushOrderElement({
-        productId: productId,
-        roomId: roomId,
-        checkInDate: checkInDate,
-        checkInTime: checkInTime,
-        checkOutDate: checkOutDate,
-        checkOutTime: checkOutTime,
-        guestCount: guestCount,
-        price: price,
-      });
-    if (response.status === 'SUCCESS') {
-      router.push(`/reservation/${response.data.orderToken}`);
-    } else {
-      router.push(`/auth/signin`);
+    try {
+      const response: PushOrderElementResponse =
+        await orderRequest.pushOrderElement({
+          productId: productId,
+          roomId: roomId,
+          checkInDate: checkInDate,
+          checkInTime: checkInTime,
+          checkOutDate: checkOutDate,
+          checkOutTime: checkOutTime,
+          guestCount: guestCount,
+          price: price,
+        });
+      if (response.status === 'SUCCESS') {
+        router.push(`/reservation/${response.data.orderToken}`);
+      } else {
+        router.push(`/auth/signin`);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
