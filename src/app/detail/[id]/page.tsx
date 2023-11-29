@@ -1,20 +1,21 @@
 import Image from 'next/image';
 import React from 'react';
 
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
-import Carousel from '@/components/detail/Carousel';
-import CartButton from '@/components/detail/CartButton';
-import DatePicker from '@/components/detail/DateRagePicker';
-import PersonInput from '@/components/detail/PersonInput';
-import ReservationButton from '@/components/detail/ReservationButton';
-import Rules from '@/components/detail/Rules';
+import {
+  Carousel,
+  CartButton,
+  DatePicker,
+  Header,
+  HeaderNav,
+  KakaoMap,
+  PersonInput,
+  ReservationButton,
+  Rules,
+} from '@/components/detail/index';
 
 import { DetailResponse, Room } from '@/@types/detail.types';
 import detailInfoRequest from '@/api/detailInfoRequest';
 import { calculateTotalCost } from '@/utils/calculatePerNightCost';
-
-import KakaoMap from '../../../components/detail/KakaoMap';
 
 const today = new Date();
 const tomorrow = new Date();
