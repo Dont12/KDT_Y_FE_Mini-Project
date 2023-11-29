@@ -7,7 +7,7 @@ import { SignupForm } from '@/components/auth';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 
-import authRequest from '@/app/api/authRequest';
+import authRequest from '@/api/authRequest';
 
 const SignUp = () => {
   const router = useRouter();
