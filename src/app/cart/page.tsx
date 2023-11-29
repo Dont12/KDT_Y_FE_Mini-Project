@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import {
   CartFooter,
@@ -14,19 +14,22 @@ import { Header, HeaderNav } from '@/components/common/header';
 
 import type { ApiCartItem, CartProduct } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
-import { cartSelectedState } from '@/recoil/atoms/cartState';
+import { apiCartListState, cartSelectedState } from '@/recoil/atoms/cartState';
 
 const Cart = () => {
-  const [apiCartList, setApiCartList] = useState<ApiCartItem[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [apiCartList, setApiCartList] = useRecoilState(apiCartListState);
   const [cartProductList, setCartProductList] = useState<CartProduct[]>([]);
 
   useEffect(() => {
     const getCartList = async () => {
       try {
-        const res = await cartRequest.getCartList(1, 10);
+        const res = await cartRequest.getCartList(1, 10000);
+        console.log(res);
+        setIsLoading(true);
         setApiCartList(res.data.items);
       } catch (error) {
-        console.error('deleteCarts api error', error);
+        console.error('getCartList api error', error);
       }
     };
 
@@ -34,6 +37,7 @@ const Cart = () => {
   }, []);
 
   useEffect(() => {
+    setCartProductList([]);
     apiCartList.map((item: ApiCartItem) => {
       setCartProductList((prevCartProductList) => {
         const existingIndex = prevCartProductList.findIndex(
@@ -111,21 +115,27 @@ const Cart = () => {
         <HeaderNav showBack showHome showMyPage>
           장바구니
         </HeaderNav>
-        <CartHeader />
+        {apiCartList.length !== 0 && <CartHeader />}
       </Header>
-      <main className='mb-52 mt-[6rem]'>
+      <main
+        className={`mb-52 mt-${apiCartList.length !== 0 ? '[6.75rem]' : '12'}`}
+      >
         <section>
-          {cartProductList.length > 0 ? (
-            <ul className='pt-[0.0063rem]'>
-              {cartProductList.map((cartProductItem) => (
-                <CartItem
-                  key={cartProductItem.productId}
-                  cartProductData={cartProductItem}
-                />
-              ))}
-            </ul>
+          {isLoading ? (
+            apiCartList.length > 0 ? (
+              <ul>
+                {cartProductList.map((cartProductItem) => (
+                  <CartItem
+                    key={cartProductItem.productId}
+                    cartProductData={cartProductItem}
+                  />
+                ))}
+              </ul>
+            ) : (
+              <EmptyCartItem />
+            )
           ) : (
-            <EmptyCartItem />
+            <div>로딩 중</div>
           )}
         </section>
         <CartNotice />

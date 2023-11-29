@@ -14,13 +14,14 @@ const cartRequest = {
       },
     }).then(responseBody),
 
-  deleteCarts: () =>
+  deleteCarts: (cartItemList: string[]) =>
     fetch(`${url}/carts`, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ cartIds: cartItemList }),
     }).then(responseBody),
 
   pushCart: ({

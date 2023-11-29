@@ -1,22 +1,19 @@
-import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import {
+  apiCartListState,
   cartCheckboxElementState,
   cartSelectedState,
 } from '@/recoil/atoms/cartState';
+
+import DeleteSelectedButton from './DeleteSelectedButton';
+import CartHeaderButton from './CartHeaderButton';
 
 const CartHeader = () => {
   const [selectedCartList, setSelectedCartList] =
     useRecoilState(cartSelectedState);
   const cartAllCheckboxList = useRecoilValue(cartCheckboxElementState);
-
-  useEffect(() => {
-    setSelectedCartList(
-      cartAllCheckboxList.map((allSelecteCartItem) => allSelecteCartItem.name)
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartAllCheckboxList]);
+  const apiCartList = useRecoilValue(apiCartListState);
 
   const onSelectAllChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -48,12 +45,19 @@ const CartHeader = () => {
           }
         />
         <label htmlFor='selectAll' className='ml-2 text-xs'>
-          전체 선택 ({selectedCartList.length}/{cartAllCheckboxList.length})
+          전체 선택 ({selectedCartList.length}/{apiCartList.length})
         </label>
       </div>
       <div className='text-blue flex text-xs'>
-        <button className='hover:bg-skyBlue ml-2 p-2'>예약불가 삭제</button>
-        <button className='hover:bg-skyBlue ml-2 p-2'>선택 삭제</button>
+        <CartHeaderButton
+          onClick={() => {
+            console.log('예약불가 삭제');
+          }}
+          disabled={false}
+        >
+          예약불가 삭제
+        </CartHeaderButton>
+        <DeleteSelectedButton />
       </div>
     </div>
   );
