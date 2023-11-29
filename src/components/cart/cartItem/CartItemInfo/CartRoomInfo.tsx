@@ -124,7 +124,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
           />
           <Link
             href={`/detail/${productId}`}
-            className={!isAvailable && 'text-gray2'}
+            className={!isAvailable ? 'text-gray2' : ''}
           >
             <h3 className='text-base font-bold'>{roomName}</h3>
           </Link>
@@ -169,7 +169,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
         </div>
       </div>
       <div className='mt-4 flex flex-col text-right text-sm font-bold'>
-        <span className={!isAvailable && 'text-gray2 line-through'}>
+        <span className={!isAvailable ? 'text-gray2 line-through' : ''}>
           {price.toLocaleString('ko-KR')}원
         </span>
         {!isAvailable && <span>예약 마감</span>}
