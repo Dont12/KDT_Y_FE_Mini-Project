@@ -13,14 +13,14 @@ import {
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 
-import type { ApiCartItem, CartProduct } from '@/@types/cart.types';
+import type { CartItemInfo, PreCartProduct } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
 import { apiCartListState, cartSelectedState } from '@/recoil/atoms/cartState';
 
 const Cart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiCartList, setApiCartList] = useRecoilState(apiCartListState);
-  const [cartProductList, setCartProductList] = useState<CartProduct[]>([]);
+  const [cartProductList, setCartProductList] = useState<PreCartProduct[]>([]);
 
   useEffect(() => {
     const getCartList = async () => {
@@ -45,7 +45,7 @@ const Cart = () => {
 
   useEffect(() => {
     setCartProductList([]);
-    apiCartList.map((item: ApiCartItem) => {
+    apiCartList.map((item: CartItemInfo) => {
       setCartProductList((prevCartProductList) => {
         const existingIndex = prevCartProductList.findIndex(
           (prevCartItem) => prevCartItem.productId === item.product.productId

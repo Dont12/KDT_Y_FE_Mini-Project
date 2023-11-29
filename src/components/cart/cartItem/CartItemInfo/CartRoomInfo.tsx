@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { HiMiniXMark } from 'react-icons/hi2';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import type { CartRoom } from '@/@types/cart.types';
+import type { PreCartRoom } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
 import {
   apiCartListState,
@@ -15,7 +15,7 @@ import { convertFullDate } from '@/utils/dateFormat';
 
 interface Props {
   productId: number;
-  cartRoomData: CartRoom;
+  cartRoomData: PreCartRoom;
 }
 
 const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
@@ -23,15 +23,16 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     id,
     roomName,
     imageUrl,
-    checkInDate,
-    checkOutDate,
-    numberOfNights,
     checkInTime,
     checkOutTime,
+    numberOfNights,
+    checkInDate,
+    checkOutDate,
     baseGuestCount,
     maxGuestCount,
     price,
     stock,
+    guestCount,
   } = cartRoomData;
   const cartId = String(id);
 
