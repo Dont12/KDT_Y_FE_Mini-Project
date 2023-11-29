@@ -134,7 +134,9 @@ const Cart = () => {
         {apiCartList.length !== 0 && <CartHeader />}
       </Header>
       <main
-        className={`mb-52 mt-${apiCartList.length !== 0 ? '[6.75rem]' : '12'}`}
+        className={`mb-52 ${
+          apiCartList.length !== 0 ? 'mt-[6.75rem]' : 'mt-12'
+        }`}
       >
         <section>
           {isLoading ? (
