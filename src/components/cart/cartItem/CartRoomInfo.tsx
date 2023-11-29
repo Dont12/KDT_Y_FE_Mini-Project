@@ -43,10 +43,12 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     cartCheckboxElementState
   );
   useEffect(() => {
-    setSelectedCartList((prevSelectedCartItem) => [
-      ...prevSelectedCartItem,
-      cartId,
-    ]);
+    if (!selectedCartList.includes(cartId)) {
+      setSelectedCartList((prevSelectedCartItem) => {
+        prevSelectedCartItem.includes(cartId);
+        return [...prevSelectedCartItem, cartId];
+      });
+    }
     setCartAllCheckboxList((prevCartCheckboxElement) => [
       ...prevCartCheckboxElement,
       checkbox.current,
