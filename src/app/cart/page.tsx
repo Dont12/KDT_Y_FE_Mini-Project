@@ -27,9 +27,15 @@ const Cart = () => {
     const getCartList = async () => {
       try {
         const res = await cartRequest.getCartList(1, 10000);
-        console.log(res);
-        setIsLoading(true);
-        setApiCartList(res.data.items);
+
+        if (res.status === 'SUCCESS') {
+          setIsLoading(true);
+          setApiCartList(res.data.items);
+        } else if (res.status === 'FAIL') {
+          // 실패 에러 처리
+        } else if (res.status === 'ERROR') {
+          // 서버 오류 에러 처리
+        }
       } catch (error) {
         console.error('getCartList api error', error);
       }
