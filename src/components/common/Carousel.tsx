@@ -1,4 +1,3 @@
-'use client';
 import Image from 'next/image';
 import { CgChevronLeft, CgChevronRight } from 'react-icons/cg';
 import Slider from 'react-slick';
@@ -31,7 +30,7 @@ const PrevArrow = ({ onClick }: any) => {
   );
 };
 
-const Carousel = ({ images }: { images: string[] }) => {
+const Carousel = ({ images }: any): JSX.Element => {
   const settings = {
     dots: true,
     infinite: true,
@@ -41,17 +40,16 @@ const Carousel = ({ images }: { images: string[] }) => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
-
   return (
     <Slider {...settings} className='relative'>
       {images.map((image: string, index: number) => (
         <div key={index}>
           <Image
             src={image}
-            alt='Room Image'
+            alt={`Room Image ${index + 1}`}
             width={768}
             height={100}
-            className='h-96 w-full object-cover'
+            className='h-auto w-full'
           />
         </div>
       ))}

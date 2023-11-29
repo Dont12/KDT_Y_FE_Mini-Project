@@ -2,7 +2,7 @@ const dayOfWeekArr = ['일', '월', '화', '수', '목', '금', '토'];
 export const getDayOfWeek = (date: string) => {
   const dayOfWeek = new Date(date).getDay();
 
-  return dayOfWeekArr[dayOfWeek];
+  return dayOfWeekArr[dayOfWeek + 1];
 };
 
 export const convertDateWithoutYear = (yyyymmdd: string) => {

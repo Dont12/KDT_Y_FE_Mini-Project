@@ -1,15 +1,10 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
 import { HiMiniXMark } from 'react-icons/hi2';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import type { CartRoom } from '@/@types/cart.types';
-import cartRequest from '@/api/cartRequest';
-import {
-  cartCheckboxElementState,
-  cartSelectedState,
-} from '@/recoil/atoms/cartState';
 import { convertFullDate } from '@/utils/dateFormat';
 
 interface Props {
@@ -17,9 +12,9 @@ interface Props {
   cartRoomData: CartRoom;
 }
 
-const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
-  const {
-    id,
+const CartRoomInfo = ({
+  productId,
+  cartRoomData: {
     roomName,
     imageUrl,
     checkInDate,
@@ -30,53 +25,17 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     baseGuestCount,
     maxGuestCount,
     price,
-  } = cartRoomData;
-  const cartId = String(id);
-
-  const deleteCartItem = async () => {
-    try {
-      const res = await cartRequest.deleteCarts();
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const checkbox = useRef<HTMLInputElement>(document.createElement('input'));
-  const setCartAllCheckboxList = useSetRecoilState(cartCheckboxElementState);
-  useEffect(() => {
-    setCartAllCheckboxList((prevCartCheckboxElement) => [
-      ...prevCartCheckboxElement,
-      checkbox.current,
-    ]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const [selectedCartList, setSelectedCartList] =
-    useRecoilState(cartSelectedState);
-  const onSelectedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedCartList((prevSelectedCartList) => {
-      if (event.target.checked) {
-        return [...prevSelectedCartList, event.target.name];
-      } else {
-        return prevSelectedCartList.filter(
-          (prevSelectedCartItem) => prevSelectedCartItem !== event.target.name
-        );
-      }
-    });
+  },
+}: Props) => {
+  const deleteCartItem = () => {
+    console.log('장바구니 삭제 기능 구현');
   };
 
   return (
     <li className='border-gray3 mt-4 border-t border-solid pt-5'>
       <div className='flex items-start justify-between'>
         <div className='mb-3 flex items-center gap-2'>
-          <input
-            type='checkbox'
-            ref={checkbox}
-            name={cartId}
-            onChange={onSelectedChange}
-            checked={selectedCartList.includes(cartId)}
-          />
+          <input type='checkbox' />
           <Link href={`/detail/${productId}`}>
             <h3 className='text-base font-bold'>{roomName}</h3>
           </Link>

@@ -4,7 +4,7 @@ import '../styles/global.css';
 
 import Footer from '@/components/common/footer/Footer';
 
-export interface AppLayout {
+interface AppLayout {
   children: React.ReactNode;
 }
 
