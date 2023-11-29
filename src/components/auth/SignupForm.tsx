@@ -10,7 +10,7 @@ import {
 import { useAuthInput, useButtonActivate } from '@hooks/auth';
 import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import { useState } from 'react';
 
 import SubmitButton from '@/components/common/SubmitButton';
 
@@ -36,6 +36,7 @@ const SignupForm = () => {
     passwordConfirm as InputType,
     contact as InputType
   );
+  const [submitError, setSubmitError] = useState(null);
 
   const router = useRouter();
 
@@ -57,12 +58,11 @@ const SignupForm = () => {
 
         if (res.status === 'SUCCESS') {
           router.replace('/auth/signin');
+        } else {
+          setSubmitError(res.errorMessage);
         }
-        if (res.status === 'FAIL') {
-          alert(res.errorMessage);
-        }
-      } catch {
-        console.error(Error);
+      } catch (error) {
+        console.log(error);
       }
     },
     200
@@ -110,6 +110,10 @@ const SignupForm = () => {
       </div>
 
       <SubmitButton content='회원가입' activate={buttonActivate} />
+
+      <p className='text-red flex w-full justify-center pt-4 text-sm font-semibold'>
+        {submitError}
+      </p>
     </form>
   );
 };

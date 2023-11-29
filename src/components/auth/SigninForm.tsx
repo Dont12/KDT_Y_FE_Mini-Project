@@ -3,7 +3,7 @@
 import { useAuthInput, useButtonActivate } from '@hooks/auth';
 import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import { useState } from 'react';
 
 import { InputEmail, InputPassword } from '@/components/auth';
 import SubmitButton from '@/components/common/SubmitButton';
@@ -18,6 +18,7 @@ const SigninForm = () => {
     email as InputType,
     password as InputType
   );
+  const [submitError, setSubmitError] = useState(null);
 
   const router = useRouter();
 
@@ -32,10 +33,10 @@ const SigninForm = () => {
       if (res.status === 'SUCCESS') {
         router.replace('/');
       } else {
-        alert(res.errorMessage);
+        setSubmitError(res.errorMessage);
       }
-    } catch {
-      console.error(Error);
+    } catch (error) {
+      console.log(error);
     }
   }, 200);
 
@@ -59,6 +60,10 @@ const SigninForm = () => {
       </div>
 
       <SubmitButton content='이메일로 로그인' activate={buttonActivate} />
+
+      <p className='text-red flex w-full justify-center pt-4 text-sm font-semibold'>
+        {submitError}
+      </p>
     </form>
   );
 };
