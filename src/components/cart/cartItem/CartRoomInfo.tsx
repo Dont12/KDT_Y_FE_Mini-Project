@@ -34,9 +34,16 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
   } = cartRoomData;
   const cartId = String(id);
 
+  const [selectedCartList, setSelectedCartList] =
+    useRecoilState(cartSelectedState);
+
   const checkbox = useRef<HTMLInputElement>(document.createElement('input'));
   const setCartAllCheckboxList = useSetRecoilState(cartCheckboxElementState);
   useEffect(() => {
+    setSelectedCartList((prevSelectedCartItem) => [
+      ...prevSelectedCartItem,
+      String(id),
+    ]);
     setCartAllCheckboxList((prevCartCheckboxElement) => [
       ...prevCartCheckboxElement,
       checkbox.current,
@@ -44,8 +51,6 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [selectedCartList, setSelectedCartList] =
-    useRecoilState(cartSelectedState);
   const onSelectedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCartList((prevSelectedCartList) => {
       if (event.target.checked) {

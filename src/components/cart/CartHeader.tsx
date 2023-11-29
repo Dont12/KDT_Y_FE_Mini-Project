@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import {
@@ -15,13 +14,6 @@ const CartHeader = () => {
     useRecoilState(cartSelectedState);
   const cartAllCheckboxList = useRecoilValue(cartCheckboxElementState);
   const apiCartList = useRecoilValue(apiCartListState);
-
-  useEffect(() => {
-    setSelectedCartList(
-      cartAllCheckboxList.map((allSelecteCartItem) => allSelecteCartItem.name)
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartAllCheckboxList]);
 
   const onSelectAllChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
