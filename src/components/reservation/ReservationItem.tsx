@@ -10,7 +10,7 @@ const ReservationItem = ({
   baseGuestCount,
   maxGuestCount,
   price,
-}) => {
+}: ReservationItem) => {
   return (
     <div className='max-w-3xl bg-white p-8'>
       <p className='font-bold'>숙소</p>
@@ -47,3 +47,15 @@ const ReservationItem = ({
 };
 
 export default ReservationItem;
+
+interface ReservationItem {
+  productName: string;
+  roomName: string;
+  checkInDate: string;
+  checkOutDate: string;
+  checkInTime: string;
+  checkOutTime: string;
+  baseGuestCount: number;
+  maxGuestCount: number;
+  price: number;
+}

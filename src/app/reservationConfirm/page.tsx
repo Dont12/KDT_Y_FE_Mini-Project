@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { ReservationConfirmContainer } from '@/components/reservation';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import orderRequest from '@/api/orderRequest';
@@ -8,14 +9,16 @@ import HeaderNav from '@/components/common/HeaderNav';
 import { useEffect, useState } from 'react';
 
 const ReservationConfirm = () => {
-  const [reservationConfirm, setReservationConfirm] = useState();
+  const [reservationConfirm, setReservationConfirm] =
+    useState<OrderHistories[]>();
 
   const fetchData = async () => {
     try {
       const response = await orderRequest.getOrderList();
-      const data = await response.data.orderHistories;
-      setReservationConfirm(data);
-      console.log(data);
+      const data = await response.data;
+
+      setReservationConfirm(data.orderHistories);
+      console.log('reconfirm', data);
     } catch (error) {
       console.log(error);
     }
@@ -39,18 +42,18 @@ const ReservationConfirm = () => {
             <MdOutlineKeyboardArrowDown />
           </button>
         </div>
-        {reservationConfirm.map((order, orderIndex) => (
+        {reservationConfirm?.map((order, orderIndex) => (
           <ReservationConfirmContainer
             key={orderIndex}
             orderId={order.orderId}
-            createdDate={order.createdDate}
+            reserveDate={order.reserveDate}
             orderItems={order.orderItems}
             isDate={true}
           />
         ))}
 
         <p className='text-mediumGray ml-10 mt-28 text-xs'>
-          예약내역은 최대 2년까지 조회할 수 있으며, 삭제하신 내역은 노출되지
+          xx 예약내역은 최대 2년까지 조회할 수 있으며, 삭제하신 내역은 노출되지
           않습니다.
         </p>
         <p className='ml-10 mr-10 mt-2 text-xs  text-gray-300'>
@@ -84,4 +87,46 @@ interface OrderItem {
   checkInTime: string;
   checkOutDate: string;
   checkOutTime: string;
+}
+
+interface OrderItem {
+  orderId: number;
+  orderItemId: number;
+  productName: string;
+  roomName: string;
+  imageUrl: string;
+  checkInDate: string;
+  checkOutDate: string;
+  checkInTime: string;
+  checkOutTime: string;
+  baseGuestCount: number;
+  maxGuestCount: number;
+}
+
+interface ReservationConfirmData {
+  size: number;
+  pageNumber: number;
+  totalPages: number;
+  totalElements: number;
+  orderHistories: OrderHistories[];
+}
+
+interface OrderHistories {
+  orderId: number;
+  reserveDate: string;
+  orderItems: OrderItem[];
+}
+
+interface OrderItem {
+  orderItemId: number;
+  productId: number;
+  productName: string;
+  roomName: string;
+  imageUrl: string;
+  maxGuestCount: number;
+  baseGuestCount: number;
+  checkInTime: string;
+  checkInDate: string;
+  checkOutTime: string;
+  checkOutDate: string;
 }

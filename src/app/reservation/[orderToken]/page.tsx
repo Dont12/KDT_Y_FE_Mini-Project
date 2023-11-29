@@ -5,6 +5,7 @@ import {
   ReservationItem,
   UserInformation,
 } from '@/components/reservation';
+
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import React, { useEffect, useState } from 'react';
@@ -14,21 +15,22 @@ import Modal from 'react-modal';
 
 const Divider = () => <div className='border-lightGray border-b  px-8 '></div>;
 
-const Reservation = ({ params }) => {
+const Reservation = ({ params }: Props) => {
   const router = useRouter();
-  const { orderToken } = params;
-  const [res, setRes] = useState();
+  const orderToken = params;
+  const [res, setRes] = useState<Data | null>();
   const [isPaymentButtonDisabled, setIsPaymentButtonDisabled] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [userInfo, setUserInfo] = useState({ userName: '', userPhone: '' });
   const [selectorPayment, setSelectorPayment] = useState<null | string>(null);
+
   const handleButtonClick = (paymentMethod: string) => {
     setSelectorPayment(paymentMethod);
     setIsPaymentButtonDisabled(false);
   };
 
-  const handleUserInfoChange = (newUserInfo) => {
-    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, ...newUserInfo }));
+  const handleUserInfoChange = (newUserInfo: UserInfo) => {
+    setUserInfo({ ...userInfo, ...newUserInfo });
   };
 
   const showLoadingMessage = () => (
@@ -40,30 +42,31 @@ const Reservation = ({ params }) => {
 
   const fetchData = async () => {
     try {
-      const response = await orderRequest.getOrderToken({ orderToken });
+      const response = await orderRequest.getOrderToken(orderToken.orderToken);
       const data = await response.data;
       setRes(data);
-      console.log(data);
+      console.log(response);
     } catch (error) {
       console.log('요청실패', error);
     }
   };
   useEffect(() => {
     fetchData();
-    console.log(orderToken);
+    console.log('orderToken', orderToken.orderToken);
   }, []);
 
-  const handlePaymentSubmit = async (e) => {
+  const handlePaymentSubmit = async (e: FormTarget) => {
     e.preventDefault();
     setModalIsOpen(true);
 
     const paymentData = {
-      orderToken,
+      orderToken: orderToken.orderToken,
       userName: userInfo.userName,
       userPhone: userInfo.userPhone,
-      totalPrice: res?.totalPrice,
+      price: res?.totalPrice,
       payment: selectorPayment,
     };
+    console.log('paymentdata', paymentData);
 
     try {
       const response = await orderRequest.postPayment(paymentData);
@@ -72,8 +75,7 @@ const Reservation = ({ params }) => {
         setModalIsOpen(false);
         router.push(`/reservationConfirm/${resOrderId}`);
       }, 3000);
-
-      console.log(response);
+      console.log('post', response);
     } catch (error) {
       console.error('결제 실패', error);
     }
@@ -110,16 +112,19 @@ const Reservation = ({ params }) => {
             <p className='font-bold'>결제 금액</p>
             <div className='flex justify-between'>
               <p className='mt-2 font-bold '>상품 금액</p>
-              <p> {new Intl.NumberFormat().format(res?.totalPrice)}원</p>
+              <p>
+                {' '}
+                {new Intl.NumberFormat().format(res?.totalPrice as number)}원
+              </p>
             </div>
             <div className='border-darkGray mt-6 w-full border-b-2 border-dotted'></div>
             <div className='my-8'>
               <p className='my-4'> 결제수단</p>
               <div className='flex justify-between'>
                 <button
-                  onClick={() => handleButtonClick('카드')}
+                  onClick={() => handleButtonClick('CARD')}
                   className={
-                    selectorPayment === '카드'
+                    selectorPayment === 'CARD'
                       ? 'border-mainButton text-mainButton flex items-center  rounded-md border border-solid px-36 py-2'
                       : 'border-mediumGray  flex items-center rounded-md border border-solid px-36 py-2'
                   }
@@ -127,9 +132,9 @@ const Reservation = ({ params }) => {
                   카드
                 </button>
                 <button
-                  onClick={() => handleButtonClick('실시간계좌이체')}
+                  onClick={() => handleButtonClick('CASH')}
                   className={
-                    selectorPayment === '실시간계좌이체'
+                    selectorPayment === 'CASH'
                       ? 'border-mainButton text-mainButton flex items-center  rounded-md border border-solid px-32 py-2'
                       : 'border-mediumGray  flex items-center rounded-md border border-solid px-32 py-2'
                   }
@@ -144,7 +149,8 @@ const Reservation = ({ params }) => {
               className='bg-mainButton mt-20 w-full rounded p-4 text-center text-white'
               disabled={isPaymentButtonDisabled}
             >
-              {new Intl.NumberFormat().format(res?.totalPrice)}원 결제하기
+              {new Intl.NumberFormat().format(res?.totalPrice as number)}원
+              결제하기
             </button>
             <p className='text-mediumGray my-10 text-xs'>
               (주)[우리 서비스 이름]는 통신판매중개업자로서, 통신판매의 당사자가
@@ -166,3 +172,49 @@ const Reservation = ({ params }) => {
 };
 
 export default Reservation;
+
+interface Data {
+  orderToken: string;
+  totalPrice: number;
+  name: string;
+  phone: string;
+  registerOrderItems: ResisterOrderItems[];
+}
+
+interface ResisterOrderItems {
+  productId: number;
+  productName: string;
+  imageUrl: string;
+  roomId: number;
+  roomName: string;
+  guestCount: number;
+  maxGuestCount: number;
+  baseGuestCount: number;
+  price: number;
+  checkInTime: string;
+  checkInDate: string;
+  checkOutTime: string;
+  checkOutDate: string;
+}
+
+interface FormElements extends HTMLFormElement {
+  email: HTMLInputElement;
+  password: HTMLInputElement;
+}
+
+interface FormTarget extends React.FormEvent<HTMLFormElement> {
+  target: FormElements;
+}
+
+interface UserInfo {
+  userName: string;
+  userPhone: string;
+}
+
+interface Props {
+  params: Params;
+}
+
+interface Params {
+  orderToken: string;
+}

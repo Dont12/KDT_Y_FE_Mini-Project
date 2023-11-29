@@ -1,13 +1,8 @@
 import { PaymentData } from '@/@types/reservation.types';
 
-const url = 'https://mock.stayinn.site/v1';
+const url = 'https://api.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
-
-type orderId = {
-  orderId: number;
-  orderToken: string;
-};
 
 const orderRequest = {
   getOrderList: () =>
@@ -19,7 +14,7 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  getOrderListDetail: ({ orderId }: orderId) =>
+  getOrderListDetail: (orderId: number) =>
     fetch(`${url}/orders/history/${orderId}`, {
       method: 'GET',
       credentials: 'include',
@@ -28,7 +23,7 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  getOrderToken: ({ orderToken }: orderId) =>
+  getOrderToken: (orderToken) =>
     fetch(`${url}/orders?orderToken=${orderToken}`, {
       method: 'GET',
       credentials: 'include',
@@ -37,7 +32,7 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  postPayment: ({ paymentData }: PaymentData) =>
+  postPayment: (paymentData) =>
     fetch(`${url}/orders/payment`, {
       method: 'POST',
       credentials: 'include',

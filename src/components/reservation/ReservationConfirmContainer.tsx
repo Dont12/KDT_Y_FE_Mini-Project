@@ -1,17 +1,18 @@
+import React from 'react';
 import ReservationConfirm from './ReservationConfirm';
 import ReservationRouter from './ReservationRouter';
 
 const ReservationConfirmContainer = ({
   orderId,
-  createdDate,
+  reserveDate,
   orderItems,
   isDate,
-}) => {
+}: ReservationConfirmContainerData) => {
   return (
     <div className='border-mediumGray mx-10 my-4 items-center justify-center rounded-md border border-solid py-2'>
       {isDate && (
         <div className='border-mediumGray flex items-center justify-between border-b-2 px-8'>
-          <div className='text-xl font-bold'>{createdDate}</div>
+          <div className='text-xl font-bold'>{reserveDate}</div>
           <ReservationRouter orderId={orderId} />
         </div>
       )}
@@ -38,4 +39,23 @@ const ReservationConfirmContainer = ({
 
 export default ReservationConfirmContainer;
 
-interface;
+interface ReservationConfirmContainerData {
+  orderId: number;
+  orderItems: ReservationOrderItem[];
+  isDate: boolean;
+  reserveDate: string;
+}
+
+interface ReservationOrderItem {
+  orderItemId: number;
+  productId: number;
+  productName: string;
+  imageUrl: string;
+  roomName: string;
+  baseGuestCount: number;
+  maxGuestCount: number;
+  checkInDate: string;
+  checkInTime: string;
+  checkOutDate: string;
+  checkOutTime: string;
+}

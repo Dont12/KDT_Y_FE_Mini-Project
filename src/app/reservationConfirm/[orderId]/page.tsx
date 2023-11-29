@@ -6,14 +6,19 @@ import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import orderRequest from '@/api/orderRequest';
 
-const ReservationConfirmDetail = ({ params }) => {
-  const [res, setRes] = useState();
+const ReservationConfirmDetail = ({ params }: Props) => {
+  const [res, setRes] = useState<OrderDetail | null>();
   const { orderId } = params;
 
   const fetchData = async () => {
-    const response = await orderRequest.getOrderListDetail({ orderId });
-    const res = response.data;
-    setRes(res);
+    try {
+      const response = await orderRequest.getOrderListDetail(orderId);
+      const res = response.data;
+      console.log('rescon/id', response);
+      setRes(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -28,9 +33,9 @@ const ReservationConfirmDetail = ({ params }) => {
       </Header>
       <main className='my-12 max-w-3xl bg-white py-5'>
         <ReservationConfirmContainer
-          orderItems={res?.orderItems}
-          orderId={res?.orderId}
-          createdDate={res?.reserveDate}
+          orderItems={res?.orderItems as OrderItem[]}
+          orderId={res?.orderId as number}
+          reserveDate={res?.reserveDate as string}
           isDate={false}
         />
         <div className='border-mediumGray m-10 items-center justify-center rounded-md border border-solid px-5 py-8 '>
@@ -50,7 +55,7 @@ const ReservationConfirmDetail = ({ params }) => {
             <div className='flex justify-between'>
               <p className='m-2 text-xl font-bold'> 상품 금액</p>
               <p className='text-xl'>
-                {new Intl.NumberFormat().format(res?.totalPrice)}
+                {new Intl.NumberFormat().format(res?.totalPrice as number)}
               </p>
             </div>
           </div>
@@ -59,11 +64,11 @@ const ReservationConfirmDetail = ({ params }) => {
             <p className='m-2 mt-8 text-xl font-bold'>이용자 정보</p>
             <div className='flex justify-between'>
               <p className='m-2 text-xl'>이름</p>
-              <p className='text-xl'>{res?.name}</p>
+              <p className='text-xl'>{res?.reserveName}</p>
             </div>
             <div className='flex justify-between'>
               <p className='m-2 text-xl'>휴대폰 번호</p>
-              <p className='text-xl'>{res?.phone}</p>
+              <p className='text-xl'>{res?.reservePhone}</p>
             </div>
           </div>
           <div className='border-lightGray mt-6 w-full border-b-2'></div>
@@ -91,8 +96,8 @@ interface OrderDetail {
   reserveDate: string;
   totalPrice: number;
   payment: string;
-  name: string;
-  phone: string;
+  reserveName: string;
+  reservePhone: string;
   userName: string;
   userPhone: string;
   orderItems: OrderItem[];
@@ -101,7 +106,6 @@ interface OrderDetail {
 interface OrderItem {
   orderItemId: number;
   productId: number;
-  roomId: number;
   productName: string;
   imageUrl: string;
   roomName: string;
@@ -111,6 +115,12 @@ interface OrderItem {
   checkInTime: string;
   checkOutDate: string;
   checkOutTime: string;
-  totalPrice: number;
-  reserveDate: string;
+}
+
+interface Parmas {
+  orderId: number;
+}
+
+interface Props {
+  params: Parmas;
 }
