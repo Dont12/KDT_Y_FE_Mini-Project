@@ -1,5 +1,3 @@
-import { pushOrderListProps } from '@/@types/order.types';
-
 const url = 'https://mock.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
@@ -13,39 +11,12 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  getOrderListDetail: ({ orderId }: any) =>
+  getOrderListDetail: ({ orderId }) =>
     fetch(`${url}/orders/history/${orderId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then(responseBody),
-
-  pushOrderElement: ({
-    productId,
-    roomId,
-    checkInDate,
-    checkInTime,
-    checkOutDate,
-    checkOutTime,
-    guestCount,
-    price,
-  }: pushOrderListProps) =>
-    fetch(`${url}/orders`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        productId: { productId },
-        roomId: { roomId },
-        checkInDate: { checkInDate },
-        checkInTime: { checkInTime },
-        checkOutDate: { checkOutDate },
-        checkOutTime: { checkOutTime },
-        guestCount: { guestCount },
-        price: { price },
-      }),
     }).then(responseBody),
 };
 
