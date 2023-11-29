@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HiMiniXMark } from 'react-icons/hi2';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
@@ -31,6 +31,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     baseGuestCount,
     maxGuestCount,
     price,
+    stock,
   } = cartRoomData;
   const cartId = String(id);
 
@@ -38,7 +39,9 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     useRecoilState(cartSelectedState);
 
   const checkbox = useRef<HTMLInputElement>(document.createElement('input'));
-  const setCartAllCheckboxList = useSetRecoilState(cartCheckboxElementState);
+  const [cartAllCheckboxList, setCartAllCheckboxList] = useRecoilState(
+    cartCheckboxElementState
+  );
   useEffect(() => {
     setSelectedCartList((prevSelectedCartItem) => [
       ...prevSelectedCartItem,
@@ -88,6 +91,27 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
       console.error(error);
     }
   };
+
+  const [isReservable, setIsReservable] = useState(false);
+  useEffect(() => {
+    if (stock < 1) {
+      setIsReservable(false);
+      cartAllCheckboxList.map((cartAllCheckboxItem) => {
+        if (cartAllCheckboxItem.name === String(id)) {
+          cartAllCheckboxItem.disabled = true;
+        }
+      });
+      setSelectedCartList((prevSelectedCartList) =>
+        prevSelectedCartList.filter(
+          (prevSelectedCartItem) => prevSelectedCartItem !== String(id)
+        )
+      );
+    } else {
+      setIsReservable(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartAllCheckboxList]);
 
   return (
     <li className='border-gray3 mt-4 border-t border-solid pt-5'>
@@ -140,7 +164,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
         </div>
       </div>
       <div className='mt-4 text-right text-sm font-bold'>
-        {price.toLocaleString('ko-KR')}원
+        {isReservable ? `${price.toLocaleString('ko-KR')}원` : '예약 마감'}
       </div>
     </li>
   );

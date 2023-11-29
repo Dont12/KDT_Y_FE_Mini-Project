@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 
-import { apiCartListState } from '@/recoil/atoms/cartState';
+import { apiCartListState, cartSelectedState } from '@/recoil/atoms/cartState';
 
 import SubmitButton from '../common/SubmitButton';
 
@@ -10,6 +10,8 @@ interface Props {
 
 const CartFooter = ({ totalPrice }: Props) => {
   const apiCartList = useRecoilValue(apiCartListState);
+
+  const selectedCartList = useRecoilValue(cartSelectedState);
 
   return (
     <div className='shadow-top fixed bottom-0 left-0 w-full bg-white'>
@@ -23,7 +25,11 @@ const CartFooter = ({ totalPrice }: Props) => {
             </div>
           </div>
         </div>
-        <SubmitButton content='예약하기' activate={false} className='mt-4' />
+        <SubmitButton
+          content='예약하기'
+          activate={selectedCartList.length > 0}
+          className='mt-4'
+        />
         <div className='mt-3'>
           <span className='text-gray1 text-xs'>
             STAYINN은 통신판매중개업자로서, 통신판매의 당사자가 아니라는 사실을
