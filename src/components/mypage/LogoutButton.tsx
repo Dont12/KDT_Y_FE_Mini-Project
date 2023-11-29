@@ -4,7 +4,7 @@ import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import authRequest from '@/app/api/authRequest';
+import authRequest from '@/api/authRequest';
 
 const LogoutButton = () => {
   const router = useRouter();

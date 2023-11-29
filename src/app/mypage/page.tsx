@@ -7,7 +7,7 @@ import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import { HistoryButton, LogoutButton } from '@/components/mypage';
 
-import authRequest from '../api/authRequest';
+import authRequest from '../../api/authRequest';
 
 interface UserInfo {
   email: string;
