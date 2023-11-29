@@ -39,6 +39,7 @@ const Cart = () => {
   }, []);
 
   useEffect(() => {
+    setCartProductList([]);
     apiCartList.map((item: ApiCartItem) => {
       setCartProductList((prevCartProductList) => {
         const existingIndex = prevCartProductList.findIndex(
