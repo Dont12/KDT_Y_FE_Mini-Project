@@ -1,5 +1,7 @@
+import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 
+import cartRequest from '@/api/cartRequest';
 import { apiCartListState, cartSelectedState } from '@/recoil/atoms/cartState';
 
 import SubmitButton from '../common/SubmitButton';
@@ -13,8 +15,20 @@ const CartFooter = ({ totalPrice }: Props) => {
 
   const selectedCartList = useRecoilValue(cartSelectedState);
 
-  const onReserveClick = () => {
-    console.log(onReserveClick);
+  const router = useRouter();
+  const onReserveClick = async () => {
+    try {
+      const res = await cartRequest.reserveCarts(selectedCartList);
+      if (res.status === 'SUCCESS') {
+        router.push(`/order-list/${res.data.orderToken}`);
+      } else if (res.status === 'FAIL') {
+        // 실패 에러 처리
+      } else if (res.status === 'ERROR') {
+        // 서버 오류 에러 처리
+      }
+    } catch (error) {
+      console.error('reserve carts errer: ', error);
+    }
   };
 
   return (

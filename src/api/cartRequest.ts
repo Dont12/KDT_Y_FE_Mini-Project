@@ -12,14 +12,24 @@ const cartRequest = {
       },
     }).then(responseBody),
 
-  deleteCarts: (cartItemList: string[]) =>
+  deleteCarts: (cartIdList: string[]) =>
     fetch(`${url}/carts`, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ cartIds: cartItemList }),
+      body: JSON.stringify({ cartIds: cartIdList }),
+    }).then(responseBody),
+
+  reserveCarts: (cartIdList: string[]) =>
+    fetch(`${url}/carts/order`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ cartIds: cartIdList }),
     }).then(responseBody),
 };
 
