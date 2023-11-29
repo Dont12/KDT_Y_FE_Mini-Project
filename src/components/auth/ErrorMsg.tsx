@@ -1,14 +1,6 @@
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
+import { ErrorProps } from '@/@types/auth.types';
 
-interface ErrorProps {
-  target: string;
-  input: InputType;
-}
-
-const ErrorMsg = ({ target, input }: ErrorProps): JSX.Element => {
+const ErrorMsg = ({ target, input }: ErrorProps) => {
   const showError = () => {
     if (target === 'email') {
       return '이메일 형식에 맞게 입력해주세요.';

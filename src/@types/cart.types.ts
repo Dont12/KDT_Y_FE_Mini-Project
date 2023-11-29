@@ -1,12 +1,12 @@
-export interface CartItem {
+export interface ApiCartItem {
   id: number;
-  product: Product;
+  product: ApiRoomItem;
   checkInDate: string;
   checkOutDate: string;
   numberOfNights: number;
 }
 
-export interface Product {
+export interface ApiRoomItem {
   productId: number;
   roomId: number;
   productName: string;

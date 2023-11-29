@@ -22,6 +22,7 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-modal": "^3.16.1",
     "react-slick": "^0.29.0",
+    "recoil": "^0.7.7",
     "rsuite": "^5.45.0",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.0.5",
