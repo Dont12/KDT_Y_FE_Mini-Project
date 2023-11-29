@@ -13,6 +13,10 @@ const CartFooter = ({ totalPrice }: Props) => {
 
   const selectedCartList = useRecoilValue(cartSelectedState);
 
+  const onReserveClick = () => {
+    console.log(onReserveClick);
+  };
+
   return (
     <div className='shadow-top fixed bottom-0 left-0 w-full bg-white'>
       <div className='mx-auto w-[48rem] px-5 pb-3 pt-4'>
@@ -26,9 +30,11 @@ const CartFooter = ({ totalPrice }: Props) => {
           </div>
         </div>
         <SubmitButton
+          type='button'
           content='예약하기'
           activate={selectedCartList.length > 0}
           className='mt-4'
+          onClick={onReserveClick}
         />
         <div className='mt-3'>
           <span className='text-gray1 text-xs'>
