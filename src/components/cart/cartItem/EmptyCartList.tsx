@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-const EmptyCartItem = () => {
+const EmptyCartList = () => {
   return (
     <div className='flex flex-col items-center bg-white py-8'>
       <div className='my-4'>
@@ -23,4 +23,4 @@ const EmptyCartItem = () => {
   );
 };
 
-export default EmptyCartItem;
+export default EmptyCartList;

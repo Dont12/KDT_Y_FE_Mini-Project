@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { HiMiniXMark } from 'react-icons/hi2';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import type { CartRoom } from '@/@types/cart.types';
+import type { PreCartRoom } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
 import {
   apiCartListState,
@@ -15,7 +15,7 @@ import { convertFullDate } from '@/utils/dateFormat';
 
 interface Props {
   productId: number;
-  cartRoomData: CartRoom;
+  cartRoomData: PreCartRoom;
 }
 
 const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
@@ -23,14 +23,16 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     id,
     roomName,
     imageUrl,
-    checkInDate,
-    checkOutDate,
-    numberOfNights,
     checkInTime,
     checkOutTime,
+    numberOfNights,
+    checkInDate,
+    checkOutDate,
     baseGuestCount,
     maxGuestCount,
     price,
+    stock,
+    guestCount,
   } = cartRoomData;
   const cartId = String(id);
 
@@ -40,10 +42,12 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
   const checkbox = useRef<HTMLInputElement>(document.createElement('input'));
   const setCartAllCheckboxList = useSetRecoilState(cartCheckboxElementState);
   useEffect(() => {
-    setSelectedCartList((prevSelectedCartItem) => [
-      ...prevSelectedCartItem,
-      String(id),
-    ]);
+    if (!selectedCartList.includes(cartId)) {
+      setSelectedCartList((prevSelectedCartItem) => {
+        prevSelectedCartItem.includes(cartId);
+        return [...prevSelectedCartItem, cartId];
+      });
+    }
     setCartAllCheckboxList((prevCartCheckboxElement) => [
       ...prevCartCheckboxElement,
       checkbox.current,
@@ -83,11 +87,28 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
             (prevSelectedCartItem) => prevSelectedCartItem.name !== String(id)
           )
         );
+      } else if (res.status === 'FAIL') {
+        // 실패 에러 처리
+      } else if (res.status === 'ERROR') {
+        // 서버 오류 에러 처리
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  const isAvailable =
+    stock > 1 && new Date(checkInDate).getTime() > new Date().getTime();
+  useEffect(() => {
+    if (!isAvailable) {
+      setSelectedCartList((prevSelectedCartList) =>
+        prevSelectedCartList.filter(
+          (prevSelectedCartItem) => prevSelectedCartItem !== String(id)
+        )
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAvailable]);
 
   return (
     <li className='border-gray3 mt-4 border-t border-solid pt-5'>
@@ -99,8 +120,12 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
             name={cartId}
             onChange={onSelectedChange}
             checked={selectedCartList.includes(cartId)}
+            disabled={!isAvailable}
           />
-          <Link href={`/detail/${productId}`}>
+          <Link
+            href={`/detail/${productId}`}
+            className={!isAvailable && 'text-gray2'}
+          >
             <h3 className='text-base font-bold'>{roomName}</h3>
           </Link>
         </div>
@@ -121,8 +146,12 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
             className='rounded object-cover'
           />
         </div>
-        <div className='text-gray1 flex-col text-xs'>
-          <div className='text-black'>
+        <div
+          className={`${
+            isAvailable ? 'text-gray1' : 'text-gray2'
+          } flex-col text-xs`}
+        >
+          <div className={isAvailable ? 'text-black' : 'text-gray2'}>
             <span>{convertFullDate(checkInDate)}</span>
             <span> ~ </span>
             <span>{convertFullDate(checkOutDate)}</span>
@@ -139,8 +168,11 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
           </div>
         </div>
       </div>
-      <div className='mt-4 text-right text-sm font-bold'>
-        {price.toLocaleString('ko-KR')}원
+      <div className='mt-4 flex flex-col text-right text-sm font-bold'>
+        <span className={!isAvailable && 'text-gray2 line-through'}>
+          {price.toLocaleString('ko-KR')}원
+        </span>
+        {!isAvailable && <span>예약 마감</span>}
       </div>
     </li>
   );
