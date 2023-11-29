@@ -41,9 +41,17 @@ const CartHeader = () => {
     }
   };
 
-  const unavailableCartList = cartAllCheckboxList
+  const disabledIdList = cartAllCheckboxList
     .filter((cartAllCheckboxItem) => cartAllCheckboxItem.disabled === true)
     .map((filteredCheckboxList) => filteredCheckboxList.name);
+
+  const abledList = cartAllCheckboxList.filter(
+    (cartAllCheckboxItem) => cartAllCheckboxItem.disabled === false
+  );
+
+  const checkedListLen = selectedCartList.length;
+  const abledListLen = abledList.length;
+  const isAllSelected = checkedListLen === abledListLen;
 
   return (
     <div className='flex h-12 items-center justify-between px-5'>
@@ -52,22 +60,16 @@ const CartHeader = () => {
           type='checkbox'
           id='selectAll'
           onChange={onSelectAllChange}
-          checked={
-            selectedCartList.length ===
-            cartAllCheckboxList.filter(
-              (cartAllCheckboxItem) => cartAllCheckboxItem.disabled === false
-            ).length
-              ? true
-              : false
-          }
+          checked={isAllSelected}
+          disabled={abledListLen < 1}
         />
         <label htmlFor='selectAll' className='ml-2 text-xs'>
-          전체 선택 ({selectedCartList.length}/{apiCartList.length})
+          전체 선택 ({checkedListLen}/{apiCartList.length})
         </label>
       </div>
       <div className='text-blue flex text-xs'>
-        {unavailableCartList.length > 0 && (
-          <DeleteUnavailableButton unavailableIdList={unavailableCartList} />
+        {disabledIdList.length > 0 && (
+          <DeleteUnavailableButton unavailableIdList={disabledIdList} />
         )}
         <DeleteSelectedButton />
       </div>
