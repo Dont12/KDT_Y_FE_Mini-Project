@@ -18,6 +18,7 @@ const CartHeader = () => {
   const apiCartList = useRecoilValue(apiCartListState);
 
   const onSelectAllChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedCartList([]);
     if (event.target.checked) {
       cartAllCheckboxList.map((cartAllCheckboxItem) => {
         if (cartAllCheckboxItem.disabled === false) {
@@ -37,7 +38,6 @@ const CartHeader = () => {
       cartAllCheckboxList.map((allSelecteCartItem) => {
         allSelecteCartItem.checked = false;
       });
-      setSelectedCartList([]);
     }
   };
 
