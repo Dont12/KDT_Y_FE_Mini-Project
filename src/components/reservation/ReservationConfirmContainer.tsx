@@ -37,3 +37,5 @@ const ReservationConfirmContainer = ({
 };
 
 export default ReservationConfirmContainer;
+
+interface;

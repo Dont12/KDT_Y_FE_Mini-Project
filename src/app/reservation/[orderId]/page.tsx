@@ -71,7 +71,7 @@ const Reservation = ({ params }) => {
       setTimeout(() => {
         setModalIsOpen(false);
         router.push(`/reservationConfirm/${resOrderId}`);
-      }, 300000);
+      }, 3000);
 
       console.log(response);
     } catch (error) {

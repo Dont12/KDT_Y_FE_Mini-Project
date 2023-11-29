@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import { IoIosArrowForward } from 'react-icons/io';
 
 const Divider = () => <div className='border-lightGray border-b  pb-4 '></div>;
 

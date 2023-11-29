@@ -6,7 +6,7 @@ import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import orderRequest from '@/api/orderRequest';
 
-const reservationConfirmDetail = ({ params }) => {
+const ReservationConfirmDetail = ({ params }) => {
   const [res, setRes] = useState();
   const { orderId } = params;
 
@@ -84,7 +84,7 @@ const reservationConfirmDetail = ({ params }) => {
   );
 };
 
-export default reservationConfirmDetail;
+export default ReservationConfirmDetail;
 
 interface OrderDetail {
   orderId: number;

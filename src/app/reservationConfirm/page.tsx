@@ -39,7 +39,7 @@ const ReservationConfirm = () => {
             <MdOutlineKeyboardArrowDown />
           </button>
         </div>
-        {reservationConfirm?.map((order, orderIndex) => (
+        {reservationConfirm.map((order, orderIndex) => (
           <ReservationConfirmContainer
             key={orderIndex}
             orderId={order.orderId}
