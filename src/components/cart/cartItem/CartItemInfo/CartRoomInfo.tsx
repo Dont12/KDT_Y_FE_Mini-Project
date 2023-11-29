@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { HiMiniXMark } from 'react-icons/hi2';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
@@ -39,9 +39,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     useRecoilState(cartSelectedState);
 
   const checkbox = useRef<HTMLInputElement>(document.createElement('input'));
-  const [cartAllCheckboxList, setCartAllCheckboxList] = useRecoilState(
-    cartCheckboxElementState
-  );
+  const setCartAllCheckboxList = useSetRecoilState(cartCheckboxElementState);
   useEffect(() => {
     if (!selectedCartList.includes(cartId)) {
       setSelectedCartList((prevSelectedCartItem) => {
@@ -108,6 +106,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
         )
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAvailable]);
 
   return (
@@ -122,7 +121,10 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
             checked={selectedCartList.includes(cartId)}
             disabled={!isAvailable}
           />
-          <Link href={`/detail/${productId}`}>
+          <Link
+            href={`/detail/${productId}`}
+            className={!isAvailable && 'text-gray2'}
+          >
             <h3 className='text-base font-bold'>{roomName}</h3>
           </Link>
         </div>
@@ -143,8 +145,12 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
             className='rounded object-cover'
           />
         </div>
-        <div className='text-gray1 flex-col text-xs'>
-          <div className='text-black'>
+        <div
+          className={`${
+            isAvailable ? 'text-gray1' : 'text-gray2'
+          } flex-col text-xs`}
+        >
+          <div className={isAvailable ? 'text-black' : 'text-gray2'}>
             <span>{convertFullDate(checkInDate)}</span>
             <span> ~ </span>
             <span>{convertFullDate(checkOutDate)}</span>
@@ -161,8 +167,11 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
           </div>
         </div>
       </div>
-      <div className='mt-4 text-right text-sm font-bold'>
-        {isAvailable ? `${price.toLocaleString('ko-KR')}원` : '예약 마감'}
+      <div className='mt-4 flex flex-col text-right text-sm font-bold'>
+        <span className={!isAvailable && 'text-gray2 line-through'}>
+          {price.toLocaleString('ko-KR')}원
+        </span>
+        {!isAvailable && <span>예약 마감</span>}
       </div>
     </li>
   );
