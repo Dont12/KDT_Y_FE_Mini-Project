@@ -45,7 +45,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
   useEffect(() => {
     setSelectedCartList((prevSelectedCartItem) => [
       ...prevSelectedCartItem,
-      String(id),
+      cartId,
     ]);
     setCartAllCheckboxList((prevCartCheckboxElement) => [
       ...prevCartCheckboxElement,
