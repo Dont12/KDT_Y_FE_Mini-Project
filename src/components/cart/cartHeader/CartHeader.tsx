@@ -6,8 +6,8 @@ import {
   cartSelectedState,
 } from '@/recoil/atoms/cartState';
 
-import DeleteSelectedButton from './DeleteSelectedButton';
 import CartHeaderButton from './CartHeaderButton';
+import DeleteSelectedButton from './DeleteSelectedButton';
 
 const CartHeader = () => {
   const [selectedCartList, setSelectedCartList] =
@@ -17,12 +17,20 @@ const CartHeader = () => {
 
   const onSelectAllChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      cartAllCheckboxList.map((allSelecteCartItem) => {
-        allSelecteCartItem.checked = true;
+      cartAllCheckboxList.map((cartAllCheckboxItem) => {
+        if (cartAllCheckboxItem.disabled === false) {
+          cartAllCheckboxItem.checked = true;
+        }
       });
-      setSelectedCartList(
-        cartAllCheckboxList.map((allSelecteCartItem) => allSelecteCartItem.name)
-      );
+
+      cartAllCheckboxList.map((cartAllCheckboxItem) => {
+        if (cartAllCheckboxItem.disabled === false) {
+          setSelectedCartList((prevSelectedCartItem) => [
+            ...prevSelectedCartItem,
+            cartAllCheckboxItem.name,
+          ]);
+        }
+      });
     } else {
       cartAllCheckboxList.map((allSelecteCartItem) => {
         allSelecteCartItem.checked = false;
@@ -39,7 +47,10 @@ const CartHeader = () => {
           id='selectAll'
           onChange={onSelectAllChange}
           checked={
-            selectedCartList.length === cartAllCheckboxList.length
+            selectedCartList.length ===
+            cartAllCheckboxList.filter(
+              (cartAllCheckboxItem) => cartAllCheckboxItem.disabled === false
+            ).length
               ? true
               : false
           }
