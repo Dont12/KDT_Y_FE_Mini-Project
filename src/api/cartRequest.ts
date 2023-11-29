@@ -1,6 +1,6 @@
 import { PushCartProps } from '@/@types/cart.types';
 
-const url = process.env.SERVER_URL;
+const url = 'https://api.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
 
