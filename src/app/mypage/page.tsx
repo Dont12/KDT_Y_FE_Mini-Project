@@ -3,7 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { Header, HeaderNav } from '@/components/common/header';
+import Header from '@/components/common/Header';
+import HeaderNav from '@/components/common/HeaderNav';
 import { HistoryButton, LogoutButton } from '@/components/mypage';
 
 import authRequest from '../../api/authRequest';
