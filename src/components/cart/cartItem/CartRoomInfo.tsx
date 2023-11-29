@@ -98,41 +98,17 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     }
   };
 
-  const [isReservable, setIsReservable] = useState(false);
+  const isAvailable =
+    stock > 1 && new Date(checkInDate).getTime() > new Date().getTime();
   useEffect(() => {
-    if (stock < 1) {
-      setIsReservable(false);
-      cartAllCheckboxList.map((cartAllCheckboxItem) => {
-        if (cartAllCheckboxItem.name === String(id)) {
-          cartAllCheckboxItem.disabled = true;
-        }
-      });
-      setSelectedCartList((prevSelectedCartList) =>
-        prevSelectedCartList.filter(
-          (prevSelectedCartItem) => prevSelectedCartItem !== String(id)
-        )
-      );
-    } else {
-      setIsReservable(true);
-    }
-
-    if (new Date(checkInDate).getTime() > new Date().getTime()) {
-      setIsReservable(true);
-    } else {
-      setIsReservable(false);
-      cartAllCheckboxList.map((cartAllCheckboxItem) => {
-        if (cartAllCheckboxItem.name === String(id)) {
-          cartAllCheckboxItem.disabled = true;
-        }
-      });
+    if (!isAvailable) {
       setSelectedCartList((prevSelectedCartList) =>
         prevSelectedCartList.filter(
           (prevSelectedCartItem) => prevSelectedCartItem !== String(id)
         )
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartAllCheckboxList]);
+  }, [isAvailable]);
 
   return (
     <li className='border-gray3 mt-4 border-t border-solid pt-5'>
@@ -144,6 +120,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
             name={cartId}
             onChange={onSelectedChange}
             checked={selectedCartList.includes(cartId)}
+            disabled={!isAvailable}
           />
           <Link href={`/detail/${productId}`}>
             <h3 className='text-base font-bold'>{roomName}</h3>
@@ -185,7 +162,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
         </div>
       </div>
       <div className='mt-4 text-right text-sm font-bold'>
-        {isReservable ? `${price.toLocaleString('ko-KR')}원` : '예약 마감'}
+        {isAvailable ? `${price.toLocaleString('ko-KR')}원` : '예약 마감'}
       </div>
     </li>
   );
