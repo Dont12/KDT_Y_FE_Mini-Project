@@ -46,3 +46,10 @@ export interface DetailProps {
   checkIn: string;
   checkOut: string;
 }
+
+export interface DatePickerProps {
+  roomId: number;
+  checkIn: string;
+  checkOut: string;
+  guest: string;
+}
