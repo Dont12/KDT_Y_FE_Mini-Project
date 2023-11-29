@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Header = ({ children }: Props): JSX.Element => {
+const Header = ({ children }: Props) => {
   const [showShadow, setShowShadow] = useState(false);
 
   const throttledScroll = useMemo(

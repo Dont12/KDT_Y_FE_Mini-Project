@@ -1,17 +1,9 @@
+'use client';
+
 import { ErrorMsg, ValidationIcon } from '@components/auth';
 import { memo, useEffect } from 'react';
 
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
-
-interface PasswordProps {
-  password: InputType;
-  handlePassword: React.ChangeEventHandler<HTMLInputElement>;
-  passwordConfirm?: InputType;
-  setPasswordConfirm?: React.Dispatch<React.SetStateAction<InputType>>;
-}
+import { PasswordProps } from '@/@types/auth.types';
 
 const InputPassword = memo(
   ({
@@ -19,7 +11,7 @@ const InputPassword = memo(
     handlePassword,
     passwordConfirm,
     setPasswordConfirm,
-  }: PasswordProps): JSX.Element => {
+  }: PasswordProps) => {
     useEffect(() => {
       if (setPasswordConfirm && passwordConfirm)
         setPasswordConfirm({
@@ -30,7 +22,7 @@ const InputPassword = memo(
     }, [password]);
 
     return (
-      <div className='relative mt-3'>
+      <div className='relative my-5'>
         <label htmlFor='password' className='text-base leading-10'>
           비밀번호*
         </label>
@@ -44,7 +36,7 @@ const InputPassword = memo(
           onChange={handlePassword}
           required
           autoComplete='off'
-          className='border-lightGray top-10 h-14 w-full rounded-[20px] border-2 p-4 text-base text-black'
+          className='border-lightGray top-10 h-14 w-full rounded-[10px] border-2 p-4 text-base text-black'
         />
 
         <ValidationIcon input={password} />

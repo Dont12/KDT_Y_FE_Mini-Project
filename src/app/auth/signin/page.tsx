@@ -1,98 +1,49 @@
 'use client';
 
-import { useAuthInput, useButtonActivate } from '@hooks/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-import { InputEmail, InputPassword } from '@/components/auth';
+import { SigninForm } from '@/components/auth';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
-import SubmitButton from '@/components/common/SubmitButton';
 
 import authRequest from '@/app/api/authRequest';
 
-interface FormElements extends HTMLFormElement {
-  email: HTMLInputElement;
-  password: HTMLInputElement;
-}
-
-interface FormTarget extends React.FormEvent<HTMLFormElement> {
-  target: FormElements;
-}
-
-interface InputType {
-  value: string;
-  validationPass: boolean;
-}
-
-type InputHandler = (e: React.ChangeEvent<HTMLInputElement>) => void;
-
-const SignIn = (): JSX.Element => {
-  const [email, handleEmail] = useAuthInput('email');
-  const [password, handlePassword] = useAuthInput('password');
-  const buttonActivate = useButtonActivate(
-    email as InputType,
-    password as InputType
-  );
-
+const SignIn = () => {
   const router = useRouter();
 
-  const signin = async (email: InputType, password: InputType) => {
+  const checkSignin = async () => {
     try {
-      const res = await authRequest.signin({
-        email: email.value,
-        password: password.value,
-      });
-
-      console.log(res);
-
-      if (res.status === 'SUCCESS') {
-        router.replace('/');
-      }
-      if (res.status === 'FAIL') {
-        alert('이메일 또는 비밀번호가 틀렸습니다.');
-      }
-      if (res.status === 'ERROR') {
-        alert('SERVER ERROR');
-      }
-    } catch {
-      console.error(Error);
+      const res = await authRequest.getUser();
+      console.log('현재 로그인이 되어있습니다.', res);
+      router.replace('/');
+    } catch (error) {
+      console.log('로그인이 되어있지 않습니다.', error);
     }
   };
 
-  const handleSubmit = (e: FormTarget) => {
-    e.preventDefault();
-    signin(email as InputType, password as InputType);
-  };
+  useEffect(() => {
+    checkSignin();
+  }, []);
 
   return (
     <>
       <Header>
         <HeaderNav showBack>로그인</HeaderNav>
       </Header>
-      <form className='w-full px-20' onSubmit={handleSubmit}>
-        <div className='mb-6'>
-          <InputEmail
-            email={email as InputType}
-            handleEmail={handleEmail as InputHandler}
-          />
-
-          <InputPassword
-            password={password as InputType}
-            handlePassword={handlePassword as InputHandler}
-          />
-        </div>
-
-        <SubmitButton content='이메일로 로그인' activate={buttonActivate} />
-      </form>
-      <Link href='/auth/signup' className='mt-10'>
-        <div className='cursor-default'>
-          아직 회원이 아니신가요?
-          <span className='ml-2 cursor-pointer underline'>
-            이메일로 회원가입
-          </span>
-        </div>
-      </Link>
+      
+      <main className='w-full '>
+        <SigninForm />
+        <Link href='/auth/signup' className='mt-10 flex justify-center'>
+          <div className='text-darkGray cursor-default'>
+            아직 회원이 아니신가요?
+            <span className='hover:text-blue ml-2 cursor-pointer underline'>
+              이메일로 회원가입
+            </span>
+          </div>
+        </Link>
+      </main>
     </>
   );
 };

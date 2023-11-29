@@ -1,45 +1,31 @@
-import { CartItem } from '@/@types/cart.types';
+import type { CartProduct } from '@/@types/cart.types';
 
-import CartItemHeader from './CartItemHeader';
-import CartRoomInfo from './CartItemRoomInfo';
+import CartProductInfo from './CartProductInfo';
+import CartRoomInfo from './CartRoomInfo';
 
 interface Props {
-  data: CartItem;
+  cartProductData: CartProduct;
 }
 
-const CartItem = ({ data }: Props): JSX.Element => {
-  const { productId, productName, address } = data.product;
-  const {
-    roomName,
-    imageUrl,
-    checkInTime,
-    checkOutTime,
-    baseGuestCount,
-    maxGuestCount,
-    price,
-    stock,
-  } = data.product;
-  const { checkInDate, checkOutDate, numberOfNights } = data;
+const CartItem = ({
+  cartProductData: { productId, productName, address, cartRoomList },
+}: Props) => {
   return (
     <li className='mt-3 w-full bg-white p-5 pt-3'>
-      <CartItemHeader
+      <CartProductInfo
         productId={productId}
         productName={productName}
         address={address}
       />
-      <CartRoomInfo
-        productId={productId}
-        roomName={roomName}
-        imageUrl={imageUrl}
-        checkInTime={checkInTime}
-        checkOutTime={checkOutTime}
-        baseGuestCount={baseGuestCount}
-        maxGuestCount={maxGuestCount}
-        price={price}
-        checkInDate={checkInDate}
-        checkOutDate={checkOutDate}
-        numberOfNights={numberOfNights}
-      />
+      <ul>
+        {cartRoomList.map((cartRoomItem) => (
+          <CartRoomInfo
+            key={cartRoomItem.id}
+            productId={productId}
+            cartRoomData={cartRoomItem}
+          />
+        ))}
+      </ul>
     </li>
   );
 };

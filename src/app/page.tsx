@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import Carousel, { carouselImages } from '@/components/main/Carousel';
+import CircleLabel from '@/components/main/CirecleLabel';
 
 import IconList, { mainIcons } from '../components/main/IconList';
 
@@ -25,11 +26,6 @@ import IconList, { mainIcons } from '../components/main/IconList';
 //   index: number;
 // }
 
-// interface CircleLabelProps {
-//   label: string;
-//   image: string;
-// }
-
 // const LocationContent = ({ selectedLocation, data, index }: LocationProps) => (
 //   <div
 //     className={`${
@@ -44,20 +40,6 @@ import IconList, { mainIcons } from '../components/main/IconList';
 //         <PensionCard key={i} {...pension} />
 //       ))}
 //     </div>
-//   </div>
-// );
-
-// const CircleLabel = ({ label, image }: CircleLabelProps) => (
-//   <div
-//     className='relative mb-4 h-[7.5rem] w-[7.5rem] rounded-full bg-black p-4 text-white'
-//     style={{
-//       backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${image})`,
-//       backgroundSize: 'cover',
-//     }}
-//   >
-//     <p className='flex h-full items-center justify-center text-center text-xl font-semibold'>
-//       {label}
-//     </p>
 //   </div>
 // );
 
@@ -79,24 +61,24 @@ const HomePage = () => {
       <main className='bg-white pt-[3rem]'>
         <Carousel images={carouselImages} />
         <IconList icons={mainIcons} />
-        <section className='p-10'>
+        {/* <section className='p-10'>
           <h1 className='mb-6 text-lg	 font-bold'>크리스마스 펜션 예약하기</h1>
-          {/* <Navigation
+          <Navigation
             locations={ChristmasPensionData.map((data) => data.location)}
             onSelectLocation={(location) =>
               setSelectedChristmasLocation(location)
             }
-            selectedLocation={selectedChristmasLocation}
-          /> */}
-          {/* {ChristmasPensionData.map((data, index) => (
+            selected Location={selectedChristmasLocation}
+          />
+          {ChristmasPensionData.map((data, index) => (
             <LocationContent
               key={index}
               selectedLocation={selectedChristmasLocation}
               data={data}
               index={index}
             />
-          ))} */}
-        </section>
+          ))}
+        </section> */}
         {/* <section className='p-10'>
           <h1 className='mb-6 text-lg	 font-bold'>겨울 도심 호캉스</h1>
           <Navigation
@@ -113,15 +95,31 @@ const HomePage = () => {
             />
           ))}
         </section> */}
-        {/* <section className='p-10'>
+        <section className='p-10'>
           <h1 className='mb-6	 text-lg font-bold'>사랑받는 겨울 여행지</h1>
           <div className='mb-6 flex justify-around'>
-            <CircleLabel label='강릉' image='svg/mainIcon/homestay.svg' />
-            <CircleLabel label='제주도' image='svg/mainIcon/homestay.svg' />
-            <CircleLabel label='속초' image='svg/mainIcon/homestay.svg' />
-            <CircleLabel label='평창' image='svg/mainIcon/homestay.svg' />
+            <CircleLabel
+              label='강원'
+              image='svg/mainIcon/homestay.svg'
+              location='강원특별자치도'
+            />
+            <CircleLabel
+              label='제주도'
+              image='svg/mainIcon/homestay.svg'
+              location='제주특별자치도'
+            />
+            <CircleLabel
+              label='경남'
+              image='svg/mainIcon/homestay.svg'
+              location='경상남도'
+            />
+            <CircleLabel
+              label='전북'
+              image='svg/mainIcon/homestay.svg'
+              location='전라북도'
+            />{' '}
           </div>
-        </section> */}
+        </section>
       </main>
     </>
   );
