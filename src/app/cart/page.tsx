@@ -8,7 +8,7 @@ import {
   CartHeader,
   CartItem,
   CartNotice,
-  EmptyCartItem,
+  EmptyCartList,
 } from '@/components/cart';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
@@ -150,7 +150,7 @@ const Cart = () => {
                 ))}
               </ul>
             ) : (
-              <EmptyCartItem />
+              <EmptyCartList />
             )
           ) : (
             <div>로딩 중</div>
