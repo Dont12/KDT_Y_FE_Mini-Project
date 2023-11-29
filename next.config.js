@@ -9,7 +9,7 @@ const nextConfig = {
 
   // Uncoment to add domain whitelist
   images: {
-    domains: ['localhost', '*', 'tong.visitkorea.or.kr'],
+    domains: ['tong.visitkorea.or.kr'],
   },
 
   webpack(config) {

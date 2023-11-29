@@ -5,6 +5,7 @@ import { HiMiniXMark } from 'react-icons/hi2';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import type { CartRoom } from '@/@types/cart.types';
+import cartRequest from '@/api/cartRequest';
 import {
   cartCheckboxElementState,
   cartSelectedState,
@@ -32,8 +33,13 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
   } = cartRoomData;
   const cartId = String(id);
 
-  const deleteCartItem = () => {
-    console.log('장바구니 삭제 기능 구현');
+  const deleteCartItem = async () => {
+    try {
+      const res = await cartRequest.deleteCarts();
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const checkbox = useRef<HTMLInputElement>(document.createElement('input'));
