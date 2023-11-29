@@ -4,8 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { SignupForm } from '@/components/auth';
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
+import { Header, HeaderNav } from '@/components/common/header';
 
 import authRequest from '@/api/authRequest';
 
