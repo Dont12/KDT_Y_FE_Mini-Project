@@ -6,8 +6,8 @@ import {
   cartSelectedState,
 } from '@/recoil/atoms/cartState';
 
-import CartHeaderButton from './CartHeaderButton';
 import DeleteSelectedButton from './DeleteSelectedButton';
+import DeleteUnavailableButton from './DeleteUnavailableButton';
 
 const CartHeader = () => {
   const [selectedCartList, setSelectedCartList] =
@@ -39,6 +39,10 @@ const CartHeader = () => {
     }
   };
 
+  const unavailableCartList = cartAllCheckboxList
+    .filter((cartAllCheckboxItem) => cartAllCheckboxItem.disabled === true)
+    .map((filteredCheckboxList) => filteredCheckboxList.name);
+
   return (
     <div className='flex h-12 items-center justify-between px-5'>
       <div className='flex'>
@@ -60,14 +64,9 @@ const CartHeader = () => {
         </label>
       </div>
       <div className='text-blue flex text-xs'>
-        <CartHeaderButton
-          onClick={() => {
-            console.log('예약불가 삭제');
-          }}
-          disabled={false}
-        >
-          예약불가 삭제
-        </CartHeaderButton>
+        {unavailableCartList.length > 0 && (
+          <DeleteUnavailableButton unavailableIdList={unavailableCartList} />
+        )}
         <DeleteSelectedButton />
       </div>
     </div>
