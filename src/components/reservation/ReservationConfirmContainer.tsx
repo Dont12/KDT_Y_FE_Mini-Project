@@ -1,6 +1,4 @@
-import React from 'react';
 import ReservationConfirm from './ReservationConfirm';
-import { IoIosArrowForward } from 'react-icons/io';
 import ReservationRouter from './ReservationRouter';
 
 const ReservationConfirmContainer = ({

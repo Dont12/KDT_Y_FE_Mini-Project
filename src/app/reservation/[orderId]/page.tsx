@@ -1,13 +1,14 @@
 'use client';
 
-import CheckBoxGroup from '@/components/reservation/CheckBoxGroup';
-import CheckBox from '@/components/reservation/CheckBoxGroup';
-import ReservationItem from '@/components/reservation/ReservationItem';
-import UserInformation from '@/components/reservation/UserInformation';
+import {
+  CheckBoxGroup,
+  ReservationItem,
+  UserInformation,
+} from '@/components/reservation';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import React, { useEffect, useState } from 'react';
-import orderRequest from '../../api/orderRequest';
+import orderRequest from '@/api/orderRequest';
 import { useRouter } from 'next/navigation';
 import Modal from 'react-modal';
 
@@ -31,9 +32,9 @@ const Reservation = ({ params }) => {
   };
 
   const showLoadingMessage = () => (
-    <div className=' flex items-center justify-center'>
-      <p className='mt-24 text-center text-2xl'>결제가 진행중입니다...</p>
-      <img src='../../public/images/roading.png' alt='로딩 이미지' />
+    <div className=' flex items-end justify-center'>
+      <p className='mr-4 mt-24 text-center text-2xl'>결제가 진행중입니다...</p>
+      <img src='/images/roading.png' alt='로딩 이미지' />
     </div>
   );
 
@@ -70,7 +71,7 @@ const Reservation = ({ params }) => {
       setTimeout(() => {
         setModalIsOpen(false);
         router.push(`/reservationConfirm/${resOrderId}`);
-      }, 3000);
+      }, 300000);
 
       console.log(response);
     } catch (error) {

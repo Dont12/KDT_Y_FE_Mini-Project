@@ -1,19 +1,19 @@
 'use client';
 
-import ReservationConfirmContainer from '@/components/reservation/ReservationConfirmContainer';
+import { ReservationConfirmContainer } from '@/components/reservation';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import orderRequest from '../api/orderRequest';
+import orderRequest from '@/api/orderRequest';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import { useEffect, useState } from 'react';
 
-const reservationConfirm = () => {
+const ReservationConfirm = () => {
   const [reservationConfirm, setReservationConfirm] = useState();
 
   const fetchData = async () => {
     try {
       const response = await orderRequest.getOrderList();
-      const data = await response.data;
+      const data = await response.data.orderHistories;
       setReservationConfirm(data);
       console.log(data);
     } catch (error) {
@@ -63,7 +63,7 @@ const reservationConfirm = () => {
   );
 };
 
-export default reservationConfirm;
+export default ReservationConfirm;
 
 interface Order {
   orderId: number;
