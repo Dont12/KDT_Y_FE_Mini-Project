@@ -10,11 +10,13 @@ import {
   CartNotice,
   EmptyCartItem,
 } from '@/components/cart';
-import { Header, HeaderNav } from '@/components/common/header';
+import Header from '@/components/common/Header';
+import HeaderNav from '@/components/common/HeaderNav';
 
 import type { ApiCartItem, CartProduct } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
 import { cartSelectedState } from '@/recoil/atoms/cartState';
+
 
 const Cart = () => {
   const [apiCartList, setApiCartList] = useState<ApiCartItem[]>([]);

@@ -3,8 +3,9 @@
 'use client';
 import React, { useState } from 'react';
 
-import { Header, HeaderNav } from '@/components/common/header';
+import HeaderNav from '@/components/common/HeaderNav';
 
+import Header from '../components/common/Header';
 import Carousel from '../components/main/Carousel';
 import IconList from '../components/main/IconList';
 import Navigation from '../components/main/Navigation';
@@ -334,7 +335,9 @@ const HomePage = () => {
   return (
     <div className='bg-white pt-[3rem]'>
       <Header>
-        <HeaderNav showLogo showCart showMyPage />
+        <HeaderNav showLogo showCart showMyPage>
+          {' '}
+        </HeaderNav>
       </Header>
       <Carousel images={carouselImages} />
       <IconList icons={mainIcons} />
