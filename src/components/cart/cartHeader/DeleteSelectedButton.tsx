@@ -22,15 +22,16 @@ const DeleteSelectedButton = () => {
       if (res.status === 'SUCCESS') {
         setApiCartList((prevApiCartList) =>
           prevApiCartList.filter(
-            (prevSelectedCartItem) =>
-              !selectedCartList.includes(String(prevSelectedCartItem.id))
+            (prevApiCartItem) =>
+              !selectedCartList.includes(String(prevApiCartItem.id))
           )
         );
-        // setSelectedCartList((prevSelectedCartList) =>
-        //   prevSelectedCartList.filter(
-        //     (prevSelectedCartItem) => prevSelectedCartItem !== String(id)
-        //   )
-        // );
+        setSelectedCartList((prevSelectedCartList) =>
+          prevSelectedCartList.filter(
+            (prevSelectedCartItem) =>
+              !selectedCartList.includes(prevSelectedCartItem)
+          )
+        );
         setCartAllCheckboxList((prevCartAllCheckedbox) =>
           prevCartAllCheckedbox.filter(
             (prevSelectedCartItem) =>
