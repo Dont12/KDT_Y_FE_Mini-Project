@@ -1,16 +1,22 @@
+import { useRecoilValue } from 'recoil';
+
+import { cartSelectedState } from '@/recoil/atoms/cartState';
+
 import SubmitButton from '../common/SubmitButton';
 
 interface Props {
-  selectCount: number;
   totalPrice: number;
 }
 
-const CartFooter = ({ selectCount, totalPrice }: Props): JSX.Element => {
+const CartFooter = ({ totalPrice }: Props) => {
+  const selectedCartList = useRecoilValue(cartSelectedState);
   return (
     <div className='shadow-top fixed bottom-0 left-0 w-full bg-white'>
       <div className='mx-auto w-[48rem] px-5 pb-3 pt-4'>
         <div className='flex items-center justify-between'>
-          <div className='text-sm font-bold'>총 {selectCount}건</div>
+          <div className='text-sm font-bold'>
+            총 {selectedCartList.length}건
+          </div>
           <div className='flex items-center gap-2'>
             <div className='text-gray4 text-xs'>결제 예상 금액</div>
             <div className='text-xl font-bold'>

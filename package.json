@@ -20,7 +20,9 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-kakao-maps-sdk": "^1.1.24",
     "react-slick": "^0.29.0",
+    "recoil": "^0.7.7",
     "rsuite": "^5.45.0",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.0.5",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
+    "@types/node": "20.10.0",
     "@types/react": "^18.2.25",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",

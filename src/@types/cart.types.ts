@@ -1,12 +1,12 @@
-export interface CartItem {
+export interface ApiCartItem {
   id: number;
-  product: Product;
+  product: ApiRoomItem;
   checkInDate: string;
   checkOutDate: string;
   numberOfNights: number;
 }
 
-export interface Product {
+export interface ApiRoomItem {
   productId: number;
   roomId: number;
   productName: string;
@@ -42,4 +42,15 @@ export interface CartRoom {
   checkInDate: string;
   checkOutDate: string;
   numberOfNights: number;
+}
+
+export interface PushCartProps {
+  roomId: number;
+  checkInDate: string;
+  checkOutDate: string;
+  guestCount: string;
+}
+
+export interface PushCartResponse {
+  status: string;
 }
