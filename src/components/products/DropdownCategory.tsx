@@ -1,18 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { CgChevronDown } from 'react-icons/cg';
 
 import { Option } from '@/app/products/page';
 
-interface DropdownProps {
+interface DropdownCategoryProps {
   options: Option[];
   selectedOption: Option | null;
   onSelectOption: (option: Option | null) => void;
 }
 
-const Dropdown = ({
+const DropdownCategory = ({
   options,
   selectedOption,
   onSelectOption,
-}: DropdownProps) => {
+}: DropdownCategoryProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -53,11 +54,12 @@ const Dropdown = ({
         <span className='rounded-md shadow-sm'>
           <button
             type='button'
-            className='inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-6 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none'
+            className=' flex bg-white'
             id='options-menu'
             onClick={handleToggle}
           >
             {selectedOption?.label || '지역 선택'}
+            <CgChevronDown className='ml-2 mt-1 text-xl' />
           </button>
         </span>
       </div>
@@ -106,4 +108,4 @@ const Dropdown = ({
   );
 };
 
-export default Dropdown;
+export default DropdownCategory;
