@@ -23,6 +23,7 @@ export interface Option {
 }
 
 const dropdownCategoryOptions = [
+  { label: '전체' },
   { label: '호텔', category: '관광호텔' },
   { label: '펜션', category: '펜션' },
   { label: '모텔', category: '모텔' },

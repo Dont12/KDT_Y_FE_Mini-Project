@@ -1,12 +1,14 @@
 /* eslint-disable react/no-children-prop */
 // pages/index.tsx
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
 import Carousel, { carouselImages } from '@/components/main/Carousel';
-import CircleLabel from '@/components/main/CirecleLabel';
+import WinterLocationList, {
+  WinterLocations,
+} from '@/components/main/WinterLocationList';
 
 import IconList, { mainIcons } from '../components/main/IconList';
 
@@ -44,9 +46,9 @@ import IconList, { mainIcons } from '../components/main/IconList';
 // );
 
 const HomePage = () => {
-  const [selectedChristmasLocation, setSelectedChristmasLocation] = useState<
-    string | null
-  >(null);
+  // const [selectedChristmasLocation, setSelectedChristmasLocation] = useState<
+  //   string | null
+  // >(null);
   // const [selectedWinterLocation, setSelectedWinterLocation] = useState<
   //   string | null
   // >(null);
@@ -97,28 +99,7 @@ const HomePage = () => {
         </section> */}
         <section className='p-10'>
           <h1 className='mb-6	 text-lg font-bold'>사랑받는 겨울 여행지</h1>
-          <div className='mb-6 flex justify-around'>
-            <CircleLabel
-              label='강원'
-              image='svg/mainIcon/homestay.svg'
-              location='강원특별자치도'
-            />
-            <CircleLabel
-              label='제주도'
-              image='svg/mainIcon/homestay.svg'
-              location='제주특별자치도'
-            />
-            <CircleLabel
-              label='경남'
-              image='svg/mainIcon/homestay.svg'
-              location='경상남도'
-            />
-            <CircleLabel
-              label='전북'
-              image='svg/mainIcon/homestay.svg'
-              location='전라북도'
-            />{' '}
-          </div>
+          <WinterLocationList locations={WinterLocations} />
         </section>
       </main>
     </>
