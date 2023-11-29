@@ -3,6 +3,10 @@
 // import React from 'react';
 
 // interface PensionCardProps {
+//   location: string; // 예상 속성과 일치하도록 조정
+// }
+
+// interface PensionCardProps {
 //   name: string;
 //   rating?: number;
 //   price: number;

@@ -68,7 +68,7 @@ const Icon = ({ icon, label, category, location }: IconProps) => {
 };
 
 const IconList = ({ icons }: IconListProps) => (
-  <div className='icon-container grid grid-cols-5 justify-items-center gap-10 pb-10 pl-12 pr-12'>
+  <div className='icon-container grid grid-cols-5 justify-items-center gap-10 pb-10 pl-12 pr-12 pt-14'>
     {icons.map((iconData, index) => (
       <Icon key={index} {...iconData} />
     ))}

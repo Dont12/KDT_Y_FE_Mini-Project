@@ -10,9 +10,9 @@ interface CarouselProps {
 }
 
 export const carouselImages = [
-  'images/carousel01.jpg',
-  'images/carousel01.jpg',
-  'images/carousel01.jpg',
+  '/images/carousel01.jpg',
+  '/images/carousel01.jpg',
+  '/images/carousel01.jpg',
 ];
 
 const Carousel = ({ images }: CarouselProps) => {

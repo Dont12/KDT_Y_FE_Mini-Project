@@ -3,14 +3,13 @@
 'use client';
 import React from 'react';
 
+import Carousel from '@/components/common/Carousel';
 import Header from '@/components/common/Header';
 import HeaderNav from '@/components/common/HeaderNav';
-import Carousel, { carouselImages } from '@/components/main/Carousel';
-import WinterLocationList, {
-  WinterLocations,
-} from '@/components/main/WinterLocationList';
-
-import IconList, { mainIcons } from '../components/main/IconList';
+import { carouselImages } from '@/components/main/Carousel';
+import ChristmasPensionList from '@/components/main/ChristmasPensionList';
+import IconList, { mainIcons } from '@/components/main/IconList';
+import WinterHotelList from '@/components/main/WinterHotelList';
 
 // interface DataType {
 //   location: string;
@@ -63,24 +62,14 @@ const HomePage = () => {
       <main className='bg-white pt-[3rem]'>
         <Carousel images={carouselImages} />
         <IconList icons={mainIcons} />
-        {/* <section className='p-10'>
+        <section className='p-8'>
           <h1 className='mb-6 text-lg	 font-bold'>크리스마스 펜션 예약하기</h1>
-          <Navigation
-            locations={ChristmasPensionData.map((data) => data.location)}
-            onSelectLocation={(location) =>
-              setSelectedChristmasLocation(location)
-            }
-            selected Location={selectedChristmasLocation}
-          />
-          {ChristmasPensionData.map((data, index) => (
-            <LocationContent
-              key={index}
-              selectedLocation={selectedChristmasLocation}
-              data={data}
-              index={index}
-            />
-          ))}
-        </section> */}
+          <ChristmasPensionList />
+        </section>
+        <section className='p-8'>
+          <h1 className='mb-6 text-lg	 font-bold'>겨울 도심 호캉스</h1>
+          <WinterHotelList />
+        </section>
         {/* <section className='p-10'>
           <h1 className='mb-6 text-lg	 font-bold'>겨울 도심 호캉스</h1>
           <Navigation
@@ -97,10 +86,10 @@ const HomePage = () => {
             />
           ))}
         </section> */}
-        <section className='p-10'>
+        {/* <section className='p-10'>
           <h1 className='mb-6	 text-lg font-bold'>사랑받는 겨울 여행지</h1>
           <WinterLocationList locations={WinterLocations} />
-        </section>
+        </section> */}
       </main>
     </>
   );
