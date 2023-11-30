@@ -6,12 +6,11 @@ import {
   UserInformation,
 } from '@/components/reservation';
 
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
 import React, { useEffect, useState } from 'react';
 import orderRequest from '@/api/orderRequest';
 import { useRouter } from 'next/navigation';
 import Modal from 'react-modal';
+import { Header, HeaderNav } from '@/components/common/header';
 
 const Divider = () => <div className='border-lightGray border-b  px-8 '></div>;
 
@@ -152,6 +151,7 @@ const Reservation = ({ params }: Props) => {
               {new Intl.NumberFormat().format(res?.totalPrice as number)}원
               결제하기
             </button>
+
             <p className='text-mediumGray my-10 text-xs'>
               (주)[우리 서비스 이름]는 통신판매중개업자로서, 통신판매의 당사자가
               아니라는 사실을 고지하며 상품의 결제, 이용 및 환불 등과 관련한
