@@ -123,7 +123,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
             disabled={!isAvailable}
           />
           <Link
-            href={`/detail/${productId}`}
+            href={`/detail/${productId}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&guest=${guestCount}`}
             className={!isAvailable ? 'text-gray2' : ''}
           >
             <h3 className='text-base font-bold'>{roomName}</h3>
