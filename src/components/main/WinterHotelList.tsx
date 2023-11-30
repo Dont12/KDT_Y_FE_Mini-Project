@@ -37,8 +37,6 @@ const WinterHotelList = () => {
         tomorrow.toISOString().split('T')[0]
       }&category=관광호텔&areaCode=${location}`;
 
-      console.log('API Request URL:', apiUrl);
-
       const response = await fetch(apiUrl, {
         method: 'GET',
         credentials: 'include',
