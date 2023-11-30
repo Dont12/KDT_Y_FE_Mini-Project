@@ -1,4 +1,5 @@
 'use client';
+
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -57,9 +58,8 @@ const ProductPage = () => {
     (option) => {
       if (location === null) {
         return { label: '전국' };
-      } else {
-        return option.location === location;
       }
+      return option.location === location;
     }
   ) || { label: '전국' }; // find가 undefined를 반환할 경우 기본값 설정
 
@@ -68,9 +68,8 @@ const ProductPage = () => {
     (option) => {
       if (category === null) {
         return { label: '전체' };
-      } else {
-        return option.category === category;
       }
+      return option.category === category;
     }
   ) || { label: '전체' }; // find가 undefined를 반환할 경우 기본값 설정
 
@@ -173,11 +172,8 @@ const ProductPage = () => {
         </Header>
         <main className='flex flex-col items-center justify-center bg-white py-[3rem]'>
           <h1 className='m-10 text-lg'>
-            <span className='font-bold'>{location ? location : '전국'}</span>에
-            있는{' '}
-            <span className='font-bold'>
-              {category ? category : '전체 숙소'}
-            </span>{' '}
+            <span className='font-bold'>{location || '전국'}</span>에 있는{' '}
+            <span className='font-bold'>{category || '전체 숙소'}</span>{' '}
             불러오는 중....🏠
           </h1>
         </main>

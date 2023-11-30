@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
-
+import { Footer } from '@/components/common';
 import { Header, HeaderNav } from '@/components/common/header';
 import { ReservationConfirmContainer } from '@/components/reservation';
 

@@ -1,4 +1,5 @@
 'use client';
+
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { DateRangePicker } from 'rsuite';
@@ -11,9 +12,7 @@ const today = new Date();
 const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
 
-const beforeToday = (date: Date) => {
-  return date < today;
-};
+const beforeToday = (date: Date) => date < today;
 
 const formatDate = (date: Date): string => {
   const year = date.getFullYear();

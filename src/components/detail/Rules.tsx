@@ -12,15 +12,13 @@ const rules = [
   '※ 청소년 보호법에 따라 미성년자의 혼숙은 불가합니다.',
 ];
 
-const Rules = () => {
-  return (
-    <>
-      <h3 className='text-[18px] font-bold'>이용규칙</h3>
-      {rules.map((rule, index) => (
-        <p key={index}>{rule}</p>
-      ))}
-    </>
-  );
-};
+const Rules = () => (
+  <>
+    <h3 className='text-[18px] font-bold'>이용규칙</h3>
+    {rules.map((rule, index) => (
+      <p key={index}>{rule}</p>
+    ))}
+  </>
+);
 
 export default Rules;
