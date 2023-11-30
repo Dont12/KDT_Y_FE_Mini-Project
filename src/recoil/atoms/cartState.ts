@@ -1,8 +1,6 @@
 import { atom } from 'recoil';
 
-import type { ApiCartItem } from '@/@types/cart.types';
-
-export const apiCartListState = atom<ApiCartItem[]>({
+export const apiCartListState = atom<any[]>({
   key: 'apiCartListState',
   default: [],
 });
