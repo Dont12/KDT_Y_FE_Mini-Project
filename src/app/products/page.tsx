@@ -96,9 +96,9 @@ const ProductPage = () => {
         query.push(`areaCode=${location}`);
       }
 
-      const nextPageUrl = `${apiUrl}&${query.join('&')}&page=${
-        page + 1
-      }&pageSize=10`;
+      const nextPageUrl = `${apiUrl}&${query.join(
+        '&'
+      )}&page=${page}&pageSize=10`;
       // console.log('Next Page URL:', nextPageUrl); // 로그 추가
       fetch(nextPageUrl, {
         method: 'GET',
