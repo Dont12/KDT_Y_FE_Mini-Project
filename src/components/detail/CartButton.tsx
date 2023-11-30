@@ -1,4 +1,5 @@
 'use client';
+
 import { debounce } from 'lodash';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -45,7 +46,7 @@ const CartButton = ({
 
   return (
     <>
-      {roomStock == 0 || Number(guestCount) > maxguest ? null : (
+      {roomStock === 0 || Number(guestCount) > maxguest ? null : (
         <button
           className='border-mediumGray mr-3 flex h-12 w-12 items-center justify-center rounded border border-solid p-1'
           onClick={pushCartElement}

@@ -59,11 +59,10 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     setSelectedCartList((prevSelectedCartList) => {
       if (event.target.checked) {
         return [...prevSelectedCartList, event.target.name];
-      } else {
-        return prevSelectedCartList.filter(
-          (prevSelectedCartItem) => prevSelectedCartItem !== event.target.name
-        );
       }
+      return prevSelectedCartList.filter(
+        (prevSelectedCartItem) => prevSelectedCartItem !== event.target.name
+      );
     });
   };
 
