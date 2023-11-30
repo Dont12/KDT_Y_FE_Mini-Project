@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
-import { Header, HeaderNav } from '@/components/common/header';
+import { Footer, Header, HeaderNav } from '@/components/common';
 import {
   CheckBoxGroup,
   ReservationItem,
@@ -82,7 +82,7 @@ const Reservation = ({ params }: Props) => {
   };
 
   return (
-    <div>
+    <>
       <Header>
         <HeaderNav showBack showCart showHome>
           예약
@@ -171,7 +171,8 @@ const Reservation = ({ params }: Props) => {
           {showLoadingMessage()}
         </Modal>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 };
 

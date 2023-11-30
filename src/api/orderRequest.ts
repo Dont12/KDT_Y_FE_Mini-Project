@@ -23,7 +23,7 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  getOrderToken: (orderToken:any) =>
+  getOrderToken: (orderToken: any) =>
     fetch(`${url}/orders?orderToken=${orderToken}`, {
       method: 'GET',
       credentials: 'include',
@@ -32,7 +32,7 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  postPayment: (paymentData:any) =>
+  postPayment: (paymentData: any) =>
     fetch(`${url}/orders/payment`, {
       method: 'POST',
       credentials: 'include',

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { Header, HeaderNav } from '@/components/common/header';
+import { Footer, Header, HeaderNav } from '@/components/common';
 import ChristmasPensionList from '@/components/main/ChristmasPensionList';
 import IconList, { mainIcons } from '@/components/main/IconList';
 import MainCarousel, { carouselImages } from '@/components/main/MainCarousel';
@@ -32,6 +32,7 @@ const HomePage = () => {
           <WinterLocationList locations={WinterLocations} />
         </section>
       </main>
+      <Footer />
     </>
   );
 };

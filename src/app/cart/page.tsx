@@ -10,7 +10,7 @@ import {
   CartNotice,
   EmptyCartList,
 } from '@/components/cart';
-import { Header, HeaderNav } from '@/components/common/header';
+import { Header, HeaderNav } from '@/components/common';
 
 import type { CartItemInfo, PreCartProduct } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';

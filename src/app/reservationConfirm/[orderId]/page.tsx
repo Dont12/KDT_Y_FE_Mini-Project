@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-import { Header, HeaderNav } from '@/components/common/header';
+import { Footer, Header, HeaderNav } from '@/components/common';
 import { ReservationConfirmContainer } from '@/components/reservation';
 
 import orderRequest from '@/api/orderRequest';
@@ -86,6 +86,7 @@ const ReservationConfirmDetail = ({ params }: Props) => {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };
