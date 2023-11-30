@@ -11,8 +11,8 @@
 
 ### main contents 01, 02, 03
 
-> - main contents 01 → 지역 별 펜션 보여주기
-> - main contents 02 → 지역 별 호텔 보여주기
+> - main contents 01 → 지역 별 펜션 보여주기, API 연결
+> - main contents 02 → 지역 별 호텔 보여주기, API 연결
 > - main contents 03 → 지역 별 전체 숙소 보여주기 (분류 페이지와 연결)
 
 ![main2](https://github.com/Dont12/KDT_Y_FE_Mini-Project/assets/51106050/be64769c-33e1-4e6e-9c00-e8b5b27e6ed2)
@@ -22,6 +22,7 @@
 > - 카테고리 별 분류 드롭다운
 > - 지역 별 분류 드롭다운
 > - 숙소 카드 제작, infinite scroll 적용
+> - 숙박 업소 목록 조회 API 연결
 
 ![products](https://github.com/moonyah/emp_management_cafe/assets/51106050/f0feff63-360b-4bfe-b4ff-a87597866319)
 
