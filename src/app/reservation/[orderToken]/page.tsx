@@ -1,16 +1,17 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
+
+import { Header, HeaderNav } from '@/components/common/header';
 import {
   CheckBoxGroup,
   ReservationItem,
   UserInformation,
 } from '@/components/reservation';
 
-import React, { useEffect, useState } from 'react';
 import orderRequest from '@/api/orderRequest';
-import { useRouter } from 'next/navigation';
-import Modal from 'react-modal';
-import { Header, HeaderNav } from '@/components/common/header';
 
 const Divider = () => <div className='border-lightGray border-b  px-8 '></div>;
 

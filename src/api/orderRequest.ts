@@ -48,6 +48,38 @@ const orderRequest = {
         'Content-Type': 'application/json',
       },
     }).then(responseBody),
+
+  pushOrderElement: ({
+    productId,
+    roomId,
+    checkInDate,
+    checkInTime,
+    checkOutDate,
+    checkOutTime,
+    guestCount,
+    price,
+  }: PushOrderListProps) =>
+    fetch(`${url}/orders`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        registerOrderItems: [
+          {
+            productId: productId,
+            roomId: roomId,
+            checkInDate: checkInDate,
+            checkInTime: checkInTime,
+            checkOutDate: checkOutDate,
+            checkOutTime: checkOutTime,
+            guestCount: guestCount,
+            price: price,
+          },
+        ],
+      }),
+    }).then(responseBody),
 };
 
 export default orderRequest;

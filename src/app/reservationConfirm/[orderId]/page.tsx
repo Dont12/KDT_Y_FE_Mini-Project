@@ -1,10 +1,11 @@
 'use client';
 
-import { ReservationConfirmContainer } from '@/components/reservation';
 import React, { useEffect, useState } from 'react';
 
-import orderRequest from '@/api/orderRequest';
 import { Header, HeaderNav } from '@/components/common/header';
+import { ReservationConfirmContainer } from '@/components/reservation';
+
+import orderRequest from '@/api/orderRequest';
 
 const ReservationConfirmDetail = ({ params }: Props) => {
   const [res, setRes] = useState<OrderDetail | null>();

@@ -12,7 +12,6 @@ const detailInfoRequest = {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'no-cache',
     }).then(responseBody),
 };
 

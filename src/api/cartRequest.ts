@@ -50,7 +50,7 @@ const cartRequest = {
         roomId: roomId,
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
-        guestCount: guestCount,
+        guestCount: Number(guestCount),
       }),
     }).then(responseBody),
 };
