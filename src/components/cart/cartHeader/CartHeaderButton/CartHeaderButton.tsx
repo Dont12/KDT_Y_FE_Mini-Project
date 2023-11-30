@@ -2,10 +2,10 @@ import type { AppLayout } from '@/app/layout';
 
 interface Props extends AppLayout {
   onClick: VoidFunction;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
-const CartHeaderButton = ({ children, onClick, disabled }: Props) => (
+const CartHeaderButton = ({ children, onClick, disabled = false }: Props) => (
   <button
     type='button'
     disabled={disabled}

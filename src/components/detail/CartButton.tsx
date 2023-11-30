@@ -3,15 +3,17 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-import { PushCartProps, PushCartResponse } from '@/@types/cart.types';
+import { IsCartPropsValid, PushCartResponse } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
 
 const CartButton = ({
   roomId,
   checkInDate,
   checkOutDate,
+  roomStock,
+  maxguest,
   guestCount,
-}: PushCartProps) => {
+}: IsCartPropsValid) => {
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
 
@@ -25,33 +27,37 @@ const CartButton = ({
   };
 
   const pushCartElement = async () => {
-    const response: PushCartResponse = await cartRequest.pushCart({
-      roomId: roomId,
-      checkInDate: checkInDate,
-      checkOutDate: checkOutDate,
-      guestCount: guestCount,
-    });
-    if (response.status === 'SUCCESS') {
-      setModalOpen(true);
-    } else {
+    try {
+      const response: PushCartResponse = await cartRequest.pushCart({
+        roomId,
+        checkInDate,
+        checkOutDate,
+        guestCount,
+      });
+      if (response.status === 'SUCCESS') {
+        setModalOpen(true);
+      }
+    } catch (error) {
       router.push(`/auth/signin`);
     }
   };
 
   return (
     <>
-      <button
-        className='border-mediumGray mr-3 flex h-12 w-12 items-center justify-center rounded border border-solid p-1'
-        onClick={pushCartElement}
-      >
-        <Image
-          src='/svg/cartIcon.svg'
-          alt='cartIcon'
-          className='h-6 w-6'
-          width={30}
-          height={30}
-        />
-      </button>
+      {roomStock == 0 || Number(guestCount) > maxguest ? null : (
+        <button
+          className='border-mediumGray mr-3 flex h-12 w-12 items-center justify-center rounded border border-solid p-1'
+          onClick={pushCartElement}
+        >
+          <Image
+            src='/svg/cartIcon.svg'
+            alt='cartIcon'
+            className='h-6 w-6'
+            width={30}
+            height={30}
+          />
+        </button>
+      )}
       {modalOpen ? (
         <div className='relative'>
           <div
@@ -71,10 +77,7 @@ const CartButton = ({
               >
                 계속 둘러보기
               </button>
-              <button
-                className='grow-1 text-lightBlue w-full font-bold'
-                onClick={movePage}
-              >
+              <button className='grow-1 w-full font-bold' onClick={movePage}>
                 장바구니로 이동하기
               </button>
             </div>

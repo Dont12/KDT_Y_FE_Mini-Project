@@ -1,4 +1,4 @@
-import { pushOrderListProps } from '@/@types/order.types';
+import { PushOrderListProps } from '@/@types/order.types';
 
 const url = 'https://api.stayinn.site/v1';
 
@@ -30,21 +30,26 @@ const orderRequest = {
     checkOutTime,
     guestCount,
     price,
-  }: pushOrderListProps) =>
+  }: PushOrderListProps) =>
     fetch(`${url}/orders`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        productId: { productId },
-        roomId: { roomId },
-        checkInDate: { checkInDate },
-        checkInTime: { checkInTime },
-        checkOutDate: { checkOutDate },
-        checkOutTime: { checkOutTime },
-        guestCount: { guestCount },
-        price: { price },
+        registerOrderItems: [
+          {
+            productId: productId,
+            roomId: roomId,
+            checkInDate: checkInDate,
+            checkInTime: checkInTime,
+            checkOutDate: checkOutDate,
+            checkOutTime: checkOutTime,
+            guestCount: guestCount,
+            price: price,
+          },
+        ],
       }),
     }).then(responseBody),
 };

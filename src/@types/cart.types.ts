@@ -1,17 +1,29 @@
-export interface ApiCartItem {
+export interface CartApiResponse {
+  totalPrice: number;
+  page: CartPage;
+  items: CartItemInfo[];
+}
+
+export interface CartPage {
+  size: number;
+  maxPage: number;
+  totalCount: number;
+}
+
+export interface CartItemInfo {
   id: number;
-  product: ApiRoomItem;
+  product: CartProductInfo;
   checkInDate: string;
   checkOutDate: string;
   numberOfNights: number;
 }
 
-export interface ApiRoomItem {
+export interface CartProductInfo {
   productId: number;
   roomId: number;
   productName: string;
-  address: string;
   imageUrl: string;
+  address: string;
   roomName: string;
   baseGuestCount: number;
   maxGuestCount: number;
@@ -19,29 +31,31 @@ export interface ApiRoomItem {
   checkInTime: string;
   checkOutTime: string;
   stock: number;
+  guestCount: number;
 }
 
-export interface CartProduct {
+export interface PreCartProduct {
   productId: number;
   productName: string;
   address: string;
-  cartRoomList: CartRoom[];
+  cartRoomList: PreCartRoom[];
 }
 
-export interface CartRoom {
+export interface PreCartRoom {
   id: number;
   roomId: number;
-  imageUrl: string;
   roomName: string;
+  imageUrl: string;
+  checkInTime: string;
+  checkOutTime: string;
+  numberOfNights: number;
+  checkInDate: string;
+  checkOutDate: string;
   baseGuestCount: number;
   maxGuestCount: number;
   price: number;
-  checkInTime: string;
-  checkOutTime: string;
   stock: number;
-  checkInDate: string;
-  checkOutDate: string;
-  numberOfNights: number;
+  guestCount: number;
 }
 
 export interface PushCartProps {
@@ -49,6 +63,11 @@ export interface PushCartProps {
   checkInDate: string;
   checkOutDate: string;
   guestCount: string;
+}
+
+export interface IsCartPropsValid extends PushCartProps {
+  roomStock: number;
+  maxguest: number;
 }
 
 export interface PushCartResponse {

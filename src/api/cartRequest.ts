@@ -1,6 +1,6 @@
 import { PushCartProps } from '@/@types/cart.types';
 
-const url = process.env.SERVER_URL;
+const url = 'https://api.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
 
@@ -14,14 +14,24 @@ const cartRequest = {
       },
     }).then(responseBody),
 
-  deleteCarts: (cartItemList: string[]) =>
+  deleteCarts: (cartIdList: string[]) =>
     fetch(`${url}/carts`, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ cartIds: cartItemList }),
+      body: JSON.stringify({ cartIds: cartIdList }),
+    }).then(responseBody),
+
+  reserveCarts: (cartIdList: string[]) =>
+    fetch(`${url}/carts/order`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ cartIds: cartIdList }),
     }).then(responseBody),
 
   pushCart: ({
@@ -30,17 +40,17 @@ const cartRequest = {
     checkOutDate,
     guestCount,
   }: PushCartProps) =>
-    fetch(url as string, {
+    fetch(`${url}/carts`, {
       method: 'POST',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        roomId: { roomId },
-        checkInDate: { checkInDate },
-        checkOutDate: { checkOutDate },
-        guestCount: { guestCount },
+        roomId: roomId,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+        guestCount: guestCount,
       }),
     }).then(responseBody),
 };
