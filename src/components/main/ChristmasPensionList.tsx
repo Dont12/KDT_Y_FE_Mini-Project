@@ -35,7 +35,7 @@ const ChristmasPensionList = () => {
         today.toISOString().split('T')[0]
       }&checkOut=${
         tomorrow.toISOString().split('T')[0]
-      }&category=펜션&areaCode=${location}`;
+      }&category=펜션&areaCode=${location}&page=1&pageSize=7`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) {
