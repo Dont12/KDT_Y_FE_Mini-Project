@@ -1,4 +1,5 @@
 'use client';
+import { debounce } from 'lodash';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -26,7 +27,7 @@ const CartButton = ({
     router.push(`/cart`);
   };
 
-  const pushCartElement = async () => {
+  const pushCartElement = debounce(async () => {
     try {
       const response: PushCartResponse = await cartRequest.pushCart({
         roomId,
@@ -40,7 +41,7 @@ const CartButton = ({
     } catch (error) {
       router.push(`/auth/signin`);
     }
-  };
+  }, 200);
 
   return (
     <>
