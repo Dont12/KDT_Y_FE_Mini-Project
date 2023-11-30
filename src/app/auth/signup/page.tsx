@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { SignupForm } from '@/components/auth';
-import { Header, HeaderNav } from '@/components/common/header';
+import { Header, HeaderNav } from '@/components/common';
 
 import authRequest from '@/api/authRequest';
 
@@ -30,7 +30,6 @@ const SignUp = () => {
       <Header>
         <HeaderNav showBack>회원가입</HeaderNav>
       </Header>
-
       <main className='w-full'>
         <SignupForm />
       </main>
