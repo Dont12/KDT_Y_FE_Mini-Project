@@ -1,18 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import axios from 'axios';
 
-const UserInformation = () => {
+const UserInformation = ({ onUserInfoChange }: any) => {
   const [userName, setUserName] = useState('');
   const [userPhone, setUserPhone] = useState('');
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
+    onUserInfoChange({ userName: e.target.value });
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserPhone(e.target.value);
+    onUserInfoChange({ userPhone: e.target.value });
   };
 
   return (
@@ -31,6 +32,8 @@ const UserInformation = () => {
           value={userName}
           onChange={handleNameChange}
           placeholder='성명을 입력해주세요'
+          className='my-2 w-11/12'
+          required
         />
         <p className='mt-4 font-bold'>휴대폰 번호</p>
         <input
@@ -38,6 +41,8 @@ const UserInformation = () => {
           value={userPhone}
           onChange={handlePhoneChange}
           placeholder='휴대폰 번호를 입력해주세요'
+          className='my-2 w-11/12'
+          required
         />
       </div>
     </div>
