@@ -1,11 +1,11 @@
 export interface PushOrderListProps {
-  productId: string;
+  productId: number;
   roomId: number;
   checkInDate: string;
   checkInTime: string;
   checkOutDate: string;
   checkOutTime: string;
-  guestCount: string;
+  guestCount: number;
   price: number;
 }
 

@@ -77,10 +77,7 @@ const CartButton = ({
               >
                 계속 둘러보기
               </button>
-              <button
-                className='grow-1 text-lightBlue w-full font-bold'
-                onClick={movePage}
-              >
+              <button className='grow-1 w-full font-bold' onClick={movePage}>
                 장바구니로 이동하기
               </button>
             </div>

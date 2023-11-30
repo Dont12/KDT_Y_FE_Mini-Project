@@ -37,11 +37,11 @@ const ReservationButton = ({
         });
       if (response.status === 'SUCCESS') {
         router.push(`/reservation/${response.data.orderToken}`);
-      } else {
-        router.push(`/auth/signin`);
       }
     } catch (error) {
-      console.log(error);
+      if (error == '401') {
+        router.push(`/auth/signin`);
+      }
     }
   };
 
