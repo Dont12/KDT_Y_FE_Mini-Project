@@ -94,6 +94,7 @@ const Reservation = ({ params }: Props) => {
               key={index}
               productName={data.productName}
               roomName={data.roomName}
+              day={data.day}
               checkInDate={data.checkInDate}
               checkOutDate={data.checkOutDate}
               checkInTime={data.checkInTime}
@@ -102,11 +103,13 @@ const Reservation = ({ params }: Props) => {
               maxGuestCount={data.maxGuestCount}
               price={data.price}
             />
-            {index < res?.registerOrderItems.length - 1 && <Divider />}
+            <Divider />
+            {/* {index < res?.registerOrderItems.length - 1 && <Divider />} */}
           </>
         ))}
         <form onSubmit={handlePaymentSubmit}>
           <UserInformation onUserInfoChange={handleUserInfoChange} />
+          <Divider />
           <div className='mt-8  bg-white p-8 '>
             <p className='font-bold'>결제 금액</p>
             <div className='flex justify-between'>
@@ -191,6 +194,7 @@ interface ResisterOrderItems {
   maxGuestCount: number;
   baseGuestCount: number;
   price: number;
+  day: string;
   checkInTime: string;
   checkInDate: string;
   checkOutTime: string;

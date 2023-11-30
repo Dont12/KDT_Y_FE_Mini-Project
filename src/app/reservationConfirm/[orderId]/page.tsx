@@ -2,9 +2,9 @@
 
 import { ReservationConfirmContainer } from '@/components/reservation';
 import React, { useEffect, useState } from 'react';
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
+
 import orderRequest from '@/api/orderRequest';
+import { Header, HeaderNav } from '@/components/common/header';
 
 const ReservationConfirmDetail = ({ params }: Props) => {
   const [res, setRes] = useState<OrderDetail | null>();
@@ -23,7 +23,7 @@ const ReservationConfirmDetail = ({ params }: Props) => {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
   return (
     <>
       <Header>
