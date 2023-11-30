@@ -32,7 +32,7 @@ const PersonInput = ({
     let inputValue = e.target.value.replace(/[^0-9]/g, '');
     inputValue = Math.min(Math.max(parseInt(inputValue), 1), 9).toString();
     setPerson(inputValue);
-    router.push(
+    router.replace(
       `/detail/${roomId}?checkInDate=${checkIn}&checkOutDate=${checkOut}&guest=${inputValue}
       `,
       { scroll: false }

@@ -159,12 +159,12 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
             <span>{numberOfNights}박</span>
           </div>
           <div>
-            <span>체크인 {checkInTime}명</span>
+            <span>체크인 {checkInTime}</span>
             <span className='bar'>|</span>
-            <span>체크아웃 {checkOutTime}명</span>
+            <span>체크아웃 {checkOutTime}</span>
           </div>
           <div>
-            기준 {baseGuestCount} / 최대 {maxGuestCount}
+            기준 {baseGuestCount}명 / 최대 {maxGuestCount}명
           </div>
         </div>
       </div>

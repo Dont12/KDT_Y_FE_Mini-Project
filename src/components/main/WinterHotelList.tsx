@@ -35,9 +35,7 @@ const WinterHotelList = () => {
         today.toISOString().split('T')[0]
       }&checkOut=${
         tomorrow.toISOString().split('T')[0]
-      }&category=관광호텔&areaCode=${location}`;
-
-      console.log('API Request URL:', apiUrl);
+      }&category=관광호텔&areaCode=${location}&page=1&pageSize=8`;
 
       const response = await fetch(apiUrl, {
         method: 'GET',
@@ -109,14 +107,6 @@ const WinterHotelList = () => {
         >
           강원
         </div>
-        {/* <div
-          onClick={() => fetchData('부산광역시')}
-          className={`mr-4 cursor-pointer p-3 ${
-            selectedLocation === '부산광역시' ? 'border-b-2 border-black' : ''
-          }`}
-        >
-          부산
-        </div> */}
       </nav>
 
       <div className='flex'>
