@@ -16,8 +16,12 @@ import { DetailResponse, Room } from '@/@types/detail.types';
 import detailInfoRequest from '@/api/detailInfoRequest';
 import { calculateTotalCost } from '@/utils/calculatePerNightCost';
 
-const today = new Date();
-const tomorrow = new Date();
+const today = new Date(
+  new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+);
+const tomorrow = new Date(
+  new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+);
 tomorrow.setDate(tomorrow.getDate() + 1);
 
 const formatDate = (date: Date): string => {
