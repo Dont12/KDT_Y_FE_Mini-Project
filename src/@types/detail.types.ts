@@ -37,7 +37,7 @@ export interface HotelData {
   description: string;
   longitude: string;
   latitude: string;
-  imageUrl: string[];
+  imageUrls: string[];
   rooms: Room[];
 }
 

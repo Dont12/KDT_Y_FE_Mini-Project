@@ -29,18 +29,16 @@ const CartButton = ({
   const pushCartElement = async () => {
     try {
       const response: PushCartResponse = await cartRequest.pushCart({
-        roomId: roomId,
-        checkInDate: checkInDate,
-        checkOutDate: checkOutDate,
-        guestCount: guestCount,
+        roomId,
+        checkInDate,
+        checkOutDate,
+        guestCount,
       });
       if (response.status === 'SUCCESS') {
         setModalOpen(true);
-      } else {
-        router.push(`/auth/signin`);
       }
     } catch (error) {
-      console.log(error);
+      router.push(`/auth/signin`);
     }
   };
 

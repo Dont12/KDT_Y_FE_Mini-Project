@@ -29,17 +29,17 @@ const cartRequest = {
     checkOutDate,
     guestCount,
   }: PushCartProps) =>
-    fetch(url as string, {
+    fetch(`${url}/carts`, {
       method: 'POST',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        roomId: { roomId },
-        checkInDate: { checkInDate },
-        checkOutDate: { checkOutDate },
-        guestCount: { guestCount },
+        roomId: roomId,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+        guestCount: guestCount,
       }),
     }).then(responseBody),
 };

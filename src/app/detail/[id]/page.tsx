@@ -55,8 +55,7 @@ const Detail = async ({
       <main>
         <div className='mt-12 bg-white'>
           <div>
-            {/* 이미지가 배열로 들어오면 [] 벗기기 */}
-            <Carousel images={details.data.imageUrl} />
+            <Carousel images={details.data.imageUrls} />
           </div>
           <div className='flex flex-col gap-4 p-5'>
             <div className='border-mediumGray border-b border-solid pb-3'>
@@ -100,10 +99,10 @@ const Detail = async ({
                     <div className='mr-5'>
                       <Image
                         src={room.imageUrl}
-                        width={150}
+                        width={350}
                         height={150}
                         alt={`Room ${index + 1}`}
-                        className='h-full w-48 object-cover'
+                        className='h-full w-[350px] object-cover'
                       />
                     </div>
                     <div className='flex grow flex-col gap-3 pt-3'>
