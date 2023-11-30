@@ -37,8 +37,6 @@ const ChristmasPensionList = () => {
         tomorrow.toISOString().split('T')[0]
       }&category=펜션&areaCode=${location}`;
 
-      // console.log('API Request URL:', apiUrl);
-
       const response = await fetch(apiUrl);
       if (!response.ok) {
         throw new Error(

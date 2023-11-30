@@ -85,7 +85,7 @@ const ProductPage = () => {
 
   // 무한 스크롤
   const productFetch = () => {
-    if (category || location) {
+    if (category !== undefined || location !== undefined) {
       const query = [];
 
       if (category) {
@@ -99,7 +99,7 @@ const ProductPage = () => {
       const nextPageUrl = `${apiUrl}&${query.join('&')}&page=${
         page + 1
       }&pageSize=10`;
-      console.log('Next Page URL:', nextPageUrl); // 로그 추가
+      // console.log('Next Page URL:', nextPageUrl); // 로그 추가
       fetch(nextPageUrl, {
         method: 'GET',
         credentials: 'include',
@@ -120,15 +120,13 @@ const ProductPage = () => {
   useEffect(() => {
     // inView가 true 일때만 실행한다.
     if (inView) {
-      console.log(inView, '무한 스크롤 요청'); // 실행할 함수
-
       productFetch();
     }
   }, [inView]);
 
   useEffect(() => {
     // category나 location이 변경되면 API 요청을 보냅니다.
-    if (category || location) {
+    if (category !== undefined || location !== undefined) {
       const query = [];
 
       if (category) {
@@ -140,9 +138,7 @@ const ProductPage = () => {
       }
 
       // API 요청 주소에 category나 location이 포함된 경우 추가합니다.
-      const fullUrl = `${apiUrl}&${query.join('&')}&page=${page}&pageSize=10`;
-
-      console.log('Full URL:', fullUrl); // 로그 추가
+      const fullUrl = `${apiUrl}&${query.join('&')}page=${page}&pageSize=10`;
 
       // fetch를 사용하여 API에 요청을 보내고 데이터를 받아옵니다.
       fetch(fullUrl, {
@@ -154,7 +150,6 @@ const ProductPage = () => {
       })
         .then((response) => response.json())
         .then((result) => {
-          // console.log(result); // API 응답을 기록
           setData(result); // 데이터를 받아와서 상태를 업데이트한다.
         });
     }
