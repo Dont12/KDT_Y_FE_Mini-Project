@@ -6,7 +6,7 @@ import { BACKS, FOOTERINFOS, FRONTS } from './Footer.constant';
 
 const Footer = () => {
   return (
-    <footer className='text-gray1 m-5 text-sm'>
+    <footer className='text-gray1 p-5 text-sm'>
       <Image src='/svg/footerLogo.svg' width={74} height={21} alt='스테이인' />
       <div className='my-5 flex flex-col gap-1'>
         <strong className='mb-1'>STAYINN 스테이인</strong>
