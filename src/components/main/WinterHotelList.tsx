@@ -1,5 +1,6 @@
 // WinterHotelList.tsx
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { CgChevronLeft, CgChevronRight } from 'react-icons/cg';
 
@@ -16,6 +17,13 @@ const WinterHotelList = () => {
   const [selectedLocation, setSelectedLocation] = useState<string | null>(
     '서울특별시'
   );
+
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+
+  const formattedToday = today.toISOString().split('T')[0];
+  const formattedTomorrow = tomorrow.toISOString().split('T')[0];
 
   const fetchData = async (location: string) => {
     try {
@@ -114,27 +122,29 @@ const WinterHotelList = () => {
             style={{ transform: `translateX(-${startIndex * 30}%)` }}
           >
             {hotels.map((hotel) => (
-              <div
+              <Link
                 key={hotel.id}
-                className='w-[12rem] rounded-md bg-white p-4 shadow-md'
+                href={`/detail/${hotel.id}?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`}
               >
-                <div className='mb-7 flex w-full justify-center'>
-                  <Image
-                    src={hotel.imageUrl}
-                    alt={hotel.name}
-                    width={200}
-                    height={200}
-                    className='h-40 w-48 object-cover'
-                  />
-                </div>{' '}
-                <h3 className='mb-2 overflow-hidden overflow-ellipsis whitespace-nowrap text-base font-bold'>
-                  {hotel.name}
-                </h3>
-                <p className='mb-2 text-sm text-gray-600'>⭐4.5</p>
-                <p className='text-right	text-sm font-bold text-gray-600'>
-                  {hotel.minPrice}원~
-                </p>
-              </div>
+                <div className='w-[12rem] cursor-pointer rounded-md bg-white p-4 shadow-md'>
+                  <div className='mb-7 flex w-full justify-center'>
+                    <Image
+                      src={hotel.imageUrl}
+                      alt={hotel.name}
+                      width={200}
+                      height={200}
+                      className='h-40 w-48 rounded-md object-cover'
+                    />
+                  </div>
+                  <h3 className='mb-2 overflow-hidden overflow-ellipsis whitespace-nowrap text-base font-bold'>
+                    {hotel.name}
+                  </h3>
+                  <p className='mb-2 text-sm text-gray-600'>⭐4.5</p>
+                  <p className='text-right	text-sm font-bold text-gray-600'>
+                    {hotel.minPrice}원~
+                  </p>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

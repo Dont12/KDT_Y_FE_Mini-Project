@@ -1,10 +1,14 @@
 'use client';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Header, HeaderNav } from '@/components/common/header';
-import DropdownCategory from '@/components/products/DropdownCategory';
-import DropdownLocation from '@/components/products/DropdownLocation';
+import DropdownCategory, {
+  dropdownCategoryOptions,
+} from '@/components/products/DropdownCategory';
+import DropdownLocation, {
+  dropdownLocationOptions,
+} from '@/components/products/DropdownLocation';
 import YourItemComponent from '@/components/products/YourItemComponent';
 
 interface product {
@@ -21,49 +25,16 @@ export interface Option {
   location?: string;
 }
 
-const dropdownCategoryOptions = [
-  { label: '전체' },
-  { label: '호텔', category: '관광호텔' },
-  { label: '펜션', category: '펜션' },
-  { label: '모텔', category: '모텔' },
-  { label: '게스트하우스', category: '게스트하우스' },
-  { label: '콘도', category: '콘도미니엄' },
-  { label: '유스호스텔', category: '유스호스텔' },
-  { label: '민박', category: '민박' },
-  { label: '홈스테이', category: '홈스테이' },
-  { label: '서비스드레지던스', category: '서비스드레지던스' },
-  { label: '한옥', category: '한옥' },
-];
-
-const dropdownLocationOptions = [
-  { label: '전국' },
-  { label: '서울', location: '서울특별시' },
-  { label: '인천', location: '인천광역시' },
-  { label: '대전', location: '대전광역시' },
-  { label: '대구', location: '대구광역시' },
-  { label: '광주', location: '광주광역시' },
-  { label: '부산', location: '부산광역시' },
-  { label: '울산', location: '울산광역시' },
-  { label: '세종', location: '세종특별자치시' },
-  { label: '경기', location: '경기도' },
-  { label: '강원', location: '강원특별자치도' },
-  { label: '충북', location: '충청북도' },
-  { label: '충남', location: '충청남도' },
-  { label: '경북', location: '경상북도' },
-  { label: '경남', location: '경상남도' },
-  { label: '전북', location: '전라북도' },
-  { label: '전남', location: '전라남도' },
-  { label: '제주', location: '제주특별자치도' },
-  // 다른 지역들도 추가
-];
-
 const ProductPage = () => {
-  //   const router = useRouter();
   const pathname = usePathname(); // /products
   const [, setpickLocation] = useState<string | null>(null); // 선택된 지역을 저장할 state
   const [, setpickCategory] = useState<string | null>(null); // 선택된 지역을 저장할 state
 
   const searchParams = useSearchParams();
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   // 이 부분에서 오늘과 내일의 날짜를 생성하는 로직이 들어갑니다.
   const today = new Date();
@@ -110,6 +81,62 @@ const ProductPage = () => {
     initialSelectedCategoryOption
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const loadMoreData = async () => {
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // 새로운 페이지 파라미터를 사용하여 API URL을 업데이트합니다.
+      const nextPageUrl = `${apiUrl}&page=${page + 1}&pageSize=10`;
+
+      console.log('Next Page URL:', nextPageUrl); // 로그 추가
+
+      const response = await fetch(nextPageUrl);
+      const newData = await response.json();
+
+      // 새로운 데이터로 상태를 업데이트합니다.
+      setData((prevData) => ({
+        data: [...(prevData?.data ?? []), ...newData.data],
+      }));
+
+      setPage((prevPage) => prevPage + 1);
+    } catch (error) {
+      /* empty */
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // 사용자가 컨테이너의 맨 아래로 스크롤했는지 확인
+      if (
+        containerRef.current &&
+        containerRef.current.scrollTop + containerRef.current.clientHeight >=
+          containerRef.current.scrollHeight - 100 // 이 임계값을 조절할 수 있습니다
+      ) {
+        // 사용자가 맨 아래로 스크롤했을 때 더 많은 데이터를 불러옵니다.
+        loadMoreData();
+      }
+    };
+
+    // 컨테이너에 스크롤 이벤트 리스너를 추가합니다.
+    if (containerRef.current) {
+      containerRef.current.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      // 컴포넌트가 언마운트될 때 스크롤 이벤트 리스너를 제거합니다.
+      if (containerRef.current) {
+        containerRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [loadMoreData]);
+
   useEffect(() => {
     // category나 location이 변경되면 API 요청을 보냅니다.
     if (category || location) {
@@ -124,9 +151,9 @@ const ProductPage = () => {
       }
 
       // API 요청 주소에 category나 location이 포함된 경우 추가합니다.
-      const fullUrl = `${apiUrl}&${query.join('&')}`;
+      const fullUrl = `${apiUrl}&${query.join('&')}&page=${page}&pageSize=10`;
 
-      // console.log(fullUrl);
+      console.log('Full URL:', fullUrl); // 로그 추가
 
       // fetch를 사용하여 API에 요청을 보내고 데이터를 받아옵니다.
       fetch(fullUrl)
@@ -227,6 +254,7 @@ const ProductPage = () => {
                 key={item.id}
                 name={item.name}
                 imageUrl={item.imageUrl}
+                id={item.id}
               />
             ))}
           </div>

@@ -9,6 +9,20 @@ interface DropdownCategoryProps {
   onSelectOption: (option: Option | null) => void;
 }
 
+export const dropdownCategoryOptions = [
+  { label: '전체' },
+  { label: '호텔', category: '관광호텔' },
+  { label: '펜션', category: '펜션' },
+  { label: '모텔', category: '모텔' },
+  { label: '게스트하우스', category: '게스트하우스' },
+  { label: '콘도', category: '콘도미니엄' },
+  { label: '유스호스텔', category: '유스호스텔' },
+  { label: '민박', category: '민박' },
+  { label: '홈스테이', category: '홈스테이' },
+  { label: '서비스드레지던스', category: '서비스드레지던스' },
+  { label: '한옥', category: '한옥' },
+];
+
 const DropdownCategory = ({
   options,
   selectedOption,
