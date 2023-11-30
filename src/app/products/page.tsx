@@ -1,6 +1,7 @@
 'use client';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import { Header, HeaderNav } from '@/components/common/header';
 import DropdownCategory, {
@@ -32,7 +33,8 @@ const ProductPage = () => {
 
   const searchParams = useSearchParams();
 
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [ref, inView] = useInView();
+  // const containerRef = useRef<HTMLDivElement | null>(null);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -45,7 +47,7 @@ const ProductPage = () => {
   const formattedTomorrow = tomorrow.toISOString().split('T')[0];
 
   // API 요청을 보낼 주소
-  const apiUrl = `https://mock.stayinn.site/v1/products?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`;
+  const apiUrl = `https://api.stayinn.site/v1/products?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`;
 
   const location = searchParams.get('location'); // 없다면 null
   const category = searchParams.get('category'); // 없다면 null
@@ -81,61 +83,48 @@ const ProductPage = () => {
     initialSelectedCategoryOption
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const loadMoreData = async () => {
-    if (loading) {
-      return;
-    }
+  // 무한 스크롤
+  const productFetch = () => {
+    if (category || location) {
+      const query = [];
 
-    setLoading(true);
+      if (category) {
+        query.push(`category=${category}`);
+      }
 
-    try {
-      // 새로운 페이지 파라미터를 사용하여 API URL을 업데이트합니다.
-      const nextPageUrl = `${apiUrl}&page=${page + 1}&pageSize=10`;
+      if (location) {
+        query.push(`areaCode=${location}`);
+      }
 
+      const nextPageUrl = `${apiUrl}&${query.join('&')}&page=${
+        page + 1
+      }&pageSize=10`;
       console.log('Next Page URL:', nextPageUrl); // 로그 추가
-
-      const response = await fetch(nextPageUrl);
-      const newData = await response.json();
-
-      // 새로운 데이터로 상태를 업데이트합니다.
-      setData((prevData) => ({
-        data: [...(prevData?.data ?? []), ...newData.data],
-      }));
-
-      setPage((prevPage) => prevPage + 1);
-    } catch (error) {
-      /* empty */
-    } finally {
-      setLoading(false);
+      fetch(nextPageUrl, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          setData((prevData) => ({
+            data: [...(prevData?.data ?? []), ...result.data],
+          }));
+          setPage((prevPage) => prevPage + 1);
+        });
     }
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      // 사용자가 컨테이너의 맨 아래로 스크롤했는지 확인
-      if (
-        containerRef.current &&
-        containerRef.current.scrollTop + containerRef.current.clientHeight >=
-          containerRef.current.scrollHeight - 100 // 이 임계값을 조절할 수 있습니다
-      ) {
-        // 사용자가 맨 아래로 스크롤했을 때 더 많은 데이터를 불러옵니다.
-        loadMoreData();
-      }
-    };
+    // inView가 true 일때만 실행한다.
+    if (inView) {
+      console.log(inView, '무한 스크롤 요청'); // 실행할 함수
 
-    // 컨테이너에 스크롤 이벤트 리스너를 추가합니다.
-    if (containerRef.current) {
-      containerRef.current.addEventListener('scroll', handleScroll);
+      productFetch();
     }
-
-    return () => {
-      // 컴포넌트가 언마운트될 때 스크롤 이벤트 리스너를 제거합니다.
-      if (containerRef.current) {
-        containerRef.current.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [loadMoreData]);
+  }, [inView]);
 
   useEffect(() => {
     // category나 location이 변경되면 API 요청을 보냅니다.
@@ -156,7 +145,13 @@ const ProductPage = () => {
       console.log('Full URL:', fullUrl); // 로그 추가
 
       // fetch를 사용하여 API에 요청을 보내고 데이터를 받아옵니다.
-      fetch(fullUrl)
+      fetch(fullUrl, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
         .then((response) => response.json())
         .then((result) => {
           // console.log(result); // API 응답을 기록
@@ -235,7 +230,10 @@ const ProductPage = () => {
           />
         </HeaderNav>
       </Header>
-      <main className='flex flex-col items-center justify-center bg-white py-[3rem]'>
+      <main
+        className='flex flex-col items-center justify-center bg-white py-[3rem]'
+        // ref={containerRef}
+      >
         <h1 className='m-5 text-lg'>어디로 갈까요?</h1>
         <DropdownLocation
           options={dropdownLocationOptions}
@@ -257,6 +255,7 @@ const ProductPage = () => {
                 id={item.id}
               />
             ))}
+            <div ref={ref} />
           </div>
         </div>
       </main>
