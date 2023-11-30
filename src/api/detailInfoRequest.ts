@@ -8,11 +8,10 @@ const detailInfoRequest = {
   getDetail: ({ id, checkIn, checkOut }: DetailProps) =>
     fetch(`${url}/products/${id}?checkIn=${checkIn}&checkOut=${checkOut}`, {
       method: 'GET',
-      credentials: 'include',
+      credentials: 'omit',
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'no-cache',
     }).then(responseBody),
 };
 

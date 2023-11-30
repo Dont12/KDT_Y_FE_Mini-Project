@@ -1,4 +1,5 @@
 'use client';
+import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -6,7 +7,7 @@ import {
   OrderButtonProps,
   PushOrderElementResponse,
 } from '@/@types/order.types';
-import orderRequest from '@/app/api/orderRequest';
+import orderRequest from '@/api/orderRequest';
 
 const ReservationButton = ({
   productId,
@@ -17,36 +18,51 @@ const ReservationButton = ({
   checkOutTime,
   price,
   guestCount,
+  maxguest,
   stock,
 }: OrderButtonProps) => {
   const router = useRouter();
 
-  const pushReservationElement = async () => {
-    const response: PushOrderElementResponse =
-      await orderRequest.pushOrderElement({
-        productId: productId,
-        roomId: roomId,
-        checkInDate: checkInDate,
-        checkInTime: checkInTime,
-        checkOutDate: checkOutDate,
-        checkOutTime: checkOutTime,
-        guestCount: guestCount,
-        price: price,
-      });
-    if (response.status === 'SUCCESS') {
-      router.push(`/reservation/${response.data.orderToken}`);
-    } else {
-      router.push(`/auth/signin`);
+  const pushReservationElement = debounce(async () => {
+    try {
+      const response: PushOrderElementResponse =
+        await orderRequest.pushOrderElement({
+          productId: productId,
+          roomId: roomId,
+          checkInDate: checkInDate,
+          checkInTime: checkInTime,
+          checkOutDate: checkOutDate,
+          checkOutTime: checkOutTime,
+          guestCount: guestCount,
+          price: price,
+        });
+      if (response.status === 'SUCCESS') {
+        router.push(`/reservation/${response.data.orderToken}`);
+      }
+    } catch (error) {
+      if (error == '401') {
+        router.push(`/auth/signin`);
+      }
     }
-  };
+  }, 200);
 
   return (
     <input
       type='button'
-      className='grow-1 bg-mainButton hover:bg-mainButtonHov w-full rounded text-[18px] font-bold text-white'
-      value={stock === 0 ? '재고 없음' : '예약 하기'}
+      className={
+        stock === 0 || maxguest < Number(guestCount)
+          ? 'grow-1 bg-gray1  h-12 w-full rounded text-[18px] font-bold text-white'
+          : 'grow-1 bg-mainButton hover:bg-mainButtonHov h-12 w-full rounded text-[18px] font-bold text-white'
+      }
+      value={
+        stock === 0
+          ? '재고 없음'
+          : maxguest < Number(guestCount)
+          ? '최대인원 초과'
+          : '예약 하기'
+      }
       onClick={pushReservationElement}
-      disabled={stock === 0}
+      disabled={stock === 0 || maxguest < Number(guestCount)}
     />
   );
 };

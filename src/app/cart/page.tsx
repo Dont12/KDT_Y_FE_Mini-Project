@@ -8,26 +8,32 @@ import {
   CartHeader,
   CartItem,
   CartNotice,
-  EmptyCartItem,
+  EmptyCartList,
 } from '@/components/cart';
 import { Header, HeaderNav } from '@/components/common/header';
 
-import type { ApiCartItem, CartProduct } from '@/@types/cart.types';
+import type { CartItemInfo, PreCartProduct } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
 import { apiCartListState, cartSelectedState } from '@/recoil/atoms/cartState';
 
 const Cart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiCartList, setApiCartList] = useRecoilState(apiCartListState);
-  const [cartProductList, setCartProductList] = useState<CartProduct[]>([]);
+  const [cartProductList, setCartProductList] = useState<PreCartProduct[]>([]);
 
   useEffect(() => {
     const getCartList = async () => {
       try {
         const res = await cartRequest.getCartList(1, 10000);
-        console.log(res);
-        setIsLoading(true);
-        setApiCartList(res.data.items);
+
+        if (res.status === 'SUCCESS') {
+          setIsLoading(true);
+          setApiCartList(res.data.items);
+        } else if (res.status === 'FAIL') {
+          // 실패 에러 처리
+        } else if (res.status === 'ERROR') {
+          // 서버 오류 에러 처리
+        }
       } catch (error) {
         console.error('getCartList api error', error);
       }
@@ -38,30 +44,40 @@ const Cart = () => {
 
   useEffect(() => {
     setCartProductList([]);
-    apiCartList.map((item: ApiCartItem) => {
+    apiCartList.map((item: CartItemInfo) => {
       setCartProductList((prevCartProductList) => {
         const existingIndex = prevCartProductList.findIndex(
           (prevCartItem) => prevCartItem.productId === item.product.productId
         );
-        const updatedCartList = [...prevCartProductList];
         if (existingIndex !== -1) {
-          // 존재하면 숙소 안에 방만 추가
-          updatedCartList[existingIndex].cartRoomList.push({
-            id: item.id,
-            roomId: item.product.roomId,
-            imageUrl: item.product.imageUrl,
-            roomName: item.product.roomName,
-            baseGuestCount: item.product.baseGuestCount,
-            maxGuestCount: item.product.maxGuestCount,
-            price: item.product.price,
-            checkInTime: item.product.checkInTime,
-            checkOutTime: item.product.checkOutTime,
-            stock: item.product.stock,
-            checkInDate: item.checkInDate,
-            checkOutDate: item.checkOutDate,
-            numberOfNights: item.numberOfNights,
+          return prevCartProductList.map((prevCartProductItem, index) => {
+            // 존재하면 숙소 안에 방만 추가
+            if (index === existingIndex) {
+              return {
+                ...prevCartProductItem,
+                cartRoomList: [
+                  ...prevCartProductItem.cartRoomList,
+                  {
+                    id: item.id,
+                    roomId: item.product.roomId,
+                    imageUrl: item.product.imageUrl,
+                    roomName: item.product.roomName,
+                    baseGuestCount: item.product.baseGuestCount,
+                    maxGuestCount: item.product.maxGuestCount,
+                    price: item.product.price,
+                    checkInTime: item.product.checkInTime,
+                    checkOutTime: item.product.checkOutTime,
+                    stock: item.product.stock,
+                    checkInDate: item.checkInDate,
+                    checkOutDate: item.checkOutDate,
+                    numberOfNights: item.numberOfNights,
+                    guestCount: item.product.guestCount,
+                  },
+                ],
+              };
+            }
+            return prevCartProductItem;
           });
-          return updatedCartList;
         } else {
           // 존재하지 않으면 숙소 및 방 추가
           return [
@@ -85,6 +101,7 @@ const Cart = () => {
                   checkInDate: item.checkInDate,
                   checkOutDate: item.checkOutDate,
                   numberOfNights: item.numberOfNights,
+                  guestCount: item.product.guestCount,
                 },
               ],
             },
@@ -118,7 +135,9 @@ const Cart = () => {
         {apiCartList.length !== 0 && <CartHeader />}
       </Header>
       <main
-        className={`mb-52 mt-${apiCartList.length !== 0 ? '[6.75rem]' : '12'}`}
+        className={`mb-52 ${
+          apiCartList.length !== 0 ? 'mt-[6.75rem]' : 'mt-12'
+        }`}
       >
         <section>
           {isLoading ? (
@@ -132,7 +151,7 @@ const Cart = () => {
                 ))}
               </ul>
             ) : (
-              <EmptyCartItem />
+              <EmptyCartList />
             )
           ) : (
             <div>로딩 중</div>

@@ -54,8 +54,7 @@ const Detail = async ({
       <main>
         <div className='mt-12 bg-white'>
           <div>
-            {/* 이미지가 배열로 들어오면 [] 벗기기 */}
-            <Carousel images={[details.data.imageUrl]} />
+            <Carousel images={details.data.imageUrls} />
           </div>
           <div className='flex flex-col gap-4 p-5'>
             <div className='border-mediumGray border-b border-solid pb-3'>
@@ -69,10 +68,6 @@ const Detail = async ({
                 />
               </div>
               <p>{details.data.address}</p>
-              <p>
-                체크인 {details.data.rooms[0].checkInTime} - 체크아웃
-                {details.data.rooms[0].checkOutTime}
-              </p>
             </div>
             <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
               <div className='flex flex-col'>
@@ -103,16 +98,21 @@ const Detail = async ({
                     <div className='mr-5'>
                       <Image
                         src={room.imageUrl}
-                        width={150}
+                        width={350}
                         height={150}
                         alt={`Room ${index + 1}`}
-                        className='h-full w-48 object-cover'
+                        className='h-full w-[350px] object-cover'
                       />
                     </div>
                     <div className='flex grow flex-col gap-3 pt-3'>
                       <div>
                         <p className='font-bold'>{room.name}</p>
+                        <p>
+                          체크인 {room.checkInTime} - 체크아웃{' '}
+                          {room.checkOutTime}
+                        </p>
                         <p>최대 인원: {room.maxGuestCount}</p>
+
                         <p>정원: {room.basicGuestCount}</p>
                         <p>
                           옵션:
@@ -167,16 +167,19 @@ const Detail = async ({
                       roomId={room.id}
                       checkInDate={defaultCheckInDate}
                       checkOutDate={defaultCheckOutDate}
-                      guestCount={defaultPerson}
+                      roomStock={room.stock}
+                      maxguest={room.maxGuestCount}
+                      guestCount={Number(defaultPerson)}
                     />
                     <ReservationButton
-                      productId={params.id}
+                      productId={Number(params.id)}
                       roomId={room.id}
                       checkInDate={defaultCheckInDate}
                       checkInTime={room.checkInTime}
                       checkOutDate={defaultCheckOutDate}
                       checkOutTime={room.checkOutTime}
-                      guestCount={defaultPerson}
+                      guestCount={Number(defaultPerson)}
+                      maxguest={room.maxGuestCount}
                       price={room.price}
                       stock={room.stock}
                     />

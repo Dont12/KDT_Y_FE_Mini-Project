@@ -1,10 +1,9 @@
-import type { CartProduct } from '@/@types/cart.types';
+import type { PreCartProduct } from '@/@types/cart.types';
 
-import CartProductInfo from './CartProductInfo';
-import CartRoomInfo from './CartRoomInfo';
+import { CartProductInfo, CartRoomInfo } from './CartItemInfo';
 
 interface Props {
-  cartProductData: CartProduct;
+  cartProductData: PreCartProduct;
 }
 
 const CartItem = ({

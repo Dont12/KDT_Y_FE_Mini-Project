@@ -1,47 +1,33 @@
 import Image from 'next/image';
 import { IoLogoGithub } from 'react-icons/io';
 
-import FooterButton from './FooterButton';
-import FooterGithub from './FooterGithub';
+import { FooterButton, FooterGithub } from './';
+import { BACKS, FOOTERINFOS, FRONTS } from './Footer.constant';
 
 const Footer = () => {
   return (
-    <footer className='text-gray1 m-5 text-sm'>
+    <footer className='text-gray1 p-5 text-sm'>
       <Image src='/svg/footerLogo.svg' width={74} height={21} alt='스테이인' />
       <div className='my-5 flex flex-col gap-1'>
         <strong className='mb-1'>STAYINN 스테이인</strong>
         <div className='flex'>
           <span className='mr-2 whitespace-nowrap'>FE :</span>
           <ul className='flex flex-wrap gap-2'>
-            <FooterGithub href='https://github.com/NamgungJongMin'>
-              남궁종민
-            </FooterGithub>
-            <FooterGithub href='https://github.com/HOOOO98'>
-              박성후
-            </FooterGithub>
-            <FooterGithub href='https://github.com/jseo9732'>
-              서지수
-            </FooterGithub>
-            <FooterGithub href='https://github.com/moonyah'>
-              장문용
-            </FooterGithub>
-            <FooterGithub href='https://github.com/jinjoo-jung'>
-              정진주
-            </FooterGithub>
+            {FRONTS.map((front) => (
+              <FooterGithub key={front.name} href={front.githubUrl}>
+                {front.name}
+              </FooterGithub>
+            ))}
           </ul>
         </div>
         <div className='flex'>
           <span className='mr-2 whitespace-nowrap'>BE :</span>
           <ul className='flex flex-wrap gap-2'>
-            <FooterGithub href='https://github.com/deepredk'>
-              김진홍
-            </FooterGithub>
-            <FooterGithub href='https://github.com/Aleexender'>
-              김정훈
-            </FooterGithub>
-            <FooterGithub href='https://github.com/cyPark95'>
-              박찬영
-            </FooterGithub>
+            {BACKS.map((back) => (
+              <FooterGithub key={back.name} href={back.githubUrl}>
+                {back.name}
+              </FooterGithub>
+            ))}
           </ul>
         </div>
       </div>
@@ -51,34 +37,15 @@ const Footer = () => {
         </a>
       </div>
       <ul className='my-5 flex flex-wrap gap-1'>
-        <FooterButton href='https://yanolja.in/ko/companyinfo/'>
-          회사소개
-        </FooterButton>
-        <FooterButton href='mailto:jmnamgung@gmail.com'>
-          광고제휴문의
-        </FooterButton>
-        <FooterButton href='https://careers.yanolja.co'>인재채용</FooterButton>
-        <FooterButton href='http://m.policy.yanolja.com?t=privacy&amp;d=m'>
-          <strong>개인정보처리방침</strong>
-        </FooterButton>
-        <FooterButton href='https://policy.yanolja.com/?t=youth'>
-          청소년 보호 정책
-        </FooterButton>
-        <FooterButton href='http://m.policy.yanolja.com?t=service&amp;d=m'>
-          서비스 이용약관
-        </FooterButton>
-        <FooterButton href='http://m.policy.yanolja.com/?t=location&amp;d=m'>
-          위치정보이용약관
-        </FooterButton>
-        <FooterButton href='http://www.ftc.go.kr/info/bizinfo/communicationViewPopup.jsp?wrkr_no=2208742885'>
-          사업자 정보확인
-        </FooterButton>
-        <FooterButton href='https://policy.yanolja.com/policy/?t=terms-eft'>
-          전자금융거래 이용약관
-        </FooterButton>
-        <FooterButton href='https://policy.yanolja.com/policy/?t=notes-eft'>
-          전자금융거래 이용자 유의사항
-        </FooterButton>
+        {FOOTERINFOS.map((footerInfo) => (
+          <FooterButton
+            key={footerInfo.label}
+            href={footerInfo.url}
+            isStrong={footerInfo.isStrong}
+          >
+            {footerInfo.label}
+          </FooterButton>
+        ))}
       </ul>
       <div className='flex flex-col gap-2'>
         <span>
