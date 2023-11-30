@@ -15,7 +15,7 @@ const ChristmasPensionList = () => {
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [startIndex, setStartIndex] = useState(0);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(
-    '부산광역시'
+    '강원특별자치도'
   );
 
   const today = new Date();
@@ -31,11 +31,11 @@ const ChristmasPensionList = () => {
       const tomorrow = new Date(today);
       tomorrow.setDate(tomorrow.getDate() + 1);
 
-      const apiUrl = `https://mock.stayinn.site/v1/products?checkIn=${
+      const apiUrl = `https://api.stayinn.site/v1/products?checkIn=${
         today.toISOString().split('T')[0]
       }&checkOut=${
         tomorrow.toISOString().split('T')[0]
-      }&category=펜션&location=${location}`;
+      }&category=펜션&areaCode=${location}`;
 
       // console.log('API Request URL:', apiUrl);
 
@@ -60,7 +60,7 @@ const ChristmasPensionList = () => {
   };
 
   useEffect(() => {
-    fetchData('부산광역시');
+    fetchData('강원특별자치도');
   }, []);
 
   const showNextGroup = () => {
@@ -76,22 +76,6 @@ const ChristmasPensionList = () => {
       {/* 네비게이션 바 */}
       <nav className='mb-2 flex justify-evenly border-b border-t text-xs'>
         <div
-          onClick={() => fetchData('부산광역시')}
-          className={`mr-4 cursor-pointer p-3 ${
-            selectedLocation === '부산광역시' ? 'border-b-2 border-black' : ''
-          }`}
-        >
-          부산
-        </div>
-        <div
-          onClick={() => fetchData('경기도')}
-          className={`mr-4 cursor-pointer p-3 ${
-            selectedLocation === '경기도' ? 'border-b-2 border-black' : ''
-          }`}
-        >
-          경기
-        </div>
-        <div
           onClick={() => fetchData('강원특별자치도')}
           className={`mr-4 cursor-pointer p-3 ${
             selectedLocation === '강원특별자치도'
@@ -100,6 +84,22 @@ const ChristmasPensionList = () => {
           }`}
         >
           강원
+        </div>
+        <div
+          onClick={() => fetchData('경상북도')}
+          className={`mr-4 cursor-pointer p-3 ${
+            selectedLocation === '경상북도' ? 'border-b-2 border-black' : ''
+          }`}
+        >
+          경북
+        </div>
+        <div
+          onClick={() => fetchData('전라남도')}
+          className={`mr-4 cursor-pointer p-3 ${
+            selectedLocation === '전라남도' ? 'border-b-2 border-black' : ''
+          }`}
+        >
+          전남
         </div>
         <div
           onClick={() => fetchData('제주특별자치도')}
