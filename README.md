@@ -445,11 +445,12 @@ const handleChange = useCallback(
 | 비로그인 시 예약하기 | 로그인 시 예약하기 |
 | :------------------: | :----------------: |
 |  ![비로그인 예약하기](https://github.com/HOOOO98/KDT_Y_FE_Mini-Project/assets/120024673/fafea81c-3452-413f-a4f1-0c2776ddb4f4)    |   ![로그인 예약](https://github.com/HOOOO98/KDT_Y_FE_Mini-Project/assets/120024673/564ab4fe-0be4-43fa-b774-86976a2b799f)    |
-| :------------------: | :----------------: |
+
+
 | 비로그인 시 장바구니 | 로그인 시 장바구니 |
 | :------------------: | :----------------: |
 |   ![비로그인 장바구니](https://github.com/HOOOO98/KDT_Y_FE_Mini-Project/assets/120024673/f3db4b96-f57a-480e-bbae-3c19c2fd5961)  |    ![ezgif-2-5bdebff3e8](https://github.com/HOOOO98/KDT_Y_FE_Mini-Project/assets/120024673/4965927f-73f2-404f-a5f5-4dda1c00b86c) |
-| :------------------: | :----------------: |
+
 | 객실 예약 유효성 검사 |                    |
 | :------------------: | :----------------: |
 |    ![객실 유효성](https://github.com/HOOOO98/KDT_Y_FE_Mini-Project/assets/120024673/67193a4b-15fd-49ff-acb9-217fc612e7f7)    |       |
