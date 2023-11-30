@@ -71,6 +71,7 @@ const Cart = () => {
                     checkInDate: item.checkInDate,
                     checkOutDate: item.checkOutDate,
                     numberOfNights: item.numberOfNights,
+                    guestCount: item.product.guestCount,
                   },
                 ],
               };
@@ -100,6 +101,7 @@ const Cart = () => {
                   checkInDate: item.checkInDate,
                   checkOutDate: item.checkOutDate,
                   numberOfNights: item.numberOfNights,
+                  guestCount: item.product.guestCount,
                 },
               ],
             },
