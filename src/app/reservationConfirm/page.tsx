@@ -1,12 +1,13 @@
 'use client';
 
 import React from 'react';
-import { ReservationConfirmContainer } from '@/components/reservation';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import orderRequest from '@/api/orderRequest';
-
 import { useEffect, useState } from 'react';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+
 import { Header, HeaderNav } from '@/components/common/header';
+import { ReservationConfirmContainer } from '@/components/reservation';
+
+import orderRequest from '@/api/orderRequest';
 
 const ReservationConfirm = () => {
   const [reservationConfirm, setReservationConfirm] =
