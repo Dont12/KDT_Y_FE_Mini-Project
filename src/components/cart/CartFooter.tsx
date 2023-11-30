@@ -18,7 +18,7 @@ const CartFooter = ({ totalPrice }: Props) => {
     try {
       const res = await cartRequest.reserveCarts(selectedCartList);
       if (res.status === 'SUCCESS') {
-        router.push(`/order-list/${res.data.orderToken}`);
+        router.push(`/reservation/${res.data.orderToken}`);
       } else if (res.status === 'FAIL') {
         // 실패 에러 처리
       } else if (res.status === 'ERROR') {

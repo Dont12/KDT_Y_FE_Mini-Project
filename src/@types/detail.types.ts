@@ -6,7 +6,7 @@ export interface Room {
   price: number;
   checkInTime: string;
   checkOutTime: string;
-  imageUrl: string;
+  imageUrls: string;
   reserveDate: string;
   stock: number;
   roomBathFacility: string;
@@ -26,6 +26,7 @@ export interface Room {
 }
 
 export interface DetailResponse {
+  statuts: string;
   data: HotelData;
 }
 

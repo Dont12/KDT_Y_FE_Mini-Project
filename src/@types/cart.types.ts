@@ -62,7 +62,7 @@ export interface PushCartProps {
   roomId: number;
   checkInDate: string;
   checkOutDate: string;
-  guestCount: string;
+  guestCount: number;
 }
 
 export interface IsCartPropsValid extends PushCartProps {

@@ -1,12 +1,13 @@
 'use client';
 
 import React from 'react';
-import { ReservationConfirmContainer } from '@/components/reservation';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import orderRequest from '@/api/orderRequest';
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
 import { useEffect, useState } from 'react';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+
+import { Footer, Header, HeaderNav } from '@/components/common';
+import { ReservationConfirmContainer } from '@/components/reservation';
+
+import orderRequest from '@/api/orderRequest';
 
 const ReservationConfirm = () => {
   const [reservationConfirm, setReservationConfirm] =
@@ -62,6 +63,7 @@ const ReservationConfirm = () => {
           판매자에게 있습니다.
         </p>
       </main>
+      <Footer />
     </div>
   );
 };
@@ -87,20 +89,6 @@ interface OrderItem {
   checkInTime: string;
   checkOutDate: string;
   checkOutTime: string;
-}
-
-interface OrderItem {
-  orderId: number;
-  orderItemId: number;
-  productName: string;
-  roomName: string;
-  imageUrl: string;
-  checkInDate: string;
-  checkOutDate: string;
-  checkInTime: string;
-  checkOutTime: string;
-  baseGuestCount: number;
-  maxGuestCount: number;
 }
 
 interface ReservationConfirmData {

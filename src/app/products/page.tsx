@@ -3,7 +3,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { Header, HeaderNav } from '@/components/common/header';
+import { Footer, Header, HeaderNav } from '@/components/common';
 import DropdownCategory, {
   dropdownCategoryOptions,
 } from '@/components/products/DropdownCategory';
@@ -259,6 +259,7 @@ const ProductPage = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

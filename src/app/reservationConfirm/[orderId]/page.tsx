@@ -1,9 +1,10 @@
 'use client';
 
-import { ReservationConfirmContainer } from '@/components/reservation';
 import React, { useEffect, useState } from 'react';
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
+
+import { Footer, Header, HeaderNav } from '@/components/common';
+import { ReservationConfirmContainer } from '@/components/reservation';
+
 import orderRequest from '@/api/orderRequest';
 
 const ReservationConfirmDetail = ({ params }: Props) => {
@@ -23,11 +24,11 @@ const ReservationConfirmDetail = ({ params }: Props) => {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
   return (
     <>
       <Header>
-        <HeaderNav showBack showCart showHome>
+        <HeaderNav showBack showCart showHome showMyPage>
           예약 결과 확인
         </HeaderNav>
       </Header>
@@ -85,6 +86,7 @@ const ReservationConfirmDetail = ({ params }: Props) => {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

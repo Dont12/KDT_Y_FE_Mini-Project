@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { Header, HeaderNav } from '@/components/common/header';
+import { Footer, Header, HeaderNav } from '@/components/common';
 import {
   Carousel,
   CartButton,
@@ -67,7 +67,6 @@ const Detail = async ({
                   latitude={details.data.latitude}
                 />
               </div>
-              <p>{details.data.address}</p>
             </div>
             <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
               <div className='flex flex-col'>
@@ -97,7 +96,7 @@ const Detail = async ({
                   <div className='flex justify-between'>
                     <div className='mr-5'>
                       <Image
-                        src={room.imageUrl}
+                        src={room.imageUrls[0]}
                         width={350}
                         height={150}
                         alt={`Room ${index + 1}`}
@@ -169,7 +168,7 @@ const Detail = async ({
                       checkOutDate={defaultCheckOutDate}
                       roomStock={room.stock}
                       maxguest={room.maxGuestCount}
-                      guestCount={defaultPerson}
+                      guestCount={Number(defaultPerson)}
                     />
                     <ReservationButton
                       productId={Number(params.id)}
@@ -197,6 +196,7 @@ const Detail = async ({
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };
