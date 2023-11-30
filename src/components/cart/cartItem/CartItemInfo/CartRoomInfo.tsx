@@ -98,7 +98,8 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
   };
 
   const isAvailable =
-    stock > 1 && new Date(checkInDate).getTime() > new Date().getTime();
+    stock > 1 &&
+    new Date(`${checkInDate}T23:59:59`).getTime() >= new Date().getTime();
   useEffect(() => {
     if (!isAvailable) {
       setSelectedCartList((prevSelectedCartList) =>

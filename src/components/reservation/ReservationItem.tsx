@@ -3,6 +3,7 @@ import React from 'react';
 const ReservationItem = ({
   productName,
   roomName,
+  day,
   checkInDate,
   checkOutDate,
   checkInTime,
@@ -37,7 +38,7 @@ const ReservationItem = ({
         기준{baseGuestCount}명 / 최대 {maxGuestCount}명
       </p>
       <div className='flex justify-end'>
-        <p className='text-mediumGray'>숙박 / 1박</p>
+        <p className='text-mediumGray'>숙박 / {day}박</p>
         <p className='ml-4 font-bold'>
           {new Intl.NumberFormat().format(price)}원
         </p>
@@ -51,6 +52,7 @@ export default ReservationItem;
 interface ReservationItem {
   productName: string;
   roomName: string;
+  day: number;
   checkInDate: string;
   checkOutDate: string;
   checkInTime: string;

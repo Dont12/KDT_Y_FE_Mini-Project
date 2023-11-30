@@ -4,9 +4,9 @@ import React from 'react';
 import { ReservationConfirmContainer } from '@/components/reservation';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import orderRequest from '@/api/orderRequest';
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
+
 import { useEffect, useState } from 'react';
+import { Header, HeaderNav } from '@/components/common/header';
 
 const ReservationConfirm = () => {
   const [reservationConfirm, setReservationConfirm] =
@@ -87,20 +87,6 @@ interface OrderItem {
   checkInTime: string;
   checkOutDate: string;
   checkOutTime: string;
-}
-
-interface OrderItem {
-  orderId: number;
-  orderItemId: number;
-  productName: string;
-  roomName: string;
-  imageUrl: string;
-  checkInDate: string;
-  checkOutDate: string;
-  checkInTime: string;
-  checkOutTime: string;
-  baseGuestCount: number;
-  maxGuestCount: number;
 }
 
 interface ReservationConfirmData {
