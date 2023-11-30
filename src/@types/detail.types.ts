@@ -37,7 +37,7 @@ export interface HotelData {
   description: string;
   longitude: string;
   latitude: string;
-  imageUrl: string;
+  imageUrls: string[];
   rooms: Room[];
 }
 
@@ -45,4 +45,11 @@ export interface DetailProps {
   id: string;
   checkIn: string;
   checkOut: string;
+}
+
+export interface DatePickerProps {
+  roomId: string;
+  checkIn: string;
+  checkOut: string;
+  guest: string;
 }

@@ -33,9 +33,9 @@ const PersonInput = ({
     setPerson(inputValue);
     router.push(
       `/detail/${roomId}?checkInDate=${checkIn}&checkOutDate=${checkOut}&guest=${inputValue}
-      `
+      `,
+      { scroll: false }
     );
-    router.refresh;
     showToast();
   };
 

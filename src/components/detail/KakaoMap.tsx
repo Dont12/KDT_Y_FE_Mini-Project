@@ -2,7 +2,7 @@
 import Script from 'next/script';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-const JSKey = process.env.KAKAOMAP_JSKEY;
+const JSKey = process.env.NEXT_PUBLIC_KAKAOMAP_JSKEY;
 
 const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${JSKey}&autoload=false`;
 

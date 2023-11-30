@@ -5,6 +5,8 @@ import { DateRangePicker } from 'rsuite';
 
 import 'rsuite/dist/rsuite.min.css';
 
+import { DatePickerProps } from '@/@types/detail.types';
+
 const today = new Date();
 const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
@@ -20,7 +22,7 @@ const formatDate = (date: Date): string => {
   return `${year}-${month}-${day}`;
 };
 
-const DatePicker = ({ roomId, checkIn, checkOut, guest }: any) => {
+const DatePicker = ({ roomId, checkIn, checkOut, guest }: DatePickerProps) => {
   const defaultDates =
     checkIn === '' || checkOut === ''
       ? [today, tomorrow]
@@ -46,7 +48,8 @@ const DatePicker = ({ roomId, checkIn, checkOut, guest }: any) => {
             router.push(
               `/detail/${roomId}?checkInDate=${formatDate(
                 value[0]
-              )}&checkOutDate=${formatDate(value[1])}&guest=${guest}`
+              )}&checkOutDate=${formatDate(value[1])}&guest=${guest}`,
+              { scroll: false }
             );
           }
         }}
