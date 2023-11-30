@@ -4,7 +4,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
-import { Footer, Header, HeaderNav } from '@/components/common';
+
+import { Header, HeaderNav } from '@/components/common/header';
 import { ReservationConfirmContainer } from '@/components/reservation';
 
 import orderRequest from '@/api/orderRequest';
