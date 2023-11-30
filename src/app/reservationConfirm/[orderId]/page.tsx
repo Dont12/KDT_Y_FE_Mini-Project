@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import React, { useEffect, useState } from 'react';
 
 import { Header, HeaderNav } from '@/components/common/header';
 import { ReservationConfirmContainer } from '@/components/reservation';
