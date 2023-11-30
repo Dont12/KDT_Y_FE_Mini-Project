@@ -169,7 +169,7 @@ const Detail = async ({
                       checkOutDate={defaultCheckOutDate}
                       roomStock={room.stock}
                       maxguest={room.maxGuestCount}
-                      guestCount={defaultPerson}
+                      guestCount={Number(defaultPerson)}
                     />
                     <ReservationButton
                       productId={Number(params.id)}
