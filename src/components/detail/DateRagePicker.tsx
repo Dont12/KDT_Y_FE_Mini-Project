@@ -3,8 +3,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { DateRangePicker } from 'rsuite';
 
-import 'rsuite/dist/rsuite.min.css';
-
+// import 'rsuite/dist/rsuite.min.css';
 import { DatePickerProps } from '@/@types/detail.types';
 
 const today = new Date();
