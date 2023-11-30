@@ -27,7 +27,7 @@ const ReservationConfirmDetail = ({ params }: Props) => {
   return (
     <>
       <Header>
-        <HeaderNav showBack showCart showHome>
+        <HeaderNav showBack showCart showHome showMyPage>
           예약 결과 확인
         </HeaderNav>
       </Header>
