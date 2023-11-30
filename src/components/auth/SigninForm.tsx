@@ -9,7 +9,7 @@ import { InputEmail, InputPassword } from '@/components/auth';
 import SubmitButton from '@/components/common/SubmitButton';
 
 import { FormTarget, InputHandler, InputType } from '@/@types/auth.types';
-import authRequest from '@/app/api/authRequest';
+import authRequest from '@/api/authRequest';
 
 const SigninForm = () => {
   const [email, handleEmail] = useAuthInput('email');

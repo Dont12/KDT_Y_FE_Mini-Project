@@ -5,10 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { SigninForm } from '@/components/auth';
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
+import { Header, HeaderNav } from '@/components/common/header';
 
-import authRequest from '@/app/api/authRequest';
+import authRequest from '@/api/authRequest';
 
 const SignIn = () => {
   const router = useRouter();

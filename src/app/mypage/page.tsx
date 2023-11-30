@@ -3,11 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import Header from '@/components/common/Header';
-import HeaderNav from '@/components/common/HeaderNav';
+import { Header, HeaderNav } from '@/components/common/header';
 import { HistoryButton, LogoutButton } from '@/components/mypage';
 
-import authRequest from '../api/authRequest';
+import authRequest from '../../api/authRequest';
 
 interface UserInfo {
   email: string;

@@ -20,7 +20,7 @@ import {
   InputType,
   SetInput,
 } from '@/@types/auth.types';
-import authRequest from '@/app/api/authRequest';
+import authRequest from '@/api/authRequest';
 
 const SignupForm = () => {
   const [name, handleName] = useAuthInput('name');
