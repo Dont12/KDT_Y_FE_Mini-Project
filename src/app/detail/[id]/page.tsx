@@ -67,7 +67,6 @@ const Detail = async ({
                   latitude={details.data.latitude}
                 />
               </div>
-              <p>{details.data.address}</p>
             </div>
             <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
               <div className='flex flex-col'>
@@ -97,7 +96,7 @@ const Detail = async ({
                   <div className='flex justify-between'>
                     <div className='mr-5'>
                       <Image
-                        src={room.imageUrl}
+                        src={room.imageUrls[0]}
                         width={350}
                         height={150}
                         alt={`Room ${index + 1}`}
