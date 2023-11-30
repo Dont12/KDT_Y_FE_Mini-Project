@@ -1,4 +1,5 @@
 'use client';
+
 import Script from 'next/script';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
@@ -12,21 +13,19 @@ const KakaoMap = ({
 }: {
   longitude: string;
   latitude: string;
-}) => {
-  return (
-    <>
-      <Script src={KAKAO_SDK_URL} strategy='beforeInteractive' />
-      <Map
-        center={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
-        style={{ width: '100%', height: '100%' }}
-        maxLevel={3}
-      >
-        <MapMarker
-          position={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
-        ></MapMarker>
-      </Map>
-    </>
-  );
-};
+}) => (
+  <>
+    <Script src={KAKAO_SDK_URL} strategy='beforeInteractive' />
+    <Map
+      center={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
+      style={{ width: '100%', height: '100%' }}
+      maxLevel={3}
+    >
+      <MapMarker
+        position={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
+      ></MapMarker>
+    </Map>
+  </>
+);
 
 export default KakaoMap;

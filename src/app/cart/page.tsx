@@ -78,35 +78,34 @@ const Cart = () => {
             }
             return prevCartProductItem;
           });
-        } else {
-          // 존재하지 않으면 숙소 및 방 추가
-          return [
-            ...prevCartProductList,
-            {
-              productId: item.product.productId,
-              productName: item.product.productName,
-              address: item.product.address,
-              cartRoomList: [
-                {
-                  id: item.id,
-                  roomId: item.product.roomId,
-                  imageUrl: item.product.imageUrl,
-                  roomName: item.product.roomName,
-                  baseGuestCount: item.product.baseGuestCount,
-                  maxGuestCount: item.product.maxGuestCount,
-                  price: item.product.price,
-                  checkInTime: item.product.checkInTime,
-                  checkOutTime: item.product.checkOutTime,
-                  stock: item.product.stock,
-                  checkInDate: item.checkInDate,
-                  checkOutDate: item.checkOutDate,
-                  numberOfNights: item.numberOfNights,
-                  guestCount: item.product.guestCount,
-                },
-              ],
-            },
-          ];
         }
+        // 존재하지 않으면 숙소 및 방 추가
+        return [
+          ...prevCartProductList,
+          {
+            productId: item.product.productId,
+            productName: item.product.productName,
+            address: item.product.address,
+            cartRoomList: [
+              {
+                id: item.id,
+                roomId: item.product.roomId,
+                imageUrl: item.product.imageUrl,
+                roomName: item.product.roomName,
+                baseGuestCount: item.product.baseGuestCount,
+                maxGuestCount: item.product.maxGuestCount,
+                price: item.product.price,
+                checkInTime: item.product.checkInTime,
+                checkOutTime: item.product.checkOutTime,
+                stock: item.product.stock,
+                checkInDate: item.checkInDate,
+                checkOutDate: item.checkOutDate,
+                numberOfNights: item.numberOfNights,
+                guestCount: item.product.guestCount,
+              },
+            ],
+          },
+        ];
       });
     });
   }, [apiCartList]);

@@ -1,6 +1,5 @@
 import { PushOrderListProps } from '@/@types/order.types';
 
-
 const url = 'https://api.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
@@ -71,14 +70,14 @@ const orderRequest = {
       body: JSON.stringify({
         registerOrderItems: [
           {
-            productId: productId,
-            roomId: roomId,
-            checkInDate: checkInDate,
-            checkInTime: checkInTime,
-            checkOutDate: checkOutDate,
-            checkOutTime: checkOutTime,
-            guestCount: guestCount,
-            price: price,
+            productId,
+            roomId,
+            checkInDate,
+            checkInTime,
+            checkOutDate,
+            checkOutTime,
+            guestCount,
+            price,
           },
         ],
       }),

@@ -6,8 +6,9 @@ const robots = (): MetadataRoute.Robots => ({
   rules: {
     userAgent: '*',
     allow: '/',
+    disallow: '/private/',
   },
-  sitemap: 'https//.../sitemap.xml',
+  sitemap: 'https://www.stayinn.site//sitemap.xml',
 });
 
 export default robots;
