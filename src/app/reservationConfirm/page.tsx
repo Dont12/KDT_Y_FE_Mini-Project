@@ -4,6 +4,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
+
 import { Header, HeaderNav } from '@/components/common/header';
 import { ReservationConfirmContainer } from '@/components/reservation';
 
@@ -63,6 +64,7 @@ const ReservationConfirm = () => {
           판매자에게 있습니다.
         </p>
       </main>
+      <Footer />
     </div>
   );
 };

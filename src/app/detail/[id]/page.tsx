@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { Header, HeaderNav } from '@/components/common/header';
+import { Footer, Header, HeaderNav } from '@/components/common';
 import {
   Carousel,
   CartButton,
@@ -196,6 +196,7 @@ const Detail = async ({
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };
