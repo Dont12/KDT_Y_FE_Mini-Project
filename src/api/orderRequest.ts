@@ -1,4 +1,4 @@
-import { PushOrderListProps } from '@/types/order.types';
+import { PushOrderListProps } from '@/@types/order.types';
 
 const url = 'https://api.stayinn.site/v1';
 
