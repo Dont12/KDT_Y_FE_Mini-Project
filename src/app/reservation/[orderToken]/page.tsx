@@ -73,8 +73,8 @@ const Reservation = ({ params }: Props) => {
       const resOrderId = response.data.orderId;
       setTimeout(() => {
         setModalIsOpen(false);
-        router.push(`/reservationConfirm/${resOrderId}`);
-      }, 3000);
+        router.replace(`/reservationConfirm/${resOrderId}`);
+      }, 1000);
       console.log('post', response);
     } catch (error) {
       console.error('결제 실패', error);
@@ -195,7 +195,7 @@ interface ResisterOrderItems {
   maxGuestCount: number;
   baseGuestCount: number;
   price: number;
-  day: string;
+  day: number;
   checkInTime: string;
   checkInDate: string;
   checkOutTime: string;
