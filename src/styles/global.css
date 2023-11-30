@@ -2,49 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Light.otf') format('otf');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Regular.otf') format('otf');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Medium.otf') format('otf');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Bold.otf') format('otf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    font-family: 'Pretendard';
+    font-size: 16px;
+    font-weight: normal;
+  }
+}
+
 /* custom css */
-.subtitle1 {
-  font-weight: bold;
-  font-size: 2.5rem;
-  line-height: 1.5;
+.bar {
+  margin: 0 0.375rem;
 }
-.subtitle2 {
-  font-weight: bold;
-  font-size: 2rem;
-  line-height: 1.5;
+.footer-button {
+  border: 0.1rem solid #e6e6e6;
+  cursor: pointer;
 }
-.subtitle3 {
-  font-weight: bold;
-  font-size: 1.75rem;
-  line-height: 1.5;
-}
-.subtitle4 {
-  font-weight: bold;
-  font-size: 1.5rem;
-  line-height: 1.5;
-}
-.subtitle5 {
-  font-weight: bold;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-.body1 {
-  font-weight: regular;
-  font-size: rem;
-  line-height: 1.5;
-}
-.body2 {
-  font-weight: medium;
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
-.button {
-  font-weight: medium;
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
-.caption {
-  font-weight: bold;
-  font-size: 0.75rem;
-  line-height: 1.5;
+.footer-button:hover {
+  border: 0.1rem solid #616161;
+  cursor: pointer;
 }

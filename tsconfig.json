@@ -15,15 +15,18 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "~/*": ["./public/*"]
+      "@/*": ["src/*"],
+      "@public/*": ["public/*"],
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"]
     },
     "incremental": true,
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "types": ["swiper"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"],
