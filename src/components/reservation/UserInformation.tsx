@@ -1,10 +1,42 @@
 'use client';
 
-import React, { useState } from 'react';
+import orderRequest from '@/api/orderRequest';
+import React, { useEffect, useState } from 'react';
 
 const UserInformation = ({ onUserInfoChange }: any) => {
   const [userName, setUserName] = useState('');
   const [userPhone, setUserPhone] = useState('');
+  const [userInfo, setUserInfo] = useState<UserInfo | null>();
+
+  const fetchUserInfo = async () => {
+    try {
+      const userInfoData = await orderRequest.getUserInfo();
+      const userInfo = await userInfoData.data;
+      setUserInfo(userInfo);
+      console.log(userInfo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (userInfo && userInfo.email && userInfo.phone && e.target.checked) {
+      setUserName(userInfo.nickname);
+      setUserPhone(userInfo.phone);
+      onUserInfoChange({
+        userName: userInfo.nickname,
+        userPhone: userInfo.phone,
+      });
+    } else {
+      setUserName('');
+      setUserPhone('');
+      onUserInfoChange({ userName: '', userPhone: '' });
+    }
+  };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
@@ -21,7 +53,11 @@ const UserInformation = ({ onUserInfoChange }: any) => {
       <div className=' flex justify-between p-8'>
         <p>이용자 정보</p>
         <label>
-          <input type='checkbox' className='mr-2' />
+          <input
+            type='checkbox'
+            className='mr-2'
+            onChange={handleCheckboxChange}
+          />
           예약자 정보와 일치합니다.
         </label>
       </div>
@@ -50,3 +86,9 @@ const UserInformation = ({ onUserInfoChange }: any) => {
 };
 
 export default UserInformation;
+
+interface UserInfo {
+  email: string;
+  nickname: string;
+  phone: string;
+}

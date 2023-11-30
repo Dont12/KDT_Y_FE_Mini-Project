@@ -95,6 +95,7 @@ const Reservation = ({ params }: Props) => {
               key={index}
               productName={data.productName}
               roomName={data.roomName}
+              day={data.day}
               checkInDate={data.checkInDate}
               checkOutDate={data.checkOutDate}
               checkInTime={data.checkInTime}
@@ -103,11 +104,13 @@ const Reservation = ({ params }: Props) => {
               maxGuestCount={data.maxGuestCount}
               price={data.price}
             />
-            {index < res?.registerOrderItems.length - 1 && <Divider />}
+            <Divider />
+            {/* {index < res?.registerOrderItems.length - 1 && <Divider />} */}
           </>
         ))}
         <form onSubmit={handlePaymentSubmit}>
           <UserInformation onUserInfoChange={handleUserInfoChange} />
+          <Divider />
           <div className='mt-8  bg-white p-8 '>
             <p className='font-bold'>결제 금액</p>
             <div className='flex justify-between'>
@@ -152,6 +155,7 @@ const Reservation = ({ params }: Props) => {
               {new Intl.NumberFormat().format(res?.totalPrice as number)}원
               결제하기
             </button>
+
             <p className='text-mediumGray my-10 text-xs'>
               (주)[우리 서비스 이름]는 통신판매중개업자로서, 통신판매의 당사자가
               아니라는 사실을 고지하며 상품의 결제, 이용 및 환불 등과 관련한
@@ -191,6 +195,7 @@ interface ResisterOrderItems {
   maxGuestCount: number;
   baseGuestCount: number;
   price: number;
+  day: string;
   checkInTime: string;
   checkInDate: string;
   checkOutTime: string;
