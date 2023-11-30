@@ -12,30 +12,26 @@ export const carouselImages = [
   '/images/main/carousel03.jpg',
 ];
 
-const NextArrow = ({ onClick }: any) => {
-  return (
-    <button
-      onClick={onClick}
-      type='button'
-      className='absolute inset-y-1/2 right-0 z-10 pr-4 text-[3rem] text-white
+const NextArrow = ({ onClick }: any) => (
+  <button
+    onClick={onClick}
+    type='button'
+    className='absolute inset-y-1/2 right-0 z-10 pr-4 text-[3rem] text-white
     '
-    >
-      <CgChevronRight />
-    </button>
-  );
-};
+  >
+    <CgChevronRight />
+  </button>
+);
 
-const PrevArrow = ({ onClick }: any) => {
-  return (
-    <button
-      onClick={onClick}
-      type='button'
-      className='absolute inset-y-1/2 left-0 z-10 pl-4 text-[3rem] text-white'
-    >
-      <CgChevronLeft />
-    </button>
-  );
-};
+const PrevArrow = ({ onClick }: any) => (
+  <button
+    onClick={onClick}
+    type='button'
+    className='absolute inset-y-1/2 left-0 z-10 pl-4 text-[3rem] text-white'
+  >
+    <CgChevronLeft />
+  </button>
+);
 
 const MainCarousel = ({ images }: any): JSX.Element => {
   const settings = {

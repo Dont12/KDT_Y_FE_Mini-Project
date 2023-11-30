@@ -28,11 +28,3 @@ export interface PaymentData {
   totalPrice: number;
   payment: string;
 }
-
-export interface PaymentData {
-  orderToken: string;
-  userName: string;
-  userPhone: string;
-  totalPrice: number;
-  payment: string;
-}

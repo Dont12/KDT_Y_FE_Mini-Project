@@ -1,7 +1,8 @@
 'use client';
 
-import orderRequest from '@/api/orderRequest';
 import React, { useEffect, useState } from 'react';
+
+import orderRequest from '@/api/orderRequest';
 
 const UserInformation = ({ onUserInfoChange }: any) => {
   const [userName, setUserName] = useState('');
