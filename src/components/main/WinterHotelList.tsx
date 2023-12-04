@@ -64,7 +64,7 @@ const WinterHotelList = () => {
     }
   };
 
-  // 서울, 경기, 인천, 부산
+  // 서울, 경기, 부산, 강원
   useEffect(() => {
     fetchData('서울특별시');
   }, []);
@@ -88,6 +88,14 @@ const WinterHotelList = () => {
           }`}
         >
           서울
+        </div>
+        <div
+          onClick={() => fetchData('경기도')}
+          className={`mr-4 cursor-pointer p-3 ${
+            selectedLocation === '경기도' ? 'border-b-2 border-black' : ''
+          }`}
+        >
+          경기
         </div>
         <div
           onClick={() => fetchData('부산광역시')}
