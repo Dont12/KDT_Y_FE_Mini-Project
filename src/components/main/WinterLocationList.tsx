@@ -14,7 +14,7 @@ interface WinterLocationProps {
   image?: string;
 }
 
-export const WinterLocations: WinterLocationProps[] = [
+export const winterLocations: WinterLocationProps[] = [
   {
     label: '강원도',
     image: 'images/main/winter01.jpg',

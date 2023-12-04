@@ -5,13 +5,13 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { Footer, Header, HeaderNav } from '@/components/common';
-import DropdownCategory, {
+import {
+  DropdownCategory,
   dropdownCategoryOptions,
-} from '@/components/products/DropdownCategory';
-import DropdownLocation, {
+  DropdownLocation,
   dropdownLocationOptions,
-} from '@/components/products/DropdownLocation';
-import YourItemComponent from '@/components/products/YourItemComponent';
+  YourItemComponent,
+} from '@/components/products';
 
 interface product {
   id: number;

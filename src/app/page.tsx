@@ -3,13 +3,16 @@
 import React from 'react';
 
 import { Footer, Header, HeaderNav } from '@/components/common';
-import ChristmasPensionList from '@/components/main/ChristmasPensionList';
-import IconList, { mainIcons } from '@/components/main/IconList';
-import MainCarousel, { carouselImages } from '@/components/main/MainCarousel';
-import WinterHotelList from '@/components/main/WinterHotelList';
-import WinterLocationList, {
-  WinterLocations,
-} from '@/components/main/WinterLocationList';
+import {
+  carouselImages,
+  ChristmasPensionList,
+  IconList,
+  MainCarousel,
+  mainIcons,
+  WinterHotelList,
+  WinterLocationList,
+  winterLocations,
+} from '@/components/main';
 
 const HomePage = () => (
   <>
@@ -29,7 +32,7 @@ const HomePage = () => (
       </section>
       <section className='p-10'>
         <h1 className='mb-6	 text-lg font-bold'>사랑받는 겨울 여행지</h1>
-        <WinterLocationList locations={WinterLocations} />
+        <WinterLocationList locations={winterLocations} />
       </section>
     </main>
     <Footer />
