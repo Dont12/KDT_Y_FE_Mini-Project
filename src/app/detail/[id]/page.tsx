@@ -98,13 +98,13 @@ const Detail = async ({
                   className='border-mediumGray flex flex-col gap-5 rounded border border-solid p-5'
                 >
                   <div className='flex justify-between'>
-                    <div className='mr-5'>
+                    <div className='mr-5 flex shrink-0'>
                       <Image
                         src={room.imageUrls[0]}
-                        width={350}
-                        height={150}
                         alt={`Room ${index + 1}`}
-                        className='h-full w-[350px] object-cover'
+                        width={288}
+                        height={288}
+                        className='h-72 w-72 rounded object-cover object-center'
                       />
                     </div>
                     <div className='flex grow flex-col gap-3 pt-3'>
