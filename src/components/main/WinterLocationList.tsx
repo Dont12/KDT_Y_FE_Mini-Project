@@ -71,11 +71,14 @@ const Location = ({
 };
 
 const WinterLocationList = ({ locations }: WinterLocationListProps) => (
-  <div className='icon-container grid grid-cols-4 justify-items-center pb-10 pl-10 pr-10'>
-    {locations.map((iconData, index) => (
-      <Location key={index} {...iconData} />
-    ))}
-  </div>
+  <section className='p-10'>
+    <h1 className='mb-6	 text-lg font-bold'>사랑받는 겨울 여행지</h1>
+    <div className='icon-container grid grid-cols-4 justify-items-center pb-10 pl-10 pr-10'>
+      {locations.map((iconData, index) => (
+        <Location key={index} {...iconData} />
+      ))}
+    </div>
+  </section>
 );
 
 export default WinterLocationList;
