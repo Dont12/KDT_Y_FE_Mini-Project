@@ -35,7 +35,7 @@ const WinterHotelList = () => {
         today.toISOString().split('T')[0]
       }&checkOut=${
         tomorrow.toISOString().split('T')[0]
-      }&category=관광호텔&areaCode=${location}&page=1&pageSize=8`;
+      }&category=관광호텔&areaCode=${location}&page=0&pageSize=10`;
 
       const response = await fetch(apiUrl, {
         method: 'GET',
