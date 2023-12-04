@@ -1,4 +1,5 @@
 'use client';
+
 import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -27,14 +28,14 @@ const ReservationButton = ({
     try {
       const response: PushOrderElementResponse =
         await orderRequest.pushOrderElement({
-          productId: productId,
-          roomId: roomId,
-          checkInDate: checkInDate,
-          checkInTime: checkInTime,
-          checkOutDate: checkOutDate,
-          checkOutTime: checkOutTime,
-          guestCount: guestCount,
-          price: price,
+          productId,
+          roomId,
+          checkInDate,
+          checkInTime,
+          checkOutDate,
+          checkOutTime,
+          guestCount,
+          price,
         });
       if (response.status === 'SUCCESS') {
         router.push(`/reservation/${response.data.orderToken}`);
