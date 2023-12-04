@@ -35,7 +35,7 @@ const WinterHotelList = () => {
         today.toISOString().split('T')[0]
       }&checkOut=${
         tomorrow.toISOString().split('T')[0]
-      }&category=관광호텔&areaCode=${location}&page=1&pageSize=8`;
+      }&category=관광호텔&areaCode=${location}&page=0&pageSize=10`;
 
       const response = await fetch(apiUrl, {
         method: 'GET',
@@ -64,7 +64,7 @@ const WinterHotelList = () => {
     }
   };
 
-  // 서울, 경기, 인천, 부산
+  // 서울, 경기, 부산, 강원
   useEffect(() => {
     fetchData('서울특별시');
   }, []);
@@ -78,7 +78,8 @@ const WinterHotelList = () => {
   };
 
   return (
-    <>
+    <section className='p-8'>
+      <h1 className='mb-6 text-lg	 font-bold'>겨울 도심 호캉스</h1>
       {/* 네비게이션 바 */}
       <nav className='mb-2 flex justify-evenly border-b border-t text-xs'>
         <div
@@ -88,6 +89,14 @@ const WinterHotelList = () => {
           }`}
         >
           서울
+        </div>
+        <div
+          onClick={() => fetchData('경기도')}
+          className={`mr-4 cursor-pointer p-3 ${
+            selectedLocation === '경기도' ? 'border-b-2 border-black' : ''
+          }`}
+        >
+          경기
         </div>
         <div
           onClick={() => fetchData('부산광역시')}
@@ -151,7 +160,7 @@ const WinterHotelList = () => {
           <CgChevronRight className='text-gray1 text-2xl' />
         </button>
       </div>
-    </>
+    </section>
   );
 };
 

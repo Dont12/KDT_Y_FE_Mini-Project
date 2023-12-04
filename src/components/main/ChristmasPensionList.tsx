@@ -35,7 +35,7 @@ const ChristmasPensionList = () => {
         today.toISOString().split('T')[0]
       }&checkOut=${
         tomorrow.toISOString().split('T')[0]
-      }&category=펜션&areaCode=${location}&page=1&pageSize=7`;
+      }&category=펜션&areaCode=${location}&page=0&pageSize=10`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) {
@@ -70,7 +70,8 @@ const ChristmasPensionList = () => {
   };
 
   return (
-    <>
+    <section className='p-8'>
+      <h1 className='mb-6 text-lg	 font-bold'>크리스마스 펜션 예약하기</h1>
       {/* 네비게이션 바 */}
       <nav className='mb-2 flex justify-evenly border-b border-t text-xs'>
         <div
@@ -156,7 +157,7 @@ const ChristmasPensionList = () => {
           <CgChevronRight className='text-gray1 text-2xl' />
         </button>
       </div>
-    </>
+    </section>
   );
 };
 
