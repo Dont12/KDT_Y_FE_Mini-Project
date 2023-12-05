@@ -3,7 +3,7 @@ import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useRouter } from 'next/navigation';
 
-const ReservationRouter = ({ orderId }) => {
+const ReservationRouter = ({ orderId }: any) => {
   const router = useRouter();
 
   const handleDetailClick = () => {
