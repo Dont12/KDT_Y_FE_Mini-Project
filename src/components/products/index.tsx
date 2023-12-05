@@ -1,11 +1,11 @@
 import DropdownCategory, { dropdownCategoryOptions } from './DropdownCategory';
 import DropdownLocation, { dropdownLocationOptions } from './DropdownLocation';
-import YourItemComponent from './YourItemComponent';
+import ProductCard from './ProductCard';
 
 export {
   DropdownCategory,
   dropdownCategoryOptions,
   DropdownLocation,
   dropdownLocationOptions,
-  YourItemComponent,
+  ProductCard,
 };

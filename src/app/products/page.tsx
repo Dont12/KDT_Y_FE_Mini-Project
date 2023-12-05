@@ -10,7 +10,7 @@ import {
   dropdownCategoryOptions,
   DropdownLocation,
   dropdownLocationOptions,
-  YourItemComponent,
+  ProductCard,
 } from '@/components/products';
 
 interface product {
@@ -233,7 +233,7 @@ const ProductPage = () => {
         <div>
           <div className='grid grid-cols-2 gap-4 '>
             {data.data.map((item) => (
-              <YourItemComponent
+              <ProductCard
                 key={item.id}
                 name={item.name}
                 imageUrl={item.imageUrl}

@@ -1,16 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-// components/category/YourItemComponent.tsx
 
 import Link from 'next/link';
 import React from 'react';
 
-interface YourItemComponentProps {
+interface ProductCardProps {
   id: number;
   name: string;
   imageUrl: string;
 }
 
-const YourItemComponent = ({ id, name, imageUrl }: YourItemComponentProps) => {
+const ProductCard = ({ id, name, imageUrl }: ProductCardProps) => {
   return (
     <Link href={`/detail/${id}`}>
       <div className='max-w-xs cursor-pointer rounded-md bg-white py-6 pr-6 shadow-md'>
@@ -36,4 +35,4 @@ const YourItemComponent = ({ id, name, imageUrl }: YourItemComponentProps) => {
   );
 };
 
-export default YourItemComponent;
+export default ProductCard;
