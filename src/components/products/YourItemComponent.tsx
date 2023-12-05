@@ -11,17 +11,8 @@ interface YourItemComponentProps {
 }
 
 const YourItemComponent = ({ id, name, imageUrl }: YourItemComponentProps) => {
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-
-  const formattedToday = today.toISOString().split('T')[0];
-  const formattedTomorrow = tomorrow.toISOString().split('T')[0];
-
   return (
-    <Link
-      href={`/detail/${id}?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`}
-    >
+    <Link href={`/detail/${id}`}>
       <div className='max-w-xs cursor-pointer rounded-md bg-white py-6 pr-6 shadow-md'>
         <div className='grid grid-cols-2 items-center'>
           <div className='ml-10'>

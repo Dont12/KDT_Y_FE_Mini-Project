@@ -18,13 +18,6 @@ const WinterHotelList = () => {
     '서울특별시'
   );
 
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-
-  const formattedToday = today.toISOString().split('T')[0];
-  const formattedTomorrow = tomorrow.toISOString().split('T')[0];
-
   const fetchData = async (location: string) => {
     try {
       const today = new Date();
@@ -130,10 +123,7 @@ const WinterHotelList = () => {
             style={{ transform: `translateX(-${startIndex * 30}%)` }}
           >
             {hotels.map((hotel) => (
-              <Link
-                key={hotel.id}
-                href={`/detail/${hotel.id}?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`}
-              >
+              <Link key={hotel.id} href={`/detail/${hotel.id}`}>
                 <div className='w-[12rem] cursor-pointer rounded-md bg-white p-4 shadow-md'>
                   <div className='mb-7 flex w-full justify-center'>
                     <Image

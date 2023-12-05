@@ -18,13 +18,6 @@ const ChristmasPensionList = () => {
     '강원특별자치도'
   );
 
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-
-  const formattedToday = today.toISOString().split('T')[0];
-  const formattedTomorrow = tomorrow.toISOString().split('T')[0];
-
   const fetchData = async (location: string) => {
     try {
       const today = new Date();
@@ -124,10 +117,7 @@ const ChristmasPensionList = () => {
             style={{ transform: `translateX(-${startIndex * 30}%)` }}
           >
             {hotels.map((hotel) => (
-              <Link
-                key={hotel.id}
-                href={`/detail/${hotel.id}?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`}
-              >
+              <Link key={hotel.id} href={`/detail/${hotel.id}`}>
                 <div
                   key={hotel.id}
                   className='w-[12rem] rounded-md bg-white p-4 shadow-md'
