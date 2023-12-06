@@ -33,7 +33,7 @@ const SigninForm = () => {
       console.log(res);
 
       if (res.status === 'SUCCESS') {
-        console.log(cookies.get('accessToken'));
+        console.log(document.cookie);
         // router.replace('/');
       } else {
         setSubmitError(res.errorMessage);
