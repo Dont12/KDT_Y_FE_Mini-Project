@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { HiMiniXMark } from 'react-icons/hi2';
+import { useSetRecoilState } from 'recoil';
 
 import { Modal } from '@/components/common';
 
@@ -10,37 +11,34 @@ import {
   cartSelectedState,
 } from '@/recoil/atoms/cartState';
 
-import CartHeaderButton from './CartHeaderButton';
+interface Props {
+  cartId: string;
+}
 
-const DeleteSelectedButton = () => {
+const DeleteButton = ({ cartId }: Props) => {
   const [isShowModal, setIsShowModal] = useState(false);
 
-  const [selectedCartList, setSelectedCartList] =
-    useRecoilState(cartSelectedState);
+  const setSelectedCartList = useSetRecoilState(cartSelectedState);
   const setApiCartList = useSetRecoilState(apiCartListState);
   const setCartAllCheckboxList = useSetRecoilState(cartCheckboxElementState);
 
-  const deleteSelectedItem = async () => {
+  const deleteCartItem = async () => {
     try {
-      const res = await cartRequest.deleteCarts(selectedCartList);
-
+      const res = await cartRequest.deleteCarts([cartId]);
       if (res.status === 'SUCCESS') {
         setApiCartList((prevApiCartList) =>
           prevApiCartList.filter(
-            (prevApiCartItem) =>
-              !selectedCartList.includes(String(prevApiCartItem.id))
+            (prevSelectedCartItem) => String(prevSelectedCartItem.id) !== cartId
           )
         );
         setSelectedCartList((prevSelectedCartList) =>
           prevSelectedCartList.filter(
-            (prevSelectedCartItem) =>
-              !selectedCartList.includes(prevSelectedCartItem)
+            (prevSelectedCartItem) => prevSelectedCartItem !== cartId
           )
         );
         setCartAllCheckboxList((prevCartAllCheckedbox) =>
           prevCartAllCheckedbox.filter(
-            (prevSelectedCartItem) =>
-              !selectedCartList.includes(prevSelectedCartItem.name)
+            (prevSelectedCartItem) => prevSelectedCartItem.name !== cartId
           )
         );
         setIsShowModal(false);
@@ -56,23 +54,22 @@ const DeleteSelectedButton = () => {
 
   return (
     <>
-      <CartHeaderButton
+      <button
+        type='button'
+        aria-label='장바구니 삭제'
         onClick={() => setIsShowModal(true)}
-        disabled={selectedCartList.length === 0}
       >
-        선택 삭제
-      </CartHeaderButton>
+        <HiMiniXMark className='text-gray1' />
+      </button>
       {isShowModal && (
         <Modal
-          content={`선택하신 ${
-            selectedCartList.length > 1 ? `${selectedCartList.length}개의 ` : ''
-          }상품이 삭제됩니다`}
+          content='선택하신 상품이 삭제됩니다'
           onCancelClick={() => setIsShowModal(false)}
-          onConfirmClick={deleteSelectedItem}
+          onConfirmClick={deleteCartItem}
         />
       )}
     </>
   );
 };
 
-export default DeleteSelectedButton;
+export default DeleteButton;

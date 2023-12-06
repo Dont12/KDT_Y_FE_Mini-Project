@@ -1,17 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
-import { HiMiniXMark } from 'react-icons/hi2';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import type { PreCartRoom } from '@/@types/cart.types';
-import cartRequest from '@/api/cartRequest';
 import {
-  apiCartListState,
   cartCheckboxElementState,
   cartSelectedState,
 } from '@/recoil/atoms/cartState';
 import { convertFullDate } from '@/utils/dateFormat';
+
+import DeleteButton from './DeleteButton';
 
 interface Props {
   productId: number;
@@ -66,36 +65,6 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     });
   };
 
-  const setApiCartList = useSetRecoilState(apiCartListState);
-  const deleteCartItem = async () => {
-    try {
-      const res = await cartRequest.deleteCarts([cartId]);
-      if (res.status === 'SUCCESS') {
-        setApiCartList((prevApiCartList) =>
-          prevApiCartList.filter(
-            (prevSelectedCartItem) => String(prevSelectedCartItem.id) !== cartId
-          )
-        );
-        setSelectedCartList((prevSelectedCartList) =>
-          prevSelectedCartList.filter(
-            (prevSelectedCartItem) => prevSelectedCartItem !== String(id)
-          )
-        );
-        setCartAllCheckboxList((prevCartAllCheckedbox) =>
-          prevCartAllCheckedbox.filter(
-            (prevSelectedCartItem) => prevSelectedCartItem.name !== String(id)
-          )
-        );
-      } else if (res.status === 'FAIL') {
-        // 실패 에러 처리
-      } else if (res.status === 'ERROR') {
-        // 서버 오류 에러 처리
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const isAvailable =
     stock > 1 &&
     new Date(`${checkInDate}T23:59:59`).getTime() >= new Date().getTime();
@@ -129,13 +98,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
             <h3 className='text-base font-bold'>{roomName}</h3>
           </Link>
         </div>
-        <button
-          type='button'
-          aria-label='장바구니 삭제'
-          onClick={deleteCartItem}
-        >
-          <HiMiniXMark className='text-gray1' />
-        </button>
+        <DeleteButton cartId={cartId} />
       </div>
       <div className='flex items-start gap-2'>
         <div className='relative h-20 w-20'>

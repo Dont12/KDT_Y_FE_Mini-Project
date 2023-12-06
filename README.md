@@ -165,8 +165,7 @@
 ![image](https://github.com/NamgungJongMin/KDT_Y_FE_Mini-Project/assets/100336573/41d802fc-999d-4961-a6ae-e34fe093be41)
 
 ## 🎞 OVERVIEW
-
-{시연 영상}
+[![시연영상](https://github.com/Dont12/KDT_Y_FE_Mini-Project/assets/79249376/3e556cb5-0763-4335-991f-7d8e36c73962)](https://drive.google.com/file/d/14apsd5GBasq9pUgUAFFZjZgJzqrIvaB2/view?usp=sharing)
 
 ## 🔍️ 기술 스택
 
