@@ -34,6 +34,7 @@ const SigninForm = () => {
 
       if (res.status === 'SUCCESS') {
         cookies.set('accessToken', cookies.get('accessToken') as string);
+        console.log(cookies.get('accessToken'));
         // router.replace('/');
       } else {
         setSubmitError(res.errorMessage);

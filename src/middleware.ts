@@ -41,14 +41,17 @@ export async function alreadyAuth(req: NextRequest) {
 export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/auth/signin')) {
     console.log('call middleware - /auth/signin');
+
     return alreadyAuth(request);
   }
   if (request.nextUrl.pathname.startsWith('/auth/signup')) {
     console.log('call middleware - /auth/signup');
+
     return alreadyAuth(request);
   }
   if (request.nextUrl.pathname.startsWith('/mypage')) {
     console.log('call middleware - /mypage');
+
     return needAuth(request);
   }
 }
