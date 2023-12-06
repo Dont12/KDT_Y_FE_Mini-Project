@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { Header, HeaderNav } from '@/components/common/header';
+import { Footer, Header, HeaderNav } from '@/components/common';
 import {
   Carousel,
   CartButton,
@@ -16,8 +16,12 @@ import { DetailResponse, Room } from '@/@types/detail.types';
 import detailInfoRequest from '@/api/detailInfoRequest';
 import { calculateTotalCost } from '@/utils/calculatePerNightCost';
 
-const today = new Date();
-const tomorrow = new Date();
+const today = new Date(
+  new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+);
+const tomorrow = new Date(
+  new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+);
 tomorrow.setDate(tomorrow.getDate() + 1);
 
 const formatDate = (date: Date): string => {
@@ -67,7 +71,6 @@ const Detail = async ({
                   latitude={details.data.latitude}
                 />
               </div>
-              <p>{details.data.address}</p>
             </div>
             <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
               <div className='flex flex-col'>
@@ -97,7 +100,7 @@ const Detail = async ({
                   <div className='flex justify-between'>
                     <div className='mr-5'>
                       <Image
-                        src={room.imageUrl}
+                        src={room.imageUrls[0]}
                         width={350}
                         height={150}
                         alt={`Room ${index + 1}`}
@@ -169,7 +172,7 @@ const Detail = async ({
                       checkOutDate={defaultCheckOutDate}
                       roomStock={room.stock}
                       maxguest={room.maxGuestCount}
-                      guestCount={defaultPerson}
+                      guestCount={Number(defaultPerson)}
                     />
                     <ReservationButton
                       productId={Number(params.id)}
@@ -197,6 +200,7 @@ const Detail = async ({
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

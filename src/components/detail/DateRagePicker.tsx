@@ -1,19 +1,22 @@
 'use client';
+
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { DateRangePicker } from 'rsuite';
 
-import 'rsuite/dist/rsuite.min.css';
+import 'rsuite/dist/rsuite-no-reset.min.css';
 
 import { DatePickerProps } from '@/@types/detail.types';
 
-const today = new Date();
-const tomorrow = new Date();
+const today = new Date(
+  new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+);
+const tomorrow = new Date(
+  new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+);
 tomorrow.setDate(tomorrow.getDate() + 1);
 
-const beforeToday = (date: Date) => {
-  return date < today;
-};
+const beforeToday = (date: Date) => date < today;
 
 const formatDate = (date: Date): string => {
   const year = date.getFullYear();
@@ -41,11 +44,26 @@ const DatePicker = ({ roomId, checkIn, checkOut, guest }: DatePickerProps) => {
         defaultValue={[today, tomorrow]}
         shouldDisableDate={beforeToday}
         className='h-8 w-52'
-        value={checkInOut as [Date, Date] | null}
+        value={
+          checkInOut
+            ? [
+                new Date(
+                  checkInOut[0].toLocaleString('en-US', {
+                    timeZone: 'Asia/Seoul',
+                  })
+                ),
+                new Date(
+                  checkInOut[1].toLocaleString('en-US', {
+                    timeZone: 'Asia/Seoul',
+                  })
+                ),
+              ]
+            : null
+        }
         onChange={(value: [Date, Date] | null) => {
           if (value !== null) {
             setCheckInOut(value);
-            router.push(
+            router.replace(
               `/detail/${roomId}?checkInDate=${formatDate(
                 value[0]
               )}&checkOutDate=${formatDate(value[1])}&guest=${guest}`,

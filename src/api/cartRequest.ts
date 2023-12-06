@@ -47,10 +47,10 @@ const cartRequest = {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        roomId: roomId,
-        checkInDate: checkInDate,
-        checkOutDate: checkOutDate,
-        guestCount: guestCount,
+        roomId,
+        checkInDate,
+        checkOutDate,
+        guestCount: Number(guestCount),
       }),
     }).then(responseBody),
 };

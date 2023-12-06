@@ -1,12 +1,12 @@
 'use client';
 
-import React from 'react';
-import { ReservationConfirmContainer } from '@/components/reservation';
+import React, { useEffect, useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import orderRequest from '@/api/orderRequest';
 
-import { useEffect, useState } from 'react';
-import { Header, HeaderNav } from '@/components/common/header';
+import { Footer, Header, HeaderNav } from '@/components/common';
+import { ReservationConfirmContainer } from '@/components/reservation';
+
+import orderRequest from '@/api/orderRequest';
 
 const ReservationConfirm = () => {
   const [reservationConfirm, setReservationConfirm] =
@@ -62,6 +62,7 @@ const ReservationConfirm = () => {
           판매자에게 있습니다.
         </p>
       </main>
+      <Footer />
     </div>
   );
 };

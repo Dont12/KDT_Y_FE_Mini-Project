@@ -1,4 +1,6 @@
 'use client';
+
+import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -6,7 +8,7 @@ import {
   OrderButtonProps,
   PushOrderElementResponse,
 } from '@/@types/order.types';
-import orderRequest from '@/app/api/orderRequest';
+import orderRequest from '@/api/orderRequest';
 
 const ReservationButton = ({
   productId,
@@ -22,28 +24,29 @@ const ReservationButton = ({
 }: OrderButtonProps) => {
   const router = useRouter();
 
-  const pushReservationElement = async () => {
+  const pushReservationElement = debounce(async () => {
     try {
       const response: PushOrderElementResponse =
         await orderRequest.pushOrderElement({
-          productId: productId,
-          roomId: roomId,
-          checkInDate: checkInDate,
-          checkInTime: checkInTime,
-          checkOutDate: checkOutDate,
-          checkOutTime: checkOutTime,
-          guestCount: guestCount,
-          price: price,
+          productId,
+          roomId,
+          checkInDate,
+          checkInTime,
+          checkOutDate,
+          checkOutTime,
+          guestCount,
+          price,
         });
       if (response.status === 'SUCCESS') {
         router.push(`/reservation/${response.data.orderToken}`);
-      }
-    } catch (error) {
-      if (error == '401') {
+      } else {
         router.push(`/auth/signin`);
       }
+    } catch (error) {
+      router.push(`/auth/signin`);
+      console.log(error);
     }
-  };
+  }, 200);
 
   return (
     <input

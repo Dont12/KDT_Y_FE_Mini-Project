@@ -31,15 +31,20 @@ const WinterHotelList = () => {
       const tomorrow = new Date(today);
       tomorrow.setDate(tomorrow.getDate() + 1);
 
-      const apiUrl = `https://mock.stayinn.site/v1/products?checkIn=${
+      const apiUrl = `https://api.stayinn.site/v1/products?checkIn=${
         today.toISOString().split('T')[0]
       }&checkOut=${
         tomorrow.toISOString().split('T')[0]
-      }&category=관광호텔&location=${location}`;
+      }&category=관광호텔&areaCode=${location}&page=1&pageSize=8`;
 
-      console.log('API Request URL:', apiUrl);
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-      const response = await fetch(apiUrl);
       if (!response.ok) {
         throw new Error(
           `데이터를 불러오는 중 오류가 발생했습니다: ${response.statusText}`
@@ -85,28 +90,22 @@ const WinterHotelList = () => {
           서울
         </div>
         <div
-          onClick={() => fetchData('경기도')}
-          className={`mr-4 cursor-pointer p-3 ${
-            selectedLocation === '경기도' ? 'border-b-2 border-black' : ''
-          }`}
-        >
-          경기
-        </div>
-        <div
-          onClick={() => fetchData('인천광역시')}
-          className={`mr-4 cursor-pointer p-3 ${
-            selectedLocation === '인천광역시' ? 'border-b-2 border-black' : ''
-          }`}
-        >
-          인천
-        </div>
-        <div
           onClick={() => fetchData('부산광역시')}
           className={`mr-4 cursor-pointer p-3 ${
             selectedLocation === '부산광역시' ? 'border-b-2 border-black' : ''
           }`}
         >
           부산
+        </div>
+        <div
+          onClick={() => fetchData('강원특별자치도')}
+          className={`mr-4 cursor-pointer p-3 ${
+            selectedLocation === '강원특별자치도'
+              ? 'border-b-2 border-black'
+              : ''
+          }`}
+        >
+          강원
         </div>
       </nav>
 

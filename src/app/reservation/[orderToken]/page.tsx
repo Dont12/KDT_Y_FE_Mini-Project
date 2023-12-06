@@ -1,16 +1,17 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
+
+import { Footer, Header, HeaderNav } from '@/components/common';
 import {
   CheckBoxGroup,
   ReservationItem,
   UserInformation,
 } from '@/components/reservation';
 
-import React, { useEffect, useState } from 'react';
 import orderRequest from '@/api/orderRequest';
-import { useRouter } from 'next/navigation';
-import Modal from 'react-modal';
-import { Header, HeaderNav } from '@/components/common/header';
 
 const Divider = () => <div className='border-lightGray border-b  px-8 '></div>;
 
@@ -81,7 +82,7 @@ const Reservation = ({ params }: Props) => {
   };
 
   return (
-    <div>
+    <>
       <Header>
         <HeaderNav showBack showCart showHome>
           예약
@@ -170,7 +171,8 @@ const Reservation = ({ params }: Props) => {
           {showLoadingMessage()}
         </Modal>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 };
 
