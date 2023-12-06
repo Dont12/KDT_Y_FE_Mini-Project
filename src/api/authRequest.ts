@@ -11,7 +11,7 @@ const authRequest = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Cookie: accessToken ? `accessToken=${accessToken}` : '',
+        Cookie: `accessToken=${accessToken}`,
       },
     }).then(responseBody),
 

@@ -33,7 +33,6 @@ const SigninForm = () => {
       console.log(res);
 
       if (res.status === 'SUCCESS') {
-        cookies.set('accessToken', cookies.get('accessToken') as string);
         console.log(cookies.get('accessToken'));
         // router.replace('/');
       } else {
