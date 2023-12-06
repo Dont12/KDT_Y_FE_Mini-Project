@@ -22,14 +22,14 @@ const DatePicker = ({ roomId, checkIn, checkOut, guest }: DatePickerProps) => {
   return (
     <>
       <DateRangePicker
-        placement='bottomEnd'
+        placement='autoVerticalStart'
         preventOverflow
         format='yyyy-MM-dd'
         id='chek'
         placeholder={`${todayTomorrow.today.toLocaleDateString()} - ${todayTomorrow.tomorrow.toLocaleDateString()}`}
         defaultValue={[todayTomorrow.today, todayTomorrow.tomorrow]}
         shouldDisableDate={(date) => date < todayTomorrow.today}
-        className='h-8 w-52'
+        className='h-8 w-[305px] md:w-52'
         value={
           checkInOut
             ? [

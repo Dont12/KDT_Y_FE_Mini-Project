@@ -46,7 +46,7 @@ const PersonInput = ({
       <input
         id='person'
         type='number'
-        className='border-lightGray h-8 w-52 rounded-md border border-solid indent-2'
+        className='border-lightGray h-8 w-[305px] rounded-md border border-solid indent-2 md:w-52'
         min='1'
         max='9'
         value={person}
