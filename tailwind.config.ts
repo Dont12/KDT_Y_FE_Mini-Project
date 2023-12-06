@@ -32,6 +32,9 @@ export default {
         gray3: '#e6e6e6',
         gray4: '#616161',
       },
+      screens: {
+        md: '768px',
+      },
     },
   },
   plugins: [],
