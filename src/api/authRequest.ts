@@ -5,12 +5,13 @@ const url = 'https://api.stayinn.site/v1';
 const responseBody = (res: Response) => res.json();
 
 const authRequest = {
-  getUser: () =>
+  getUser: (accessToken?: string) =>
     fetch(`${url}/users`, {
       method: 'GET',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
+        Cookie: accessToken ? `accessToken=${accessToken}` : '',
       },
     }).then(responseBody),
 

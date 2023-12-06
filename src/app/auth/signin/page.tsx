@@ -2,29 +2,26 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 import { SigninForm } from '@/components/auth';
 import { Header, HeaderNav } from '@/components/common';
 
-import authRequest from '@/api/authRequest';
-
 const SignIn = () => {
   const router = useRouter();
 
-  const checkSignin = async () => {
-    try {
-      const res = await authRequest.getUser();
-      console.log('현재 로그인이 되어있습니다.', res);
-      router.replace('/');
-    } catch (error) {
-      console.log('로그인이 되어있지 않습니다.', error);
-    }
-  };
+  // const checkSignin = async () => {
+  //   try {
+  //     const res = await authRequest.getUser();
+  //     console.log('현재 로그인이 되어있습니다.', res);
+  //     router.replace('/');
+  //   } catch (error) {
+  //     console.log('로그인이 되어있지 않습니다.', error);
+  //   }
+  // };
 
-  useEffect(() => {
-    checkSignin();
-  }, []);
+  // useEffect(() => {
+  //   checkSignin();
+  // }, []);
 
   return (
     <>
