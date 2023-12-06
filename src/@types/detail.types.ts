@@ -54,3 +54,7 @@ export interface DatePickerProps {
   checkOut: string;
   guest: string;
 }
+
+export type ArrowProps = {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+};
