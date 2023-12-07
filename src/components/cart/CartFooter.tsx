@@ -1,5 +1,8 @@
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+
+import { Toast } from '@/components/common';
 
 import cartRequest from '@/api/cartRequest';
 import { cartSelectedState } from '@/recoil/atoms/cartState';
@@ -12,6 +15,7 @@ interface Props {
 
 const CartFooter = ({ totalPrice }: Props) => {
   const selectedCartList = useRecoilValue(cartSelectedState);
+  const [isShowToast, setIsShowToast] = useState<string>('');
 
   const router = useRouter();
   const onReserveClick = async () => {
@@ -20,9 +24,15 @@ const CartFooter = ({ totalPrice }: Props) => {
       if (res.status === 'SUCCESS') {
         router.push(`/reservation/${res.data.orderToken}`);
       } else if (res.status === 'FAIL') {
-        // 실패 에러 처리
+        setIsShowToast(res.errorMessage);
+        setTimeout(() => {
+          setIsShowToast('');
+        }, 3000);
       } else if (res.status === 'ERROR') {
-        // 서버 오류 에러 처리
+        setIsShowToast('서버 오류로 실패했습니다. 다시 시도해주세요.');
+        setTimeout(() => {
+          setIsShowToast('');
+        }, 3000);
       }
     } catch (error) {
       console.error('reserve carts errer: ', error);
@@ -58,6 +68,7 @@ const CartFooter = ({ totalPrice }: Props) => {
           </span>
         </div> */}
       </div>
+      {isShowToast && <Toast message={isShowToast} />}
     </div>
   );
 };

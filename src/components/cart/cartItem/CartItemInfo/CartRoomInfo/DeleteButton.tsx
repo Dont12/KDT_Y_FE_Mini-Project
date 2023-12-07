@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { HiMiniXMark } from 'react-icons/hi2';
 import { useSetRecoilState } from 'recoil';
 
-import { Modal } from '@/components/common';
+import { Modal, Toast } from '@/components/common';
 
 import cartRequest from '@/api/cartRequest';
 import {
@@ -17,6 +17,7 @@ interface Props {
 
 const DeleteButton = ({ cartId }: Props) => {
   const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowToast, setIsShowToast] = useState<string>('');
 
   const setSelectedCartList = useSetRecoilState(cartSelectedState);
   const setApiCartList = useSetRecoilState(apiCartListState);
@@ -43,9 +44,15 @@ const DeleteButton = ({ cartId }: Props) => {
         );
         setIsShowModal(false);
       } else if (res.status === 'FAIL') {
-        // 실패 에러 처리
+        setIsShowToast(res.errorMessage);
+        setTimeout(() => {
+          setIsShowToast('');
+        }, 3000);
       } else if (res.status === 'ERROR') {
-        // 서버 오류 에러 처리
+        setIsShowToast('서버 오류로 실패했습니다. 다시 시도해주세요.');
+        setTimeout(() => {
+          setIsShowToast('');
+        }, 3000);
       }
     } catch (error) {
       console.error(error);
@@ -68,6 +75,7 @@ const DeleteButton = ({ cartId }: Props) => {
           onConfirmClick={deleteCartItem}
         />
       )}
+      {isShowToast && <Toast message={isShowToast} />}
     </>
   );
 };
