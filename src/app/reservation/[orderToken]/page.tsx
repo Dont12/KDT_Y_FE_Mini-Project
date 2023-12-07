@@ -13,8 +13,6 @@ import {
 
 import orderRequest from '@/api/orderRequest';
 
-const Divider = () => <div className='border-lightGray border-b  px-8 '></div>;
-
 const Reservation = ({ params }: Props) => {
   const router = useRouter();
   const orderToken = params;
@@ -71,10 +69,10 @@ const Reservation = ({ params }: Props) => {
 
     try {
       const response = await orderRequest.postPayment(paymentData);
-      const resOrderId = response.data.orderId;
+      const getOrderId = response.data.orderId;
       setTimeout(() => {
         setModalIsOpen(false);
-        router.replace(`/reservationConfirm/${resOrderId}`);
+        router.replace(`/reservationConfirm/${getOrderId}`);
       }, 1000);
       console.log('post', response);
     } catch (error) {

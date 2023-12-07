@@ -9,16 +9,13 @@ import { ReservationConfirmContainer } from '@/components/reservation';
 import orderRequest from '@/api/orderRequest';
 
 const ReservationConfirm = () => {
-  const [reservationConfirm, setReservationConfirm] =
-    useState<OrderHistories[]>();
+  const [orderList, setOrderList] = useState<OrderHistoriesData[]>();
 
   const fetchData = async () => {
     try {
       const response = await orderRequest.getOrderList();
-      const data = await response.data;
-
-      setReservationConfirm(data.orderHistories);
-      console.log('reconfirm', data);
+      const getOrderList = await response.data;
+      setOrderList(getOrderList.orderHistories);
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +39,7 @@ const ReservationConfirm = () => {
             <MdOutlineKeyboardArrowDown />
           </button>
         </div>
-        {reservationConfirm?.map((order, orderIndex) => (
+        {orderList?.map((order, orderIndex) => (
           <ReservationConfirmContainer
             key={orderIndex}
             orderId={order.orderId}
@@ -69,9 +66,9 @@ const ReservationConfirm = () => {
 
 export default ReservationConfirm;
 
-interface Order {
+interface OrderHistoriesData {
   orderId: number;
-  createdDate: number;
+  reserveDate: string;
   orderItems: OrderItem[];
 }
 
@@ -88,32 +85,4 @@ interface OrderItem {
   checkInTime: string;
   checkOutDate: string;
   checkOutTime: string;
-}
-
-interface ReservationConfirmData {
-  size: number;
-  pageNumber: number;
-  totalPages: number;
-  totalElements: number;
-  orderHistories: OrderHistories[];
-}
-
-interface OrderHistories {
-  orderId: number;
-  reserveDate: string;
-  orderItems: OrderItem[];
-}
-
-interface OrderItem {
-  orderItemId: number;
-  productId: number;
-  productName: string;
-  roomName: string;
-  imageUrl: string;
-  maxGuestCount: number;
-  baseGuestCount: number;
-  checkInTime: string;
-  checkInDate: string;
-  checkOutTime: string;
-  checkOutDate: string;
 }
