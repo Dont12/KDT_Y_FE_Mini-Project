@@ -13,6 +13,8 @@ import {
   ProductCard,
 } from '@/components/products';
 
+import todayTomorrow from '@/utils/todayTomorrow';
+
 interface product {
   id: number;
   name: string;
@@ -36,13 +38,8 @@ const ProductPage = () => {
   const [ref, inView] = useInView();
   const [page, setPage] = useState(0);
 
-  // 이 부분에서 오늘과 내일의 날짜를 생성하는 로직이 들어갑니다.
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-
-  const formattedToday = today.toISOString().split('T')[0];
-  const formattedTomorrow = tomorrow.toISOString().split('T')[0];
+  const formattedToday = todayTomorrow.formatDate(todayTomorrow.today);
+  const formattedTomorrow = todayTomorrow.formatDate(todayTomorrow.tomorrow);
 
   // API 요청을 보낼 주소
   const apiUrl = `https://api.stayinn.site/v1/products?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`;
