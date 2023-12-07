@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import orderRequest from '@/api/orderRequest';
 
-const UserInformation = ({ onUserInfoChange }: any) => {
+const UserInformation = ({ onUserInfoChange }: ) => {
   const [userName, setUserName] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [userInfo, setUserInfo] = useState<UserInfo | null>();
@@ -87,6 +87,11 @@ const UserInformation = ({ onUserInfoChange }: any) => {
 };
 
 export default UserInformation;
+
+interface UserInformation {
+  userName : string;
+  userPhone : string;
+}
 
 interface UserInfo {
   email: string;

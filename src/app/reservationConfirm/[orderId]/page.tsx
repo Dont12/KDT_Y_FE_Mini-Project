@@ -119,10 +119,10 @@ interface OrderItem {
   checkOutTime: string;
 }
 
-interface Parmas {
-  orderId: number;
-}
-
 interface Props {
   params: Parmas;
+}
+
+interface Parmas {
+  orderId: number;
 }
