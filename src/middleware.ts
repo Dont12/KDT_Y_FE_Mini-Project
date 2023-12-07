@@ -32,9 +32,9 @@ export async function alreadyAuth(req: NextRequest) {
     if (response.status === 'SUCCESS') {
       return NextResponse.redirect(url);
     }
-    return NextResponse.next();
   } catch (error) {
     console.log('err: ', error);
+    return NextResponse.next();
   }
 }
 
