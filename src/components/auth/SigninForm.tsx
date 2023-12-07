@@ -32,7 +32,7 @@ const SigninForm = () => {
       });
       console.log(res);
 
-      if (res.status === 'SUCCESS') {
+      if (true) {
         console.log(document.cookie);
         // router.replace('/');
       } else {

@@ -33,7 +33,7 @@ const authRequest = {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(signinData),
-    }).then(responseBody),
+    }),
 
   logout: () =>
     fetch(`${url}/auth/logout`, {
