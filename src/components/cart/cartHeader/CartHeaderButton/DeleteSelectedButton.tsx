@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { Modal } from '@/components/common';
+import { Modal, Toast } from '@/components/common';
 
 import cartRequest from '@/api/cartRequest';
 import {
@@ -19,6 +19,7 @@ const DeleteSelectedButton = () => {
     useRecoilState(cartSelectedState);
   const setApiCartList = useSetRecoilState(apiCartListState);
   const setCartAllCheckboxList = useSetRecoilState(cartCheckboxElementState);
+  const [isShowToast, setIsShowToast] = useState<string>('');
 
   const deleteSelectedItem = async () => {
     try {
@@ -45,9 +46,15 @@ const DeleteSelectedButton = () => {
         );
         setIsShowModal(false);
       } else if (res.status === 'FAIL') {
-        // 실패 에러 처리
+        setIsShowToast(res.errorMessage);
+        setTimeout(() => {
+          setIsShowToast('');
+        }, 3000);
       } else if (res.status === 'ERROR') {
-        // 서버 오류 에러 처리
+        setIsShowToast('서버 오류로 실패했습니다. 다시 시도해주세요.');
+        setTimeout(() => {
+          setIsShowToast('');
+        }, 3000);
       }
     } catch (error) {
       console.error(error);
@@ -71,6 +78,7 @@ const DeleteSelectedButton = () => {
           onConfirmClick={deleteSelectedItem}
         />
       )}
+      {isShowToast && <Toast message={isShowToast} />}
     </>
   );
 };
