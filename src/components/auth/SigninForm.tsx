@@ -30,12 +30,13 @@ const SigninForm = () => {
         email: email.value,
         password: password.value,
       });
-      console.log(res, '뿅뿅4');
+      console.log(res, '뿅뿅5');
 
       if (res.status === 'SUCCESS') {
         console.log(cookies.get('accessToken'));
         cookies.set('accessToken', cookies.get('accessToken') as string);
-        router.replace('/');
+        // router.push('/');
+        router.refresh();
       } else {
         setSubmitError(res.errorMessage);
       }

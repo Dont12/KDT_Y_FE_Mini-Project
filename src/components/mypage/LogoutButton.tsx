@@ -16,7 +16,8 @@ const LogoutButton = () => {
       const res = await authRequest.logout();
       console.log(res);
       cookies.remove('accessToken');
-      router.push('/auth/signin');
+      // router.push('/auth/signin');
+      router.refresh();
     } catch (error) {
       console.log(error);
     }
