@@ -136,7 +136,7 @@ const ChristmasPensionList = () => {
                   </h3>
                   <p className='mb-2 text-sm text-gray-600'>⭐4.5</p>
                   <p className='text-right	text-sm font-bold text-gray-600'>
-                    {hotel.minPrice}원~
+                    {hotel.minPrice.toLocaleString('ko-KR')}원~
                   </p>
                 </div>
               </Link>
