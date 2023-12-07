@@ -15,9 +15,9 @@ export async function needAuth(req: NextRequest) {
     if (response.status === 'SUCCESS') {
       return NextResponse.next();
     }
+    return NextResponse.redirect(url);
   } catch (error) {
     console.log('err: ', error);
-    return NextResponse.redirect(url);
   }
 }
 
@@ -39,6 +39,7 @@ export async function alreadyAuth(req: NextRequest) {
 }
 
 export function middleware(request: NextRequest) {
+  // <user signed> redirect to '/' when access auth pages
   if (request.nextUrl.pathname.startsWith('/auth/signin')) {
     console.log('call middleware - /auth/signin');
 
@@ -49,13 +50,40 @@ export function middleware(request: NextRequest) {
 
     return alreadyAuth(request);
   }
+
+  // <user not signed> redirect to '/auth/signin' when access pages required authentication
   if (request.nextUrl.pathname.startsWith('/mypage')) {
     console.log('call middleware - /mypage');
+
+    return needAuth(request);
+  }
+
+  if (request.nextUrl.pathname.startsWith('/cart')) {
+    console.log('call middleware - /cart');
+
+    return needAuth(request);
+  }
+
+  if (request.nextUrl.pathname.startsWith('/reservation')) {
+    console.log('call middleware - /reservation');
+
+    return needAuth(request);
+  }
+
+  if (request.nextUrl.pathname.startsWith('/reservationConfirm')) {
+    console.log('call middleware - /reservationConfirm');
 
     return needAuth(request);
   }
 }
 
 export const config = {
-  matcher: ['/auth/signin', '/auth/signup', '/', '/mypage'],
+  matcher: [
+    '/',
+    '/mypage',
+    '/cart',
+    '/auth/:path*',
+    '/reservation/:path*',
+    '/reservationConfirm/:path*',
+  ],
 };
