@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import useCartList from '@/hooks/cart/useCartList';
 
@@ -15,7 +15,7 @@ import {
 import { Header, HeaderNav } from '@/components/common';
 
 import cartRequest from '@/api/cartRequest';
-import { apiCartListState, cartSelectedState } from '@/recoil/atoms/cartState';
+import { apiCartListState } from '@/recoil/atoms/cartState';
 
 const Cart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -44,21 +44,6 @@ const Cart = () => {
   }, []);
 
   const preppedProductList = useCartList(apiCartList);
-
-  const selectedCartList = useRecoilValue(cartSelectedState);
-
-  const [totalPrice, setTotalPrice] = useState<number>(0);
-  useEffect(() => {
-    const filteredList = apiCartList.filter((apiCartItem) =>
-      selectedCartList.includes(String(apiCartItem.id))
-    );
-
-    let selectPrice = 0;
-    filteredList.map((filteredItem) => {
-      selectPrice += filteredItem.product.price;
-    });
-    setTotalPrice(selectPrice);
-  }, [selectedCartList]);
 
   return (
     <>
@@ -92,7 +77,7 @@ const Cart = () => {
           )}
         </section>
         <CartNotice />
-        <CartFooter totalPrice={totalPrice} />
+        <CartFooter />
       </main>
     </>
   );

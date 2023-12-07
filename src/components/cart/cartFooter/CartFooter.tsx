@@ -4,13 +4,10 @@ import { useRecoilValue } from 'recoil';
 import cartRequest from '@/api/cartRequest';
 import { cartSelectedState } from '@/recoil/atoms/cartState';
 
-import SubmitButton from '../common/SubmitButton';
+import CartTotalPrice from './CartTotalPrice';
+import SubmitButton from '../../common/SubmitButton';
 
-interface Props {
-  totalPrice: number;
-}
-
-const CartFooter = ({ totalPrice }: Props) => {
+const CartFooter = () => {
   const selectedCartList = useRecoilValue(cartSelectedState);
 
   const router = useRouter();
@@ -38,9 +35,7 @@ const CartFooter = ({ totalPrice }: Props) => {
           </div>
           <div className='flex items-center gap-2'>
             <div className='text-gray4 text-xs'>결제 예상 금액</div>
-            <div className='text-xl font-bold'>
-              {totalPrice.toLocaleString('ko-KR')}원
-            </div>
+            <CartTotalPrice />
           </div>
         </div>
         <SubmitButton

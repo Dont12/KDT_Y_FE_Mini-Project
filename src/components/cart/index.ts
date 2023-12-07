@@ -1,4 +1,4 @@
-import CartFooter from './CartFooter';
+import CartFooter from './cartFooter/CartFooter';
 import CartHeader from './cartHeader/CartHeader';
 import CartItem from './cartItem/CartItem';
 import EmptyCartList from './cartItem/EmptyCartList';
