@@ -53,14 +53,14 @@ const Cart = () => {
         </HeaderNav>
         {apiCartList.length !== 0 && <CartHeader />}
       </Header>
-      <main
-        className={`mb-40 ${
-          apiCartList.length !== 0 ? 'mt-[6.75rem]' : 'mt-12'
-        }`}
-      >
-        <section>
-          {isLoading ? (
-            apiCartList.length > 0 ? (
+      {isLoading && (
+        <main
+          className={`mb-40 ${
+            apiCartList.length !== 0 ? 'mt-[6.75rem]' : 'mt-12'
+          }`}
+        >
+          <section>
+            {apiCartList.length > 0 ? (
               <ul>
                 {preppedProductList.map((preppedProductItem) => (
                   <CartItem
@@ -71,14 +71,12 @@ const Cart = () => {
               </ul>
             ) : (
               <EmptyCartList />
-            )
-          ) : (
-            <div>로딩 중</div>
-          )}
-        </section>
-        <CartNotice />
-        <CartFooter />
-      </main>
+            )}
+          </section>
+          <CartNotice />
+          <CartFooter />
+        </main>
+      )}
     </>
   );
 };
