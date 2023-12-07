@@ -44,8 +44,8 @@ const Reservation = ({ params }: Props) => {
   const fetchData = async () => {
     try {
       const response = await orderRequest.getOrderToken(orderToken.orderToken);
-      const data = await response.data;
-      setRegisterOrderItemsData(data);
+      const getRegisterOrderItem = await response.data;
+      setRegisterOrderItemsData(getRegisterOrderItem);
       console.log(response);
     } catch (error) {
       console.log('요청실패', error);
@@ -107,7 +107,6 @@ const Reservation = ({ params }: Props) => {
         ))}
         <form onSubmit={handlePaymentSubmit}>
           <UserInformation onUserInfoChange={handleUserInfoChange} />
-          <Divider />
           <div className='mt-8  bg-white p-8 '>
             <p className='font-bold'>결제 금액</p>
             <div className='flex justify-between'>
