@@ -59,7 +59,7 @@ const SigninForm = () => {
         />
       </div>
 
-      <SubmitButton content='이메일로 로그인' activate={buttonActivate} />
+      <SubmitButton content='이메일로 로그인 뿅' activate={buttonActivate} />
 
       <p className='text-red flex w-full justify-center pt-4 text-sm font-semibold'>
         {submitError}

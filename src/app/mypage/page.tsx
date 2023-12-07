@@ -1,10 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Footer, Header, HeaderNav } from '@/components/common';
 import { HistoryButton, LogoutButton } from '@/components/mypage';
+
+import authRequest from '@/api/authRequest';
 
 interface UserInfo {
   email: string;
@@ -16,20 +18,19 @@ const Mypage = () => {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
-  // const checkSignin = async () => {
-  //   try {
-  //     const res = await authRequest.getUser();
-  //     setUserInfo(res.data);
-  //     console.log('현재 로그인이 되어있습니다.', res);
-  //   } catch (error) {
-  //     console.log('로그인이 필요합니다.', error);
-  //     router.replace('/auth/signin');
-  //   }
-  // };
+  const checkSignin = async () => {
+    try {
+      const res = await authRequest.getUser();
+      setUserInfo(res.data);
+      console.log('현재 로그인이 되어있습니다.', res);
+    } catch (error) {
+      console.log('로그인이 필요합니다.', error);
+    }
+  };
 
-  // useEffect(() => {
-  //   checkSignin();
-  // }, []);
+  useEffect(() => {
+    checkSignin();
+  }, []);
 
   return (
     <>
