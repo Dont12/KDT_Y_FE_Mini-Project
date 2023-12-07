@@ -45,13 +45,6 @@ const CartFooter = () => {
           className='mt-4'
           onClick={onReserveClick}
         />
-        {/* <div className='mt-3'>
-          <span className='text-gray1 text-xs'>
-            STAYINN은 통신판매중개업자로서, 통신판매의 당사자가 아니라는 사실을
-            고지하며 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각
-            판매자에게 있습니다.
-          </span>
-        </div> */}
       </div>
     </div>
   );
