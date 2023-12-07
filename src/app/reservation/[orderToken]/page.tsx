@@ -18,7 +18,8 @@ const Divider = () => <div className='border-lightGray border-b  px-8 '></div>;
 const Reservation = ({ params }: Props) => {
   const router = useRouter();
   const orderToken = params;
-  const [res, setRes] = useState<Data | null>();
+  const [registerOrderItemsData, setRegisterOrderItemsData] =
+    useState<RegisterOrderItemsData | null>();
   const [isPaymentButtonDisabled, setIsPaymentButtonDisabled] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [userInfo, setUserInfo] = useState({ userName: '', userPhone: '' });
@@ -44,7 +45,7 @@ const Reservation = ({ params }: Props) => {
     try {
       const response = await orderRequest.getOrderToken(orderToken.orderToken);
       const data = await response.data;
-      setRes(data);
+      setRegisterOrderItemsData(data);
       console.log(response);
     } catch (error) {
       console.log('요청실패', error);
@@ -63,7 +64,7 @@ const Reservation = ({ params }: Props) => {
       orderToken: orderToken.orderToken,
       userName: userInfo.userName,
       userPhone: userInfo.userPhone,
-      price: res?.totalPrice,
+      price: registerOrderItemsData?.totalPrice,
       payment: selectorPayment,
     };
     console.log('paymentdata', paymentData);
@@ -89,24 +90,20 @@ const Reservation = ({ params }: Props) => {
         </HeaderNav>
       </Header>
       <main className='mt-12'>
-        {res?.registerOrderItems.map((data, index) => (
-          <>
-            <ReservationItem
-              key={index}
-              productName={data.productName}
-              roomName={data.roomName}
-              day={data.day}
-              checkInDate={data.checkInDate}
-              checkOutDate={data.checkOutDate}
-              checkInTime={data.checkInTime}
-              checkOutTime={data.checkOutTime}
-              baseGuestCount={data.baseGuestCount}
-              maxGuestCount={data.maxGuestCount}
-              price={data.price}
-            />
-            <Divider />
-            {/* {index < res?.registerOrderItems.length - 1 && <Divider />} */}
-          </>
+        {registerOrderItemsData?.registerOrderItems.map((data, index) => (
+          <ReservationItem
+            key={index}
+            productName={data.productName}
+            roomName={data.roomName}
+            day={data.day}
+            checkInDate={data.checkInDate}
+            checkOutDate={data.checkOutDate}
+            checkInTime={data.checkInTime}
+            checkOutTime={data.checkOutTime}
+            baseGuestCount={data.baseGuestCount}
+            maxGuestCount={data.maxGuestCount}
+            price={data.price}
+          />
         ))}
         <form onSubmit={handlePaymentSubmit}>
           <UserInformation onUserInfoChange={handleUserInfoChange} />
@@ -117,7 +114,10 @@ const Reservation = ({ params }: Props) => {
               <p className='mt-2 font-bold '>상품 금액</p>
               <p>
                 {' '}
-                {new Intl.NumberFormat().format(res?.totalPrice as number)}원
+                {new Intl.NumberFormat().format(
+                  registerOrderItemsData?.totalPrice as number
+                )}
+                원
               </p>
             </div>
             <div className='border-darkGray mt-6 w-full border-b-2 border-dotted'></div>
@@ -152,8 +152,10 @@ const Reservation = ({ params }: Props) => {
               className='bg-mainButton mt-20 w-full rounded p-4 text-center text-white'
               disabled={isPaymentButtonDisabled}
             >
-              {new Intl.NumberFormat().format(res?.totalPrice as number)}원
-              결제하기
+              {new Intl.NumberFormat().format(
+                registerOrderItemsData?.totalPrice as number
+              )}
+              원 결제하기
             </button>
 
             <p className='text-mediumGray my-10 text-xs'>
@@ -178,15 +180,15 @@ const Reservation = ({ params }: Props) => {
 
 export default Reservation;
 
-interface Data {
+interface RegisterOrderItemsData {
   orderToken: string;
   totalPrice: number;
   name: string;
   phone: string;
-  registerOrderItems: ResisterOrderItems[];
+  registerOrderItems: RegisterOrderItems[];
 }
 
-interface ResisterOrderItems {
+interface RegisterOrderItems {
   productId: number;
   productName: string;
   imageUrl: string;
