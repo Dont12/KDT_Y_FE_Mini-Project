@@ -6,7 +6,7 @@ export interface Room {
   price: number;
   checkInTime: string;
   checkOutTime: string;
-  imageUrl: string;
+  imageUrls: string;
   reserveDate: string;
   stock: number;
   roomBathFacility: string;
@@ -26,6 +26,7 @@ export interface Room {
 }
 
 export interface DetailResponse {
+  statuts: string;
   data: HotelData;
 }
 
@@ -53,3 +54,7 @@ export interface DatePickerProps {
   checkOut: string;
   guest: string;
 }
+
+export type ArrowProps = {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+};

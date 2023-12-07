@@ -1,9 +1,10 @@
 'use client';
+
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
-import { useRouter } from 'next/navigation';
 
-const ReservationRouter = ({ orderId }) => {
+const ReservationRouter = ({ orderId }: OrderID) => {
   const router = useRouter();
 
   const handleDetailClick = () => {
@@ -21,3 +22,7 @@ const ReservationRouter = ({ orderId }) => {
 };
 
 export default ReservationRouter;
+
+interface OrderID {
+  orderId: number;
+}

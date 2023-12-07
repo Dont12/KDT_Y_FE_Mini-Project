@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { Header, HeaderNav } from '@/components/common/header';
+import { Footer, Header, HeaderNav } from '@/components/common';
 import {
   Carousel,
   CartButton,
@@ -15,17 +15,7 @@ import {
 import { DetailResponse, Room } from '@/@types/detail.types';
 import detailInfoRequest from '@/api/detailInfoRequest';
 import { calculateTotalCost } from '@/utils/calculatePerNightCost';
-
-const today = new Date();
-const tomorrow = new Date();
-tomorrow.setDate(tomorrow.getDate() + 1);
-
-const formatDate = (date: Date): string => {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
+import todayTomorrow from '@/utils/todayTomorrow';
 
 const Detail = async ({
   params,
@@ -34,8 +24,11 @@ const Detail = async ({
   params: { id: string };
   searchParams: { checkInDate: string; checkOutDate: string; guest: string };
 }) => {
-  const defaultCheckInDate = searchParams.checkInDate || formatDate(today);
-  const defaultCheckOutDate = searchParams.checkOutDate || formatDate(tomorrow);
+  const defaultCheckInDate =
+    searchParams.checkInDate || todayTomorrow.formatDate(todayTomorrow.today);
+  const defaultCheckOutDate =
+    searchParams.checkOutDate ||
+    todayTomorrow.formatDate(todayTomorrow.tomorrow);
   const defaultPerson = searchParams.guest || '1';
 
   const details: DetailResponse = await detailInfoRequest.getDetail({
@@ -67,7 +60,6 @@ const Detail = async ({
                   latitude={details.data.latitude}
                 />
               </div>
-              <p>{details.data.address}</p>
             </div>
             <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
               <div className='flex flex-col'>
@@ -95,13 +87,13 @@ const Detail = async ({
                   className='border-mediumGray flex flex-col gap-5 rounded border border-solid p-5'
                 >
                   <div className='flex justify-between'>
-                    <div className='mr-5'>
+                    <div className='mr-5 flex shrink-0'>
                       <Image
-                        src={room.imageUrl}
-                        width={350}
-                        height={150}
+                        src={room.imageUrls[0]}
                         alt={`Room ${index + 1}`}
-                        className='h-full w-[350px] object-cover'
+                        width={288}
+                        height={288}
+                        className='h-72 w-72 rounded object-cover object-center'
                       />
                     </div>
                     <div className='flex grow flex-col gap-3 pt-3'>
@@ -169,7 +161,7 @@ const Detail = async ({
                       checkOutDate={defaultCheckOutDate}
                       roomStock={room.stock}
                       maxguest={room.maxGuestCount}
-                      guestCount={defaultPerson}
+                      guestCount={Number(defaultPerson)}
                     />
                     <ReservationButton
                       productId={Number(params.id)}
@@ -197,6 +189,7 @@ const Detail = async ({
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

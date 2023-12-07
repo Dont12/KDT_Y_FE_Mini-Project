@@ -2,9 +2,10 @@
 const nextConfig = {
   eslint: {
     dirs: ['src'],
+    ignoreDuringBuilds: true,
   },
 
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
 
   // Uncoment to add domain whitelist

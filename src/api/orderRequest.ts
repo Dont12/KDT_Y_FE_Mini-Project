@@ -1,3 +1,5 @@
+import { PushOrderListProps } from '@/@types/order.types';
+
 const url = 'https://api.stayinn.site/v1';
 
 const responseBody = (res: Response) => res.json();
@@ -21,7 +23,7 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  getOrderToken: (orderToken) =>
+  getOrderToken: (orderToken: any) =>
     fetch(`${url}/orders?orderToken=${orderToken}`, {
       method: 'GET',
       credentials: 'include',
@@ -30,7 +32,7 @@ const orderRequest = {
       },
     }).then(responseBody),
 
-  postPayment: (paymentData) =>
+  postPayment: (paymentData: any) =>
     fetch(`${url}/orders/payment`, {
       method: 'POST',
       credentials: 'include',
@@ -47,6 +49,38 @@ const orderRequest = {
       headers: {
         'Content-Type': 'application/json',
       },
+    }).then(responseBody),
+
+  pushOrderElement: ({
+    productId,
+    roomId,
+    checkInDate,
+    checkInTime,
+    checkOutDate,
+    checkOutTime,
+    guestCount,
+    price,
+  }: PushOrderListProps) =>
+    fetch(`${url}/orders`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        registerOrderItems: [
+          {
+            productId,
+            roomId,
+            checkInDate,
+            checkInTime,
+            checkOutDate,
+            checkOutTime,
+            guestCount,
+            price,
+          },
+        ],
+      }),
     }).then(responseBody),
 };
 

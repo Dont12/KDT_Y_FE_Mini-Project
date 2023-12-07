@@ -10,7 +10,7 @@ import {
   CartNotice,
   EmptyCartList,
 } from '@/components/cart';
-import { Header, HeaderNav } from '@/components/common/header';
+import { Header, HeaderNav } from '@/components/common';
 
 import type { CartItemInfo, PreCartProduct } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
@@ -71,40 +71,41 @@ const Cart = () => {
                     checkInDate: item.checkInDate,
                     checkOutDate: item.checkOutDate,
                     numberOfNights: item.numberOfNights,
+                    guestCount: item.product.guestCount,
                   },
                 ],
               };
             }
             return prevCartProductItem;
           });
-        } else {
-          // 존재하지 않으면 숙소 및 방 추가
-          return [
-            ...prevCartProductList,
-            {
-              productId: item.product.productId,
-              productName: item.product.productName,
-              address: item.product.address,
-              cartRoomList: [
-                {
-                  id: item.id,
-                  roomId: item.product.roomId,
-                  imageUrl: item.product.imageUrl,
-                  roomName: item.product.roomName,
-                  baseGuestCount: item.product.baseGuestCount,
-                  maxGuestCount: item.product.maxGuestCount,
-                  price: item.product.price,
-                  checkInTime: item.product.checkInTime,
-                  checkOutTime: item.product.checkOutTime,
-                  stock: item.product.stock,
-                  checkInDate: item.checkInDate,
-                  checkOutDate: item.checkOutDate,
-                  numberOfNights: item.numberOfNights,
-                },
-              ],
-            },
-          ];
         }
+        // 존재하지 않으면 숙소 및 방 추가
+        return [
+          ...prevCartProductList,
+          {
+            productId: item.product.productId,
+            productName: item.product.productName,
+            address: item.product.address,
+            cartRoomList: [
+              {
+                id: item.id,
+                roomId: item.product.roomId,
+                imageUrl: item.product.imageUrl,
+                roomName: item.product.roomName,
+                baseGuestCount: item.product.baseGuestCount,
+                maxGuestCount: item.product.maxGuestCount,
+                price: item.product.price,
+                checkInTime: item.product.checkInTime,
+                checkOutTime: item.product.checkOutTime,
+                stock: item.product.stock,
+                checkInDate: item.checkInDate,
+                checkOutDate: item.checkOutDate,
+                numberOfNights: item.numberOfNights,
+                guestCount: item.product.guestCount,
+              },
+            ],
+          },
+        ];
       });
     });
   }, [apiCartList]);
@@ -133,7 +134,7 @@ const Cart = () => {
         {apiCartList.length !== 0 && <CartHeader />}
       </Header>
       <main
-        className={`mb-52 ${
+        className={`mb-40 ${
           apiCartList.length !== 0 ? 'mt-[6.75rem]' : 'mt-12'
         }`}
       >
