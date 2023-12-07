@@ -1,5 +1,3 @@
-'use client';
-
 import { SignupForm } from '@/components/auth';
 import { Header, HeaderNav } from '@/components/common';
 

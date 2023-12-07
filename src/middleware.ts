@@ -1,16 +1,16 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import { getCookies } from 'next-client-cookies/server';
 
-// import { getCookies } from 'next-client-cookies/server';
 import authRequest from './api/authRequest';
 
 export async function needAuth(req: NextRequest) {
-  // const cookies = getCookies();
+  const cookies = getCookies();
   const url = req.nextUrl.clone();
   url.pathname = '/auth/signin';
 
   try {
-    const response = await authRequest.getUser();
+    const response = await authRequest.getUser(cookies?.get('accessToken'));
 
     if (response.status === 'SUCCESS') {
       return NextResponse.next();
@@ -22,19 +22,19 @@ export async function needAuth(req: NextRequest) {
 }
 
 export async function alreadyAuth(req: NextRequest) {
-  // const cookies = getCookies();
+  const cookies = getCookies();
   const url = req.nextUrl.clone();
   url.pathname = '/';
 
   try {
-    const response = await authRequest.getUser();
+    const response = await authRequest.getUser(cookies?.get('accessToken'));
 
     if (response.status === 'SUCCESS') {
       return NextResponse.redirect(url);
     }
+    return NextResponse.next();
   } catch (error) {
     console.log('err: ', error);
-    return NextResponse.next();
   }
 }
 
