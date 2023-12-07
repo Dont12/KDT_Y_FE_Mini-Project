@@ -1,15 +1,12 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useRef } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 import type { PreppedCartRoom } from '@/@types/cart.types';
-import {
-  cartCheckboxElementState,
-  cartSelectedState,
-} from '@/recoil/atoms/cartState';
+import { cartSelectedState } from '@/recoil/atoms/cartState';
 import { convertFullDate } from '@/utils/dateFormat';
 
+import CartRoomName from './CartRoomName';
 import DeleteButton from './DeleteButton';
 
 interface Props {
@@ -35,39 +32,12 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
   } = cartRoomData;
   const cartId = String(id);
 
-  const [selectedCartList, setSelectedCartList] =
-    useRecoilState(cartSelectedState);
-
-  const checkbox = useRef<HTMLInputElement>(document.createElement('input'));
-  const setCartAllCheckboxList = useSetRecoilState(cartCheckboxElementState);
-  useEffect(() => {
-    if (!selectedCartList.includes(cartId)) {
-      setSelectedCartList((prevSelectedCartItem) => {
-        prevSelectedCartItem.includes(cartId);
-        return [...prevSelectedCartItem, cartId];
-      });
-    }
-    setCartAllCheckboxList((prevCartCheckboxElement) => [
-      ...prevCartCheckboxElement,
-      checkbox.current,
-    ]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const onSelectedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedCartList((prevSelectedCartList) => {
-      if (event.target.checked) {
-        return [...prevSelectedCartList, event.target.name];
-      }
-      return prevSelectedCartList.filter(
-        (prevSelectedCartItem) => prevSelectedCartItem !== event.target.name
-      );
-    });
-  };
+  const setSelectedCartList = useSetRecoilState(cartSelectedState);
 
   const isAvailable =
     stock > 1 &&
     new Date(`${checkInDate}T23:59:59`).getTime() >= new Date().getTime();
+
   useEffect(() => {
     if (!isAvailable) {
       setSelectedCartList((prevSelectedCartList) =>
@@ -82,22 +52,15 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
   return (
     <li className='border-gray3 mt-4 border-t border-solid pt-5'>
       <div className='flex items-start justify-between'>
-        <div className='mb-3 flex items-center gap-2'>
-          <input
-            type='checkbox'
-            ref={checkbox}
-            name={cartId}
-            onChange={onSelectedChange}
-            checked={selectedCartList.includes(cartId)}
-            disabled={!isAvailable}
-          />
-          <Link
-            href={`/detail/${productId}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&guest=${guestCount}`}
-            className={!isAvailable ? 'text-gray2' : ''}
-          >
-            <h3 className='text-base font-bold'>{roomName}</h3>
-          </Link>
-        </div>
+        <CartRoomName
+          cartId={cartId}
+          isAvailable={isAvailable}
+          productId={productId}
+          checkInDate={checkInDate}
+          checkOutDate={checkOutDate}
+          guestCount={guestCount}
+          roomName={roomName}
+        />
         <DeleteButton cartId={cartId} />
       </div>
       <div className='flex items-start gap-2'>
