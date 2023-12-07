@@ -72,7 +72,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     if (!isAvailable) {
       setSelectedCartList((prevSelectedCartList) =>
         prevSelectedCartList.filter(
-          (prevSelectedCartItem) => prevSelectedCartItem !== String(id)
+          (prevSelectedCartItem) => prevSelectedCartItem !== cartId
         )
       );
     }
