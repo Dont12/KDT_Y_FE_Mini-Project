@@ -3,7 +3,6 @@
 import { useAuthInput, useButtonActivate } from '@hooks/auth';
 import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
-import { useCookies } from 'next-client-cookies';
 import { useState } from 'react';
 
 import { InputEmail, InputPassword } from '@/components/auth';
@@ -22,7 +21,6 @@ const SigninForm = () => {
   const [submitError, setSubmitError] = useState(null);
 
   const router = useRouter();
-  const cookies = useCookies();
 
   const signin = debounce(async (email: InputType, password: InputType) => {
     try {
@@ -30,11 +28,10 @@ const SigninForm = () => {
         email: email.value,
         password: password.value,
       });
-      console.log(res);
+      console.log(res, '뿅뿅!!');
 
-      if (true) {
-        console.log(document.cookie);
-        // router.replace('/');
+      if (res.status === 'SUCCESS') {
+        router.replace('/');
       } else {
         setSubmitError(res.errorMessage);
       }

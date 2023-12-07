@@ -5,13 +5,12 @@ const url = 'https://api.stayinn.site/v1';
 const responseBody = (res: Response) => res.json();
 
 const authRequest = {
-  getUser: (accessToken?: string) =>
+  getUser: () =>
     fetch(`${url}/users`, {
       method: 'GET',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Cookie: `accessToken=${accessToken}`,
       },
     }).then(responseBody),
 
@@ -33,7 +32,7 @@ const authRequest = {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(signinData),
-    }),
+    }).then(responseBody),
 
   logout: () =>
     fetch(`${url}/auth/logout`, {
