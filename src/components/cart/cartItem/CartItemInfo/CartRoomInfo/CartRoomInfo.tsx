@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import type { PreCartRoom } from '@/@types/cart.types';
+import type { PreppedCartRoom } from '@/@types/cart.types';
 import {
   cartCheckboxElementState,
   cartSelectedState,
@@ -14,7 +14,7 @@ import DeleteButton from './DeleteButton';
 
 interface Props {
   productId: number;
-  cartRoomData: PreCartRoom;
+  cartRoomData: PreppedCartRoom;
 }
 
 const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
@@ -72,7 +72,7 @@ const CartRoomInfo = ({ productId, cartRoomData }: Props) => {
     if (!isAvailable) {
       setSelectedCartList((prevSelectedCartList) =>
         prevSelectedCartList.filter(
-          (prevSelectedCartItem) => prevSelectedCartItem !== String(id)
+          (prevSelectedCartItem) => prevSelectedCartItem !== cartId
         )
       );
     }

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import type { CartItemInfo, PreCartProduct } from '@/@types/cart.types';
+import type { CartItemInfo, PreppedCartProduct } from '@/@types/cart.types';
 
 const useCartList = (apiCartList: CartItemInfo[]) => {
   const [preppedProductList, setPreppedProductList] = useState<
-    PreCartProduct[]
+    PreppedCartProduct[]
   >([]);
 
   useEffect(() => {

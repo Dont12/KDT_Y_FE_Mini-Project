@@ -34,14 +34,14 @@ export interface CartProductInfo {
   guestCount: number;
 }
 
-export interface PreCartProduct {
+export interface PreppedCartProduct {
   productId: number;
   productName: string;
   address: string;
-  cartRoomList: PreCartRoom[];
+  cartRoomList: PreppedCartRoom[];
 }
 
-export interface PreCartRoom {
+export interface PreppedCartRoom {
   id: number;
   roomId: number;
   roomName: string;
