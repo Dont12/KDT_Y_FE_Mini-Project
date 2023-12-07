@@ -1,27 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-// components/category/YourItemComponent.tsx
 
 import Link from 'next/link';
 import React from 'react';
 
-interface YourItemComponentProps {
+interface ProductCardProps {
   id: number;
   name: string;
   imageUrl: string;
 }
 
-const YourItemComponent = ({ id, name, imageUrl }: YourItemComponentProps) => {
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-
-  const formattedToday = today.toISOString().split('T')[0];
-  const formattedTomorrow = tomorrow.toISOString().split('T')[0];
-
+const ProductCard = ({ id, name, imageUrl }: ProductCardProps) => {
   return (
-    <Link
-      href={`/detail/${id}?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`}
-    >
+    <Link href={`/detail/${id}`}>
       <div className='max-w-xs cursor-pointer rounded-md bg-white py-6 pr-6 shadow-md'>
         <div className='grid grid-cols-2 items-center'>
           <div className='ml-10'>
@@ -45,4 +35,4 @@ const YourItemComponent = ({ id, name, imageUrl }: YourItemComponentProps) => {
   );
 };
 
-export default YourItemComponent;
+export default ProductCard;

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { CgChevronLeft, CgChevronRight } from 'react-icons/cg';
-import Slider from 'react-slick';
+import Slider, { Settings } from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -12,7 +12,11 @@ export const carouselImages = [
   '/images/main/carousel03.jpg',
 ];
 
-const NextArrow = ({ onClick }: any) => (
+interface ArrowProps {
+  onClick?: () => void;
+}
+
+const NextArrow = ({ onClick }: ArrowProps) => (
   <button
     onClick={onClick}
     type='button'
@@ -23,7 +27,7 @@ const NextArrow = ({ onClick }: any) => (
   </button>
 );
 
-const PrevArrow = ({ onClick }: any) => (
+const PrevArrow = ({ onClick }: ArrowProps) => (
   <button
     onClick={onClick}
     type='button'
@@ -33,8 +37,12 @@ const PrevArrow = ({ onClick }: any) => (
   </button>
 );
 
-const MainCarousel = ({ images }: any): JSX.Element => {
-  const settings = {
+interface MainCarouselProps {
+  images: string[];
+}
+
+const MainCarousel = ({ images }: MainCarouselProps) => {
+  const settings: Settings = {
     dots: true,
     infinite: true,
     speed: 500,
