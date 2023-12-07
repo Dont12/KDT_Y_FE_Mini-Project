@@ -15,9 +15,9 @@ export async function needAuth(req: NextRequest) {
     if (response.status === 'SUCCESS') {
       return NextResponse.next();
     }
-    return NextResponse.redirect(url);
   } catch (error) {
     console.log('err: ', error);
+    return NextResponse.redirect(url);
   }
 }
 
