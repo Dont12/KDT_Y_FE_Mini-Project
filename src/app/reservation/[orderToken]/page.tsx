@@ -28,8 +28,8 @@ const Reservation = ({ params }: Props) => {
     setIsPaymentButtonDisabled(false);
   };
 
-  const handleUserInfoChange = (newUserInfo: UserInfo) => {
-    setUserInfo({ ...userInfo, ...newUserInfo });
+  const handleUserInfoChange = (newUserInfo: UserData) => {
+    setUserInfo(newUserInfo);
   };
 
   const showLoadingMessage = () => (
@@ -211,7 +211,7 @@ interface FormTarget extends React.FormEvent<HTMLFormElement> {
   target: FormElements;
 }
 
-interface UserInfo {
+export interface UserData {
   userName: string;
   userPhone: string;
 }
