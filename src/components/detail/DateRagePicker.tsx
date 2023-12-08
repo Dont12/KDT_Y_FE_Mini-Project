@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { DateRangePicker } from 'rsuite';
 
-import '../../styles/dateRangePicker.css';
+import '@/styles/dateRangePicker.css';
 import 'rsuite/dist/rsuite-no-reset.min.css';
 
 import { DatePickerProps } from '@/@types/detail.types';
