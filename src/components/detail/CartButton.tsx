@@ -40,7 +40,7 @@ const CartButton = ({
         setModalOpen(true);
       }
     } catch (error) {
-      router.push(`/auth/signin`);
+      console.log(error);
     }
   }, 200);
 
