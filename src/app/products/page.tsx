@@ -5,16 +5,17 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { Footer, Header, HeaderNav } from '@/components/common';
-import DropdownCategory, {
+import {
+  DropdownCategory,
   dropdownCategoryOptions,
-} from '@/components/products/DropdownCategory';
-import DropdownLocation, {
+  DropdownLocation,
   dropdownLocationOptions,
-} from '@/components/products/DropdownLocation';
-import YourItemComponent from '@/components/products/YourItemComponent';
+  ProductCard,
+} from '@/components/products';
+
+import todayTomorrow from '@/utils/todayTomorrow';
 
 interface product {
-  // 이렇게 받아올 거임
   id: number;
   name: string;
   imageUrl: string;
@@ -35,17 +36,10 @@ const ProductPage = () => {
   const searchParams = useSearchParams();
 
   const [ref, inView] = useInView();
-  // const containerRef = useRef<HTMLDivElement | null>(null);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(0);
 
-  // 이 부분에서 오늘과 내일의 날짜를 생성하는 로직이 들어갑니다.
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-
-  const formattedToday = today.toISOString().split('T')[0];
-  const formattedTomorrow = tomorrow.toISOString().split('T')[0];
+  const formattedToday = todayTomorrow.formatDate(todayTomorrow.today);
+  const formattedTomorrow = todayTomorrow.formatDate(todayTomorrow.tomorrow);
 
   // API 요청을 보낼 주소
   const apiUrl = `https://api.stayinn.site/v1/products?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`;
@@ -221,10 +215,7 @@ const ProductPage = () => {
           />
         </HeaderNav>
       </Header>
-      <main
-        className='flex flex-col items-center justify-center bg-white py-[3rem]'
-        // ref={containerRef}
-      >
+      <main className='flex flex-col items-center justify-center bg-white py-[3rem]'>
         <h1 className='m-5 text-lg'>어디로 갈까요?</h1>
         <DropdownLocation
           options={dropdownLocationOptions}
@@ -239,7 +230,7 @@ const ProductPage = () => {
         <div>
           <div className='grid grid-cols-2 gap-4 '>
             {data.data.map((item) => (
-              <YourItemComponent
+              <ProductCard
                 key={item.id}
                 name={item.name}
                 imageUrl={item.imageUrl}

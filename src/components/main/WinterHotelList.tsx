@@ -18,13 +18,6 @@ const WinterHotelList = () => {
     '서울특별시'
   );
 
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-
-  const formattedToday = today.toISOString().split('T')[0];
-  const formattedTomorrow = tomorrow.toISOString().split('T')[0];
-
   const fetchData = async (location: string) => {
     try {
       const today = new Date();
@@ -35,7 +28,7 @@ const WinterHotelList = () => {
         today.toISOString().split('T')[0]
       }&checkOut=${
         tomorrow.toISOString().split('T')[0]
-      }&category=관광호텔&areaCode=${location}&page=1&pageSize=8`;
+      }&category=관광호텔&areaCode=${location}&page=0&pageSize=10`;
 
       const response = await fetch(apiUrl, {
         method: 'GET',
@@ -64,7 +57,7 @@ const WinterHotelList = () => {
     }
   };
 
-  // 서울, 경기, 인천, 부산
+  // 서울, 경기, 부산, 강원
   useEffect(() => {
     fetchData('서울특별시');
   }, []);
@@ -78,7 +71,8 @@ const WinterHotelList = () => {
   };
 
   return (
-    <>
+    <section className='p-8'>
+      <h1 className='mb-6 text-lg	 font-bold'>겨울 도심 호캉스</h1>
       {/* 네비게이션 바 */}
       <nav className='mb-2 flex justify-evenly border-b border-t text-xs'>
         <div
@@ -88,6 +82,14 @@ const WinterHotelList = () => {
           }`}
         >
           서울
+        </div>
+        <div
+          onClick={() => fetchData('경기도')}
+          className={`mr-4 cursor-pointer p-3 ${
+            selectedLocation === '경기도' ? 'border-b-2 border-black' : ''
+          }`}
+        >
+          경기
         </div>
         <div
           onClick={() => fetchData('부산광역시')}
@@ -121,10 +123,7 @@ const WinterHotelList = () => {
             style={{ transform: `translateX(-${startIndex * 30}%)` }}
           >
             {hotels.map((hotel) => (
-              <Link
-                key={hotel.id}
-                href={`/detail/${hotel.id}?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`}
-              >
+              <Link key={hotel.id} href={`/detail/${hotel.id}`}>
                 <div className='w-[12rem] cursor-pointer rounded-md bg-white p-4 shadow-md'>
                   <div className='mb-7 flex w-full justify-center'>
                     <Image
@@ -140,7 +139,7 @@ const WinterHotelList = () => {
                   </h3>
                   <p className='mb-2 text-sm text-gray-600'>⭐4.5</p>
                   <p className='text-right	text-sm font-bold text-gray-600'>
-                    {hotel.minPrice}원~
+                    {hotel.minPrice.toLocaleString('ko-KR')}원~
                   </p>
                 </div>
               </Link>
@@ -151,7 +150,7 @@ const WinterHotelList = () => {
           <CgChevronRight className='text-gray1 text-2xl' />
         </button>
       </div>
-    </>
+    </section>
   );
 };
 
