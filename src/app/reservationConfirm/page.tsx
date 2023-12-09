@@ -9,21 +9,52 @@ import { ReservationConfirmContainer } from '@/components/reservation';
 import orderRequest from '@/api/orderRequest';
 
 const ReservationConfirm = () => {
-  const [orderList, setOrderList] = useState<OrderHistoriesData[]>();
+  const [orderList, setOrderList] = useState<OrderHistoriesData[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const fetchData = async () => {
+  const fetchMoreData = async () => {
     try {
-      const response = await orderRequest.getOrderList();
-      const getOrderList = await response.data;
-      setOrderList(getOrderList.orderHistories);
+      setLoading(true);
+      const response = await orderRequest.getOrderList(page, 10);
+      const newOrderList = await response.data.orderHistories;
+      const totalPage = await response.data.totalPages;
+      setTotalPages(totalPage);
+      console.log(totalPage);
+      setOrderList((prevOrderList) => [...prevOrderList, ...newOrderList]);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchMoreData();
+    console.log(page);
+  }, [page]);
+
+  const handleScroll = () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    if (
+      scrollTop + clientHeight >= scrollHeight - 20 &&
+      !loading &&
+      page < totalPages!
+    ) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    // 스크롤 이벤트 리스너 추가
+    window.addEventListener('scroll', handleScroll);
+
+    // 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [page, totalPages]);
 
   return (
     <div className='mx-auto min-h-screen max-w-3xl bg-white'>
