@@ -18,13 +18,6 @@ const ChristmasPensionList = () => {
     '강원특별자치도'
   );
 
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-
-  const formattedToday = today.toISOString().split('T')[0];
-  const formattedTomorrow = tomorrow.toISOString().split('T')[0];
-
   const fetchData = async (location: string) => {
     try {
       const today = new Date();
@@ -35,7 +28,7 @@ const ChristmasPensionList = () => {
         today.toISOString().split('T')[0]
       }&checkOut=${
         tomorrow.toISOString().split('T')[0]
-      }&category=펜션&areaCode=${location}&page=1&pageSize=7`;
+      }&category=펜션&areaCode=${location}&page=0&pageSize=10`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) {
@@ -70,7 +63,8 @@ const ChristmasPensionList = () => {
   };
 
   return (
-    <>
+    <section className='p-8'>
+      <h1 className='mb-6 text-lg	 font-bold'>크리스마스 펜션 예약하기</h1>
       {/* 네비게이션 바 */}
       <nav className='mb-2 flex justify-evenly border-b border-t text-xs'>
         <div
@@ -123,10 +117,7 @@ const ChristmasPensionList = () => {
             style={{ transform: `translateX(-${startIndex * 30}%)` }}
           >
             {hotels.map((hotel) => (
-              <Link
-                key={hotel.id}
-                href={`/detail/${hotel.id}?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`}
-              >
+              <Link key={hotel.id} href={`/detail/${hotel.id}`}>
                 <div
                   key={hotel.id}
                   className='w-[12rem] rounded-md bg-white p-4 shadow-md'
@@ -145,7 +136,7 @@ const ChristmasPensionList = () => {
                   </h3>
                   <p className='mb-2 text-sm text-gray-600'>⭐4.5</p>
                   <p className='text-right	text-sm font-bold text-gray-600'>
-                    {hotel.minPrice}원~
+                    {hotel.minPrice.toLocaleString('ko-KR')}원~
                   </p>
                 </div>
               </Link>
@@ -156,7 +147,7 @@ const ChristmasPensionList = () => {
           <CgChevronRight className='text-gray1 text-2xl' />
         </button>
       </div>
-    </>
+    </section>
   );
 };
 

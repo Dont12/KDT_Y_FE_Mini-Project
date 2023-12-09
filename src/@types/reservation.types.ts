@@ -25,6 +25,6 @@ export interface PaymentData {
   orderToken: string;
   userName: string;
   userPhone: string;
-  totalPrice: number;
-  payment: string;
+  price: number | undefined;
+  payment: string | null;
 }

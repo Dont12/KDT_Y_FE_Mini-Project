@@ -3,8 +3,13 @@
 import React, { useEffect, useState } from 'react';
 
 import orderRequest from '@/api/orderRequest';
+import { UserData } from '@/app/reservation/[orderToken]/page';
 
-const UserInformation = ({ onUserInfoChange }: any) => {
+interface Props {
+  onUserInfoChange: (newUserInfo: UserData) => void;
+}
+
+const UserInformation = ({ onUserInfoChange }: Props) => {
   const [userName, setUserName] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [userInfo, setUserInfo] = useState<UserInfo | null>();
@@ -41,12 +46,12 @@ const UserInformation = ({ onUserInfoChange }: any) => {
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
-    onUserInfoChange({ userName: e.target.value });
+    onUserInfoChange({ userName: e.target.value, userPhone: e.target.value });
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserPhone(e.target.value);
-    onUserInfoChange({ userPhone: e.target.value });
+    onUserInfoChange({ userName: e.target.value, userPhone: e.target.value });
   };
 
   return (

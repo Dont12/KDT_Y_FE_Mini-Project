@@ -114,6 +114,7 @@ interface OrderItem {
   productName: string;
   imageUrl: string;
   roomName: string;
+  day: number;
   baseGuestCount: number;
   maxGuestCount: number;
   checkInDate: string;
