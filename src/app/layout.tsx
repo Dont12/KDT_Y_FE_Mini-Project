@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { CookiesProvider } from 'next-client-cookies/server';
 import React from 'react';
 
 import '../styles/global.css';
@@ -24,9 +25,11 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: AppLayout) => (
-  <html lang='ko' className='bg-background'>
-    <body className='container mx-auto mb-24 max-w-3xl'>{children}</body>
-  </html>
+  <CookiesProvider>
+    <html lang='ko' className='bg-background'>
+      <body className='container mx-auto mb-24 max-w-3xl'>{children}</body>
+    </html>
+  </CookiesProvider>
 );
 
 export default RootLayout;
