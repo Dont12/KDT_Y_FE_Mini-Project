@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 
-const ReservationRouter = ({ orderId }: any) => {
+const ReservationRouter = ({ orderId }: OrderID) => {
   const router = useRouter();
 
   const handleDetailClick = () => {
@@ -22,3 +22,7 @@ const ReservationRouter = ({ orderId }: any) => {
 };
 
 export default ReservationRouter;
+
+interface OrderID {
+  orderId: number;
+}
