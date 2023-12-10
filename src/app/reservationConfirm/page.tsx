@@ -9,24 +9,52 @@ import { ReservationConfirmContainer } from '@/components/reservation';
 import orderRequest from '@/api/orderRequest';
 
 const ReservationConfirm = () => {
-  const [reservationConfirm, setReservationConfirm] =
-    useState<OrderHistories[]>();
+  const [orderList, setOrderList] = useState<OrderHistoriesData[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const fetchData = async () => {
+  const fetchMoreData = async () => {
     try {
-      const response = await orderRequest.getOrderList();
-      const data = await response.data;
-
-      setReservationConfirm(data.orderHistories);
-      console.log('reconfirm', data);
+      setLoading(true);
+      const response = await orderRequest.getOrderList(page, 10);
+      const newOrderList = await response.data.orderHistories;
+      const totalPage = await response.data.totalPages;
+      setTotalPages(totalPage);
+      console.log(totalPage);
+      setOrderList((prevOrderList) => [...prevOrderList, ...newOrderList]);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchMoreData();
+    console.log(page);
+  }, [page]);
+
+  const handleScroll = () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    if (
+      scrollTop + clientHeight >= scrollHeight - 20 &&
+      !loading &&
+      page < totalPages!
+    ) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    // 스크롤 이벤트 리스너 추가
+    window.addEventListener('scroll', handleScroll);
+
+    // 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [page, totalPages]);
 
   return (
     <div className='mx-auto min-h-screen max-w-3xl bg-white'>
@@ -42,7 +70,7 @@ const ReservationConfirm = () => {
             <MdOutlineKeyboardArrowDown />
           </button>
         </div>
-        {reservationConfirm?.map((order, orderIndex) => (
+        {orderList?.map((order, orderIndex) => (
           <ReservationConfirmContainer
             key={orderIndex}
             orderId={order.orderId}
@@ -69,9 +97,9 @@ const ReservationConfirm = () => {
 
 export default ReservationConfirm;
 
-interface Order {
+interface OrderHistoriesData {
   orderId: number;
-  createdDate: number;
+  reserveDate: string;
   orderItems: OrderItem[];
 }
 
@@ -82,38 +110,11 @@ interface OrderItem {
   productName: string;
   imageUrl: string;
   roomName: string;
+  day: number;
   baseGuestCount: number;
   maxGuestCount: number;
   checkInDate: string;
   checkInTime: string;
   checkOutDate: string;
   checkOutTime: string;
-}
-
-interface ReservationConfirmData {
-  size: number;
-  pageNumber: number;
-  totalPages: number;
-  totalElements: number;
-  orderHistories: OrderHistories[];
-}
-
-interface OrderHistories {
-  orderId: number;
-  reserveDate: string;
-  orderItems: OrderItem[];
-}
-
-interface OrderItem {
-  orderItemId: number;
-  productId: number;
-  productName: string;
-  roomName: string;
-  imageUrl: string;
-  maxGuestCount: number;
-  baseGuestCount: number;
-  checkInTime: string;
-  checkInDate: string;
-  checkOutTime: string;
-  checkOutDate: string;
 }

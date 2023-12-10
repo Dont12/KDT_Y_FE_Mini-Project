@@ -9,6 +9,7 @@ const ReservationConfirm = ({
   productName,
   roomName,
   imageUrl,
+  day,
   checkInDate,
   checkOutDate,
   checkInTime,
@@ -39,9 +40,13 @@ const ReservationConfirm = ({
         alt='room img'
       />
       <div className='m-4'>
-        <div className='text-base'>
-          {checkInDate} ~ {checkOutDate}
+        <div className='flex'>
+          <div className='text-base'>
+            {checkInDate} ~ {checkOutDate}
+          </div>
+          <div className='ml-2 text-base'>/ {day}박</div>
         </div>
+
         <div className='text-base'>
           체크인 {checkInTime} 체크아웃 {checkOutTime}
         </div>
@@ -62,6 +67,7 @@ interface ReservationConfirmProps {
   productName: string;
   roomName: string;
   imageUrl: string;
+  day: number;
   checkInDate: string;
   checkOutDate: string;
   checkInTime: string;

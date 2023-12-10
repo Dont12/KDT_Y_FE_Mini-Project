@@ -24,6 +24,7 @@ const ReservationConfirmContainer = ({
         productName={orderItem.productName}
         roomName={orderItem.roomName}
         imageUrl={orderItem.imageUrl}
+        day={orderItem.day}
         checkInDate={orderItem.checkInDate}
         checkOutDate={orderItem.checkOutDate}
         checkInTime={orderItem.checkInTime}
@@ -51,6 +52,7 @@ interface ReservationOrderItem {
   productName: string;
   imageUrl: string;
   roomName: string;
+  day: number;
   baseGuestCount: number;
   maxGuestCount: number;
   checkInDate: string;
