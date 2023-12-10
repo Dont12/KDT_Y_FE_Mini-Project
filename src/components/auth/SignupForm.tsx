@@ -57,7 +57,7 @@ const SignupForm = () => {
         console.log(res);
 
         if (res.status === 'SUCCESS') {
-          router.replace('/auth/signin');
+          router.push('/auth/signin');
         } else {
           setSubmitError(res.errorMessage);
         }
