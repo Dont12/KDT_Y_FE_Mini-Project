@@ -1,12 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { Option } from '@/app/products/page';
-
-interface DropdownLocationProps {
-  options: Option[];
-  selectedOption: Option | null;
-  onSelectOption: (option: Option | null) => void;
-}
+import { DropdownLocationProps, Option } from '@/@types/products.types';
 
 export const dropdownLocationOptions = [
   { label: '전국' },

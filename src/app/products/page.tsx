@@ -13,20 +13,8 @@ import {
   ProductCard,
 } from '@/components/products';
 
+import { Option, product } from '@/@types/products.types';
 import todayTomorrow from '@/utils/todayTomorrow';
-
-interface product {
-  id: number;
-  name: string;
-  imageUrl: string;
-  minPrice: number;
-}
-
-export interface Option {
-  label: string;
-  category?: string;
-  location?: string;
-}
 
 const ProductPage = () => {
   const pathname = usePathname(); // /products

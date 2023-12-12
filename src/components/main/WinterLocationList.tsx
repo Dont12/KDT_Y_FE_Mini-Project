@@ -2,17 +2,10 @@
 import Link from 'next/link';
 import React from 'react';
 
-interface WinterLocationListProps {
-  locations: WinterLocationProps[];
-}
-
-interface WinterLocationProps {
-  icon?: string;
-  label?: string; // alt에 들어감
-  category?: string;
-  location?: string;
-  image?: string;
-}
+import {
+  WinterLocationListProps,
+  WinterLocationProps,
+} from '@/@types/main.types';
 
 export const winterLocations: WinterLocationProps[] = [
   {

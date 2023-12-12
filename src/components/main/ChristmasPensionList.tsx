@@ -4,12 +4,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { CgChevronLeft, CgChevronRight } from 'react-icons/cg';
 
-interface Hotel {
-  id: number;
-  name: string;
-  imageUrl: string;
-  minPrice: number;
-}
+import { Hotel } from '@/@types/main.types';
 
 const ChristmasPensionList = () => {
   const [hotels, setHotels] = useState<Hotel[]>([]);
