@@ -1,10 +1,10 @@
-// WinterHotelList.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { CgChevronLeft, CgChevronRight } from 'react-icons/cg';
 
 import { Hotel } from '@/@types/main.types';
+import productRequest from '@/api/productRequest';
 
 const WinterHotelList = () => {
   const [hotels, setHotels] = useState<Hotel[]>([]);
@@ -12,44 +12,15 @@ const WinterHotelList = () => {
   const [selectedLocation, setSelectedLocation] = useState<string | null>(
     '서울특별시'
   );
-
   const fetchData = async (location: string) => {
-    try {
-      const today = new Date();
-      const tomorrow = new Date(today);
-      tomorrow.setDate(tomorrow.getDate() + 1);
+    const response = await productRequest.getHotels(location);
+    setHotels(response.data);
 
-      const apiUrl = `https://api.stayinn.site/v1/products?checkIn=${
-        today.toISOString().split('T')[0]
-      }&checkOut=${
-        tomorrow.toISOString().split('T')[0]
-      }&category=관광호텔&areaCode=${location}&page=0&pageSize=10`;
+    // 지역을 변경할 때마다 스크롤을 맨 앞으로 이동
+    setStartIndex(0);
 
-      const response = await fetch(apiUrl, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(
-          `데이터를 불러오는 중 오류가 발생했습니다: ${response.statusText}`
-        );
-      }
-
-      const data = await response.json();
-      setHotels(data.data);
-
-      // 지역을 변경할 때마다 스크롤을 맨 앞으로 이동
-      setStartIndex(0);
-
-      // 선택된 지역 업데이트
-      setSelectedLocation(location);
-    } catch (error) {
-      console.error('알 수 없는 오류가 발생했습니다');
-    }
+    // 선택된 지역 업데이트
+    setSelectedLocation(location);
   };
 
   // 서울, 경기, 부산, 강원

@@ -14,7 +14,7 @@ import {
 } from '@/components/products';
 
 import { Option, product } from '@/@types/products.types';
-import todayTomorrow from '@/utils/todayTomorrow';
+import productRequest from '@/api/productRequest';
 
 const ProductPage = () => {
   const pathname = usePathname(); // /products
@@ -25,12 +25,6 @@ const ProductPage = () => {
 
   const [ref, inView] = useInView();
   const [page, setPage] = useState(0);
-
-  const formattedToday = todayTomorrow.formatDate(todayTomorrow.today);
-  const formattedTomorrow = todayTomorrow.formatDate(todayTomorrow.tomorrow);
-
-  // API 요청을 보낼 주소
-  const apiUrl = `https://api.stayinn.site/v1/products?checkIn=${formattedToday}&checkOut=${formattedTomorrow}`;
 
   const location = searchParams.get('location'); // 없다면 null
   const category = searchParams.get('category'); // 없다면 null
@@ -77,24 +71,12 @@ const ProductPage = () => {
         query.push(`areaCode=${location}`);
       }
 
-      const nextPageUrl = `${apiUrl}&${query.join(
-        '&'
-      )}&page=${page}&pageSize=10`;
-      // console.log('Next Page URL:', nextPageUrl); // 로그 추가
-      fetch(nextPageUrl, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          setData((prevData) => ({
-            data: [...(prevData?.data ?? []), ...result.data],
-          }));
-          setPage((prevPage) => prevPage + 1);
-        });
+      productRequest.getProducts(page, query).then((result) => {
+        setData((prevData) => ({
+          data: [...(prevData?.data ?? []), ...result.data],
+        }));
+        setPage((prevPage) => prevPage + 1);
+      });
     }
   };
 
@@ -118,23 +100,11 @@ const ProductPage = () => {
         query.push(`areaCode=${location}`);
       }
 
-      // API 요청 주소에 category나 location이 포함된 경우 추가합니다.
-      const fullUrl = `${apiUrl}&${query.join('&')}page=${page}&pageSize=10`;
-
-      // fetch를 사용하여 API에 요청을 보내고 데이터를 받아옵니다.
-      fetch(fullUrl, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          setData(result); // 데이터를 받아와서 상태를 업데이트한다.
-        });
+      productRequest.getProducts(page, query).then((result) => {
+        setData(result); // 데이터를 받아와서 상태를 업데이트한다.
+      });
     }
-  }, [apiUrl, searchParams, location, category]);
+  }, [searchParams, location, category]);
 
   // 데이터가 로딩 중일 때의 화면을 표시합니다.
   if (!data) {
