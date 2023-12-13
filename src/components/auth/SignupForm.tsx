@@ -14,12 +14,7 @@ import { useState } from 'react';
 
 import SubmitButton from '@/components/common/SubmitButton';
 
-import {
-  FormTarget,
-  InputHandler,
-  InputType,
-  SetInput,
-} from '@/@types/auth.types';
+import { FormTarget, InputType } from '@/@types/auth.types';
 import authRequest from '@/api/authRequest';
 
 const SignupForm = () => {
@@ -27,14 +22,14 @@ const SignupForm = () => {
   const [email, handleEmail] = useAuthInput('email');
   const [password, handlePassword] = useAuthInput('password');
   const [passwordConfirm, handlePasswordConfirm, setPasswordConfirm] =
-    useAuthInput('passwordConfirm', password as InputType);
+    useAuthInput('passwordConfirm', password);
   const [contact, handleContact] = useAuthInput('contact');
   const buttonActivate = useButtonActivate(
-    name as InputType,
-    email as InputType,
-    password as InputType,
-    passwordConfirm as InputType,
-    contact as InputType
+    name,
+    email,
+    password,
+    passwordConfirm,
+    contact
   );
   const [submitError, setSubmitError] = useState(null);
 
@@ -70,43 +65,29 @@ const SignupForm = () => {
 
   const handleSubmit = async (e: FormTarget) => {
     e.preventDefault();
-    await signup(
-      email as InputType,
-      password as InputType,
-      name as InputType,
-      contact as InputType
-    );
+    await signup(email, password, name, contact);
   };
 
   return (
     <form className='w-full px-20 pb-6' onSubmit={handleSubmit}>
       <div className='mb-10'>
-        <InputName
-          name={name as InputType}
-          handleName={handleName as InputHandler}
-        />
+        <InputName name={name} handleName={handleName} />
 
-        <InputEmail
-          email={email as InputType}
-          handleEmail={handleEmail as InputHandler}
-        />
+        <InputEmail email={email} handleEmail={handleEmail} />
 
         <InputPassword
-          password={password as InputType}
-          handlePassword={handlePassword as InputHandler}
-          passwordConfirm={passwordConfirm as InputType}
-          setPasswordConfirm={setPasswordConfirm as SetInput}
+          password={password}
+          handlePassword={handlePassword}
+          passwordConfirm={passwordConfirm}
+          setPasswordConfirm={setPasswordConfirm}
         />
 
         <InputPasswordConfirm
-          passwordConfirm={passwordConfirm as InputType}
-          handlePasswordConfirm={handlePasswordConfirm as InputHandler}
+          passwordConfirm={passwordConfirm}
+          handlePasswordConfirm={handlePasswordConfirm}
         />
 
-        <InputContact
-          contact={contact as InputType}
-          handleContact={handleContact as InputHandler}
-        />
+        <InputContact contact={contact} handleContact={handleContact} />
       </div>
 
       <SubmitButton content='회원가입' activate={buttonActivate} />

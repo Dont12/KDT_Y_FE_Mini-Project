@@ -9,16 +9,13 @@ import { useState } from 'react';
 import { InputEmail, InputPassword } from '@/components/auth';
 import SubmitButton from '@/components/common/SubmitButton';
 
-import { FormTarget, InputHandler, InputType } from '@/@types/auth.types';
+import { FormTarget, InputType } from '@/@types/auth.types';
 import authRequest from '@/api/authRequest';
 
 const SigninForm = () => {
   const [email, handleEmail] = useAuthInput('email');
   const [password, handlePassword] = useAuthInput('password');
-  const buttonActivate = useButtonActivate(
-    email as InputType,
-    password as InputType
-  );
+  const buttonActivate = useButtonActivate(email, password);
   const [submitError, setSubmitError] = useState(null);
 
   const router = useRouter();
@@ -46,21 +43,15 @@ const SigninForm = () => {
 
   const handleSubmit = (e: FormTarget) => {
     e.preventDefault();
-    signin(email as InputType, password as InputType);
+    signin(email, password);
   };
 
   return (
     <form className='w-full px-20' onSubmit={handleSubmit}>
       <div className='mb-10'>
-        <InputEmail
-          email={email as InputType}
-          handleEmail={handleEmail as InputHandler}
-        />
+        <InputEmail email={email} handleEmail={handleEmail} />
 
-        <InputPassword
-          password={password as InputType}
-          handlePassword={handlePassword as InputHandler}
-        />
+        <InputPassword password={password} handlePassword={handlePassword} />
       </div>
 
       <SubmitButton content='이메일로 로그인' activate={buttonActivate} />

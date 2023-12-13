@@ -4,6 +4,7 @@ import { Button, Modal } from 'rsuite';
 
 import 'rsuite/dist/rsuite-no-reset.min.css';
 
+import { ChangePasswordProps } from '@/@types/mypage.types';
 import authRequest from '@/api/authRequest';
 
 import { NewPassword, NewPasswordConfirm } from './input';
@@ -76,9 +77,3 @@ const ChangePasswordModal = ({
 };
 
 export default ChangePasswordModal;
-
-interface ChangePasswordProps {
-  toggleModal: (state: boolean, setState: (value: boolean) => void) => void;
-  passwordChangeModal: boolean;
-  setPasswordChangeModal: (value: boolean) => void;
-}

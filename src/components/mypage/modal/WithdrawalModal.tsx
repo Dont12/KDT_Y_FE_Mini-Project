@@ -4,6 +4,7 @@ import { Button, Modal } from 'rsuite';
 
 import 'rsuite/dist/rsuite-no-reset.min.css';
 
+import { WithdrawalProps } from '@/@types/mypage.types';
 import authRequest from '@/api/authRequest';
 
 const WithdrawalModal = ({
@@ -58,9 +59,3 @@ const WithdrawalModal = ({
 };
 
 export default WithdrawalModal;
-
-interface WithdrawalProps {
-  toggleModal: (state: boolean, setState: (value: boolean) => void) => void;
-  withdrawalModal: boolean;
-  setWithdrawalModal: (value: boolean) => void;
-}

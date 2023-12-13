@@ -1,10 +1,12 @@
 import { SubmitButton } from '@components/common';
 
+import { ChangePasswordProps } from '@/@types/mypage.types';
+
 const ChangePasswordButton = ({
   toggleModal,
   passwordChangeModal,
   setPasswordChangeModal,
-}: Props) => {
+}: ChangePasswordProps) => {
   const handleModal = () => {
     toggleModal(passwordChangeModal, setPasswordChangeModal);
   };
@@ -21,9 +23,3 @@ const ChangePasswordButton = ({
 };
 
 export default ChangePasswordButton;
-
-interface Props {
-  toggleModal: (state: boolean, setState: (value: boolean) => void) => void;
-  passwordChangeModal: boolean;
-  setPasswordChangeModal: (value: boolean) => void;
-}

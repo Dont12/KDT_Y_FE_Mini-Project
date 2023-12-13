@@ -1,10 +1,12 @@
 import { SubmitButton } from '@components/common';
 
+import { WithdrawalProps } from '@/@types/mypage.types';
+
 const WithdrawalButton = ({
   toggleModal,
   withdrawalModal,
   setWithdrawalModal,
-}: Props) => {
+}: WithdrawalProps) => {
   const handleModal = () => {
     toggleModal(withdrawalModal, setWithdrawalModal);
   };
@@ -21,9 +23,3 @@ const WithdrawalButton = ({
 };
 
 export default WithdrawalButton;
-
-interface Props {
-  toggleModal: (state: boolean, setState: (value: boolean) => void) => void;
-  withdrawalModal: boolean;
-  setWithdrawalModal: (value: boolean) => void;
-}
