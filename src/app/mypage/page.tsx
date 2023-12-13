@@ -3,7 +3,14 @@
 import { useEffect, useState } from 'react';
 
 import { Footer, Header, HeaderNav } from '@/components/common';
-import { HistoryButton, LogoutButton } from '@/components/mypage';
+import {
+  ChangePasswordButton,
+  ChangePasswordModal,
+  HistoryButton,
+  LogoutButton,
+  WithdrawalButton,
+  WithdrawalModal,
+} from '@/components/mypage';
 
 import { UserInfo } from '@/@types/mypage.types';
 
@@ -11,6 +18,9 @@ import authRequest from '../../api/authRequest';
 
 const Mypage = () => {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [passwordChangeModal, setPasswordChangeModal] =
+    useState<boolean>(false);
+  const [withdrawalModal, setWithdrawalModal] = useState<boolean>(false);
 
   const checkSignin = async () => {
     try {
@@ -20,6 +30,10 @@ const Mypage = () => {
     } catch (error) {
       console.log('로그인이 필요합니다.', error);
     }
+  };
+
+  const toggleModal = (state: boolean, setState: (value: boolean) => void) => {
+    setState(!state);
   };
 
   useEffect(() => {
@@ -57,7 +71,33 @@ const Mypage = () => {
 
         <HistoryButton />
         <LogoutButton />
+        <ChangePasswordButton
+          toggleModal={toggleModal}
+          passwordChangeModal={passwordChangeModal}
+          setPasswordChangeModal={setPasswordChangeModal}
+        />
+        <WithdrawalButton
+          toggleModal={toggleModal}
+          withdrawalModal={withdrawalModal}
+          setWithdrawalModal={setWithdrawalModal}
+        />
       </main>
+
+      {passwordChangeModal && (
+        <ChangePasswordModal
+          toggleModal={toggleModal}
+          passwordChangeModal={passwordChangeModal}
+          setPasswordChangeModal={setPasswordChangeModal}
+        />
+      )}
+
+      {withdrawalModal && (
+        <WithdrawalModal
+          toggleModal={toggleModal}
+          withdrawalModal={withdrawalModal}
+          setWithdrawalModal={setWithdrawalModal}
+        />
+      )}
       <Footer />
     </>
   );

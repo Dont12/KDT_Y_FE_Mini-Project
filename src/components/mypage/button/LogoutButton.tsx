@@ -1,5 +1,6 @@
 'use client';
 
+import { SubmitButton } from '@components/common';
 import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -20,13 +21,13 @@ const LogoutButton = () => {
   }, 200);
 
   return (
-    <button
+    <SubmitButton
       type='button'
+      content='로그아웃'
+      activate={true}
+      className='my-2'
       onClick={logout}
-      className=' bg-mainButton hover:bg-mainButtonHov mb-6 h-12 w-full  rounded-[10px] text-white'
-    >
-      로그아웃
-    </button>
+    />
   );
 };
 

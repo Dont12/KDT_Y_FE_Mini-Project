@@ -1,4 +1,17 @@
-import HistoryButton from './HistoryButton';
-import LogoutButton from './LogoutButton';
+import {
+  ChangePasswordButton,
+  HistoryButton,
+  LogoutButton,
+  WithdrawalButton,
+} from './button';
+import ChangePasswordModal from './modal/ChangePasswordModal';
+import WithdrawalModal from './modal/WithdrawalModal';
 
-export { HistoryButton, LogoutButton };
+export {
+  ChangePasswordButton,
+  ChangePasswordModal,
+  HistoryButton,
+  LogoutButton,
+  WithdrawalButton,
+  WithdrawalModal,
+};

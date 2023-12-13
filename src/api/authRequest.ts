@@ -1,4 +1,5 @@
 import { SigninData, UserData } from '@/@types/auth.types';
+import { UserPassword } from '@/@types/mypage.types';
 
 const url = 'https://api.stayinn.site/v1';
 
@@ -38,6 +39,25 @@ const authRequest = {
   logout: () =>
     fetch(`${url}/auth/logout`, {
       method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(responseBody),
+
+  changePassword: (userPassword: UserPassword) =>
+    fetch(`${url}/users/password`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userPassword),
+    }).then(responseBody),
+
+  withdrawal: () =>
+    fetch(`${url}/users`, {
+      method: 'DELETE',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',

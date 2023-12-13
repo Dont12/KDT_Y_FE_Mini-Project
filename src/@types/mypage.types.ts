@@ -3,3 +3,7 @@ export interface UserInfo {
   nickname: string;
   phone: string;
 }
+
+export interface UserPassword {
+  password: string;
+}

@@ -11,7 +11,7 @@ const useAuthInput = (target: string, password?: InputType) => {
   });
 
   const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>): void => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       if (target === 'email') {
         setInput({
           value: e.target.value,
@@ -58,7 +58,7 @@ const useAuthInput = (target: string, password?: InputType) => {
     [input, target, password]
   );
 
-  return [input, handleChange, setInput];
+  return [input, handleChange, setInput] as const;
 };
 
 export default useAuthInput;
