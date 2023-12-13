@@ -15,7 +15,6 @@ const ReservationItem = ({
   const [isModal, setIsModal] = useState(false);
 
   const openModal = () => setIsModal(!isModal);
-  // const closeModal = () => setIsModal(false);
 
   return (
     <div className='max-w-3xl bg-white p-8'>
@@ -30,7 +29,7 @@ const ReservationItem = ({
         </button>
       </div>
       {isModal && (
-        <div className='rounded bg-[#f8f8f8] p-4'>
+        <div className='my-4 rounded bg-[#f8f8f8] p-4'>
           <ul>
             <li className=' text-xs text-[#616161]'>
               - 예약일시 기준 체크인 시각 이전일 경우 무료취소가 가능합니다.
