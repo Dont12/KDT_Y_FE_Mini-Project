@@ -15,7 +15,6 @@ const productRequest = {
       )}&page=0&pageSize=10`,
       {
         method: 'GET',
-        credentials: 'omit',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -29,7 +28,6 @@ const productRequest = {
       )}&page=0&pageSize=10`,
       {
         method: 'GET',
-        credentials: 'omit',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -43,7 +41,6 @@ const productRequest = {
       )}&page=${page}&pageSize=10`,
       {
         method: 'GET',
-        credentials: 'omit',
         headers: {
           'Content-Type': 'application/json',
         },
