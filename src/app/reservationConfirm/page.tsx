@@ -13,6 +13,35 @@ const ReservationConfirm = () => {
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [selectedPeriod, setSelectedPeriod] = useState<string>('최근 3개월');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const DropdownMenu = () => {
+    const periods = ['최근 3개월', '최근 6개월', '최근 1년', '최근 2년'];
+
+    const handlePeriodSelect = (period: string) => {
+      setSelectedPeriod(period);
+      setIsDropdownOpen(false);
+    };
+
+    return (
+      <div className='border-mediumGray absolute left-10 top-14  w-40 rounded-md border border-solid bg-white p-2'>
+        {periods.map((period) => (
+          <div
+            key={period}
+            onClick={() => handlePeriodSelect(period)}
+            className='hover:bg-lightGray cursor-pointer px-6 py-3'
+          >
+            {period}
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   const fetchMoreData = async () => {
     try {
@@ -47,10 +76,7 @@ const ReservationConfirm = () => {
   };
 
   useEffect(() => {
-    // 스크롤 이벤트 리스너 추가
     window.addEventListener('scroll', handleScroll);
-
-    // 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -64,11 +90,15 @@ const ReservationConfirm = () => {
         </HeaderNav>
       </Header>
       <main className='mt-12'>
-        <div className=' flex'>
-          <button className='border-mediumGray mx-10 mt-6 flex items-center justify-center rounded-md border border-solid px-5 py-1 '>
-            <p className='tex-2xl'>최근 6개월</p>
+        <div className='relative flex'>
+          <button
+            onClick={toggleDropdown}
+            className='border-mediumGray mx-10 mt-6 flex w-40 items-center justify-center rounded-md border border-solid px-5 py-1 '
+          >
+            <p className='tex-2xl'>{selectedPeriod}</p>
             <MdOutlineKeyboardArrowDown />
           </button>
+          {isDropdownOpen && <DropdownMenu />}
         </div>
         {orderList?.map((order, orderIndex) => (
           <ReservationConfirmContainer

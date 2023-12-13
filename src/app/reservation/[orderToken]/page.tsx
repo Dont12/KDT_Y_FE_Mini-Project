@@ -122,10 +122,10 @@ const Reservation = ({ params }: Props) => {
               <p className='my-4'> 결제수단</p>
               <div className='flex justify-between'>
                 <button
-                  onClick={() => handleButtonClick('CARD')}
+                  onClick={() => handleButtonClick('카드')}
                   type='button'
                   className={
-                    selectorPayment === 'CARD'
+                    selectorPayment === '카드'
                       ? 'border-mainButton text-mainButton flex items-center  rounded-md border border-solid px-36 py-2'
                       : 'border-mediumGray  flex items-center rounded-md border border-solid px-36 py-2'
                   }
@@ -133,10 +133,10 @@ const Reservation = ({ params }: Props) => {
                   카드
                 </button>
                 <button
-                  onClick={() => handleButtonClick('CASH')}
+                  onClick={() => handleButtonClick('계좌이체')}
                   type='button'
                   className={
-                    selectorPayment === 'CASH'
+                    selectorPayment === '계좌이체'
                       ? 'border-mainButton text-mainButton flex items-center  rounded-md border border-solid px-32 py-2'
                       : 'border-mediumGray  flex items-center rounded-md border border-solid px-32 py-2'
                   }
