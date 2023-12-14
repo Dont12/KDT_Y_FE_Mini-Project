@@ -1,4 +1,4 @@
-const CartNotice = (): JSX.Element => {
+const CartNotice = () => {
   return (
     <section className='mt-3 bg-white p-5'>
       <ul className='text-gray1 text-xs'>

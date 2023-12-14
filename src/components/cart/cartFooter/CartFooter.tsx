@@ -1,17 +1,18 @@
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+
+import { Toast } from '@/components/common';
 
 import cartRequest from '@/api/cartRequest';
 import { cartSelectedState } from '@/recoil/atoms/cartState';
 
-import SubmitButton from '../common/SubmitButton';
+import CartTotalPrice from './CartTotalPrice';
+import SubmitButton from '../../common/SubmitButton';
 
-interface Props {
-  totalPrice: number;
-}
-
-const CartFooter = ({ totalPrice }: Props) => {
+const CartFooter = () => {
   const selectedCartList = useRecoilValue(cartSelectedState);
+  const [isShowToast, setIsShowToast] = useState<string>('');
 
   const router = useRouter();
   const onReserveClick = async () => {
@@ -20,9 +21,15 @@ const CartFooter = ({ totalPrice }: Props) => {
       if (res.status === 'SUCCESS') {
         router.push(`/reservation/${res.data.orderToken}`);
       } else if (res.status === 'FAIL') {
-        // 실패 에러 처리
+        setIsShowToast(res.errorMessage);
+        setTimeout(() => {
+          setIsShowToast('');
+        }, 3000);
       } else if (res.status === 'ERROR') {
-        // 서버 오류 에러 처리
+        setIsShowToast('서버 오류로 실패했습니다. 다시 시도해주세요.');
+        setTimeout(() => {
+          setIsShowToast('');
+        }, 3000);
       }
     } catch (error) {
       console.error('reserve carts errer: ', error);
@@ -38,9 +45,7 @@ const CartFooter = ({ totalPrice }: Props) => {
           </div>
           <div className='flex items-center gap-2'>
             <div className='text-gray4 text-xs'>결제 예상 금액</div>
-            <div className='text-xl font-bold'>
-              {totalPrice.toLocaleString('ko-KR')}원
-            </div>
+            <CartTotalPrice />
           </div>
         </div>
         <SubmitButton
@@ -50,14 +55,8 @@ const CartFooter = ({ totalPrice }: Props) => {
           className='mt-4'
           onClick={onReserveClick}
         />
-        {/* <div className='mt-3'>
-          <span className='text-gray1 text-xs'>
-            STAYINN은 통신판매중개업자로서, 통신판매의 당사자가 아니라는 사실을
-            고지하며 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각
-            판매자에게 있습니다.
-          </span>
-        </div> */}
       </div>
+      {isShowToast && <Toast message={isShowToast} />}
     </div>
   );
 };

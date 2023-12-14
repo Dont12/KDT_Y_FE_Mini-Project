@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { CgChevronLeft } from 'react-icons/cg';
 
+import HeaderIcon from './HeaderIcon/HeaderIcon';
+
 interface Props {
   showLogo?: boolean;
   showBack?: boolean;
@@ -46,40 +48,21 @@ const HeaderNav = ({
       <div className='text-lg font-bold'>{children}</div>
       <div className='absolute right-3 flex'>
         {showHome && (
-          <Link href='/' className='flex h-10 w-10 items-center justify-center'>
-            <Image
-              src='/svg/homeIcon.svg'
-              width={24}
-              height={24}
-              alt='홈 아이콘'
-            />
-          </Link>
+          <HeaderIcon href='/' imgSrc='/svg/homeIcon.svg' imgAlt='홈 아이콘' />
         )}
         {showCart && (
-          <Link
+          <HeaderIcon
             href='/cart'
-            className='flex h-10 w-10 items-center justify-center'
-          >
-            <Image
-              src='/svg/cartIcon.svg'
-              width={24}
-              height={24}
-              alt='장바구니 아이콘'
-            />
-          </Link>
+            imgSrc='/svg/cartIcon.svg'
+            imgAlt='장바구니 아이콘'
+          />
         )}
         {showMyPage && (
-          <Link
+          <HeaderIcon
             href='/mypage'
-            className='flex h-10 w-10 items-center justify-center'
-          >
-            <Image
-              src='/svg/myPageIcon.svg'
-              width={24}
-              height={24}
-              alt='마이페이지 아이콘'
-            />
-          </Link>
+            imgSrc='/svg/myPageIcon.svg'
+            imgAlt='마이페이지 아이콘'
+          />
         )}
       </div>
     </nav>
