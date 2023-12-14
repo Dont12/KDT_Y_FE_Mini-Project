@@ -42,7 +42,6 @@ const ReservationButton = ({
       }
     } catch (error) {
       console.log(error);
-      router.push('/auth/signin');
     }
   }, 200);
 
