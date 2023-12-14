@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { DateRangePicker } from 'rsuite';
 
+import '@/styles/dateRangePicker.css';
 import 'rsuite/dist/rsuite-no-reset.min.css';
 
 import { DatePickerProps } from '@/@types/detail.types';
@@ -21,12 +22,14 @@ const DatePicker = ({ roomId, checkIn, checkOut, guest }: DatePickerProps) => {
   return (
     <>
       <DateRangePicker
+        placement='autoVerticalStart'
+        preventOverflow
         format='yyyy-MM-dd'
         id='chek'
         placeholder={`${todayTomorrow.today.toLocaleDateString()} - ${todayTomorrow.tomorrow.toLocaleDateString()}`}
         defaultValue={[todayTomorrow.today, todayTomorrow.tomorrow]}
         shouldDisableDate={(date) => date < todayTomorrow.today}
-        className='h-8 w-52'
+        className='h-8 w-[305px] md:w-52'
         value={
           checkInOut
             ? [
