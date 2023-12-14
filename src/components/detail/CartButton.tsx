@@ -8,6 +8,8 @@ import React, { useState } from 'react';
 import { IsCartPropsValid, PushCartResponse } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
 
+import { Modal } from '../common';
+
 const CartButton = ({
   roomId,
   checkInDate,
@@ -41,6 +43,7 @@ const CartButton = ({
       }
     } catch (error) {
       console.log(error);
+      router.push('/auth/signin');
     }
   }, 200);
 
@@ -61,30 +64,13 @@ const CartButton = ({
         </button>
       )}
       {modalOpen ? (
-        <div className='relative'>
-          <div
-            className='fixed left-0 top-0 z-50 h-screen w-screen bg-[rgba(0,0,0,0.5)]'
-            onClick={() => {
-              setModalOpen(false);
-            }}
-          />
-          <div className='fixed left-1/2 top-1/2 z-50 flex h-[150px] w-[400px] translate-x-[-50%] translate-y-[-50%] flex-col justify-around rounded-lg bg-white p-4 shadow-[0px_0px_10px_rgba(0,0,0,0.5)]'>
-            <div className='w-full text-center font-bold'>
-              장바구니에 담겼습니다
-            </div>
-            <div className='flex justify-around'>
-              <button
-                className='grow-1 text-gray1 w-full font-bold'
-                onClick={remainPage}
-              >
-                계속 둘러보기
-              </button>
-              <button className='grow-1 w-full font-bold' onClick={movePage}>
-                장바구니로 이동하기
-              </button>
-            </div>
-          </div>
-        </div>
+        <Modal
+          title='장바구니에 담겼습니다'
+          cancel='계속 쇼핑하기'
+          onCancelClick={remainPage}
+          confirm='장바구니로 이동'
+          onConfirmClick={movePage}
+        />
       ) : null}
     </>
   );
