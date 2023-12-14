@@ -1,5 +1,6 @@
 'use client';
 
+import { Modal } from '@components/common';
 import { debounce } from 'lodash';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -7,8 +8,6 @@ import React, { useState } from 'react';
 
 import { IsCartPropsValid, PushCartResponse } from '@/@types/cart.types';
 import cartRequest from '@/api/cartRequest';
-
-import { Modal } from '../common';
 
 const CartButton = ({
   roomId,
