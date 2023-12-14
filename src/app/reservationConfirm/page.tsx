@@ -13,6 +13,7 @@ const ReservationConfirm = () => {
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [selectedPeriod, setSelectedPeriod] = useState<string>('최근 3개월');
 
   const fetchMoreData = async () => {
     try {
@@ -47,10 +48,7 @@ const ReservationConfirm = () => {
   };
 
   useEffect(() => {
-    // 스크롤 이벤트 리스너 추가
     window.addEventListener('scroll', handleScroll);
-
-    // 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -64,10 +62,9 @@ const ReservationConfirm = () => {
         </HeaderNav>
       </Header>
       <main className='mt-12'>
-        <div className=' flex'>
-          <button className='border-mediumGray mx-10 mt-6 flex items-center justify-center rounded-md border border-solid px-5 py-1 '>
+        <div className='relative flex'>
+          <button className='border-mediumGray mx-10 mt-6 flex w-40 items-center justify-center rounded-md border border-solid px-5 py-1 '>
             <p className='tex-2xl'>최근 6개월</p>
-            <MdOutlineKeyboardArrowDown />
           </button>
         </div>
         {orderList?.map((order, orderIndex) => (
