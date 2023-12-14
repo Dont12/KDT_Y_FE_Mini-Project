@@ -5,16 +5,14 @@ import Slider, { Settings } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { ArrowProps, MainCarouselProps } from '@/@types/main.types';
+
 // 높이 348px로 넣어주세요
 export const carouselImages = [
   '/images/main/carousel01.jpg',
   '/images/main/carousel02.jpg',
   '/images/main/carousel03.jpg',
 ];
-
-interface ArrowProps {
-  onClick?: () => void;
-}
 
 const NextArrow = ({ onClick }: ArrowProps) => (
   <button
@@ -36,10 +34,6 @@ const PrevArrow = ({ onClick }: ArrowProps) => (
     <CgChevronLeft />
   </button>
 );
-
-interface MainCarouselProps {
-  images: string[];
-}
 
 const MainCarousel = ({ images }: MainCarouselProps) => {
   const settings: Settings = {

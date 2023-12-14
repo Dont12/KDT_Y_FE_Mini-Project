@@ -3,16 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-interface IconListProps {
-  icons: IconProps[];
-}
-
-interface IconProps {
-  icon?: string;
-  label?: string; // alt에 들어감
-  category?: string;
-  location?: string;
-}
+import { IconListProps, IconProps } from '@/@types/main.types';
 
 export const mainIcons: IconProps[] = [
   { icon: 'svg/mainIcon/hotel.svg', label: '호텔', category: '관광호텔' },
