@@ -3,11 +3,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-interface ProductCardProps {
-  id: number;
-  name: string;
-  imageUrl: string;
-}
+import { ProductCardProps } from '@/@types/products.types';
 
 const ProductCard = ({ id, name, imageUrl }: ProductCardProps) => {
   return (

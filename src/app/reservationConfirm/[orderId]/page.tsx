@@ -48,7 +48,9 @@ const ReservationConfirmDetail = ({ params }: Props) => {
             </div>
             <div className='flex justify-between text-xl'>
               <p className='m-2 text-xl font-bold'>결제 수단</p>
-              <p className='text-xl'>{orderListDetail?.payment}</p>
+              <p className='text-xl'>
+                {orderListDetail?.payment === 'CARD' ? '카드' : '계좌이체'}
+              </p>
             </div>
           </div>
           <div className='border-lightGray mt-6 w-full border-b-2'></div>

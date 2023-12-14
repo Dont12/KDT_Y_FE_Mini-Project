@@ -1,22 +1,26 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { Footer, Header, HeaderNav } from '@/components/common';
-import { HistoryButton, LogoutButton } from '@/components/mypage';
+import {
+  ChangePasswordButton,
+  ChangePasswordModal,
+  HistoryButton,
+  LogoutButton,
+  WithdrawalButton,
+  WithdrawalModal,
+} from '@/components/mypage';
+
+import { UserInfo } from '@/@types/mypage.types';
 
 import authRequest from '../../api/authRequest';
 
-interface UserInfo {
-  email: string;
-  nickname: string;
-  phone: string;
-}
-
 const Mypage = () => {
-  const router = useRouter();
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [passwordChangeModal, setPasswordChangeModal] =
+    useState<boolean>(false);
+  const [withdrawalModal, setWithdrawalModal] = useState<boolean>(false);
 
   const checkSignin = async () => {
     try {
@@ -25,8 +29,11 @@ const Mypage = () => {
       console.log('현재 로그인이 되어있습니다.', res);
     } catch (error) {
       console.log('로그인이 필요합니다.', error);
-      router.replace('/auth/signin');
     }
+  };
+
+  const toggleModal = (state: boolean, setState: (value: boolean) => void) => {
+    setState(!state);
   };
 
   useEffect(() => {
@@ -64,7 +71,33 @@ const Mypage = () => {
 
         <HistoryButton />
         <LogoutButton />
+        <ChangePasswordButton
+          toggleModal={toggleModal}
+          passwordChangeModal={passwordChangeModal}
+          setPasswordChangeModal={setPasswordChangeModal}
+        />
+        <WithdrawalButton
+          toggleModal={toggleModal}
+          withdrawalModal={withdrawalModal}
+          setWithdrawalModal={setWithdrawalModal}
+        />
       </main>
+
+      {passwordChangeModal && (
+        <ChangePasswordModal
+          toggleModal={toggleModal}
+          passwordChangeModal={passwordChangeModal}
+          setPasswordChangeModal={setPasswordChangeModal}
+        />
+      )}
+
+      {withdrawalModal && (
+        <WithdrawalModal
+          toggleModal={toggleModal}
+          withdrawalModal={withdrawalModal}
+          setWithdrawalModal={setWithdrawalModal}
+        />
+      )}
       <Footer />
     </>
   );

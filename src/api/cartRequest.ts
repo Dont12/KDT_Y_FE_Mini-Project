@@ -1,4 +1,4 @@
-import { PushCartProps } from '@/@types/cart.types';
+import type { PushCartProps } from '@/@types/cart.types';
 
 const url = 'https://api.stayinn.site/v1';
 

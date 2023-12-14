@@ -1,13 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { CgChevronDown } from 'react-icons/cg';
 
-import { Option } from '@/app/products/page';
-
-interface DropdownCategoryProps {
-  options: Option[];
-  selectedOption: Option | null;
-  onSelectOption: (option: Option | null) => void;
-}
+import { DropdownCategoryProps, Option } from '@/@types/products.types';
 
 export const dropdownCategoryOptions = [
   { label: '전체' },

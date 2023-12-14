@@ -61,7 +61,7 @@ const Detail = async ({
                 />
               </div>
             </div>
-            <div className='border-mediumGray flex justify-evenly border-b border-solid pb-3 '>
+            <div className='border-mediumGray flex flex-col items-center justify-evenly gap-5 border-b border-solid pb-3 md:flex-row'>
               <div className='flex flex-col'>
                 <label htmlFor='check'>체크인-체크아웃</label>
                 <DatePicker
@@ -86,7 +86,7 @@ const Detail = async ({
                   key={index}
                   className='border-mediumGray flex flex-col gap-5 rounded border border-solid p-5'
                 >
-                  <div className='flex justify-between'>
+                  <div className='flex flex-col items-center justify-between md:flex-row'>
                     <div className='mr-5 flex shrink-0'>
                       <Image
                         src={room.imageUrls[0]}
