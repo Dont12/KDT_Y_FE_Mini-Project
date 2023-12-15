@@ -3,8 +3,23 @@
 - 🗓 기간: 2023.11.20 ~ 2023.12.01
 - ❓ 주제: Next.js를 활용한 숙박 예약 서비스
 - 🎉 [배포 링크](https://www.stayinn.site/)
+- ❗ 테스트 계정 :
+  - test1@gmail.com / asdasd123
+  - test2@gmail.com / asdasd123
+  - test3@gmail.com / asdasd123
+  - test4@gmail.com / asdasd123
+  - test5@gmail.com / asdasd123
 
 ![image](https://github.com/NamgungJongMin/KDT_Y_FE_Mini-Project/assets/100336573/fc400c15-323f-4a9d-8ee3-03e3b5ea9ff8)
+
+## 📗 목차
+1. [참여 인원 및 담당 기능](#-참여-인원-및-담당-기능) 
+2. [기획 및 디자인](#-기획-및-디자인)
+3. [OVERVIEW](#-overview)
+4. [기술 스택](#%EF%B8%8F-기술-스택)
+5. [협업 프로세스](#-협업-프로세스)
+6. [팀원별 구현 기능 및 회고](#-팀원별-구현-기능-및-회고)
+7. [리팩토링 이후 추가/변경 된 기능](#-리팩토링-이후-추가변경-된-기능)
 
 ## 👭 참여 인원 및 담당 기능
 
@@ -620,4 +635,416 @@ const handleChange = useCallback(
 이번 프로젝트는 숙박 예약 서비스로, 제가 맡았던 부분인 숙소 결제 페이지와 주문 내역 목록 페이지간의 상호작용을 원활하게 하기위한 컴포넌트 구조를 나누고 코드를 작성하도록 노력하였습니다.
 next.js 프레임워크를 프로젝트에 처음으로 사용하면서 기존과는 달리 서버사이드렌더링을 통해 코드를 짜고 구조가 달라진 부분이 어렵다고 느껴졌지만 좋은 팀원분들을 만나서 next.js에 대해서 더 많이 배울 수 있었고, 백엔드분들과 협업하면서 API 문서를 보고 데이터 구조를 잡고, 데이터 정보를 가져오기까지 같이 소통하고 수정하는 과정을 거치면서 협업의 중요성도 다시 한 번 느낄 수 있었던 프로젝트였습니다.
 
+</details>
+
+## 🛠 리팩토링 이후 추가/변경 된 기능
+
+<details>
+<summary>남궁종민</summary>
+
+### 1. 유저 정보와 관련된 기능 추가 (비밀번호 변경 / 회원 탈퇴)
+마이페이지에 비밀번호 변경과 회원 탈퇴 요청을 하는 버튼들을 추가하였다. 해당 버튼들을 누르면 요청 여부를 다시 한번 확인하는 모달이 뜨게 되고 필수 input 값을 채우고 validation이 충족되면 확인 버튼이 활성화되어 요청들을 보낼 수 있게 된다.
+
+|         마이페이지 버튼 추가                                |                             비밀번호 변경 모달                                  |                      회원 탈퇴 모달                                         |
+| :-----------------------------------------------------------: | :-----------------------------------------------------------: | :-----------------------------------------------------------: |
+|![image](https://github.com/NamgungJongMin/STAYINN/assets/100336573/501b4b66-29f7-4124-b54c-0f64c93d96b7)|![image](https://github.com/NamgungJongMin/STAYINN/assets/100336573/89a95ab9-2f14-4020-a429-291f9cd6a95c)|![image](https://github.com/NamgungJongMin/STAYINN/assets/100336573/ef177261-4ff7-431c-9992-2def69ddde19)|
+
+
+
+
+### 2. 미들웨어를 작성하여 페이지 렌더링 이전 서버 측에서 로그인 여부를 판별
+로그인 여부에 따라 페이지를 보여줄지 리다이렉트 시킬지에 대한 여부를 판별하는 기존 로직은 해당 페이지에서 useEffect를 통해 로그인 여부를 판별하는 api요청을 보내고 그 여부에 따라 페이지를 리다이렉트 시키는 방식이었다. 이 방법의 문제는 인가여부를 판별하는 컴포넌트를 서버컴포넌트로 사용할 수 없다는 점과 페이지가 mount되어 렌더링 할 때 api요청이 가기 때문에 리다이렉트 전에도 잠깐 페이지가 보이며 깜빡거리는 현상이 일어난다는 점이었다. 따라서 해당 페이지의 렌더링 이전에 인증여부를 판별하기 위해 미들웨어를 작성했다.
+
+이 때 미들웨어를 작성하면서 쿠키 이슈가 생겼는데, 백엔드 단에서 Set-cookie를 해주더라도 next서버에는 쿠키라는 개념이 없기 때문에 next서버에서의 요청에서 쿠키가 담겨가지 않아 인증 요청을 할 수가 없었다. 이를 해결하기 위해 로그인시 브라우저에 Set-cookie된 토큰들을 직접 next서버에 변수로 불러와 header의 cookie로 직접 넣어서 api 요청을 해주어야 했다. 이를 위해 'next-client-cookies/server'의 CookiesProvider를 RootLayout에 감싸주어 서버 컴포넌트와 클라이언트 컴포넌트에서 쿠키들을 공유할 수 있게하였다. 이후엔 Set-cookie한 토큰들의 값을 로그인시 읽어와 CookiesProvider에 따로 set 해주어 미들웨어에서 토큰들을 읽을 수 있게 하였고, 마찬가지로 로그아웃 시에는 따로 CookiesProvider의 토큰 값들을 remove 해주는 로직을 추가하였다.
+
+> // src/middleware.ts
+```ts
+export async function needAuth(req: NextRequest) {
+  const cookies = getCookies();
+  const url = req.nextUrl.clone();
+  url.pathname = '/auth/signin';
+
+  try {
+    const response = await authRequest.getUser(cookies?.get('accessToken'));
+
+    if (response.status === 'SUCCESS') {
+      return NextResponse.next();
+    }
+  } catch (error) {
+    console.log('err: ', error);
+    return NextResponse.redirect(url);
+  }
+}
+
+export async function alreadyAuth(req: NextRequest) {
+  const cookies = getCookies();
+  const url = req.nextUrl.clone();
+  url.pathname = '/';
+
+  try {
+    const response = await authRequest.getUser(cookies?.get('accessToken'));
+
+    if (response.status === 'SUCCESS') {
+      return NextResponse.redirect(url);
+    }
+  } catch (error) {
+    console.log('err: ', error);
+    return NextResponse.next();
+  }
+}
+
+export function middleware(request: NextRequest) {
+  // <user signed> redirect to '/' when access auth pages
+  if (request.nextUrl.pathname.startsWith('/auth/signin')) {
+    console.log('call middleware - /auth/signin');
+
+    return alreadyAuth(request);
+  }
+  if (request.nextUrl.pathname.startsWith('/auth/signup')) {
+    console.log('call middleware - /auth/signup');
+
+    return alreadyAuth(request);
+  }
+
+  // <user not signed> redirect to '/auth/signin' when access pages required authentication
+  if (request.nextUrl.pathname.startsWith('/mypage')) {
+    console.log('call middleware - /mypage');
+
+    return needAuth(request);
+  }
+
+  if (request.nextUrl.pathname.startsWith('/cart')) {
+    console.log('call middleware - /cart');
+
+    return needAuth(request);
+  }
+
+  if (request.nextUrl.pathname.startsWith('/reservation')) {
+    console.log('call middleware - /reservation');
+
+    return needAuth(request);
+  }
+
+  if (request.nextUrl.pathname.startsWith('/reservationConfirm')) {
+    console.log('call middleware - /reservationConfirm');
+
+    return needAuth(request);
+  }
+}
+
+export const config = {
+  matcher: [
+    '/',
+    '/mypage',
+    '/cart',
+    '/auth/:path*',
+    '/reservation/:path*',
+    '/reservationConfirm/:path*',
+  ],
+};
+```
+
+> // src/app/layout.tsx
+```ts
+const RootLayout = ({ children }: AppLayout) => (
+  <CookiesProvider>
+    <html lang='ko' className='bg-background'>
+      <body className='container mx-auto mb-24 max-w-3xl'>{children}</body>
+    </html>
+  </CookiesProvider>
+);
+```
+</details>
+
+<details>
+<summary>박성후</summary>
+
+### 라이브러리 유사 CSS pollyfill
+- 상황 : rsuite라는 라이브러리에서 제공하는 daterangepicker는 하나의 모달에서 두개의 달력을 제공하여 사용자로 하여금 한눈에 기간을 선택할 수 있게 합니다.
+- 문제 : 하지만 반응형을 제공하지 않아 모바일의 경우 뷰포트를 벗어나는 문제가 발생합니다. 뿐만 아니라 올해 2023년 부터 해당 라이브러리의 update를 중지하면서 contribution도 할 수 없는 상황이었습니다.
+- 해결 : 그래서 css module을 사용해서 class로 직접 반응형을 적용했습니다. 이미 적용된 css는 important를 적용하여 덮어씌워 스타일을 적용했습니다.
+
+> 코드
+```
+//styles/dateRangePicker.css
+
+.rs-picker-daterange-calendar-group {
+  height: 100% !important;
+}
+@media screen and (max-width: 768px) {
+  .rs-picker-daterange-menu {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .rs-picker-daterange-panel {
+    text-align: center;
+    height: 100%;
+  }
+  .rs-stack-item {
+    width: fit-content;
+  }
+  .rs-picker-daterange-content {
+    width: 100%;
+  }
+  .rs-picker-daterange-header {
+    width: 100%;
+  }
+  .rs-calendar-header-title {
+    font-weight: bold;
+  }
+
+  .rs-picker-daterange-calendar-group {
+    height: 578px;
+    display: flex;
+    flex-direction: column;
+    min-width: 270px !important;
+  }
+  .rs-clendar,
+  .rs-picker-menu {
+    margin: 0;
+  }
+}
+```
+
+![라이브러리csspolyfill](https://github.com/HOOOO98/STAYINN/assets/120024673/db52be01-9da1-4093-ba76-f9d6905abedf)
+  
+</details>
+
+<details>
+<summary>서지수</summary>
+
+### 1. 장바구니 목록 삭제 확인 절차없이 바로 삭제되는 문제
+   * 상황  
+     장바구니 목록을 조회하는 페이지에서 '예약불가삭제', '선택삭제', '개별삭제' 버튼을 클릭하면 한번 더 확인하는 절차없이 바로 삭제되는 상황
+   * 문제  
+     장바구니에 추가한 항목이 확인 절차없이 바로 삭제된다면 사용자 경험이 떨어지는 것으로 판단
+   * 해결  
+     삭제를 확인하는 모달을 만들어서 바로 삭제되어 사용자 경험을 개선
+   * 코드  
+     ```js
+     'use client';
+
+      import { useEffect } from 'react';
+      
+      interface Props {
+        title?: string;
+        content?: string;
+        cancel?: string;
+        onCancelClick: VoidFunction;
+        confirm?: string;
+        onConfirmClick: VoidFunction;
+      }
+      
+      const Modal = ({
+        title = '삭제하시겠어요?',
+        content,
+        cancel = '아니요',
+        onCancelClick,
+        confirm = '삭제하기',
+        onConfirmClick,
+      }: Props) => {
+        useEffect(() => {
+          document.body.style.overflow = 'hidden';
+          return () => {
+            document.body.style.overflow = 'unset';
+          };
+        }, []);
+      
+        return (
+          <div className='fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-[rgba(0,0,0,0.5)]'>
+            <div className='w-[18.5rem] rounded-2xl bg-white px-4 pb-2 pt-8'>
+              <div className='mx-1 mb-4 text-center text-base font-bold text-black'>
+                {title}
+              </div>
+              <div className='text-gray1 mx-1 mb-5 text-center text-sm'>
+                {content}
+              </div>
+              <div className='flex items-center justify-center text-base'>
+                <button
+                  className='text-gray1 mx-1 h-10 w-full flex-1'
+                  onClick={onCancelClick}
+                >
+                  {cancel}
+                </button>
+                <button
+                  className='text-blue mx-1 h-10 flex-1 font-bold'
+                  onClick={onConfirmClick}
+                >
+                  {confirm}
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      };
+      
+      export default Modal;
+     ```
+     ```js
+     const DeleteButton = ({ cartId }: Props) => {
+     const [isShowModal, setIsShowModal] = useState(false);
+    
+     return (
+         <>
+           <button
+             type='button'
+             aria-label='장바구니 삭제'
+             onClick={() => setIsShowModal(true)}
+           >
+             <HiMiniXMark className='text-gray1' />
+           </button>
+           {isShowModal && (
+             <Modal
+               content='선택하신 상품이 삭제됩니다'
+               onCancelClick={() => setIsShowModal(false)}
+               onConfirmClick={deleteCartItem}
+             />
+           )}
+          {isShowToast && <Toast message={isShowToast} />}
+        </>
+       );
+     };
+      
+     export default DeleteButton;
+     ```
+     삭제 버튼을 클릭하면 모달을 표시해주고 항목을 삭제할지 한번 더 확인하는 절차를 거치도록 개선
+   
+### 2. api로 받아온 데이터를 사용하는 코드에 맞도록 전처리하는 코드가 길어 파일에 너무 많은 코드를 보유하고 있는 문제
+   * 상황  
+     api로 받아온 장바구니 데이터가 화면에 보여줘야하는 형식과 차이가 있어 전처리를 해주어야하는데 그 코드가 너무 길어 한 파일에 너무 많은 내용을 가지고 있는 상황
+   * 문제  
+     한 파일에 너무 많은 코드를 가지고 있어서 코드 가독성이 떨어지고 유지보수가 쉽지 않은 문제
+   * 해결  
+     데이터를 전처리하는 코드를 커스텀훅으로 분리
+   * 코드  
+     ```js
+      import { useEffect, useState } from 'react';
+      
+      import type { CartItemInfo, PreppedCartProduct } from '@/@types/cart.types';
+      
+      const useCartList = (apiCartList: CartItemInfo[]) => {
+        const [preppedProductList, setPreppedProductList] = useState<
+          PreppedCartProduct[]
+        >([]);
+      
+        useEffect(() => {
+          setPreppedProductList([]);
+      
+          apiCartList.map((item) => {
+            setPreppedProductList((prevPreppedProductList) => {
+              const existingIndex = prevPreppedProductList.findIndex(
+                (prevPreppedProductItem) =>
+                  prevPreppedProductItem.productId === item.product.productId
+              );
+      
+              // 배열 안에 숙소가 존재하면
+              if (existingIndex !== -1) {
+                return prevPreppedProductList.map((prevPreppedProductItem, index) => {
+                  // 숙소 안에 방만 추가
+                  if (index === existingIndex) {
+                    return {
+                      ...prevPreppedProductItem,
+                      cartRoomList: [
+                        ...prevPreppedProductItem.cartRoomList,
+                        {
+                          id: item.id,
+                          roomId: item.product.roomId,
+                          imageUrl: item.product.imageUrl,
+                          roomName: item.product.roomName,
+                          baseGuestCount: item.product.baseGuestCount,
+                          maxGuestCount: item.product.maxGuestCount,
+                          price: item.product.price,
+                          checkInTime: item.product.checkInTime,
+                          checkOutTime: item.product.checkOutTime,
+                          stock: item.product.stock,
+                          checkInDate: item.checkInDate,
+                          checkOutDate: item.checkOutDate,
+                          numberOfNights: item.numberOfNights,
+                          guestCount: item.product.guestCount,
+                        },
+                      ],
+                    };
+                  }
+                  return prevPreppedProductItem;
+                });
+              }
+      
+              // 존재하지 않으면 숙소 및 방 추가
+              return [
+                ...prevPreppedProductList,
+                {
+                  productId: item.product.productId,
+                  productName: item.product.productName,
+                  address: item.product.address,
+                  cartRoomList: [
+                    {
+                      id: item.id,
+                      roomId: item.product.roomId,
+                      imageUrl: item.product.imageUrl,
+                      roomName: item.product.roomName,
+                      baseGuestCount: item.product.baseGuestCount,
+                      maxGuestCount: item.product.maxGuestCount,
+                      price: item.product.price,
+                      checkInTime: item.product.checkInTime,
+                      checkOutTime: item.product.checkOutTime,
+                      stock: item.product.stock,
+                      checkInDate: item.checkInDate,
+                      checkOutDate: item.checkOutDate,
+                      numberOfNights: item.numberOfNights,
+                      guestCount: item.product.guestCount,
+                    },
+                  ],
+                },
+              ];
+            });
+          });
+        }, [apiCartList]);
+      
+        return preppedProductList;
+      };
+      
+      export default useCartList;
+     ```
+  
+</details>
+
+<details>
+<summary>장문용</summary>
+
+### 리팩토링 내용
+
+1. 숙소 개수를 불러오는 중에 발생한 오류를 해결했습니다. 이 문제의 원인은 API 문서에서 페이지의 기본값이 1로 명시되어 있어서, 초기에는 페이지가 1부터 시작한다고 오해하고 있었던 것입니다. 하지만 실제로는 페이지가 0부터 시작한다는 것을 발견했습니다. 이로 인해 발생한 오류를 수정했습니다
+
+2. 메인캐러셀 코드에서 있던 `any` 타입을 명시적인 TypeScript 타입으로 대체하였습니다.
+
+3. 컴포넌트 `main`, `products` 폴더에 `index` 파일을 추가하였습니다.
+
+4. 컴포넌트에 `section` 태그 넣어서 `main` 페이지 코드를 정리하였습니다.
+
+5. 날짜 관련 기능에 대한 부분을 유틸리티 함수 적용으로 개선하였습니다.
+
+6. 프로젝트 구조를 개선하기 위해 코드를 리팩토링하여 타입 정의를 `types` 폴더로, 그리고 API 요청과 관련된 로직을 `api` 폴더로 이동시켰습니다. 이 변경은 코드의 모듈화와 가독성을 향상시키고, 유지보수성을 강화하는 데 목적이 있습니다.
+  
+</details>
+
+<details>
+<summary>정진주</summary>
+  
+### 추가기능
+- 예약 내역 목록 확인 무한스크롤 적용
+- 주문 내역 목록, 주문 내역 디테일 페이지에에서도 몇 박인지 보이게 변경
+### 수정사항
+- 발견하지 못 한 any타입 제거
+- 불명확한 변수, 함수명 수정
+- 기간 최근 6개월 fix
+- 주문 내역 목록에서 CARD, CASH -> 카드, 계좌이체 한글로 보이게 변경
+- 버튼 누르면 제출되는 버그 변경
+      
+### 무한 스크롤 시연 영상
+
+
+https://github.com/jinjoo-jung/KDT_Y_FE_Mini-Project/assets/85981963/13efc0bd-c533-4605-9de8-cd0962d8bdc4
+  
 </details>
